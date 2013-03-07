@@ -51,10 +51,10 @@ test:
   username: esl
   password:
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: esl_production
-  pool: 5
-  username: esl
-  password:
+#production:
+#  adapter: postgresql
+#  encoding: unicode
+#  database: esl_production
+#  pool: 5
+#  username: esl
+#  password:
