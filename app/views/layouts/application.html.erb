@@ -7,8 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= render "layouts/user_login" %>
 <%= yield %>
 
+
+<footer>
+  <hr/>
+  <%= link_to "home", root_path %>
+</footer>
 </body>
 </html>
