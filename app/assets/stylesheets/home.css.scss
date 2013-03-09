@@ -1,3 +1,15 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$grey: #ccc;
+body {
+  margin:5px;
+  padding: 15px;
+  border:1px solid $grey;
+}
+
+footer {
+  margin-top:5px;
+  padding-top:5px;
+  border-top:1px solid $grey;
+}
