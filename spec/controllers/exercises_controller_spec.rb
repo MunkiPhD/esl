@@ -24,7 +24,7 @@ describe ExercisesController do
   # Exercise. As you add validations to Exercise, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    FactoryGirl.build(:exercise).attributes
+    FactoryGirl.build(:exercise, user_id: "1").attributes
    # { "name" => "MyString" }
   end
 
@@ -69,6 +69,8 @@ describe ExercisesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Exercise" do
+        #post :create, {:exercise => valid_attributes}, valid_session
+          #post :create, { exercise: build(:exercise).attributes }, valid_session
         expect {
           post :create, {:exercise => valid_attributes}, valid_session
         }.to change(Exercise, :count).by(1)
