@@ -24,7 +24,7 @@ class ExercisesController < ApplicationController
   # POST /exercises
   # POST /exercises.json
   def create
-    @exercise = Exercise.new(exercise_params)
+    @exercise = current_user.exercises.build(exercise_params) #Exercise.new(exercise_params)
 
     respond_to do |format|
       if @exercise.save
@@ -69,6 +69,6 @@ class ExercisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exercise_params
-      params.require(:exercise).permit(:name, :references)
+      params.require(:exercise).permit(:name)
     end
 end

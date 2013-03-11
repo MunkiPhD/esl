@@ -24,7 +24,7 @@ describe ExercisesController do
   # Exercise. As you add validations to Exercise, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    FactoryGirl.build(:exercise, user_id: "1").attributes
+    FactoryGirl.build(:exercise, user_id: @user.id).attributes
    # { "name" => "MyString" }
   end
 
@@ -33,6 +33,12 @@ describe ExercisesController do
   # ExercisesController. Be sure to keep this updated too.
   def valid_session
     {}
+  end
+  
+  before(:each) do
+    @user = User.new
+    @user.id = 1
+    controller.stub(:current_user).and_return(@user)
   end
 
   describe "GET index" do
@@ -56,6 +62,10 @@ describe ExercisesController do
       get :new, {}, valid_session
       assigns(:exercise).should be_a_new(Exercise)
     end
+
+    describe "for unauthenticated user" do
+      pending "it redirects to sign in page"
+    end
   end
 
   describe "GET edit" do
@@ -67,6 +77,10 @@ describe ExercisesController do
   end
 
   describe "POST create" do
+    describe "with un-authenticated user" do
+      pending "it redirects to sign in page"
+    end
+
     describe "with valid params" do
       it "creates a new Exercise" do
         #post :create, {:exercise => valid_attributes}, valid_session
