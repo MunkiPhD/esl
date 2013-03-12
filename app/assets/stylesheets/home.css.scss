@@ -3,9 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $grey: #ccc;
 body {
-  margin:5px;
+  margin:5px auto;
   padding: 15px;
   border:1px solid $grey;
+  width:920px;
 }
 
 footer {

@@ -69,7 +69,11 @@ describe ExercisesController do
 
   describe "POST create" do
     describe "with un-authenticated user" do
-      pending "it redirects to sign in page"
+      it "redirects user that is not logged in" do
+        sign_out @user
+        post :create, {:exercise => valid_attributes}
+        response.should redirect_to(new_user_session_path)
+      end
     end
 
     describe "with valid params" do
@@ -152,6 +156,25 @@ describe ExercisesController do
         response.should render_template("edit")
       end
     end
+
+
+    describe "not authenticated" do
+      it "redirects you to sign in page" do
+        sign_out @user
+        exercise = Exercise.create! valid_attributes
+        # Assuming there are no other exercises in the database, this
+        # specifies that the Exercise created on the previous line
+        # receives the :update_attributes message with whatever params are
+        # submitted in the request.
+        Exercise.any_instance.should_not_receive(:update).with({ "name" => "MyString" })
+        put :update, {:id => exercise.to_param, :exercise => { "name" => "MyString" }}
+        response.should redirect_to(new_user_session_path)
+      end
+
+      it "only updates if the exercise was created by the user" do
+        pending "this can be implemented later"
+      end
+    end
   end
 
   describe "DELETE destroy" do
@@ -166,6 +189,20 @@ describe ExercisesController do
       exercise = Exercise.create! valid_attributes
       delete :destroy, {:id => exercise.to_param}
       response.should redirect_to(exercises_url)
+    end
+
+    describe "not authorized" do
+      it "does not delete if un-authenticated" do
+        pending "do this"
+      end
+
+      it "does not delete if not created by the user" do
+        pending "do this"
+      end
+
+      it "only deletes if created by user AND is not logged in a workout" do
+        pending "reqs workouts"
+      end
     end
   end
 
