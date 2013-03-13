@@ -15,20 +15,56 @@ describe WorkoutSet do
       it "is valid with an exercise" do
         expect(WorkoutSet.new(exercise_id: 1)).to have(0).errors_on(:exercise_id)
       end
-      pending "set number is greater than or equal to 1"
-      pending "rep number must be greater than or equal to 0"
-      pending "notes can be empty"
-      pending "notes must be less than 250 characters"
+      
+      it "set number is greater than or equal to 1" do
+        expect(WorkoutSet.new(set_number: 1)).to have(0).errors_on(:set_number)
+      end
+
+      it "rep number must be greater than or equal to 0" do
+        expect(WorkoutSet.new(rep_count: 0)).to have(0).errors_on(:rep_count)
+      end
+
+      it "notes can be empty" do
+        expect(WorkoutSet.new(notes:nil)).to have(0).errors_on(:notes)
+      end
+
+      it "notes must be less than 250 characters" do
+        expect(WorkoutSet.new(notes: "a"*250)).to have(0).errors_on(:notes)
+      end
     end
 
-    context "with invalid data" do
-      it "is invalid without a workout" do
+    context "is invalid if" do
+      it "without a workout" do
         expect(WorkoutSet.new(workout_id: nil)).to have(1).errors_on(:workout_id)
       end
 
-      pending "set number is zero"
-      pending "rep number is less than zero"
-      pending "notes is longer than 250 chars"
+      it "set number is null" do
+        expect(WorkoutSet.new(set_number: nil)).to have(2).errors_on(:set_number)
+      end
+
+      it "rep number is null" do
+        expect(WorkoutSet.new(rep_count: nil)).to have(2).errors_on(:rep_count)
+      end
+
+      it "set number is zero" do
+        expect(WorkoutSet.new(set_number: 0)).to have(1).errors_on(:set_number)
+      end
+
+      it "rep number is less than zero" do
+        expect(WorkoutSet.new(rep_count:-1)).to have(1).errors_on(:rep_count)
+      end
+
+      it "notes is longer than 250 chars" do
+        expect(WorkoutSet.new(notes: "1" * 251)).to have(1).errors_on(:notes)
+      end
+
+      it "only accepts whole numbers for sets" do
+        expect(WorkoutSet.new(set_number: 1.1)).to have(1).errors_on(:set_number)
+      end
+
+      it "only accepts whole numbers for rep_count" do
+        expect(WorkoutSet.new(rep_count: 1.1)).to have(1).errors_on(:rep_count)
+      end
     end
   end
 end
