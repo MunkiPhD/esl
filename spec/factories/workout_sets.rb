@@ -5,8 +5,8 @@ FactoryGirl.define do
     set_number 1
     rep_count 1
     weight 1
-    notes "MyString"
-    workout nil
-    exercise nil
+    notes ""
+    workout
+    exercise
   end
 end
