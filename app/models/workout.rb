@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: workouts
+#
+#  id             :integer          not null, primary key
+#  title          :string(255)      not null
+#  date_performed :date             not null
+#  notes          :text             default(""), not null
+#  user_id        :integer          not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Workout < ActiveRecord::Base
   belongs_to :user
   has_many :workout_sets
