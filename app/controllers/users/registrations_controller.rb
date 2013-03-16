@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
-        sign_in(resource_name, resource)
+        sign_up(resource_name, resource)
         respond_with resource, :location => self.after_sign_up_path_for(resource)
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
@@ -23,6 +23,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def sign_up(resource_name, resource)
+    sign_in(resource_name, resource)
+  end
 
    # Build a devise resource passing in the session. Useful to move
   # temporary session data to the newly created user.
