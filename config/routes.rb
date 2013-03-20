@@ -1,5 +1,6 @@
 Esl::Application.routes.draw do
   resources :exercises
+  resources :workouts
 
   #devise_for :users
   devise_for :users, :controllers => {:registrations => "users/registrations", :passwords => "users/passwords"}
