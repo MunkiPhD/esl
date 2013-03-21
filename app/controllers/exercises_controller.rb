@@ -42,6 +42,11 @@ class ExercisesController < ApplicationController
   # PATCH/PUT /exercises/1.json
   def update
     respond_to do |format|
+      if @exercise.user_id != current_user.id
+        format.html { redirect_to @exercise, notice: 'You cannot update an exercise not created by you.' }
+        format.json { head :no_content, status: :unprocessable_entity }
+      end
+
       if @exercise.update(exercise_params)
         format.html { redirect_to @exercise, notice: 'Exercise was successfully updated.' }
         format.json { head :no_content }
@@ -55,10 +60,15 @@ class ExercisesController < ApplicationController
   # DELETE /exercises/1
   # DELETE /exercises/1.json
   def destroy
-    @exercise.destroy
     respond_to do |format|
-      format.html { redirect_to exercises_url }
-      format.json { head :no_content }
+      if @exercise.user_id == current_user.id
+        @exercise.destroy
+        format.html { redirect_to exercises_url }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @exercise, notice: "You cannot delete an exercise you did not create"}
+        format.json { head :no_content }
+      end
     end
   end
 

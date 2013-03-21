@@ -172,7 +172,10 @@ describe ExercisesController do
       end
 
       it "only updates if the exercise was created by the user" do
-        pending "this can be implemented later"
+        exercise = FactoryGirl.create(:exercise, user_id: 99)
+        Exercise.any_instance.should_not_receive(:update).with({ "id" => exercise.id })
+        put :update, {:id => exercise.to_param, :exercise => exercise.attributes }
+        response.should redirect_to(exercise)
       end
     end
   end
@@ -193,15 +196,30 @@ describe ExercisesController do
 
     describe "not authorized" do
       it "does not delete if un-authenticated" do
-        pending "do this"
+        sign_out @user
+        exercise = create(:exercise)
+        Exercise.any_instance.should_not_receive(:destroy).with({"id" => exercise.id})
+        delete :destroy, { :id => exercise.to_param }
+        response.should redirect_to(new_user_session_path)
       end
 
       it "does not delete if not created by the user" do
-        pending "do this"
+        exercise = create(:exercise, user_id: 99)
+        Exercise.any_instance.should_not_receive(:destroy).with({"id" => exercise.id})
+        expect {
+          delete :destroy, {:id => exercise.to_param}
+        }.to change(Exercise, :count).by(0)
+        response.should redirect_to(exercise)
       end
 
       it "only deletes if created by user AND is not logged in a workout" do
-        pending "reqs workouts"
+        pending "this test isnt correct yet"
+        set = create(:workout_set)
+        exercise = set.exercise
+        expect {
+          delete :destroy, {:id => exercise.to_param}
+        }.to change(Exercise, :count).by(0)
+        response.should redirect_to(exercise)
       end
     end
   end
