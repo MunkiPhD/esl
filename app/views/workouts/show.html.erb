@@ -1,2 +1,18 @@
 <h1>Workouts#show</h1>
-<p>Find me in app/views/workouts/show.html.erb</p>
+<div>
+  Title: <%= @workout.title %>
+</div>
+<div>
+  Date: <%= @workout.date_performed %>
+</div>
+<div>
+  Notes: <%= @workout.notes %>
+</div>
+<div>
+  ID: <%= @workout.id %>
+</div>
+<div>
+  User ID: <%= @workout.user_id %>
+</div>
+
+<%= link_to "edit", edit_workout_path(@workout) %>
