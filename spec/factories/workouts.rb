@@ -6,5 +6,9 @@ FactoryGirl.define do
     date_performed  "2013-03-11"
     notes           "Felt great to have cold steel in my hands"
     user
+
+    factory :invalid_workout do
+      title           nil
+    end
   end
 end
