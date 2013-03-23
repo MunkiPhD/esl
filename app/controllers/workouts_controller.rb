@@ -1,6 +1,7 @@
 class WorkoutsController < ApplicationController
   before_filter :authenticate_user!, except: [:show]
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, only: [:index, :show]
 
   def index
     @workouts = current_user.workouts

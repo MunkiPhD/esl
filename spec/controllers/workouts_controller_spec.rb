@@ -19,13 +19,33 @@ describe WorkoutsController do
 
       it "renders the :index view" do
         get :index
-        response.should render_template :index
         expect(response).to render_template :index
+      end
+
+      it "returns list in order of date performed" do
+        @user2 = create(:user)
+        sign_in @user2
+
+        workout = create(:workout, date_performed: DateTime.now.tomorrow.to_date, user: @user2)
+        workout2 = create(:workout, date_performed: DateTime.now, user: @user2)
+        get :index
+        expect(assigns(:workouts)).to eq [workout, workout2]
+      end
+
+      context "JSON" do
+        render_views
+        it "returns JSON formatted content" do
+          workout2 = create(:workout, user: @user)
+          get :index, format: :json
+          expect(response.body).to have_content [workout2, @workout].to_json(only: [:id, :title, :date_performed, :notes, :user_id ])
+        end
       end
     end
 
 
     describe "GET 'show'" do
+      render_views
+
       it "assigns the requested workout to @workout" do
         get 'show', { id: @workout.id }
         expect(assigns(:workout)).to eq(@workout)
@@ -36,6 +56,10 @@ describe WorkoutsController do
         expect(response).to render_template :show
       end
 
+      it "returns JSON data" do
+        get :show, format: :json, id: @workout
+        expect(response.body).to have_content @workout.to_json(only:  [:id, :title, :date_performed, :notes, :user_id])
+      end
     end
 
     describe "GET 'new'" do
@@ -50,7 +74,7 @@ describe WorkoutsController do
       end
     end
 
-  
+
     describe "GET 'edit'" do
       it "assigns the requested workout to @workout" do
         get :edit, id: @workout
