@@ -62,6 +62,7 @@ describe WorkoutsController do
       end
     end
 
+
     describe "GET 'new'" do
       it "assigns a new workout to @workout" do
         get 'new'
@@ -86,6 +87,7 @@ describe WorkoutsController do
         expect(response).to render_template :edit
       end
     end
+
 
     describe "POST #create" do
       context "with valid attributes" do

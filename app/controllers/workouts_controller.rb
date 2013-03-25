@@ -12,6 +12,7 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = Workout.new
+    1.times { @workout.workout_sets.build }
   end
 
   def create
@@ -69,6 +70,6 @@ class WorkoutsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def workout_params
-    params.require(:workout).permit(:name, :title, :date_performed, :notes)
+    params.require(:workout).permit(:name, :title, :date_performed, :notes, workout_sets_attributes: [:exercise_id, :workout_id, :id, :set_number, :rep_count, :weight, :notes])
   end
 end

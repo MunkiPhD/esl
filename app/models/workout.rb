@@ -15,10 +15,12 @@ class Workout < ActiveRecord::Base
   default_scope order('date_performed DESC')
 
   belongs_to :user
-  has_many :workout_sets
+  has_many :workout_sets, dependent: :destroy
 
   validates :title, presence: true, length: {minimum: 2, maximum: 200}
   validates :user_id, presence: true
   validates :date_performed, presence: true
   validates :notes, presence: true, allow_blank: true
+
+  accepts_nested_attributes_for :workout_sets, allow_destroy: true
 end

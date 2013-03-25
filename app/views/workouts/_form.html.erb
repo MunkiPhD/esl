@@ -23,6 +23,24 @@
     <%= f.label :notes %>
     <%= f.text_area :notes %>
   </div>
+
+
+  <% @exercises = Exercise.all %>
+  <%= f.fields_for :workout_sets do |builder| %>
+    <%= builder.collection_select(:exercise_id, @exercises, :id, :name) %>
+    <div>
+      <%= builder.label :set_number %>
+      <%= builder.text_field :set_number %>
+    </div>
+    <div>
+      <%= builder.label :rep_count %>
+      <%= builder.text_field :rep_count %>
+    </div>
+    <div>
+      <%= builder.label :weight %>
+      <%= builder.text_field :weight %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
