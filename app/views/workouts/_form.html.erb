@@ -26,6 +26,26 @@
 
 
   <% @exercises = Exercise.all %>
+  <div style="border:1px red solid; padding:10px;">
+  <%= f.fields_for :workout_exercises do |builder| %>
+    <%= builder.collection_select(:exercise_id, @exercises, :id, :name) %>
+    <%= builder.fields_for :workout_sets do |set| %>
+    <div>
+      <%= set.label :set_number %>
+      <%= set.text_field :set_number %>
+    </div>
+    <div>
+      <%= set.label :rep_count %>
+      <%= set.text_field :rep_count %>
+    </div>
+    <div>
+      <%= set.label :weight %>
+      <%= set.text_field :weight %>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+  <hr/>
   <%= f.fields_for :workout_sets do |builder| %>
     <%= builder.collection_select(:exercise_id, @exercises, :id, :name) %>
     <div>

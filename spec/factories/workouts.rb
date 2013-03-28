@@ -10,5 +10,17 @@ FactoryGirl.define do
     factory :invalid_workout do
       title           nil
     end
+
+    factory :workout_with_exercises do
+      ignore do
+        workout_exercises_count 2
+      end
+
+      after(:build) do |workout, evaluator|
+        workout_exercises = FactoryGirl.build(:workout_exercise_with_sets)
+        workout.workout_exercises << workout_exercises
+        #FactoryGirl.build_list(:workout_exercise, evaluator.workout_exercises_count, workout: workout)
+      end
+    end
   end
 end

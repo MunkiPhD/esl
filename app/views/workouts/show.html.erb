@@ -15,11 +15,14 @@
   User ID: <%= @workout.user_id %>
 </div>
 <h3>Sets</h3>
-<% @workout.workout_sets.each do |workout_set| %>
-  ID: <%= workout_set.id %> 
-  Set: <%= workout_set.set_number %> 
-  Reps: <%= workout_set.rep_count %>
-  <br/>
+<% @workout.workout_exercises.each do |workout_exercise| %>
+  <h3><%= workout_exercise.exercise.name %>
+  <% workout_exercise.workout_sets.each do |workout_set| %>
+    ID: <%= workout_set.id %> 
+    Set: <%= workout_set.set_number %> 
+    Reps: <%= workout_set.rep_count %>
+    <br/>
+  <% end %>
 <% end %>
 
-<%= link_to "edit", edit_workout_path(@workout) %>
+  <%= link_to "edit", edit_workout_path(@workout) %>

@@ -15,6 +15,27 @@ require 'spec_helper'
 
 describe Workout do
   describe "is valid with" do
+    it "has a valid factory" do
+      expect(build(:workout)).to be_valid
+    end
+
+    it "has a valid factory with exercises" do
+      workout = build(:workout_with_exercises)
+      expect(workout).to be_valid
+    end
+
+    it "saves the factory with the exercises and sets" do
+        #workout_exercise = build(:workout_exercise_with_sets)
+        ##workout_exercise.workout_sets << build(:workout_set)
+
+        #workout = build(:workout)
+        #workout.workout_exercises << workout_exercise
+
+      workout = build(:workout_with_exercises)
+        expect(workout.workout_exercises.length).to eq(1)
+        expect(workout.workout_exercises[0].workout_sets.length).to eq(3)
+    end
+
     it "a title" do
       expect(Workout.new(title: "dsadas")).to have(0).errors_on(:title)  
     end

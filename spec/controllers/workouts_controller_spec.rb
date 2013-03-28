@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe WorkoutsController do
   before :each do
-      @user = create(:user)
-      @workout = create(:workout, user_id: @user.id)
+    @user = create(:user)
+    @workout = create(:workout, user_id: @user.id)
   end
 
   context "for authenticated user" do
@@ -100,7 +100,20 @@ describe WorkoutsController do
           post :create, workout: attributes_for(:workout)
           expect(response).to redirect_to workouts_path
         end
+
+        it "saves with workout exercises" do
+          expect {
+            post :create, workout: attributes_for(:workout_with_exercises)
+          }.to change(Workout, :count).by(1)
+        end
+
+        it "saves workout and nested workout exercise" do
+          expect {
+            post :create, workout: attributes_for(:workout_with_exercises)
+          }.to change(WorkoutExercise, :count).by(1)
+        end
       end
+
 
       context "with invalid attributes" do
         it "does now save the workout to the db" do
@@ -148,7 +161,7 @@ describe WorkoutsController do
         end
       end
     end
-    
+
 
     describe "DELETE #destroy" do
       it "deletes the message from the database" do
