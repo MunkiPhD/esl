@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130313013925) do
+ActiveRecord::Schema.define(version: 20130328122807) do
 
   create_table "exercises", force: true do |t|
     t.string   "name",       null: false
@@ -38,18 +38,25 @@ ActiveRecord::Schema.define(version: 20130313013925) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  create_table "workout_sets", force: true do |t|
-    t.integer  "set_number",               null: false
-    t.integer  "rep_count",                null: false
-    t.integer  "weight",                   null: false
-    t.string   "notes",       default: "", null: false
-    t.integer  "workout_id",               null: false
-    t.integer  "exercise_id",              null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "workout_exercises", force: true do |t|
+    t.integer "workout_id",  null: false
+    t.integer "exercise_id", null: false
   end
 
-  add_index "workout_sets", ["exercise_id"], name: "index_workout_sets_on_exercise_id"
+  add_index "workout_exercises", ["exercise_id"], name: "index_workout_exercises_on_exercise_id"
+  add_index "workout_exercises", ["workout_id"], name: "index_workout_exercises_on_workout_id"
+
+  create_table "workout_sets", force: true do |t|
+    t.integer  "set_number",                       null: false
+    t.integer  "rep_count",                        null: false
+    t.integer  "weight",                           null: false
+    t.string   "notes",               default: "", null: false
+    t.integer  "workout_id",                       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "workout_exercise_id",              null: false
+  end
+
   add_index "workout_sets", ["workout_id"], name: "index_workout_sets_on_workout_id"
 
   create_table "workouts", force: true do |t|

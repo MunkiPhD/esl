@@ -2,15 +2,15 @@
 #
 # Table name: workout_sets
 #
-#  id          :integer          not null, primary key
-#  set_number  :integer          not null
-#  rep_count   :integer          not null
-#  weight      :integer          not null
-#  notes       :string(255)      default(""), not null
-#  workout_id  :integer          not null
-#  exercise_id :integer          not null
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id                  :integer          not null, primary key
+#  set_number          :integer          not null
+#  rep_count           :integer          not null
+#  weight              :integer          not null
+#  notes               :string(255)      default(""), not null
+#  workout_id          :integer          not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  workout_exercise_id :integer          not null
 #
 
 require 'spec_helper'
@@ -23,14 +23,10 @@ describe WorkoutSet do
         expect(build(:workout_set)).to be_valid
       end
 
-      it "is valid with a workout" do
-        expect(WorkoutSet.new(workout_id: 1)).to have(0).errors_on(:workout_id)
+      it "is valid with a workout exercise" do
+        expect(WorkoutSet.new(workout_exercise_id: 1)).to have(0).errors_on(:workout_exercise_id)
       end
 
-      it "is valid with an exercise" do
-        expect(WorkoutSet.new(exercise_id: 1)).to have(0).errors_on(:exercise_id)
-      end
-      
       it "set number is greater than or equal to 1" do
         expect(WorkoutSet.new(set_number: 1)).to have(0).errors_on(:set_number)
       end
@@ -49,13 +45,10 @@ describe WorkoutSet do
     end
 
     context "is invalid if" do
-      it "without a workout" do
-        expect(WorkoutSet.new(workout_id: nil)).to have(1).errors_on(:workout_id)
+      it "without a workout exercise" do
+        expect(WorkoutSet.new(workout_exercise_id: nil)).to have(1).errors_on(:workout_exercise_id)
       end
 
-      it "without an exercise" do
-        expect(WorkoutSet.new(exercise_id: nil)).to have(1).errors_on(:exercise_id)
-      end
 
       it "set number is null" do
         expect(WorkoutSet.new(set_number: nil)).to have(2).errors_on(:set_number)

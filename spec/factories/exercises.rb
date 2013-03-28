@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :exercise do
-    name "MyString"
+    name "deadlift"
     user
   end
 end

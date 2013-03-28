@@ -6,7 +6,6 @@ FactoryGirl.define do
     rep_count 1
     weight 1
     notes ""
-    workout
-    exercise
+    workout_exercise
   end
 end
