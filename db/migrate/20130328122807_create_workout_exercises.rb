@@ -6,7 +6,7 @@ class CreateWorkoutExercises < ActiveRecord::Migration
     end
 
     change_table :workout_sets do |t|
-      t.references :workout_exercise, null: false
+      #t.references :workout_exercise, null: false
     end
   end
 end

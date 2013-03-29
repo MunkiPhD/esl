@@ -14,13 +14,16 @@
 <div>
   User ID: <%= @workout.user_id %>
 </div>
+<hr/>
 <h3>Sets</h3>
 <% @workout.workout_exercises.each do |workout_exercise| %>
-  <h3><%= workout_exercise.exercise.name %>
+  <h3>Exercise:<%= workout_exercise.exercise.name %></h3>
+    <h2> -- Sets: </h2>
   <% workout_exercise.workout_sets.each do |workout_set| %>
     ID: <%= workout_set.id %> 
     Set: <%= workout_set.set_number %> 
     Reps: <%= workout_set.rep_count %>
+    weight: <%= workout_set.weight %>
     <br/>
   <% end %>
 <% end %>

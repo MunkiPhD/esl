@@ -24,16 +24,18 @@ describe Workout do
       expect(workout).to be_valid
     end
 
-    it "saves the factory with the exercises and sets" do
-        #workout_exercise = build(:workout_exercise_with_sets)
-        ##workout_exercise.workout_sets << build(:workout_set)
-
-        #workout = build(:workout)
-        #workout.workout_exercises << workout_exercise
-
+    it "builds the factory with the exercises and sets" do
       workout = build(:workout_with_exercises)
-        expect(workout.workout_exercises.length).to eq(1)
-        expect(workout.workout_exercises[0].workout_sets.length).to eq(3)
+      expect(workout.workout_exercises.length).to eq(1)
+      expect(workout.workout_exercises[0].workout_sets.length).to eq(3)
+    end
+
+    it "saves a workout with nested attributes" do
+      workout = build(:workout_with_exercises)
+      workout.save
+      workout.reload
+      expect(workout.workout_exercises.length).to eq(1)
+      expect(workout.workout_exercises[0].workout_sets.length).to eq(3)
     end
 
     it "a title" do

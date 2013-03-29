@@ -5,8 +5,9 @@ class CreateWorkoutSets < ActiveRecord::Migration
       t.integer :rep_count, null: false
       t.integer :weight, null: false
       t.string :notes, null: false, default: ""
-      t.references :workout, index: true, null: false
-      t.references :exercise, index: true, null: false
+      #t.references :workout, index: true, null: false
+      #t.references :exercise, index: true, null: false
+      t.references :workout_exercise, null: false
 
       t.timestamps
     end

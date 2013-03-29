@@ -51,13 +51,10 @@ ActiveRecord::Schema.define(version: 20130328122807) do
     t.integer  "rep_count",                        null: false
     t.integer  "weight",                           null: false
     t.string   "notes",               default: "", null: false
-    t.integer  "workout_id",                       null: false
+    t.integer  "workout_exercise_id",              null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "workout_exercise_id",              null: false
   end
-
-  add_index "workout_sets", ["workout_id"], name: "index_workout_sets_on_workout_id"
 
   create_table "workouts", force: true do |t|
     t.string   "title",                       null: false

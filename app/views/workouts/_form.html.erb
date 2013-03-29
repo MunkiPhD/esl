@@ -1,32 +1,32 @@
 <%= form_for(@workout) do |f| %>
   <% if @workout.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
+  <div id="error_explanation">
+  <h2><%= pluralize(@workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
 
-      <ul>
-      <% @workout.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+  <ul>
+    <% @workout.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :date_performed %>
-    <%= f.date_select :date_performed %>
-  </div>
-  <div>
-    <%= f.label :notes %>
-    <%= f.text_area :notes %>
-  </div>
+<div class="field">
+  <%= f.label :title %><br />
+  <%= f.text_field :title %>
+</div>
+<div>
+  <%= f.label :date_performed %>
+  <%= f.date_select :date_performed %>
+</div>
+<div>
+  <%= f.label :notes %>
+  <%= f.text_area :notes %>
+</div>
 
 
-  <% @exercises = Exercise.all %>
-  <div style="border:1px red solid; padding:10px;">
+<% @exercises = Exercise.all %>
+<div style="border:1px red solid; padding:10px;">
   <%= f.fields_for :workout_exercises do |builder| %>
     <%= builder.collection_select(:exercise_id, @exercises, :id, :name) %>
     <%= builder.fields_for :workout_sets do |set| %>
@@ -42,26 +42,10 @@
       <%= set.label :weight %>
       <%= set.text_field :weight %>
     </div>
-    <% end %>
   <% end %>
+<% end %>
 </div>
-  <hr/>
-  <%= f.fields_for :workout_sets do |builder| %>
-    <%= builder.collection_select(:exercise_id, @exercises, :id, :name) %>
-    <div>
-      <%= builder.label :set_number %>
-      <%= builder.text_field :set_number %>
-    </div>
-    <div>
-      <%= builder.label :rep_count %>
-      <%= builder.text_field :rep_count %>
-    </div>
-    <div>
-      <%= builder.label :weight %>
-      <%= builder.text_field :weight %>
-    </div>
-  <% end %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>

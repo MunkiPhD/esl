@@ -60,8 +60,13 @@ describe WorkoutsController do
         get :show, format: :json, id: @workout
         expect(response.body).to have_content @workout.to_json(only:  [:id, :title, :date_performed, :notes, :user_id])
       end
-    end
 
+      it "returns JSON data for the entire workout with sets" do
+        workout = create(:workout_with_exercises)
+        get :show, format: :json, id: workout
+        expect(response.body).to have_content(Workout.includes(:workout_exercises => [:workout_sets, :exercise]).find(workout).to_json())
+      end
+    end
 
     describe "GET 'new'" do
       it "assigns a new workout to @workout" do
@@ -107,13 +112,22 @@ describe WorkoutsController do
           }.to change(Workout, :count).by(1)
         end
 
-        it "saves workout and nested workout exercise" do
+=begin
+        it "saves the nested workout_exercise" do
           expect {
             post :create, workout: attributes_for(:workout_with_exercises)
           }.to change(WorkoutExercise, :count).by(1)
         end
-      end
 
+        it "saves nested workout_sets" do
+          expect {
+            post :create, workout: attributes_for(:workout_with_exercises)
+          }.to change(WorkoutSet, :count).by(3)
+        end
+      end
+=end
+
+  end
 
       context "with invalid attributes" do
         it "does now save the workout to the db" do
