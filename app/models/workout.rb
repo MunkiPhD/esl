@@ -11,6 +11,8 @@
 #  updated_at     :datetime
 #
 
+
+
 class Workout < ActiveRecord::Base
   default_scope order('date_performed DESC')
 

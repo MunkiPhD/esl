@@ -7,10 +7,13 @@
 #  rep_count           :integer          not null
 #  weight              :integer          not null
 #  notes               :string(255)      default(""), not null
-#  workout_exercise_id :integer          not null
+#  workout_id          :integer          not null
 #  created_at          :datetime
 #  updated_at          :datetime
+#  workout_exercise_id :integer          not null
 #
+
+
 
 class WorkoutSet < ActiveRecord::Base
   belongs_to :workout_exercise
