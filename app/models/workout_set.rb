@@ -19,7 +19,7 @@ class WorkoutSet < ActiveRecord::Base
   belongs_to :workout_exercise
 
   # validates :workout_id, presence: true
-  #validates :workout_exercise_id, presence: true
+  validates :workout_exercise, presence: true
   validates :notes, length: { maximum: 250 }
   validates :set_number, presence: true,
                          allow_nil: false, 

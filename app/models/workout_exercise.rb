@@ -13,11 +13,8 @@ class WorkoutExercise < ActiveRecord::Base
 
   has_many :workout_sets, :dependent => :destroy
 
-=begin
-  validates :workout_id, presence: true
-  validates :exercise_id, presence: true
-=end
-
+  validates :workout, presence: true
+  validates :exercise, presence: true
 
   accepts_nested_attributes_for :workout_sets, allow_destroy: true
 end

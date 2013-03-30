@@ -25,12 +25,16 @@ describe WorkoutExercise do
   end
 
   context "in-valid data" do
-    it "missing workout id" do
-      expect(WorkoutExercise.new(workout_id: nil)).to have(1).errors_on(:workout_id)
+    it "missing workout id will not save" do
+      expect {
+        build(:workout_exercise, workout_id: nil).save 
+      }.to change(WorkoutExercise, :count).by(0)
     end
 
-    it "missing exercise id" do
-      expect(WorkoutExercise.new(exercise_id: nil)).to have(1).errors_on(:exercise_id)
+    it "missing exercise id will not save" do
+      expect {
+        build(:workout_exercise, exercise_id: nil).save 
+      }.to change(WorkoutExercise, :count).by(0)
     end
   end
 end

@@ -45,8 +45,11 @@ describe WorkoutSet do
     end
 
     context "is invalid if" do
-      it "without a workout exercise" do
-        expect(WorkoutSet.new(workout_exercise_id: nil)).to have(1).errors_on(:workout_exercise_id)
+      it "without a workout exercise when saving" do
+        expect {
+          build(:workout_set, workout_exercise_id: nil).save
+        }.to change(WorkoutSet, :count).by(0)
+        #expect(WorkoutSet.new(workout_exercise_id: nil).save).to have(1).errors_on(:workout_exercise_id)
       end
 
 
