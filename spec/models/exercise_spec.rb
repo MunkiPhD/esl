@@ -35,6 +35,12 @@ describe Exercise do
     expect(exercise).to be_valid
   end
 
+  it "has a unique name" do
+      exercise = create(:exercise, name: "deadlift")
+      exercise2 = build(:exercise, name: "deadlift")
+      expect(exercise2).to have(1).errors_on(:name)
+  end
+
   it "belongs to a user" do
     expect(build(:exercise, user_id: nil)).to have(1).errors_on(:user_id)
     expect(build(:exercise, user_id: 2)).to be_valid
