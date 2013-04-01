@@ -1,0 +1,7 @@
+<%= f.collection_select(:exercise_id, exercises, :id, :name) %>
+<table>
+  <%= f.fields_for :workout_sets do |set| %>
+    <%= render "workout_sets_fields", f: set %>
+   <% end %>
+</table>
+<%= link_to "Add Set", "#" %>

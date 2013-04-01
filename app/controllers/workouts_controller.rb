@@ -11,6 +11,7 @@ class WorkoutsController < ApplicationController
   end
 
   def new
+    @exercises = Exercise.all
     @workout = Workout.new
     1.times { @workout.workout_exercises.build }
     1.times { @workout.workout_exercises[0].workout_sets.build }
@@ -31,6 +32,7 @@ class WorkoutsController < ApplicationController
   end
 
   def edit
+    @exercises = Exercise.all
   end
 
   def update

@@ -24,26 +24,14 @@
   <%= f.text_area :notes %>
 </div>
 
-
-<% @exercises = Exercise.all %>
-<div style="border:1px red solid; padding:10px;">
-  <%= f.fields_for :workout_exercises do |builder| %>
-    <%= builder.collection_select(:exercise_id, @exercises, :id, :name) %>
-    <%= builder.fields_for :workout_sets do |set| %>
-    <div>
-      <%= set.label :set_number %>
-      <%= set.text_field :set_number %>
-    </div>
-    <div>
-      <%= set.label :rep_count %>
-      <%= set.text_field :rep_count %>
-    </div>
-    <div>
-      <%= set.label :weight %>
-      <%= set.text_field :weight %>
-    </div>
+<div id="workout_exercises_container">
+  <div style="border:1px red solid; padding:10px;">
+    <%= f.fields_for :workout_exercises do |builder| %>
+      <%= render "workout_exercises_fields", f: builder, exercises: @exercises %>
   <% end %>
-<% end %>
+  </div>
+  <%= link_to "Add Exercise", "#", data: { "action" => "workouts.add_set" } %>
+  <%= link_to_function "function link", "window.Workouts.add_exercise()" %>
 </div>
 <div class="actions">
   <%= f.submit %>
