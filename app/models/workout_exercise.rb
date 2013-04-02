@@ -8,10 +8,10 @@
 #
 
 class WorkoutExercise < ActiveRecord::Base
-  belongs_to :workout
+  belongs_to :workout, inverse_of: :workout_exercises
   belongs_to :exercise
 
-  has_many :workout_sets, :dependent => :destroy
+  has_many :workout_sets, :dependent => :destroy, inverse_of: :workout_exercise
 
   validates :workout, presence: true
   validates :exercise, presence: true

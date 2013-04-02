@@ -16,7 +16,7 @@
 
 
 class WorkoutSet < ActiveRecord::Base
-  belongs_to :workout_exercise
+  belongs_to :workout_exercise, inverse_of: :workout_sets
 
   # validates :workout_id, presence: true
   validates :workout_exercise, presence: true

@@ -17,15 +17,18 @@
 <hr/>
 <h3>Sets</h3>
 <% @workout.workout_exercises.each do |workout_exercise| %>
-  <h3>Exercise:<%= workout_exercise.exercise.name %></h3>
-    <h2> -- Sets: </h2>
-  <% workout_exercise.workout_sets.each do |workout_set| %>
-    ID: <%= workout_set.id %> 
-    Set: <%= workout_set.set_number %> 
-    Reps: <%= workout_set.rep_count %>
-    weight: <%= workout_set.weight %>
-    <br/>
-  <% end %>
+  <table>
+    <tr>
+      <td colspan="2"><h3><%= link_to workout_exercise.exercise.name, workout_exercise.exercise %></h3></td>
+    </tr>
+    <% workout_exercise.workout_sets.each do |workout_set| %>
+      <tr>
+        <td><%= workout_set.set_number %>:</td>
+        <td><%= workout_set.weight %>x<%= workout_set.rep_count %></td>
+        <td> Workout Set ID: <%= workout_set.id %> </td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
 
   <%= link_to "edit", edit_workout_path(@workout) %>

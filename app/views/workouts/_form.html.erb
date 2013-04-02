@@ -28,12 +28,12 @@
   <div style="border:1px red solid; padding:10px;">
     <%= f.fields_for :workout_exercises do |builder| %>
       <%= render "workout_exercises_fields", f: builder, exercises: @exercises %>
-  <% end %>
+    <% end %>
+    <%= link_to_add_fields "Add Exercise", f, :workout_exercises %><br/>
   </div>
-  <%= link_to "Add Exercise", "#", data: { "action" => "workouts.add_set" } %>
-  <%= link_to_function "function link", "window.Workouts.add_exercise()" %>
 </div>
 <div class="actions">
   <%= f.submit %>
 </div>
+
 <% end %>

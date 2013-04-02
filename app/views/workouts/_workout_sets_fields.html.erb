@@ -1,15 +1,9 @@
-<tr>
-  <td>
+<div class="fields">
     <%= f.label :set_number %>
-    <%= f.text_field :set_number %>
-  </td>
-  <td>
+    <%= f.text_field :set_number %> |
     <%= f.label :rep_count %>
-    <%= f.text_field :rep_count %>
-  </td>
-  <td>
+    <%= f.text_field :rep_count %> |
     <%= f.label :weight %>
-    <%= f.text_field :weight %>
-  </td>
-</tr>
-
+    <%= f.text_field :weight %> |
+    <%= link_to_remove_fields "remove", f %>
+  </div>

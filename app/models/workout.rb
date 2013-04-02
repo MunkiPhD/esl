@@ -17,7 +17,7 @@ class Workout < ActiveRecord::Base
   default_scope order('date_performed DESC')
 
   belongs_to :user
-  has_many :workout_exercises, :dependent => :destroy
+  has_many :workout_exercises, :dependent => :destroy, inverse_of: :workout
 
   validates :title, presence: true, length: {minimum: 2, maximum: 200}
   validates :user_id, presence: true

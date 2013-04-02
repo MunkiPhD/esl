@@ -25,6 +25,7 @@ class WorkoutsController < ApplicationController
         format.html { redirect_to workouts_path, notice: 'Workout was successfully created.' }
         format.json { render action: 'show', status: :created, location: @workout }
       else
+        @exercises = Exercise.all
         format.html { render action: 'new' }
         format.json { render json: @workout.errors, status: :unprocessable_entity }
       end
@@ -46,6 +47,7 @@ class WorkoutsController < ApplicationController
         format.html { redirect_to @workout, notice: 'Exercise was successfully updated.' }
         format.json { head :no_content }
       else
+        @exercises = Exercise.all
         format.html { render action: 'edit' }
         format.json { render json: @workout.errors, status: :unprocessable_entity }
       end
@@ -77,14 +79,16 @@ class WorkoutsController < ApplicationController
                                     workout_exercises_attributes: [ 
                                       :workout_id, 
                                       :exercise_id, 
-                                      :id, 
+                                      :id,
+                                      :_destroy, 
                                       workout_sets_attributes: [ 
                                         :id,
                                         :workout_exercise_id,
                                         :set_number, 
                                         :rep_count, 
                                         :weight, 
-                                        :notes
+                                        :notes,
+                                        :_destroy
                                       ]
                                     ]
                                    )
