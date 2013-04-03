@@ -43,4 +43,7 @@ RSpec.configure do |config|
 
   # factory_girl syntax to simplify calls
   config.include FactoryGirl::Syntax::Methods
+
+  # add the macros for feature specs
+  config.include(LoginMacros, :type => :feature)
 end

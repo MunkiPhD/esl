@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :exercise do
-    name "deadlift"
+    sequence(:name){ |n| "deadlift_#{n}" }
     user
   end
 end
