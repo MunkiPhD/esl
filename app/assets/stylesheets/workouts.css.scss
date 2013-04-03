@@ -13,10 +13,10 @@ table {
   padding: 4px;
   min-width:85px;
   }
-  tr:first-child {
+  th:not(:empty) {
     background-color:#ddd;
   }
-  tr:not(:first-child) > td { 
+  tr > td { 
     text-align:center;
   }
 }
