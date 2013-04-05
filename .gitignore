@@ -14,4 +14,5 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 *.swp
+*.swo
 *.lock
