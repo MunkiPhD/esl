@@ -15,7 +15,7 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
-#
+#  username               :string(255)      default(""), not null
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
