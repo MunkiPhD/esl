@@ -20,5 +20,13 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "has a unique username" do
+    user = create(:user, username: "steve")
+    user2 = build(:user, username: "steve")
+    expect {
+      user2.save
+    }.to change(User, :count).by(0)
+
+    expect(user2).to have(1).errors_on(:username)
+  end
 end

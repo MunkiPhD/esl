@@ -7,7 +7,7 @@ class Users::SessionsController < Devise::SessionsController
 
 
   def resource_params
-    params.permit(:user).permit(:email, :password, :password_confirmation, :remember_me)
+    params.permit(:user).permit(:login, :password, :password_confirmation, :remember_me)
   end
   private :resource_params
 end

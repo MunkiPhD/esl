@@ -11,18 +11,44 @@ feature "Users" do
     expect(page).to have_content 'logout'
   end
 
+  scenario "allows a user to sign in using either email or username" do
+    user = create(:user)
+   
+    visit root_path
+    click_link 'login'
+    fill_in "Login", with: user.email
+    fill_in "Password", with: user.password
+
+    click_button "Sign in"
+
+    expect(page).to have_content user.username
+    expect(page).to have_content 'logout' 
+
+    click_link 'logout'
+
+    visit root_path
+    click_link 'login'
+    fill_in "Login", with: user.username
+    fill_in "Password", with: user.password
+
+    click_button "Sign in"
+
+    expect(page).to have_content user.username
+    expect(page).to have_content 'logout' 
+  end
+
 
   scenario "someone attempts to login with invalid account information" do
     visit new_user_session_path
 
     user = build(:user)
 
-    fill_in 'Email', with: user.email
+    fill_in 'Login', with: user.email
     fill_in 'Password', with: user.password
 
     click_button "Sign in"
 
-    expect(page).to have_content 'Invalid email or password.'
+    expect(page).to have_content 'Invalid login or password.'
   end
 
 

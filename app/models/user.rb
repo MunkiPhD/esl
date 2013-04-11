@@ -23,8 +23,23 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  attr_accessor :login
+
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :exercises
   has_many :workouts
+
+  validates :username, uniqueness: true
+
+
+  # override the finder so that it searches by username OR email
+  def self.find_for_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where("lower(username) = :value OR lower(email) = :value", { value: login.downcase }).first
+    else
+      where(conditions).first
+    end
+  end
 end
