@@ -17,7 +17,7 @@
 <hr/>
 <h3>Sets</h3>
 <% @workout.workout_exercises.each do |workout_exercise| %>
-  <table>
+  <table class="workout_exercise" id="<%= dom_id(workout_exercise) %>">
     <thead>
     <tr>
       <th colspan="2"><h3><%= link_to workout_exercise.exercise.name, workout_exercise.exercise %></h3></th>
