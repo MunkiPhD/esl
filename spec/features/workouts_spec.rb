@@ -55,6 +55,7 @@ feature "Workouts" do
 
     click_button "Update Workout"
     expect(page).to have_content "NewWorkoutTitle"
+    expect(page).to have_content "Workout was successfully updated."
   end
 
   scenario "user can delete a workouts" do

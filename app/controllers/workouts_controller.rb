@@ -44,7 +44,7 @@ class WorkoutsController < ApplicationController
       end
 
       if @workout.update(workout_params)
-        format.html { redirect_to @workout, notice: 'Exercise was successfully updated.' }
+        format.html { redirect_to @workout, notice: 'Workout was successfully updated.' }
         format.json { head :no_content }
       else
         @exercises = Exercise.all
