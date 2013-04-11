@@ -7,12 +7,30 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= yield %>
+<div id="masthead" class="container">
+  <div id="main-info">
+    <%= render "layouts/user_login" %>
+  </div>
+  <div id="main-nav">
+    <nav>
+      <ul>
+        <li><%= link_to "home", root_path %></li>
+        <li><%= link_to "exercises", exercises_path %></li>
+        <li><%= link_to "workouts", workouts_path %></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div id="main-content-container" class="container">
+  <div id="main-content">
+    <%= yield %>
+  </div>
+</div>
 
-
-<footer>
-  <%= link_to "home", root_path %>
-  <%= render "layouts/user_login" %>
+<footer class="container">
+  <div id="main-footer-content">
+    &copy;2013 EatSleepLift
+  </div>
 </footer>
 </body>
 </html>
