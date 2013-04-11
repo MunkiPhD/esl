@@ -14,7 +14,7 @@
 
 
 class Workout < ActiveRecord::Base
-  default_scope order('date_performed DESC')
+  default_scope  { order('date_performed DESC') }
 
   belongs_to :user
   has_many :workout_exercises, :dependent => :destroy, inverse_of: :workout

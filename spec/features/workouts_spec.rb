@@ -4,21 +4,21 @@ feature "Workouts" do
   scenario "user can add a workout" do
     user = create(:user)
     login_user user
-    
+
     exercise = create(:exercise) 
     visit workouts_path
 
-      click_link "new workout"
-      fill_in "Title", with: "back exercise"
+    click_link "new workout"
+    fill_in "Title", with: "back exercise"
 
-      last_nested_exercise = all(".workouts_workout_exercise").last
+    last_nested_exercise = all(".workouts_workout_exercise").last
 
-      within(last_nested_exercise) do
-        select exercise.name, from: 'workout_workout_exercises_attributes_0_exercise_id'
-        fill_in "Set number", with: "1"
-        fill_in "Rep count", with: "2"
-        fill_in "Weight", with: "225"
-      end
+    within(last_nested_exercise) do
+      select exercise.name, from: 'workout_workout_exercises_attributes_0_exercise_id'
+      fill_in "Set number", with: "1"
+      fill_in "Rep count", with: "2"
+      fill_in "Weight", with: "225"
+    end
 
     expect {
       click_button "Create Workout"
@@ -26,5 +26,38 @@ feature "Workouts" do
 
     expect(page).to have_content "back exercise" # redirects to the index
     expect(page).to have_content("logout")
+  end
+
+  scenario "user can edit a workout" do
+    user = create(:user)
+    login_user user
+
+    workout = create(:workout, user: user)
+
+    visit workouts_path
+    expect(page).not_to have_content "NewWorkoutTitle"
+    click_link workout.title
+
+    click_link "edit"
+    click_link "Add Exercise"
+    # change the title
+    fill_in "workout[title]", with: "NewWorkoutTitle"
+=begin
+    last_nested_exercise = all(".workouts_workout_exercise")
+    within(last_nested_exercise.last) do
+      click_link "Add Set"
+      select exercise.name, from: 'workout_workout_exercises_attributes_0_exercise_id'
+      fill_in "Set number", with: "1"
+      fill_in "Rep count", with: "2"
+      fill_in "Weight", with: "225"
+    end
+=end
+
+    click_button "Update Workout"
+    expect(page).to have_content "NewWorkoutTitle"
+  end
+
+  scenario "user can delete a workouts" do
+    pending
   end
 end
