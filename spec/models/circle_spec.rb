@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Circle do
+  it "has a valid factory" do
+    expect(build(:circle)).to be_valid
+  end
+
   it "has a unique name" do
     create(:circle, name: "group1")
     circle = build(:circle, name: "group1")
