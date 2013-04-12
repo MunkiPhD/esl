@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130411011809) do
+ActiveRecord::Schema.define(version: 20130412011619) do
+
+  create_table "circles", force: true do |t|
+    t.string   "name",                       null: false
+    t.string   "motto",       default: ""
+    t.text     "description", default: "",   null: false
+    t.boolean  "is_public",   default: true, null: false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "circles", ["user_id"], name: "index_circles_on_user_id"
 
   create_table "exercises", force: true do |t|
     t.string   "name",       null: false
