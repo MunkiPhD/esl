@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :circle do
-    name            "Tampa Powerlifting"
+    sequence(:name) { |n| "Tampa Powerlifting#{n}" }
     motto           "Lift Heavy."
     description     "Train hard, compete"
-    is_public          true
+    is_public       true
     user
   end
 end

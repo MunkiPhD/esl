@@ -1,0 +1,23 @@
+<p>
+  <strong>Name:</strong>
+  <%= @circle.name %>
+</p>
+
+<p>
+  <strong>Motto:</strong>
+  <%= @circle.motto %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @circle.description %>
+</p>
+
+<p>
+  <strong>Is public:</strong>
+  <%= @circle.is_public %>
+</p>
+
+
+<%= link_to 'Edit', edit_circle_path(@circle) %> |
+<%= link_to 'Back', circles_path %>

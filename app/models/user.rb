@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   # attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :exercises
   has_many :workouts
+  has_many :circles
 
   validates :username, uniqueness: true
 

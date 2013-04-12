@@ -1,4 +1,5 @@
 Esl::Application.routes.draw do
+  resources :circles
   resources :exercises
   resources :workouts
 

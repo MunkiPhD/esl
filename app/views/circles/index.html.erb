@@ -1,0 +1,33 @@
+<h1>Listing circles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Motto</th>
+      <th>Description</th>
+      <th>Is public</th>
+      <th>Created By</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @circles.each do |circle| %>
+    <tr>
+      <td><%= link_to circle.name, circle %></td>
+      <td><%= circle.motto %></td>
+      <td><%= circle.description %></td>
+      <td><%= circle.is_public? ? 'Yes' : 'No' %></td>
+      <td><%= circle.user.username %></td>
+      <td><%= link_to 'Edit', edit_circle_path(circle) %></td>
+      <td><%= link_to 'Destroy', circle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Circle', new_circle_path %>
