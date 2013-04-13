@@ -5,7 +5,7 @@ feature "Circles" do
     pending
   end
 
-  scenario "can be edited by their creator" do
+  scenario "can only be edited/updated by their creator" do
     pending
   end
 
