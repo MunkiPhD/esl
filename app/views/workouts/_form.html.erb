@@ -29,6 +29,7 @@
     <%= f.fields_for :workout_exercises do |builder| %>
       <%= render "workout_exercises_fields", f: builder, exercises: @exercises %>
     <% end %>
+    <div class="prev-placeholder" style="display: none"></div>
     <%= link_to_add_fields "Add Exercise", f, :workout_exercises %><br/>
   </div>
 </div>

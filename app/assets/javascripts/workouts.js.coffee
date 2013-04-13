@@ -17,7 +17,8 @@ Workouts.add_fields = (link, association, content) ->
   new_id = new Date().getTime()
   regexp = new RegExp("new_" + association, "g")
   $(link).before(content.replace(regexp, new_id))
-  Workouts.renumberSetFields($(link).parent(".workouts_workout_exercise"))
+  parent = $(link).parents(".workouts_workout_exercise")
+  Workouts.renumberSetFields(parent)
   
 
 Workouts.renumberSetFields = (container) ->
@@ -27,15 +28,3 @@ Workouts.renumberSetFields = (container) ->
     $(this).prev(".set-number").html(setCounter)
     setCounter++
   true
-
-Workouts.add_exercise = (parent) ->
-  try
-    template = $("#workouts_templates_add_exercise").html()
-    time = new Date().getTime()
-    rendered = Mustache.render(template, { number: time })
-    $(parent).prev(".workouts_workout_exercise").after(rendered)
-    $("a[data-action='workouts.add_set']").on("click", ->
-      Workouts.add_set(this)
-    )
-  catch error
-    alert error
