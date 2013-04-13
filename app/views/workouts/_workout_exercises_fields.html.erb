@@ -1,9 +1,9 @@
 <div class="workouts_workout_exercise fields">
   <%= f.collection_select(:exercise_id, exercises, :id, :name) %>
+  <%= link_to_remove_fields "remove exercise", f %>
   <%= f.fields_for :workout_sets do |set| %>
       <%= render "workout_sets_fields", f: set %>
   <% end %>
-  <%= link_to_remove_fields "remove exercise", f %>
   <%= link_to_add_fields "Add Set", f, :workout_sets %>
 </div>
 

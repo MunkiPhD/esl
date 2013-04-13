@@ -24,6 +24,7 @@ Workouts.renumberSetFields = (container) ->
   setCounter = 1
   $(container).find(".set-field").each (i) ->
     $(this).val(setCounter)
+    $(this).prev(".set-number").html(setCounter)
     setCounter++
   true
 

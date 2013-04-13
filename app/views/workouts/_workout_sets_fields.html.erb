@@ -1,10 +1,10 @@
 <div class="fields">
-    <%= f.label :set_number %>:
-    <span class="set-number"><%= f.object.set_number ||= 1 %></span>
-    <%= f.hidden_field :set_number, { :class => "set-field" } %> |
-    <%= f.label :rep_count %>
-    <%= f.text_field :rep_count %> |
-    <%= f.label :weight %>
-    <%= f.text_field :weight %> |
+    <%= f.label :set_number, "Set: " %>
+    <span class="set-number"><%= f.object.set_number ||= 1 %></span>&nbsp;---
+    <%= f.hidden_field :set_number, { :class => "set-field" } %>
+    <%= f.label :rep_count, "Reps: " %>
+    <%= f.text_field :rep_count %>
+    <%= f.label :weight, "Weight: " %>
+    <%= f.text_field :weight %>
     <%= link_to_remove_fields "remove", f %>
   </div>
