@@ -1,6 +1,7 @@
 <div class="fields">
-    <%= f.label :set_number %>
-    <%= f.text_field :set_number %> |
+    <%= f.label :set_number %>:
+    <span class="set-number"><%= f.object.set_number ||= 1 %></span>
+    <%= f.hidden_field :set_number, { :class => "set-field" } %> |
     <%= f.label :rep_count %>
     <%= f.text_field :rep_count %> |
     <%= f.label :weight %>
