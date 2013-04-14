@@ -1,4 +1,4 @@
-<div id="user-login">
+<div id="user-login" class="right">
   <% if user_signed_in? %>
     <%= current_user.username %>
     ( <%= link_to 'logout', destroy_user_session_path, :method => :delete %> )

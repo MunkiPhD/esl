@@ -12,6 +12,17 @@ body {
   margin:5px auto;
 }
 
+#header-logo {
+  padding:8px;
+  display: inline-block;
+  
+  > h1 {
+    font-size: 24px;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
 .container {
   width: 1160px;
 }
@@ -43,11 +54,12 @@ body {
 
 #main-info {
   margin:0 auto;
+  border-bottom: 2px dotted $grey;
 }
 
 #user-login {
   background-color: $secondary;
-  padding:4px;
+  padding:8px;
   text-align:right;
 }
 
@@ -59,4 +71,12 @@ footer {
 
 #main-footer-content {
   padding:5px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
 }
