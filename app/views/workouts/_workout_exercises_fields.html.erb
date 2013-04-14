@@ -1,9 +1,11 @@
 <table class="workouts_workout_exercise fields">
   <thead>
     <tr>
-      <th colspan="2">
-        <%= f.collection_select(:exercise_id, exercises, :id, :name) %>
-        <%= link_to_remove_fields "remove exercise", f %>
+      <th colspan="4">
+        <h3>
+          <%= f.collection_select(:exercise_id, exercises, :id, :name) %>
+          <%= link_to_remove_fields "remove exercise", f %>
+        </h3>
       </th>
     </tr>
   </thead>

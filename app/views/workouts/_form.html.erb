@@ -19,20 +19,19 @@
   <%= f.label :date_performed %>
   <%= f.date_select :date_performed %>
 </div>
+<br/>
 <div>
-  <%= f.label :notes %>
+  <%= f.label :notes %><br/>
   <%= f.text_area :notes %>
 </div>
 
 <div id="workout_exercises_container">
-  <div style="border:1px red solid; padding:10px;">
     <%= f.fields_for :workout_exercises do |builder| %>
       <%= render "workout_exercises_fields", f: builder, exercises: @exercises %>
     <% end %>
     <div class="prev-placeholder">
       <%= link_to_add_fields "Add Exercise", f, :workout_exercises %><br/>
     </div>
-  </div>
 </div>
 <div class="actions">
   <%= f.submit %>
