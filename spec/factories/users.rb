@@ -13,6 +13,9 @@ FactoryGirl.define do
   end
 
   factory :user_circle_admin do
-    after(:create) { |user| user.grant :circle_admin, circle }
+    after(:create) do |user|
+      circle = create(:circle)
+      user.grant :circle_admin, circle
+    end #{ |user| user.grant :circle_admin, circle }
   end
 end

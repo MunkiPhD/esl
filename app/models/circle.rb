@@ -1,4 +1,6 @@
 class Circle < ActiveRecord::Base
+  resourcify 
+
   belongs_to :user
 
   validates :name, presence: true, 

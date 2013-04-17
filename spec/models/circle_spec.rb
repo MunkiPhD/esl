@@ -46,4 +46,5 @@ describe Circle do
     circle = Circle.new(is_public: nil)
     expect(circle).to have(1).errors_on(:is_public)
   end
+
 end
