@@ -51,7 +51,7 @@ describe User do
         user = create(:user)
         circle = create(:circle, user: user)
         user.grant :manage, circle
-        ability = Ability.new(user)
+#        ability = Ability.new(user)
         expect(user.has_role? :manage, circle).to eq true
 
         user.revoke :manage, circle

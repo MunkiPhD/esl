@@ -20,4 +20,8 @@ feature "Circles" do
   scenario "can be applied to by a user NOT in the circle and then be approved by a circle admin" do
     pending
   end
+
+  scenario "user can join a circle" do
+    pending
+  end
 end
