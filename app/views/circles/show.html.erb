@@ -11,7 +11,13 @@
 <p>
   <strong>Description:</strong>
   <%= @circle.description %>
-</p>
+  </p>
+
+  <% if current_user.has_role? :circle_admin, @circle %>
+    <h1>You are an admin</h1>
+  <% else %>
+    <h2>You are NOT an admin</h2>
+  <% end %>
 
 <p>
   <strong>Is public:</strong>

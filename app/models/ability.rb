@@ -34,6 +34,7 @@ class Ability
       can :manage, :all
     else
       #can :read, :all
+      can :read, Circle, is_public: true # only allows you to see a page for a circle if it's public
       can :manage, Circle, id: Circle.with_role(:circle_admin, user).map(&:id) # allow the person that's an admin to modify a circle
       #can :read, Circle, id: Circle.with_role(:circle_member, user).map(&:id) # allow members to read the circles
     end

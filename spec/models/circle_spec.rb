@@ -47,4 +47,16 @@ describe Circle do
     expect(circle).to have(1).errors_on(:is_public)
   end
 
+  describe "abilties" do
+    it "assigns admin rights to creator of circle after create" do
+      user = create(:user)
+      circle = build(:circle, user: user)
+      expect(user.has_role? :circle_admin, circle).to eq false
+
+      circle.save
+      circle.reload
+      expect(user.has_role? :circle_admin, circle).to eq true
+    end
+  end
+
 end
