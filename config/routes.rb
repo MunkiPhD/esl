@@ -1,5 +1,10 @@
 Esl::Application.routes.draw do
-  resources :circles
+  resources :circles do
+    member do
+      get 'join'
+      post 'leave'
+    end
+  end
   resources :exercises
   resources :workouts
 

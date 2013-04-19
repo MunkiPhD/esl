@@ -10,6 +10,7 @@
       <th>Created By</th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -23,6 +24,8 @@
       <td><%= circle.user.username %></td>
       <td><%= link_to 'Edit', edit_circle_path(circle) %></td>
       <td><%= link_to 'Destroy', circle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Join', join_circle_path(circle.id) %></td>
+      <td><%= link_to 'Leave', leave_circle_path(circle.id), method: :post if current_user.has_role? :circle_member, circle %></td>
     </tr>
     <% end %>
   </tbody>

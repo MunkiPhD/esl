@@ -63,6 +63,30 @@ class CirclesController < ApplicationController
     end
   end
 
+
+  def join
+    current_user.grant :circle_member, @circle
+    respond_to do |format|
+      format.html { redirect_to @circle, notice: "You are now a member of #{@circle.name}!" }
+      format.json { render action: 'show', status: :created, location: @circle }
+    end
+  end
+
+
+  def leave
+    msg = ""
+    if current_user.has_role? :circle_member, @circle
+      current_user.revoke :circle_member, @circle
+      msg = "You are no longer a member of #{@circle.name}"
+    else
+      msg = "You can't leave a circle you are not a member of!"
+    end
+    respond_to do |format|
+      format.html { redirect_to circles_url, notice: msg }
+      format.json { render action: 'show', status: :created, location: @circle }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_circle
