@@ -145,7 +145,10 @@ describe CirclesController do
 
     describe "DELETE destroy" do
       it "the requested circle" do
-        circle = create(:circle)
+        #user = create(:user)
+        #circle = user.circles.build(attributes_for(:circle))
+        #circle.save
+        expect(user.has_role? :circle_admin, circle).to eq true
         expect {
           delete :destroy, id: circle.to_param
         }.to change(Circle, :count).by(-1)

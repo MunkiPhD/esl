@@ -15,9 +15,8 @@ feature "Workouts" do
 
     within(last_nested_exercise) do
       select exercise.name, from: 'workout_workout_exercises_attributes_0_exercise_id'
-      fill_in "Set number", with: "1"
-      fill_in "Rep count", with: "2"
-      fill_in "Weight", with: "225"
+      fill_in "Reps:", with: "2"
+      fill_in "Weight:", with: "225"
     end
 
     expect {

@@ -1,7 +1,7 @@
 class CirclesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   #before_action :set_circle, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource except: [:index, :new, :create] #only: [:show, :edit, :update, :destroy]
 
   # GET /circles
   # GET /circles.json
