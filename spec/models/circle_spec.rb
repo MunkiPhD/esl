@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'cancan/matchers'
 
 describe Circle do
   it "has a valid factory" do
@@ -48,6 +49,9 @@ describe Circle do
   end
 
   describe "abilties" do
+    # let(:user) { create(:user) }
+    # let(:circle) { create(:circle, user: user) }
+
     it "assigns admin rights to creator of circle after create" do
       user = create(:user)
       circle = build(:circle, user: user)
@@ -56,6 +60,62 @@ describe Circle do
       circle.save
       circle.reload
       expect(user.has_role? :circle_admin, circle).to eq true
+    end
+
+    describe "upon joining" do
+      it "grants circle_member rights" do
+        user = create(:user)
+        circle = build(:circle)
+        expect(user.has_role? :circle_member, circle).to eq false
+
+        circle.add_member(user)
+        expect(user.has_role? :circle_member, circle).to eq true
+      end
+
+      it "can leave circle" do
+        pending
+      end
+    end
+
+    describe "permissions" do
+      subject { ability }
+      let(:user) { create(:user) }
+      let(:circle) { create(:circle) }
+      let(:ability) { Ability.new(user) }
+
+      describe "circle_admin" do
+        before :each do
+          circle.add_admin(user)
+        end
+
+        context "is allowed to" do
+          it { should be_able_to :read, circle }
+          it { should be_able_to :edit, circle }
+          it { should be_able_to :update, circle }
+          it { should be_able_to :destroy, circle }
+        end
+
+        context "is not allowed to" do
+          pending "admin should be able to do everything"
+        end
+      end
+
+      describe "circle_member" do
+        before :each do
+          circle.add_member(user)
+        end
+
+        context "is allowed" do
+          it { should be_able_to :read, circle }
+          it { should be_able_to :leave, circle }
+        end
+
+        context "is not allowed to" do
+          it { should_not be_able_to :edit, circle }
+          it { should_not be_able_to :destroy, circle }
+          it { should_not be_able_to :update, circle }
+        end
+      end
     end
   end
 

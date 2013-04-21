@@ -11,8 +11,16 @@ class Circle < ActiveRecord::Base
   validates :user, presence: true
   validates :is_public, presence: true
 
+  def add_member(user)
+    user.grant :circle_member, self unless user.has_role? :circle_member, self
+  end
+
+  def add_admin(user)
+    user.grant :circle_admin, self
+  end
+
   private
   def add_admin_role_to_creator
-    self.user.grant :circle_admin, self 
+    add_admin self.user
   end
 end
