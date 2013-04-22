@@ -1,3 +1,4 @@
+<%= join_leave_link(@circle) %>
 <p>
   <strong>Name:</strong>
   <%= @circle.name %>
@@ -24,6 +25,10 @@
   <%= @circle.is_public %>
 </p>
 
-
-<%= link_to 'Edit', edit_circle_path(@circle) %> |
+<%= link_to 'Edit Info', edit_circle_path(@circle) if current_user.has_role? :circle_admin, @circle %> |
 <%= link_to 'Back', circles_path %>
+<br><br>
+<h3>Members</h3>
+<% @circle.circle_members.each do |user| %>
+  <%= "#{user.username}" %><br>
+<% end %>

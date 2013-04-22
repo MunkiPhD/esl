@@ -41,16 +41,6 @@ feature "Workouts" do
     click_link "Add Exercise"
     # change the title
     fill_in "workout[title]", with: "NewWorkoutTitle"
-=begin
-    last_nested_exercise = all(".workouts_workout_exercise")
-    within(last_nested_exercise.last) do
-      click_link "Add Set"
-      select exercise.name, from: 'workout_workout_exercises_attributes_0_exercise_id'
-      fill_in "Set number", with: "1"
-      fill_in "Rep count", with: "2"
-      fill_in "Weight", with: "225"
-    end
-=end
 
     click_button "Update Workout"
     expect(page).to have_content "NewWorkoutTitle"

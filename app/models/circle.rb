@@ -19,6 +19,22 @@ class Circle < ActiveRecord::Base
     user.grant :circle_admin, self
   end
 
+  def circle_members
+    assigned = self.roles.find_by_name(:circle_member)
+    unless assigned.nil?
+      assigned.users
+    else
+      []
+    end
+  end
+
+
+  def self.memberships_for_user(user)
+    resource_ids = Circle.find_roles(:circle_member, user).pluck(:resource_id)
+    Circle.where(id: resource_ids)
+  end
+
+
   private
   def add_admin_role_to_creator
     add_admin self.user

@@ -3,12 +3,7 @@ require 'spec_helper'
 describe CirclesController do
   let(:user) { create(:user) }
   let(:circle) { create(:circle, user: user) }
-=begin
-  before :each do
-    @user = create(:user)
-    @circle = create(:circle, user: @user)
-  end
-=end
+
   context "for authenticated users" do
     before :each do
       sign_in user

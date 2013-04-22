@@ -1,7 +1,7 @@
 Esl::Application.routes.draw do
   resources :circles do
     member do
-      get 'join'
+      post 'join'
       post 'leave'
     end
   end

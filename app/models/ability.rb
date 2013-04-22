@@ -38,7 +38,6 @@ class Ability
       can :read, Circle, id: Circle.with_role(:circle_member, user).map(&:id)
       can :leave, Circle, id: Circle.with_role(:circle_member, user).map(&:id)
       can :manage, Circle, id: Circle.with_role(:circle_admin, user).map(&:id) # allow the person that's an admin to modify a circle
-      #can :read, Circle, id: Circle.with_role(:circle_member, user).map(&:id) # allow members to read the circles
     end
   end
 end
