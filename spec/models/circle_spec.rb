@@ -62,6 +62,22 @@ describe Circle do
       expect(user.has_role? :circle_admin, circle).to eq true
     end
 
+    describe "when circle is destroyed" do
+      it "removes the roles from all the members" do
+        user = create(:user)
+        circle = create(:circle, user: user)
+        expect(user.circles.count).to eq 1
+
+        user2 = create(:user)
+        circle.add_member(user2)
+        expect(user2.has_role? :circle_member, circle).to eq true
+
+        circle.destroy
+        expect(user2.has_role? :circle_member, circle).to eq false
+        expect(user.circles.count).to eq 0
+      end
+    end
+
     describe "upon joining" do
       it "grants circle_member rights" do
         user = create(:user)
@@ -83,7 +99,7 @@ describe Circle do
       let(:circle) { create(:circle) }
       let(:ability) { Ability.new(user) }
 
-      describe "circle_admin" do
+      describe "with circle_admin" do
         before :each do
           circle.add_admin(user)
         end
@@ -100,6 +116,22 @@ describe Circle do
         end
       end
 
+      describe "with circle_admin" do
+        before :each do
+          circle.add_admin(user)
+        end
+        
+        context "is allowed" do
+          it { should be_able_to :read, circle }
+          it { should be_able_to :update, circle }
+          it { should be_able_to :create, Circle }
+        end
+
+        context "is NOT allowed" do
+          it { should be_able_to :destroy, circle }
+        end
+      end
+
       describe "circle_member" do
         before :each do
           circle.add_member(user)
@@ -108,10 +140,10 @@ describe Circle do
         context "is allowed" do
           it { should be_able_to :read, circle }
           it { should be_able_to :leave, circle }
+          it { should be_able_to :create, Circle } # even if a user is a circle_member, they should still be able to make a circle themselves
         end
 
         context "is not allowed to" do
-          it { should_not be_able_to :edit, circle }
           it { should_not be_able_to :destroy, circle }
           it { should_not be_able_to :update, circle }
         end

@@ -56,7 +56,11 @@ class CirclesController < ApplicationController
   # DELETE /circles/1
   # DELETE /circles/1.json
   def destroy
-    @circle.destroy
+    if current_user == @circle.user
+      @circle.destroy
+    else
+      flash[:notice] = "A circle can only be destroyed by it's creator!"
+    end
     respond_to do |format|
       format.html { redirect_to circles_url }
       format.json { head :no_content }
