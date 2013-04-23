@@ -93,17 +93,52 @@ describe Circle do
       end
     end
 
-    describe '#is_member?' do
+    describe 'methods' do
       let(:user) { create(:user) }
       let(:circle) { create(:circle) }
 
-      it "returns false when not a member" do
-        expect(circle.is_member?(user)).to eq false
+      describe '#members' do
+        it 'returns a list of all users with member role' do
+          user2 = create(:user)
+          circle2 = create(:circle, user: user)
+          circle2.add_member(user)
+          circle2.add_member(user2)
+
+          expect(circle2.members).to eq [user, user2]
+        end
       end
 
-      it "returns true if a member" do
-        circle.add_member(user)
-        expect(circle.is_member?(user)).to eq true
+      describe '#admins' do
+        it 'returns a list of all users that are admins' do
+          user2 = create(:user)
+          circle2 = create(:circle, user: user)
+          circle2.add_admin(user)
+          circle2.add_admin(user2)
+
+          expect(circle2.admins).to eq [user, user2]
+        end
+      end
+
+      describe '#is_member?' do
+        it "returns false when not a member" do
+          expect(circle.is_member?(user)).to eq false
+        end
+
+        it "returns true if a member" do
+          circle.add_member(user)
+          expect(circle.is_member?(user)).to eq true
+        end
+      end
+
+      describe '#is_admin?' do
+        it 'returns false for non-admins' do
+          expect(circle.is_admin?(user)).to eq false
+        end
+
+        it 'returns true if an admin' do
+          circle.add_admin(user)
+          expect(circle.is_admin? user).to eq true
+        end
       end
     end
 

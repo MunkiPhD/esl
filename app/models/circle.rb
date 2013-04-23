@@ -32,23 +32,31 @@ class Circle < ActiveRecord::Base
   end
 
 
-  # returns a list of circle members as a relation, or an empty array
+  # returns a list of circle members as a relation or an empty array
   def members
-    assigned = self.roles.find_by_name(:member)
-    unless assigned.nil?
-      assigned.users.scoped
-    else
-      []
-    end
+    get_users_with_roles :member
+  end
+
+
+  # returns a list of circle admins as a relation or an empty array
+  def admins
+    get_users_with_roles :admin
   end
 
 
   # tests whether a user is a member of the current circle instance
   def is_member?(user)
-    !members.where('user_id = ?', user.id).take.nil?
+    is_user_in_role_group members, user
   end
 
 
+  # checks to see if the specified user has admin role
+  def is_admin?(user)
+    is_user_in_role_group admins, user
+  end
+
+
+  # CLASS METHOD that gets all the circles where a user is a member of (since admins also get member role, they should be covered as well)
   def self.memberships_for_user(user)
     resource_ids = Circle.find_roles(:member, user).pluck(:resource_id)
     Circle.where(id: resource_ids)
@@ -58,5 +66,20 @@ class Circle < ActiveRecord::Base
   private
   def add_admin_role_to_creator
     add_admin self.user
+  end
+
+  def is_user_in_role_group(role_group, user)
+    !role_group.where('user_id = ?', user.id).take.nil?
+  end
+
+
+  # returns a list of users with the specified role, or an empty array
+  def get_users_with_roles(role)
+    assigned = self.roles.find_by_name(role)
+    unless assigned.nil?
+      assigned.users.scoped
+    else
+      []
+    end
   end
 end
