@@ -69,7 +69,11 @@ class Circle < ActiveRecord::Base
   end
 
   def is_user_in_role_group(role_group, user)
-    !role_group.where('user_id = ?', user.id).take.nil?
+    unless role_group.empty?
+      !role_group.where('user_id = ?', user.id).take.nil?
+    else
+      false
+    end
   end
 
 

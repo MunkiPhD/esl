@@ -120,6 +120,12 @@ describe Circle do
       end
 
       describe '#is_member?' do
+        it "returns false when a circle has no members" do
+          circle.remove_member(circle.user)
+          expect(circle.members.count).to eq 0
+          expect(circle.is_member? user).to eq false
+        end
+
         it "returns false when not a member" do
           expect(circle.is_member?(user)).to eq false
         end
