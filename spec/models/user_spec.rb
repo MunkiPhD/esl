@@ -41,9 +41,9 @@ describe User do
       it "should be able to have permissions to circle" do
         user = create(:user)
         circle = create(:circle, user: user)
-        user.grant :admin #, circle
+        circle.add_admin(user)
         ability = Ability.new(user)
-        expect(ability.can? :manage, :all).to eq true
+        expect(ability.can? :manage, circle).to eq true
         expect(ability).to be_able_to(:update, circle)
       end
 

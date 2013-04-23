@@ -143,7 +143,7 @@ describe CirclesController do
         #user = create(:user)
         #circle = user.circles.build(attributes_for(:circle))
         #circle.save
-        expect(user.has_role? :circle_admin, circle).to eq true
+        expect(user.has_role? :admin, circle).to eq true
         expect {
           delete :destroy, id: circle.to_param
         }.to change(Circle, :count).by(-1)

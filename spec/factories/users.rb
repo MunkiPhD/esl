@@ -9,13 +9,13 @@ FactoryGirl.define do
   end
 
   factory :user_circle_member do
-    after(:create) { |user| user.grant :circle_member, circle }
+    after(:create) { |user| circle.add_member user }
   end
 
   factory :user_circle_admin do
     after(:create) do |user|
       circle = create(:circle)
-      user.grant :circle_admin, circle
+      circle.add_admin user
     end #{ |user| user.grant :circle_admin, circle }
   end
 end

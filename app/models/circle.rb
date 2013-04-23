@@ -14,27 +14,27 @@ class Circle < ActiveRecord::Base
 
   # adds member rights to the specified user
   def add_member(user)
-    user.grant :circle_member, self unless user.has_role? :circle_member, self
+    user.grant :member, self unless user.has_role? :member, self
   end
 
 
   # adds administrator rights to the specified user
   def add_admin(user)
     add_member(user)
-    user.grant :circle_admin, self unless user.has_role? :circle_admin, self
+    user.grant :admin, self unless user.has_role? :admin, self
   end
 
 
   # removes a member from the group by revoking all the rights
   def remove_member(user)
-    user.revoke :circle_admin, self if user.has_role? :circle_admin, self
-    user.revoke :circle_member, self if user.has_role? :circle_member, self
+    user.revoke :admin, self if user.has_role? :admin, self
+    user.revoke :member, self if user.has_role? :member, self
   end
 
 
   # returns a list of circle members as a relation, or an empty array
   def members
-    assigned = self.roles.find_by_name(:circle_member)
+    assigned = self.roles.find_by_name(:member)
     unless assigned.nil?
       assigned.users.scoped
     else
@@ -50,7 +50,7 @@ class Circle < ActiveRecord::Base
 
 
   def self.memberships_for_user(user)
-    resource_ids = Circle.find_roles(:circle_member, user).pluck(:resource_id)
+    resource_ids = Circle.find_roles(:member, user).pluck(:resource_id)
     Circle.where(id: resource_ids)
   end
 

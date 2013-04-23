@@ -56,25 +56,25 @@ describe Circle do
     it "assigns admin rights and member rights to creator of circle after create" do
       user = create(:user)
       circle = build(:circle, user: user)
-      expect(user.has_role? :circle_admin, circle).to eq false
-      expect(user.has_role? :circle_member, circle).to eq false
+      expect(user.has_role? :admin, circle).to eq false
+      expect(user.has_role? :member, circle).to eq false
 
       circle.save
       circle.reload
-      expect(user.has_role? :circle_admin, circle).to eq true
-      expect(user.has_role? :circle_member, circle).to eq true
+      expect(user.has_role? :admin, circle).to eq true
+      expect(user.has_role? :member, circle).to eq true
     end
 
     it "automatically assigns member rights if a user is added as an admin and has no member rights" do
       user = create(:user)
       circle = create(:circle)
 
-      expect(user.has_role? :circle_member, circle).to eq false
+      expect(user.has_role? :member, circle).to eq false
 
       circle.add_admin(user)
 
-      expect(user.has_role? :circle_admin, circle).to eq true
-      expect(user.has_role? :circle_member, circle).to eq true
+      expect(user.has_role? :admin, circle).to eq true
+      expect(user.has_role? :member, circle).to eq true
     end
 
     describe "when circle is destroyed" do
@@ -85,10 +85,10 @@ describe Circle do
 
         user2 = create(:user)
         circle.add_member(user2)
-        expect(user2.has_role? :circle_member, circle).to eq true
+        expect(user2.has_role? :member, circle).to eq true
 
         circle.destroy
-        expect(user2.has_role? :circle_member, circle).to eq false
+        expect(user2.has_role? :member, circle).to eq false
         expect(user.circles.count).to eq 0
       end
     end
@@ -108,13 +108,13 @@ describe Circle do
     end
 
     describe "upon joining" do
-      it "grants circle_member rights" do
+      it "grants member rights" do
         user = create(:user)
         circle = build(:circle)
-        expect(user.has_role? :circle_member, circle).to eq false
+        expect(user.has_role? :member, circle).to eq false
 
         circle.add_member(user)
-        expect(user.has_role? :circle_member, circle).to eq true
+        expect(user.has_role? :member, circle).to eq true
       end
 
       it "can leave circle" do
@@ -122,10 +122,10 @@ describe Circle do
         circle = build(:circle)
 
         circle.add_member(user)
-        expect(user.has_role? :circle_member, circle).to eq true
+        expect(user.has_role? :member, circle).to eq true
 
         circle.remove_member(user)
-        expect(user.has_role? :circle_member, circle).to eq false
+        expect(user.has_role? :member, circle).to eq false
       end
     end
 
@@ -135,7 +135,7 @@ describe Circle do
       let(:circle) { create(:circle) }
       let(:ability) { Ability.new(user) }
 
-      describe "with circle_admin" do
+      describe "with admin" do
         before :each do
           circle.add_admin(user)
         end
@@ -152,7 +152,7 @@ describe Circle do
         end
       end
 
-      describe "with circle_admin" do
+      describe "with admin" do
         before :each do
           circle.add_admin(user)
         end
@@ -168,7 +168,7 @@ describe Circle do
         end
       end
 
-      describe "circle_member" do
+      describe "member" do
         before :each do
           circle.add_member(user)
         end
@@ -176,7 +176,7 @@ describe Circle do
         context "is allowed" do
           it { should be_able_to :read, circle }
           it { should be_able_to :leave, circle }
-          it { should be_able_to :create, Circle } # even if a user is a circle_member, they should still be able to make a circle themselves
+          it { should be_able_to :create, Circle } # even if a user is a member, they should still be able to make a circle themselves
         end
 
         context "is not allowed to" do

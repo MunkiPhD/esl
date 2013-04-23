@@ -30,14 +30,14 @@ class Ability
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
     user ||= User.new # guest user (not logged in)
-    if user.has_role? :admin
+    if user.has_role? :super_admin
       can :manage, :all
     else
       can :read, Circle, is_public: true
       can :join, Circle, is_public: true # only allows you to join a page for a circle if it's public
-      can :read, Circle, id: Circle.with_role(:circle_member, user).map(&:id)
-      can :leave, Circle, id: Circle.with_role(:circle_member, user).map(&:id)
-      can :manage, Circle, id: Circle.with_role(:circle_admin, user).map(&:id) # allow the person that's an admin to modify a circle
+      can :read, Circle, id: Circle.with_role(:member, user).map(&:id)
+      can :leave, Circle, id: Circle.with_role(:member, user).map(&:id)
+      can :manage, Circle, id: Circle.with_role(:admin, user).map(&:id) # allow the person that's an admin to modify a circle
     end
   end
 end
