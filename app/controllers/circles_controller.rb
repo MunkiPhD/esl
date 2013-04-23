@@ -1,6 +1,5 @@
 class CirclesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  #before_action :set_circle, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource except: [:index, :new, :create] #only: [:show, :edit, :update, :destroy]
 
   # GET /circles
@@ -9,19 +8,23 @@ class CirclesController < ApplicationController
     @circles = Circle.all
   end
 
+
   # GET /circles/1
   # GET /circles/1.json
   def show
   end
+
 
   # GET /circles/new
   def new
     @circle = Circle.new
   end
 
+
   # GET /circles/1/edit
   def edit
   end
+
 
   # POST /circles
   # POST /circles.json
@@ -39,6 +42,7 @@ class CirclesController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /circles/1
   # PATCH/PUT /circles/1.json
   def update
@@ -52,6 +56,7 @@ class CirclesController < ApplicationController
       end
     end
   end
+
 
   # DELETE /circles/1
   # DELETE /circles/1.json
@@ -68,8 +73,10 @@ class CirclesController < ApplicationController
   end
 
 
+  # POST /circles/1/join
   def join
-    current_user.grant :circle_member, @circle
+    @circle.add_member current_user
+
     respond_to do |format|
       format.html { redirect_to @circle, notice: "You are now a member of #{@circle.name}!" }
       format.json { render action: 'show', status: :created, location: @circle }
@@ -77,10 +84,11 @@ class CirclesController < ApplicationController
   end
 
 
+  # POST /circles/1/leave
   def leave
     msg = ""
-    if current_user.has_role? :circle_member, @circle
-      current_user.revoke :circle_member, @circle
+    if @circle.is_member? current_user
+      @circle.remove_member current_user
       msg = "You are no longer a member of #{@circle.name}"
     else
       msg = "You can't leave a circle you are not a member of!"

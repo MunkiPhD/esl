@@ -43,23 +43,38 @@ describe Circle do
     expect(circle).to have(1).errors_on(:user)
   end
 
-  it "must have a value for if it's public" do
-    circle = Circle.new(is_public: nil)
-    expect(circle).to have(1).errors_on(:is_public)
+  it "not public is set to false if unchecked" do
+    circle = Circle.new(is_public: false)
+    expect(circle).to have(0).errors_on(:is_public)
+    expect(circle.is_public).to eq false
   end
 
   describe "abilties" do
     # let(:user) { create(:user) }
     # let(:circle) { create(:circle, user: user) }
 
-    it "assigns admin rights to creator of circle after create" do
+    it "assigns admin rights and member rights to creator of circle after create" do
       user = create(:user)
       circle = build(:circle, user: user)
       expect(user.has_role? :circle_admin, circle).to eq false
+      expect(user.has_role? :circle_member, circle).to eq false
 
       circle.save
       circle.reload
       expect(user.has_role? :circle_admin, circle).to eq true
+      expect(user.has_role? :circle_member, circle).to eq true
+    end
+
+    it "automatically assigns member rights if a user is added as an admin and has no member rights" do
+      user = create(:user)
+      circle = create(:circle)
+
+      expect(user.has_role? :circle_member, circle).to eq false
+
+      circle.add_admin(user)
+
+      expect(user.has_role? :circle_admin, circle).to eq true
+      expect(user.has_role? :circle_member, circle).to eq true
     end
 
     describe "when circle is destroyed" do
@@ -78,6 +93,20 @@ describe Circle do
       end
     end
 
+    describe '#is_member?' do
+      let(:user) { create(:user) }
+      let(:circle) { create(:circle) }
+
+      it "returns false when not a member" do
+        expect(circle.is_member?(user)).to eq false
+      end
+
+      it "returns true if a member" do
+        circle.add_member(user)
+        expect(circle.is_member?(user)).to eq true
+      end
+    end
+
     describe "upon joining" do
       it "grants circle_member rights" do
         user = create(:user)
@@ -89,7 +118,14 @@ describe Circle do
       end
 
       it "can leave circle" do
-        pending
+        user = create(:user)
+        circle = build(:circle)
+
+        circle.add_member(user)
+        expect(user.has_role? :circle_member, circle).to eq true
+
+        circle.remove_member(user)
+        expect(user.has_role? :circle_member, circle).to eq false
       end
     end
 
@@ -120,7 +156,7 @@ describe Circle do
         before :each do
           circle.add_admin(user)
         end
-        
+
         context "is allowed" do
           it { should be_able_to :read, circle }
           it { should be_able_to :update, circle }

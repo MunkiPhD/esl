@@ -29,6 +29,6 @@
 <%= link_to 'Back', circles_path %>
 <br><br>
 <h3>Members</h3>
-<% @circle.circle_members.each do |user| %>
+<% @circle.members.each do |user| %>
   <%= "#{user.username}" %><br>
 <% end %>

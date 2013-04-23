@@ -44,7 +44,13 @@ feature "Circles" do
   end
 
   scenario "can only be joined by a user if they are public" do
-    pending
+    user = create(:user)
+    circle = create(:circle, is_public: false)
+
+    login_user user
+
+    visit circle_path(circle)
+    expect(page).to have_content "You are not authorized to access this page"
   end
 
   scenario "can be deleted by their creator" do
@@ -56,6 +62,17 @@ feature "Circles" do
   end
 
   scenario "user can join a circle" do
-    pending
+    user = create(:user)
+    circle = create(:circle, is_public: true)
+
+    login_user user
+
+    visit circle_path(circle)
+    expect(page).to have_button "Join"
+
+    click_button "Join"
+
+    visit circle_path(circle)
+    expect(page).to have_button "Leave"
   end
 end

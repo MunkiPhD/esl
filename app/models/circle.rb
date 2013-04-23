@@ -9,23 +9,43 @@ class Circle < ActiveRecord::Base
                    length: { minimum: 3, maximum: 50 }
   validates :motto, length: { maximum: 50 }
   validates :user, presence: true
-  validates :is_public, presence: true
+  validates :is_public, inclusion: { in: [true, false] }
 
+
+  # adds member rights to the specified user
   def add_member(user)
     user.grant :circle_member, self unless user.has_role? :circle_member, self
   end
 
+
+  # adds administrator rights to the specified user
   def add_admin(user)
-    user.grant :circle_admin, self
+    add_member(user)
+    user.grant :circle_admin, self unless user.has_role? :circle_admin, self
   end
 
-  def circle_members
+
+  # removes a member from the group by revoking all the rights
+  def remove_member(user)
+    user.revoke :circle_admin, self if user.has_role? :circle_admin, self
+    user.revoke :circle_member, self if user.has_role? :circle_member, self
+  end
+
+
+  # returns a list of circle members as a relation, or an empty array
+  def members
     assigned = self.roles.find_by_name(:circle_member)
     unless assigned.nil?
-      assigned.users
+      assigned.users.scoped
     else
       []
     end
+  end
+
+
+  # tests whether a user is a member of the current circle instance
+  def is_member?(user)
+    !members.where('user_id = ?', user.id).take.nil?
   end
 
 
