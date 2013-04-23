@@ -14,18 +14,15 @@
   <%= @circle.description %>
   </p>
 
-  <% if current_user.has_role? :admin, @circle %>
-    <h1>You are an admin</h1>
-  <% else %>
-    <h2>You are NOT an admin</h2>
-  <% end %>
+  <%= "You are a member" if @circle.is_member? current_user %>
+  <%= "You are also an ADMIN" if @circle.is_admin? current_user %>
 
 <p>
   <strong>Is public:</strong>
   <%= @circle.is_public %>
 </p>
 
-<%= link_to 'Edit Info', edit_circle_path(@circle) if current_user.has_role? :admin, @circle %> |
+<%= link_to 'Edit Info', edit_circle_path(@circle) if @circle.is_admin? current_user %> |
 <%= link_to 'Back', circles_path %>
 <br><br>
 <h3>Members</h3>
