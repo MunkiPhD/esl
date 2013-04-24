@@ -8,7 +8,7 @@
 <% if user_signed_in? %>
   <h2>Circle Memberships</h2>
   <% memberships = Circle.memberships_for_user(current_user) %>
-  <%= memberships.inspect %>
+  <%= "Not a member of any circles!" if memberships.empty? %>
   <% memberships.each do |circle| %>
     <%= circle.name %>
   <% end %>

@@ -10,7 +10,6 @@
       <th>Created By</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -22,9 +21,7 @@
       <td><%= circle.description %></td>
       <td><%= circle.is_public? ? 'Yes' : 'No' %></td>
       <td><%= circle.user.username %></td>
-      <td><%= link_to 'Edit', edit_circle_path(circle) %></td>
       <td><%= join_leave_link(circle) %></td>
-      <td><%= link_to 'Destroy', circle, method: :delete, data: { confirm: 'Are you sure?' } if circle.user == current_user %></td>
     </tr>
     <% end %>
   </tbody>

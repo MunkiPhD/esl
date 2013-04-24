@@ -1,4 +1,7 @@
 <%= join_leave_link(@circle) %>
+<% if user_signed_in? %>
+  <%= button_to 'Destroy', @circle, method: :delete, data: { confirm: 'Are you sure?' } if @circle.is_admin? current_user %>
+<% end %>
 <p>
   <strong>Name:</strong>
   <%= @circle.name %>
@@ -14,15 +17,17 @@
   <%= @circle.description %>
   </p>
 
+<% if user_signed_in? %>
   <%= "You are a member" if @circle.is_member? current_user %>
   <%= "You are also an ADMIN" if @circle.is_admin? current_user %>
+  <%= link_to 'Edit Info', edit_circle_path(@circle) if @circle.is_admin? current_user %> |
+<% end %>
 
 <p>
   <strong>Is public:</strong>
   <%= @circle.is_public %>
 </p>
 
-<%= link_to 'Edit Info', edit_circle_path(@circle) if @circle.is_admin? current_user %> |
 <%= link_to 'Back', circles_path %>
 <br><br>
 <h3>Members</h3>

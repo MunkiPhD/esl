@@ -53,7 +53,11 @@ feature "Circles" do
     expect(page).to have_content "You are not authorized to access this page"
   end
 
-  scenario "can be deleted by their creator" do
+  scenario "can be deleted by an admin if there are no other members" do
+    pending
+  end
+
+  scenario "if a circle has no users, the first user to join automatically becomes the admin" do
     pending
   end
 
