@@ -33,7 +33,7 @@ class Ability
     if user.has_role? :super_admin
       can :manage, :all
     else
-      can :read, Circle, is_public: true
+      can :read, Circle #, is_public: true
       can :join, Circle, is_public: true # only allows you to join a page for a circle if it's public
       can :read, Circle, id: Circle.with_role(:member, user).map(&:id)
       can :leave, Circle, id: Circle.with_role(:member, user).map(&:id)

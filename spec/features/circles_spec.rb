@@ -50,7 +50,7 @@ feature "Circles" do
     login_user user
 
     visit circle_path(circle)
-    expect(page).to have_content "You are not authorized to access this page"
+    expect(page).to have_button "Apply"
   end
 
   scenario "can be deleted by an admin if there are no other members" do
