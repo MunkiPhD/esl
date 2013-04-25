@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 feature "Circles" do
+  let(:user) { create(:user) }
+
   scenario "are created by an authenticated user" do
-    user = create(:user)
     circle = build(:circle)
     login_user user
 
@@ -21,7 +22,6 @@ feature "Circles" do
   end
 
   scenario "can only be edited/updated by an admin" do
-    user = create(:user)
     circle = create(:circle)
 
     login_user user
@@ -44,7 +44,6 @@ feature "Circles" do
   end
 
   scenario "can only be joined by a user if they are public" do
-    user = create(:user)
     circle = create(:circle, is_public: false)
 
     login_user user
@@ -61,12 +60,62 @@ feature "Circles" do
     pending
   end
 
-  scenario "can be applied to by a user NOT in the circle and then be approved by a circle admin" do
-    pending
+  scenario "can be applied to by a user NOT in the circle and approved by an admin" do
+    circle = create(:circle, is_public: false)
+
+    login_user user
+
+    visit circle_path(circle)
+    expect(page).to have_button "Apply"
+
+    click_button "Apply"
+
+    expect(page).to have_content "Your membership is awaiting approval."
+
+    logout_user
+
+    admin = create(:user)
+    circle.add_admin admin
+
+    login_user admin
+
+    visit circle_members_path(circle.id)
+    expect(page).to_not have_content user.username
+
+    visit pending_circle_members_path(circle.id)
+    expect(page).to have_content user.username
+    expect(page).to have_button "Approve"
+
+    click_button "Approve"
+
+    visit circle_members_path(circle.id)
+    expect(page).to have_content user.username
+  end
+
+
+  scenario "user applies for membership, but descides to cancel before he is approved" do
+    circle = create(:circle, is_public: false)
+
+    login_user user
+
+    visit circle_path(circle)
+    expect(page).to have_button "Apply"
+
+    click_button "Apply"
+
+    expect(page).to have_content "Your membership is awaiting approval."
+
+    visit circle_path(circle)
+
+    expect(page).to have_button "Cancel Membership Request"
+
+    click_button "Cancel Membership Request"
+
+    expect(page).to have_content "Your membership request has been cancelled."
+    expect(page).to have_button "Apply"
   end
 
   scenario "user can join a circle" do
-    user = create(:user)
     circle = create(:circle, is_public: true)
 
     login_user user

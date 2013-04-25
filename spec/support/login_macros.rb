@@ -8,4 +8,9 @@ module LoginMacros
 
     click_button "Sign in"
   end
+
+  def logout_user
+    visit root_path
+    click_link "logout"
+  end
 end

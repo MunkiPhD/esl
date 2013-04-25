@@ -1,9 +1,23 @@
 Esl::Application.routes.draw do
+  #get "circle_member/index"
+  #get "circle_member/show"
+  #get "circle_member/join"
+  #get "circle_member/pending"
   resources :circles do
-    member do
-      post 'join'
-      post 'leave'
+    resources :members, controller: 'circle_members', only: [:index] do
+      collection do
+        get 'pending'
+        post 'join'
+        post 'leave'
+      end
+      member do
+        post 'approve'
+      end
     end
+    #member do
+    #  post 'join'
+    #  post 'leave'
+    #end
   end
   resources :exercises
   resources :workouts

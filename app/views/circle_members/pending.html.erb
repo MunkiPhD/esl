@@ -1,0 +1,7 @@
+<h1>CircleMember#pending</h1>
+<% @pending_members.each do |user| %>
+  <div class="circle-member-pending">
+    <%= "#{user.username}" %><br>
+    <%= button_to "Approve", approve_circle_member_path(@circle, user) %>
+</div>
+<% end %>

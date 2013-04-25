@@ -12,8 +12,32 @@ class Circle < ActiveRecord::Base
   validates :is_public, inclusion: { in: [true, false] }
 
 
+  # manages a users membership request
+  def request_membership(user)
+    if self.is_public
+      add_member(user)
+    else
+      add_pending(user)
+    end
+  end
+
+  # approves membership of user
+  #    user: user to be approved
+  #    admin: admin that is approving the requested membership
+  def approve_membership(user, admin)
+    if is_admin? admin
+      add_member(user) if is_pending? user
+    end
+  end
+
+  # adds pending rights to the specified user
+  def add_pending(user)
+    user.grant :pending, self unless user.has_role? :member, self
+  end
+
   # adds member rights to the specified user
   def add_member(user)
+    user.revoke :pending, self if user.has_role? :pending, self
     user.grant :member, self unless user.has_role? :member, self
   end
 
@@ -27,10 +51,16 @@ class Circle < ActiveRecord::Base
 
   # removes a member from the group by revoking all the rights
   def remove_member(user)
-    user.revoke :admin, self if user.has_role? :admin, self
+    user.revoke :pending, self if user.has_role? :pending, self
     user.revoke :member, self if user.has_role? :member, self
+    user.revoke :admin, self if user.has_role? :admin, self
   end
 
+
+  # returns a list of users pending approval to become members as a relation or an empty array
+  def pending_members
+    get_users_with_roles :pending
+  end
 
   # returns a list of circle members as a relation or an empty array
   def members
@@ -41,6 +71,11 @@ class Circle < ActiveRecord::Base
   # returns a list of circle admins as a relation or an empty array
   def admins
     get_users_with_roles :admin
+  end
+
+
+  def is_pending?(user)
+    is_user_in_role_group pending_members, user
   end
 
 

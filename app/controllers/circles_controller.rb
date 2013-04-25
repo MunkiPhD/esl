@@ -72,7 +72,7 @@ class CirclesController < ApplicationController
     end
   end
 
-
+=begin
   # POST /circles/1/join
   def join
     @circle.add_member current_user
@@ -98,6 +98,8 @@ class CirclesController < ApplicationController
       format.json { render action: 'show', status: :created, location: @circle }
     end
   end
+=end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -97,6 +97,16 @@ describe Circle do
       let(:user) { create(:user) }
       let(:circle) { create(:circle) }
 
+      describe '#pending' do
+        it 'returns a list of all users pending membership approval' do
+          user2 = create(:user)
+          circle.add_pending(user)
+          circle.add_pending(user2)
+
+          expect(circle.pending_members).to eq [user, user2]
+        end
+      end
+
       describe '#members' do
         it 'returns a list of all users with member role' do
           user2 = create(:user)
@@ -116,6 +126,59 @@ describe Circle do
           circle2.add_admin(user2)
 
           expect(circle2.admins).to eq [user, user2]
+        end
+      end
+
+      describe '#request_membership' do
+        it 'sets user as pending if the circle is private' do
+          private_circle = create(:circle, is_public: false)
+          private_circle.request_membership(user)
+          expect(private_circle.is_member? user).to eq false
+          expect(private_circle.is_pending? user).to eq true
+        end
+
+        it 'adds the user as a member if the group is public' do
+          circle.request_membership(user)
+          expect(circle.is_pending? user).to eq false
+          expect(circle.is_member? user).to eq true
+        end
+      end
+
+      describe '#approve_membership' do
+        it 'approves a user if they were pending' do
+          private_circle = create(:circle, is_public: false)
+          private_circle.add_pending(user)
+
+          admin = create(:user)
+          private_circle.add_admin(admin)
+
+          private_circle.approve_membership(user, admin)
+          expect(private_circle.is_member? user).to eq true
+        end 
+      end
+
+      describe '#is_pending?' do
+        it 'returns false when user is not pending' do
+          expect(circle.is_pending? user).to eq false
+        end
+
+        it 'returns true when a user is pending' do
+          circle.add_pending(user)
+          expect(circle.is_pending? user).to eq true
+        end
+
+        it 'if a user is pending they are not a member' do
+          circle.add_pending(user)
+          expect(circle.is_member? user).to eq false
+        end
+
+        it 'if a user is a member, they can not be pending' do
+          circle.add_pending(user)
+          expect(circle.is_pending? user).to eq true
+
+          circle.add_member(user)
+          expect(circle.is_member? user).to eq true
+          expect(circle.is_pending? user).to eq false
         end
       end
 
@@ -148,9 +211,9 @@ describe Circle do
       end
     end
 
-    describe "upon joining" do
+    describe "when joining" do
+      let(:user) { create(:user) }
       it "grants member rights" do
-        user = create(:user)
         circle = build(:circle)
         expect(user.has_role? :member, circle).to eq false
 
@@ -159,7 +222,6 @@ describe Circle do
       end
 
       it "can leave circle" do
-        user = create(:user)
         circle = build(:circle)
 
         circle.add_member(user)
@@ -167,6 +229,27 @@ describe Circle do
 
         circle.remove_member(user)
         expect(user.has_role? :member, circle).to eq false
+      end
+
+      it "adds pending rights if circle is not public" do
+        circle = create(:circle, is_public: false)
+        expect(circle.is_member?(user)).to eq false
+  
+        circle.add_pending(user)
+
+        expect(circle.is_member?(user)).to eq false
+        expect(circle.is_pending?(user)).to eq true
+      end
+
+      it 'allows a user to leave if pending' do
+        circle = create(:circle, is_public: false)
+        circle.add_pending(user)
+
+        expect(circle.is_pending? user).to eq true
+        circle.remove_member(user)
+
+        expect(circle.is_pending? user).to eq false
+        expect(circle.is_member? user).to eq false
       end
     end
 
