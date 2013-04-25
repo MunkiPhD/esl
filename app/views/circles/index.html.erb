@@ -1,32 +1,14 @@
 <h1>Listing circles</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Motto</th>
-      <th>Description</th>
-      <th>Is public</th>
-      <th>Created By</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
     <% @circles.each do |circle| %>
-    <tr>
-      <td><%= link_to circle.name, circle %></td>
-      <td><%= circle.motto %></td>
-      <td><%= circle.description %></td>
-      <td><%= circle.is_public? ? 'Yes' : 'No' %></td>
-      <td><%= circle.user.username %></td>
-      <td><%= join_leave_link(circle) %></td>
-    </tr>
+      <div class="circle-short-listing">
+        <h3><%= link_to circle.name, circle %></h3>
+      <h4><%= circle.motto %></h4>
+      <p class="description"><%= circle.description %></p>
+    </div>
     <% end %>
-  </tbody>
-</table>
-
+ 
 <br />
 
 <%= link_to 'Create a Circle', new_circle_path %>
