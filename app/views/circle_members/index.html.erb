@@ -1,4 +1,7 @@
 <h1>CircleMember#index</h1>
+<% if @circle.is_admin? current_user %>
+  <%= link_to "Awaiting Approval #{@circle.pending_members}", pending_circle_members_path(@circle) if @circle.pending_members.count > 0 %>
+<% end %>
 <%= @members.each do |member| %>
   <%= member.username %><br>
 <% end %>

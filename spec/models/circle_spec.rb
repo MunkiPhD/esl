@@ -142,6 +142,15 @@ describe Circle do
           expect(circle.is_pending? user).to eq false
           expect(circle.is_member? user).to eq true
         end
+
+        it 'when there are no members makes the first person to join an admin on the circle' do
+          circle.members.each { |member| circle.remove_member(member) }
+          expect(circle.members.count).to eq 0
+          circle.request_membership(user)
+
+          expect(circle.is_member? user).to eq true
+          expect(circle.is_admin? user).to eq true
+        end
       end
 
       describe '#approve_membership' do

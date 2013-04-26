@@ -57,7 +57,18 @@ feature "Circles" do
   end
 
   scenario "if a circle has no users, the first user to join automatically becomes the admin" do
-    pending
+    circle = create(:circle)
+    circle.members.each { |member| circle.remove_member(member) }
+    expect(circle.members.count).to eq 0
+
+    login_user user
+
+    visit circle_path(circle)
+
+    expect(page).to have_button "Join"
+    click_button "Join"
+
+    expect(page).to have_link "Edit Info"
   end
 
   scenario "can be applied to by a user NOT in the circle and approved by an admin" do
@@ -93,7 +104,7 @@ feature "Circles" do
   end
 
 
-  scenario "user applies for membership, but descides to cancel before he is approved" do
+  scenario "user applies for membership, but decides to cancel before he is approved" do
     circle = create(:circle, is_public: false)
 
     login_user user
@@ -127,5 +138,33 @@ feature "Circles" do
 
     visit circle_path(circle)
     expect(page).to have_button "Leave"
+  end
+
+  scenario "an admin of a private group can approve users who are pending" do
+    circle = create(:circle, is_public: false)
+    login_user user
+
+    pending_member = create(:user)
+    circle.add_admin(user)
+
+    visit circle_path(circle)
+    expect(page).to_not have_link pending_member.username
+
+    circle.request_membership(pending_member)
+
+    visit circle_path(circle)
+
+    expect(page).to have_link("Awaiting Approval (1)")
+
+    click_link "Awaiting Approval (1)"
+
+    expect(page).to have_content pending_member.username
+    expect(page).to have_button "Approve"
+
+    click_button "Approve"
+
+    visit circle_path(circle)
+    expect(page).to have_content pending_member.username
+
   end
 end

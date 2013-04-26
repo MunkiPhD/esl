@@ -14,7 +14,10 @@ class Circle < ActiveRecord::Base
 
   # manages a users membership request
   def request_membership(user)
-    if self.is_public
+    # if the group has no members, promote the first one to join/apply to admin status
+    if members.count == 0
+      add_admin(user)
+    elsif self.is_public
       add_member(user)
     else
       add_pending(user)
