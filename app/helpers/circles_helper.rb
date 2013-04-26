@@ -16,12 +16,14 @@ module CirclesHelper
       return button_to 'Cancel Membership Request', leave_circle_members_path(circle.id), method: :post
     end
 
-    #if current_user.has_any_role? :god, { name: :member, resource: circle }, { name: :admin, resource: circle }
-      # show the leave link unless theyre the creator of the circle
-    #  button_to 'Leave', leave_circle_path(circle.id), method: :post
-    #else
-     return create_join_apply_button(circle)
-    #end
+    return create_join_apply_button(circle)
+  end
+
+  # generates a link to display to admins how many members are awaiting approval
+  def link_to_awaiting_approval(circle)
+    if circle.is_admin? current_user
+      link_to "Awaiting Approval (#{circle.pending_members.count})", pending_circle_members_path(circle), {class: 'circle-members-awaiting-approval' } if circle.pending_members.count > 0
+    end
   end
 
   private
