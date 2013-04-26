@@ -10,6 +10,6 @@
   <% memberships = Circle.memberships_for_user(current_user) %>
   <%= "Not a member of any circles!" if memberships.empty? %>
   <% memberships.each do |circle| %>
-    <%= circle.name %>
+    <%= link_to circle.name, circle %><br>
   <% end %>
 <% end %>

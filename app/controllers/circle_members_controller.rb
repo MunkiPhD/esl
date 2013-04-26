@@ -3,6 +3,7 @@ class CircleMembersController < ApplicationController
   before_action :set_circle, only: [:index, :pending, :join, :leave, :approve]
   before_action :set_user, only: [:approve]
   before_filter :authorize, only: [:approve, :pending]
+  respond_to :html, :json, only: [:index, :pending]
 
   def index
     # this needs to be performed better, possibly a concern where it checks to see if the request is empty using 'base info' or something similar
@@ -80,6 +81,7 @@ class CircleMembersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    # custom authorize to throw an access denied if attempting to get into the authorize and pending actions
     def authorize
       raise CanCan::AccessDenied unless @circle.is_admin? current_user
     end

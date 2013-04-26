@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Esl</title>
+<title>EatSleepLift</title>
 <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 <%= csrf_meta_tags %>
@@ -10,17 +10,16 @@
 <div id="masthead" class="container">
   <div id="main-info">
     <div id="header-logo">
-      <h1>EatSleepLift</h1>
+      <h1><%= link_to "EatSleepLift", root_path %></h1>
     </div>
     <%= render "layouts/user_login" %>
   </div>
   <div id="main-nav">
     <nav>
       <ul>
-        <li><%= link_to "home", root_path %></li>
+        <li><%= link_to "circles", circles_path %></li>
         <li><%= link_to "exercises", exercises_path %></li>
         <li><%= link_to "workouts", workouts_path %></li>
-        <li><%= link_to "circles", circles_path %></li>
       </ul>
     </nav>
   </div>

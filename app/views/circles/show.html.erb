@@ -8,10 +8,7 @@
   </p>
 
 
-<p>
-  <strong>Public Group?</strong>
-  <%= @circle.is_public %>
-</p>
+  <%= "This is a private group" if !@circle.is_public? %>
 
 <% if user_signed_in? %>
   <%= "You are a member" if @circle.is_member? current_user %>

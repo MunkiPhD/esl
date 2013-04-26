@@ -6,4 +6,9 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, notice: exception.message
   end
+
+  rescue_from ActiveRecord::RecordNotFound do
+    flash[:notice] = "What you were looking for... was not found!"
+    redirect_to root_path
+  end
 end

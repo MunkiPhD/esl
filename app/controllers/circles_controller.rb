@@ -72,34 +72,6 @@ class CirclesController < ApplicationController
     end
   end
 
-=begin
-  # POST /circles/1/join
-  def join
-    @circle.add_member current_user
-
-    respond_to do |format|
-      format.html { redirect_to @circle, notice: "You are now a member of #{@circle.name}!" }
-      format.json { render action: 'show', status: :created, location: @circle }
-    end
-  end
-
-
-  # POST /circles/1/leave
-  def leave
-    msg = ""
-    if @circle.is_member? current_user
-      @circle.remove_member current_user
-      msg = "You are no longer a member of #{@circle.name}"
-    else
-      msg = "You can't leave a circle you are not a member of!"
-    end
-    respond_to do |format|
-      format.html { redirect_to circles_url, notice: msg }
-      format.json { render action: 'show', status: :created, location: @circle }
-    end
-  end
-=end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -111,4 +83,5 @@ class CirclesController < ApplicationController
     def circle_params
       params.require(:circle).permit(:name, :motto, :description, :is_public)
     end
+
 end
