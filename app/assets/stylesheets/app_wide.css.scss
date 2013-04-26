@@ -1,9 +1,4 @@
-$grey: #ccc;
-$secondary: #ffaa00;
-$color-one: #ffaa00; 
-$color-two: #3498db;
-$color-three: #2980b9;
-$link-color: #444444;
+@import 'colors';
 
 @mixin drop-shadow($size: 3px, $size2: 4px, $opacity: 0.10) {
   position:relative;

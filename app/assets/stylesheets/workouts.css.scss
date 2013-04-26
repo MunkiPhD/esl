@@ -1,11 +1,55 @@
-// Place all the styles related to the Workouts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com
+@import 'colors';
+#workout_exercises_container {
+  float:left;
+  margin-left:10px;
+}
+
+.workout-actions {
+  clear:both;
+  text-align:center;
+}
 
 .workouts_workout_exercise {
   border: 0px solid orange;
   padding: 5px;
+
+  select {
+    padding:5px;
+    min-width: 200px;
+    text-align:center;
+  }
 }
+
+.workout-general-info {
+  width: 355px;
+  background-color: $color-one;
+  border:1px solid darken($color-one, 8%);
+  padding: 10px;
+  float:left;
+
+  select {
+    font-size:20px;
+    text-align:center;
+    padding:3px;
+  }
+  
+  textarea {
+    font-size:12px;
+    width:320px;
+    height:100px;
+  }
+
+  input[type='text'] {
+    text-align:center;
+    font-size:26px;
+  }
+
+
+  .field {
+    margin:15px;
+  }
+}
+
 table {
   margin-top:10px;
   td {

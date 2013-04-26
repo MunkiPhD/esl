@@ -11,29 +11,30 @@
 </div>
   <% end %>
 
-<div class="field">
-  <%= f.label :title %><br />
-  <%= f.text_field :title %>
-</div>
-<div>
-  <%= f.label :date_performed %>
-  <%= f.date_select :date_performed %>
-</div>
-<br/>
-<div>
-  <%= f.label :notes %><br/>
-  <%= f.text_area :notes %>
+<div class="workout-general-info">
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, { placeholder: "Workout Title" } %>
+  </div>
+  <div class="field">
+    <%= f.label :date_performed %><br>
+    <%= f.date_select :date_performed %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br/>
+    <%= f.text_area :notes, { placeholder: "Notes" } %>
+  </div>
 </div>
 
 <div id="workout_exercises_container">
-    <%= f.fields_for :workout_exercises do |builder| %>
-      <%= render "workout_exercises_fields", f: builder, exercises: @exercises %>
-    <% end %>
-    <div class="prev-placeholder">
-      <%= link_to_add_fields "Add Exercise", f, :workout_exercises %><br/>
-    </div>
+  <%= f.fields_for :workout_exercises do |builder| %>
+    <%= render "workout_exercises_fields", f: builder, exercises: @exercises %>
+  <% end %>
+  <div class="prev-placeholder">
+    <%= link_to_add_fields "Add Exercise", f, :workout_exercises %><br/>
+  </div>
 </div>
-<div class="actions">
+<div class="workout-actions">
   <%= f.submit %>
 </div>
 

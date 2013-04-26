@@ -1,20 +1,15 @@
-<h1>Workouts#show</h1>
+<div class="workout-general-info">
+  <h2><%= @workout.title %></h2>
 <div>
-  Title: <%= @workout.title %>
+  <%= format_date @workout.date_performed %>
 </div>
-<div>
-  Date: <%= @workout.date_performed %>
-</div>
+<% unless @workout.notes.blank? %>
 <div>
   Notes: <%= @workout.notes %>
 </div>
-<div>
-  ID: <%= @workout.id %>
+<% end %>
 </div>
-<div>
-  User ID: <%= @workout.user_id %>
-</div>
-<hr/>
+<div id="workout_exercises_container">
 <h3>Sets</h3>
 <% @workout.workout_exercises.each do |workout_exercise| %>
   <table class="workout_exercise" id="<%= dom_id(workout_exercise) %>">
@@ -33,5 +28,8 @@
     </tbody>
   </table>
 <% end %>
+</div>
 
+<div class="workout-actions">
   <%= link_to "edit", edit_workout_path(@workout) %>
+</div>
