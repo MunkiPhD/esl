@@ -1,12 +1,33 @@
 $grey: #ccc;
 $secondary: #ffaa00;
+$color-one: #ffaa00; 
+$color-two: #3498db;
+$color-three: #2980b9;
+
+@mixin drop-shadow($size: 3px, $size2: 4px, $opacity: 0.10) {
+  position:relative;
+  box-shadow: $size $size $size2 rgba(0, 0, 0, $opacity);
+  -moz-box-shadow: $size $size $size2 rgba(0, 0, 0, $opacity);
+  -webkit-box-shadow: $size $size $size2 rgba(0, 0, 0, $opacity);
+}
 
 body {
 }
 
+a {
+  text-decoration: none;
+  color: #444;
+  &:visited {
+    color: #444;
+  }
+  &:hover {
+    color: #666;
+  }
+}
+
 #masthead {
-  border:1px solid $grey;
-  margin:5px auto;
+  margin:0px auto;
+  background-color: $color-two;
 }
 
 #header-logo {
@@ -17,6 +38,7 @@ body {
     font-size: 24px;
     padding: 0px;
     margin: 0px;
+    font-style: italic;
   }
 }
 
@@ -35,27 +57,48 @@ body {
 
 #main-content {
   padding: 15px;
+  @include drop-shadow;
+  
+  h1, h2, h3, h4, h5 {
+    margin: 2px;
+  }
 }
 
-#main-nav > nav > ul {
-  list-style: none;
-  padding:0px;
-  margin:0px;
+#main-nav > nav {
+  background-color: $color-three;
+
+  > ul {
+    list-style: none;
+    padding:0px;
+    margin:0px;
  
-  > li {
-    display: inline-block;
-    padding: 10px;
+    > li {
+      display: inline-block;
+      padding: 10px;
+    }
+  }
+
+  a {
+    color: $grey;
+   
+    &:visited {
+      color: $grey;
+    }
+    &:hover {
+      color: lighten($grey, 30%);
+    }
   }
 }
 
 
 #main-info {
   margin:0 auto;
-  border-bottom: 2px dotted $grey;
+  border-bottom: 1px dotted $grey;
 }
 
 #user-login {
   background-color: $secondary;
+  border:2px solid $color-three;
   padding:8px;
   text-align:right;
 }
@@ -63,6 +106,7 @@ body {
 
 footer {
   margin:5px auto;
+  margin-top:15px;
   border-top:1px solid $grey;
 }
 
@@ -78,13 +122,9 @@ footer {
   float: right;
 }
 
-a {
-  color: #666;
-  &:visited {
-    color: #666;
-  }
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
+input[type='submit']{
+  min-width:100px;
+  padding:7px;
+  margin:3px 0px 3px 0px;
 }
+

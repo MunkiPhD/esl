@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
 <title>EatSleepLift</title>
 <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 <%= csrf_meta_tags %>
+<meta name="viewport" content="width=device-width">
 </head>
 <body>
-<div id="masthead" class="container">
+<div id="masthead">
   <div id="main-info">
     <div id="header-logo">
       <h1><%= link_to "EatSleepLift", root_path %></h1>
@@ -26,7 +27,7 @@
 </div>
 <div id="main-content-container" class="container">
   <div id="main-content">
-    <p id="notice"><%= notice %></p>
+    <%= render "layouts/flash_messages" %>
     <%= yield %>
   </div>
 </div>

@@ -25,6 +25,11 @@ $dark-grey: #888;
   }
 }
 a.circle-members-awaiting-approval {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+    color: lighten(red, 15%);
+  }
 }
