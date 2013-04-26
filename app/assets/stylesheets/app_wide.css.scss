@@ -3,6 +3,7 @@ $secondary: #ffaa00;
 $color-one: #ffaa00; 
 $color-two: #3498db;
 $color-three: #2980b9;
+$link-color: #444444;
 
 @mixin drop-shadow($size: 3px, $size2: 4px, $opacity: 0.10) {
   position:relative;
@@ -16,12 +17,12 @@ body {
 
 a {
   text-decoration: none;
-  color: #444;
+  color: $link-color;
   &:visited {
     color: #444;
   }
   &:hover {
-    color: #666;
+    color: lighten($link-color, 30%);
   }
 }
 
@@ -66,6 +67,7 @@ a {
 
 #main-nav > nav {
   background-color: $color-three;
+  border-bottom:2px solid darken($color-three, 5%);
 
   > ul {
     list-style: none;
@@ -93,7 +95,7 @@ a {
 
 #main-info {
   margin:0 auto;
-  border-bottom: 1px dotted $grey;
+  border-bottom: 1px dotted lighten($color-two, 15%);
 }
 
 #user-login {
