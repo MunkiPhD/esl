@@ -22,14 +22,63 @@ require 'spec_helper'
 require 'cancan/matchers'
 
 describe User do
-  it "has a unique username" do
-    user = create(:user, username: "steve")
-    user2 = build(:user, username: "steve")
-    expect {
-      user2.save
-    }.to change(User, :count).by(0)
+  it 'factory is valid' do
+    user = build(:user)
+    expect(user).to be_valid
+  end
 
-    expect(user2).to have(1).errors_on(:username)
+  context "username" do
+    it "is unique" do
+      user = create(:user, username: "steve")
+      user2 = build(:user, username: "steve")
+      expect {
+        user2.save
+      }.to change(User, :count).by(0)
+
+      expect(user2).to have(1).errors_on(:username)
+    end
+
+
+    it "has no spaces" do
+      user = build(:user, username: "steve martin")
+      expect(user).to have(1).errors_on(:username)
+    end
+
+    it "can only be alphanumeric" do
+      user = build(:user, username: "steve!martin")
+      expect(user).to have(1).errors_on(:username)
+
+      user.username = "stevemartin2"
+      expect(user).to have(0).errors_on(:username)
+    end
+
+    it "allows _ character" do
+      user = build(:user, username: "steve_martin")
+      expect(user).to have(0).errors_on(:username)
+    end
+
+    it "does not allow - character" do
+      user = build(:user, username: "steve-martin")
+      expect(user).to have(1).errors_on(:username)
+    end
+
+    it 'does not allow just numbers' do
+      user = build(:user, username: "12346")
+      expect(user).to have(1).errors_on(:username)
+    end
+
+    it 'has at least one letter' do
+      user = build(:user, username: "a12346")
+      expect(user).to have(0).errors_on(:username)
+    end
+
+    it 'does not have to start with a letter' do
+      user = build(:user, username: "1stevemartin")
+      expect(user).to have(0).errors_on(:username)
+
+      user.username = "_stevemartin"
+      expect(user).to have(0).errors_on(:username)
+    end
   end
 
   describe "abilities" do
@@ -51,17 +100,11 @@ describe User do
         user = create(:user)
         circle = create(:circle, user: user)
         user.grant :manage, circle
-#        ability = Ability.new(user)
         expect(user.has_role? :manage, circle).to eq true
 
         user.revoke :manage, circle
         expect(user.has_role? :manage, circle).to eq false
-        #expect(ability.can? :manage, circle).to eq true
-        #expect(ability).to be_able_to(:update, circle)
       end
-      #let(:user){ create(:user_circle_admin) }
-
-      #it{ should be_able_to(:manage, Circle.new) }
     end
   end
 end

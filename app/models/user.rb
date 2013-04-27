@@ -31,7 +31,8 @@ class User < ActiveRecord::Base
   has_many :workouts
   has_many :circles
 
-  validates :username, uniqueness: true
+  validates :username, uniqueness: true,
+                      format: { with: /\A(?=.*[a-z])[a-z\_\d]+\Z/i, message: "Only alphanumeric letters and underscores allowed" }
 
 
   # override the finder so that it searches by username OR email
