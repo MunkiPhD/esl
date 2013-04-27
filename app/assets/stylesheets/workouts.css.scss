@@ -1,4 +1,5 @@
-@import 'colors';
+@import 'helpers/colors';
+
 #workout_exercises_container {
   float:left;
   margin-left:10px;
@@ -10,7 +11,7 @@
 }
 
 .workouts_workout_exercise {
-  border: 0px solid orange;
+  border: 0px solid $secondary;
   padding: 5px;
 
   select {

@@ -1,7 +1,7 @@
 <h1>Pending Members for <%= link_to @circle.name, @circle %></h1>
 <% @pending_members.each do |user| %>
   <div class="circle-member-pending">
+    <%= button_to "Approve", approve_circle_member_path(@circle, user) %>
     <span class="user-name"><%= "#{user.username}" %></span>
-    <%= button_to "Approve", approve_circle_member_path(@circle, user), { class: "clearfix" } %>
 </div>
 <% end %>

@@ -8,7 +8,8 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require normalize.min
+ * !!!! The normalize.min MUST COME FIRST as it is the HTML5 reset to normalize on all browsers !!!!
+ *= require vendors/normalize.min 
  *= require_self
  *= require app_wide
  *= require_tree .

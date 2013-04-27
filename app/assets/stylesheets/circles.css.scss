@@ -1,9 +1,7 @@
-// Need to put the colors into one file
-$grey: #ccc;
-$dark-grey: #888;
+@import 'helpers/colors';
 
 .circle-short-listing {
-  border:1px solid $grey;
+  border:1px solid $border;
   padding:10px;
   margin: 5px 0px 5px 0px;
 

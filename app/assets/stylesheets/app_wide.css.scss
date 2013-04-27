@@ -1,23 +1,18 @@
-@import 'colors';
+@import 'helpers/colors';
+@import 'helpers/mixins';
 
-@mixin drop-shadow($size: 3px, $size2: 4px, $opacity: 0.10) {
-  position:relative;
-  box-shadow: $size $size $size2 rgba(0, 0, 0, $opacity);
-  -moz-box-shadow: $size $size $size2 rgba(0, 0, 0, $opacity);
-  -webkit-box-shadow: $size $size $size2 rgba(0, 0, 0, $opacity);
-}
 
 body {
 }
 
 a {
   text-decoration: none;
-  color: $link-color;
+  color: $link;
   &:visited {
-    color: #444;
+    color: $link-visited;
   }
   &:hover {
-    color: lighten($link-color, 30%);
+    color: $link-hover;
   }
 }
 
@@ -48,7 +43,7 @@ a {
 
 #main-content-container {
   margin:5px auto;
-  border:1px solid $grey;
+  border:1px solid $border;
 }
 
 #main-content {
@@ -104,7 +99,7 @@ a {
 footer {
   margin:5px auto;
   margin-top:15px;
-  border-top:1px solid $grey;
+  border-top:1px solid $border;
 }
 
 #main-footer-content {

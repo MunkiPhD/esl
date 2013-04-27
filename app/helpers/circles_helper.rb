@@ -1,8 +1,6 @@
 module CirclesHelper
   def join_leave_link(circle)
-    if current_user.blank?
-      return create_join_apply_button(circle)
-    end
+    return create_join_apply_button(circle) if current_user.blank?
 
     if circle.is_admin?(current_user)
       return button_to 'Leave', leave_circle_members_path(circle.id), method: :post
@@ -21,8 +19,11 @@ module CirclesHelper
 
   # generates a link to display to admins how many members are awaiting approval
   def link_to_awaiting_approval(circle)
+    return if current_user.blank? # check for if the user is currently signed in
+
     if circle.is_admin? current_user
-      link_to "Awaiting Approval (#{circle.pending_members.count})", pending_circle_members_path(circle), {class: 'circle-members-awaiting-approval' } if circle.pending_members.count > 0
+      link_to "Awaiting Approval (#{circle.pending_members.count})", pending_circle_members_path(circle), 
+        { class: 'circle-members-awaiting-approval' } if circle.pending_members.count > 0
     end
   end
 

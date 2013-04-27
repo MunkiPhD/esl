@@ -1,18 +1,15 @@
-// Place all the styles related to the CircleMember controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-$grey: #ccc;
+@import 'helpers/colors';
+
 .circle-member-pending {
-  border: 1px solid $grey;
+  border: 1px solid $border;
   padding: 15px;
   width: 300px;
   
-  
   form {
-    float:right;
-    position: relative;
-    right: 0px;
-    top: -5px;
     display: inline-block;
+  }
+
+  .user-name {
+    margin-left:10px;
   }
 }
