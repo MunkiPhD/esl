@@ -1,25 +1,28 @@
-<%= link_to_awaiting_approval(@circle) %>
-  <h1><%= @circle.name %></h1>
+<div id="circle_control_panel">
+  <% if user_signed_in? %>
+  <%= link_to 'Edit Info', edit_circle_path(@circle), class: "btn" if @circle.is_admin? current_user %>
+  <%= join_leave_link(@circle) %>
+    <%= button_to 'Destroy', @circle, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if @circle.is_admin? current_user %>
+    <div>
+    <%= "This is a private group" if !@circle.is_public? %><br/>
+    <%= "You are a member" if @circle.is_member? current_user %><br/>
+    <%= "You are also an Administrator" if @circle.is_admin? current_user %><br/>
+    <%= link_to_awaiting_approval(@circle) %>
+  </div>
+<% end %>
+</div>
+
+<h1><%= @circle.name %></h1>
 <h3><%= @circle.motto %></h3>
 
 <p>
-  <strong>Description:</strong>
-  <%= @circle.description %>
-  </p>
+<strong>Description:</strong>
+<%= @circle.description %>
+</p>
 
 
-  <%= "This is a private group" if !@circle.is_public? %>
 
-<% if user_signed_in? %>
-  <%= "You are a member" if @circle.is_member? current_user %>
-  <%= "You are also an ADMIN" if @circle.is_admin? current_user %>
-  <%= link_to 'Edit Info', edit_circle_path(@circle) if @circle.is_admin? current_user %>
-<% end %>
 
-<%= join_leave_link(@circle) %>
-<% if user_signed_in? %>
-  <%= button_to 'Destroy', @circle, method: :delete, data: { confirm: 'Are you sure?' } if @circle.is_admin? current_user %>
-<% end %>
 
 <br><br>
 

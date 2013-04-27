@@ -6,7 +6,6 @@
   margin: 5px 0px 5px 0px;
 
   h3 {
-   font-size: 16px;
   }
 
   h4 {
@@ -30,4 +29,8 @@ a.circle-members-awaiting-approval {
     text-decoration: underline;
     color: lighten(red, 15%);
   }
+}
+
+#circle_control_panel {
+  float:right;
 }

@@ -22,7 +22,8 @@ class WorkoutsController < ApplicationController
 
     respond_to do |format|
       if @workout.save
-        format.html { redirect_to workouts_path, notice: 'Workout was successfully created.' }
+        flash[:success] = 'Workout was successfully created.'
+        format.html { redirect_to workouts_path }
         format.json { render action: 'show', status: :created, location: @workout }
       else
         @exercises = Exercise.all
@@ -39,12 +40,14 @@ class WorkoutsController < ApplicationController
   def update
     respond_to do |format|
       if @workout.user_id != current_user.id
-        format.html { redirect_to @workout, notice: 'You cannot update an workout not created by you.' }
+        flash[:error] = 'You cannot update an workout not created by you.'
+        format.html { redirect_to @workout }
         format.json { head :no_content, status: :unprocessable_entity }
       end
 
       if @workout.update(workout_params)
-        format.html { redirect_to @workout, notice: 'Workout was successfully updated.' }
+        flash[:success] = "Workout was successfully updated."
+        format.html { redirect_to @workout }
         format.json { head :no_content }
       else
         @exercises = Exercise.all
@@ -61,7 +64,8 @@ class WorkoutsController < ApplicationController
         format.html { redirect_to workouts_url }
         format.json { head :no_content }
       else
-        format.html { redirect_to @workout, notice: "You cannot delete a workout you did not create"}
+        flash[:info] = "You cannot delete a workout that does not belong to you!"
+        format.html { redirect_to @workout }
         format.json { head :no_content }
       end
     end

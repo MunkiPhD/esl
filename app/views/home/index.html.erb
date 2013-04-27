@@ -1,15 +1,20 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<ul>
-  <li><%= link_to "Exercises", exercises_path %>
-  <li><%= link_to "Workouts", workouts_path %>
-</ul>
+<div class="hero-unit">
+  <% unless user_signed_in? %>
+    <h1>Well, hello there!</h1>
+    <p>
+      <%= link_to 'Login', new_user_session_path %> or try it out by 
+        <%= link_to "Signing up", new_user_registration_path %><br />
+      </p>
+  <% else %>
+    <h2>Welcome back, holmes.</h2>
+  <% end %>
+</div>
 
 <% if user_signed_in? %>
-  <h2>Circle Memberships</h2>
-  <% memberships = Circle.memberships_for_user(current_user) %>
-  <%= "Not a member of any circles!" if memberships.empty? %>
-  <% memberships.each do |circle| %>
-    <%= link_to circle.name, circle %><br>
+  <h2>My Circles</h2>
+<% memberships = Circle.memberships_for_user(current_user) %>
+<%= "Not a member of any circles!" if memberships.empty? %>
+<% memberships.each do |circle| %>
+  <%= link_to circle.name, circle %><br>
   <% end %>
 <% end %>

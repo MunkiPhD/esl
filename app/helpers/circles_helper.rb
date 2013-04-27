@@ -3,15 +3,15 @@ module CirclesHelper
     return create_join_apply_button(circle) if current_user.blank?
 
     if circle.is_admin?(current_user)
-      return button_to 'Leave', leave_circle_members_path(circle.id), method: :post
+      return button_to 'Leave', leave_circle_members_path(circle.id), method: :post, data: { confirm: "Are you sure you want to leave this circle?" }, class: "btn btn-danger"
     end
 
     if circle.is_member? current_user
-      return button_to 'Leave', leave_circle_members_path(circle.id), method: :post
+      return button_to 'Leave', leave_circle_members_path(circle.id), method: :post, data: { confirm: "Are you sure you want to leave this circle?" }, class: "btn btn-danger"
     end
 
     if circle.is_pending? current_user
-      return button_to 'Cancel Membership Request', leave_circle_members_path(circle.id), method: :post
+      return button_to 'Cancel Membership Request', leave_circle_members_path(circle.id), method: :post, data: { confirm: "Are you sure you want to cancel your membership request for this circle?" }, class: "btn btn-danger btn-large"
     end
 
     return create_join_apply_button(circle)
@@ -31,9 +31,9 @@ module CirclesHelper
 
   def create_join_apply_button(circle)
     if circle.is_public
-      button_to 'Join', join_circle_members_path(circle.id)
+      button_to 'Join', join_circle_members_path(circle.id), class: "btn btn-primary btn-large"
     else
-      button_to 'Apply', join_circle_members_path(circle.id)
+      button_to 'Apply', join_circle_members_path(circle.id), class: "btn btn-primary btn-large"
     end
   end
 end

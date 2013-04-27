@@ -29,11 +29,15 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.0.1'
 
+group :development do
+  gem "guard-rspec"
+  gem "annotate"
+  gem 'libnotify'
+end
+
 group :development, :test do
   gem "rspec-rails"
   gem "factory_girl_rails"
-  gem "guard-rspec"
-  gem "annotate"
 end
 
 group :test do

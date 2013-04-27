@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  * !!!! The normalize.min MUST COME FIRST as it is the HTML5 reset to normalize on all browsers !!!!
- *= require vendors/normalize.min 
+ *= require vendor/normalize.min 
  *= require_self
  *= require app_wide
  *= require_tree .

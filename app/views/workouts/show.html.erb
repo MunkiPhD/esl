@@ -1,3 +1,7 @@
+<div class="workout-actions right">
+  <%= link_to "Edit", edit_workout_path(@workout), class: "btn" %>  <%= button_to 'Delete Workout', @workout, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+</div>
+
 <div class="workout-general-info">
   <h2><%= @workout.title %></h2>
 <div>
@@ -9,6 +13,8 @@
 </div>
 <% end %>
 </div>
+
+
 <div id="workout_exercises_container">
 <h3>Sets</h3>
 <% @workout.workout_exercises.each do |workout_exercise| %>
@@ -30,6 +36,3 @@
 <% end %>
 </div>
 
-<div class="workout-actions">
-  <%= link_to "edit", edit_workout_path(@workout) %>
-</div>

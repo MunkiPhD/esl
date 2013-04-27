@@ -102,6 +102,12 @@ footer {
   border-top:1px solid $border;
 }
 
+.clearfix:after {
+    content:"";
+    display:table;
+    clear:both;
+}
+
 #main-footer-content {
   padding:5px;
 }
@@ -114,9 +120,12 @@ footer {
   float: right;
 }
 
+form.button_to {
+  display:inline-block;
+}
 input[type='submit']{
   min-width:100px;
-  padding:7px;
+  //padding:7px;
   margin:3px 0px 3px 0px;
 }
 

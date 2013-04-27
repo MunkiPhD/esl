@@ -1,10 +1,14 @@
 require 'spec_helper'
 
 feature "Workouts" do
-  scenario "user can add a workout" do
-    user = create(:user)
-    login_user user
+  let(:user) { create(:user) }
 
+  before :each do 
+    login_user user
+    expect(page).to have_content user.username
+  end
+
+  scenario "user can add a workout" do
     exercise = create(:exercise) 
     visit workouts_path
 
@@ -28,16 +32,13 @@ feature "Workouts" do
   end
 
   scenario "user can edit a workout" do
-    user = create(:user)
-    login_user user
-
     workout = create(:workout, user: user)
 
     visit workouts_path
     expect(page).not_to have_content "NewWorkoutTitle"
     click_link workout.title
 
-    click_link "edit"
+    click_link "Edit"
     click_link "Add Exercise"
     # change the title
     fill_in "workout[title]", with: "NewWorkoutTitle"
@@ -48,6 +49,21 @@ feature "Workouts" do
   end
 
   scenario "user can delete a workouts" do
-    pending
+    #save_and_open_page
+    workout = create(:workout, user: user)
+
+    visit workouts_path
+    expect(page).to have_content "Workouts"
+    expect(page).to have_link workout.title
+
+    expect {
+      click_link workout.title
+      click_button "Delete Workout"
+      #alert = page.driver.browser.switch_to.alert
+      #alert.accept
+    }.to change(Workout, :count).by(-1)
+
+    expect(page).to have_content "Workouts"
+    expect(page).to_not have_link workout.title
   end
 end
