@@ -14,6 +14,8 @@
 require 'spec_helper'
 
 describe Workout do
+  let(:user) { create(:user) }
+
   describe "is valid with" do
     it "has a valid factory" do
       expect(build(:workout)).to be_valid
@@ -78,6 +80,24 @@ describe Workout do
 
     it "no user" do
       expect(Workout.new(user_id: nil)).to have(1).errors_on(:user_id)
+    end
+  end
+
+  describe 'methods' do
+    describe '#max_weight' do
+      it 'fetches the workout with the highest weight' do
+        workout = create(:workout_with_exercises, user: user)
+        workout2 = create(:workout_with_exercises, user: user)
+
+        workout.workout_exercises[0].workout_sets[0].weight = 200
+        workout.save
+        workout2.workout_exercises[0].workout_sets[0].weight = 100
+        workout2.save
+
+        max_workout = user.workouts.max_weight
+
+        expect(max_workout).to eq [workout]
+      end
     end
   end
 end

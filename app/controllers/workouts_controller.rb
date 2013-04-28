@@ -4,7 +4,7 @@ class WorkoutsController < ApplicationController
   respond_to :html, :json, only: [:index, :show]
 
   def index
-    @workouts = current_user.workouts
+    @workouts = current_user.workouts.latest
   end
 
   def show

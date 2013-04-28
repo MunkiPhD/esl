@@ -1,0 +1,21 @@
+<h3>Leaderboards</h3>
+<% if workouts.count > 0 %>
+<div id="workouts">
+  <table>
+    <tr>
+      <th>Member</th>
+      <th>Workout</th>
+      <th>Date Performed</th>
+    </tr>
+  <% workouts.each do |workout| %>
+    <tr>    
+      <td><%= workout.user.username %></td>
+      <td><%= link_to workout.title, workout %></td>
+      <td><%= days_ago workout.date_performed %></td>
+    </tr>
+  <% end %>
+</table>
+<% else %>
+No workouts logged for users of this circle.
+<% end %>
+</div>
