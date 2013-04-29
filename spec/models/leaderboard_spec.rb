@@ -26,7 +26,7 @@ describe Leaderboard do
         workout4.workout_exercises[0].workout_sets[0].weight = 400
         workout4.save
 
-        #workouts = Leaderboard.circle_member_workouts(circle).max_weight
+        workouts = Leaderboard.circle_member_workouts(circle).max_weight
 
         expect(workouts).to eq [workout, workout4]
       end
@@ -45,7 +45,7 @@ describe Leaderboard do
         circle.add_member(user)
         circle.add_member(user2)
 
-        #workouts = Leaderboard.circle_member_workouts(circle)
+        workouts = Leaderboard.circle_member_workouts(circle)
         expect(workouts).to eq [workout1, workout2, workout3]
       end
     end

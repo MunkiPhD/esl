@@ -27,7 +27,7 @@ Esl::Application.routes.draw do
    # end
 
    get ':username/workout/:id', to: 'workouts#show', as: :user_workout
-   get ':username/workouts', to: 'workouts#index', as: :user_workout
+   get ':username/workouts', to: 'workouts#index', as: :user_workouts
    get ':username/workout/:id/edit', to: 'workouts#edit', as: :edit_user_workout
    delete ':username/workout/:id/delete', to: 'workouts#destroy', as: :delete_user_workout
    put ':username/workout/:id/update', to: 'workouts#update', as: :update_user_workout
