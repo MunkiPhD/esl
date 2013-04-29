@@ -10,7 +10,7 @@
   <% workouts.each do |workout| %>
     <tr>    
       <td><%= workout.user.username %></td>
-      <td><%= link_to workout.title, workout %></td>
+      <td><%= link_to workout.title, user_workout_path(workout.user, workout) %></td>
       <td><%= days_ago workout.date_performed %></td>
     </tr>
   <% end %>

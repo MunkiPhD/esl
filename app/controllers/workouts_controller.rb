@@ -4,7 +4,9 @@ class WorkoutsController < ApplicationController
   respond_to :html, :json, only: [:index, :show]
 
   def index
-    @workouts = current_user.workouts.latest
+    params[:username] ||= current_user.username
+    @user = User.find_by_username(params[:username])
+    @workouts = @user.workouts.latest
   end
 
   def show
@@ -74,7 +76,8 @@ class WorkoutsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_workout
-    @workout= Workout.find(params[:id])
+    params[:username] ||= current_user.username
+    @workout= User.find(params[:username]).workouts.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

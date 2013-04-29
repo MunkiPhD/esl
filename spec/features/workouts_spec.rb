@@ -34,7 +34,7 @@ feature "Workouts" do
   scenario "user can edit a workout" do
     workout = create(:workout, user: user)
 
-    visit workouts_path
+    visit workouts_path #(id: workout, username: workout.user.username)
     expect(page).not_to have_content "NewWorkoutTitle"
     click_link workout.title
 
@@ -52,7 +52,7 @@ feature "Workouts" do
     #save_and_open_page
     workout = create(:workout, user: user)
 
-    visit workouts_path
+    visit workouts_path(id: workout, username: workout.user.username)
     expect(page).to have_content "Workouts"
     expect(page).to have_link workout.title
 

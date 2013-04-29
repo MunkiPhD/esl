@@ -44,4 +44,12 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
+
+  def to_param
+    username
+  end
+
+  def self.find(input)
+    input.to_i == 0 ? find_by_username(input) : super
+  end
 end

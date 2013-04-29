@@ -47,17 +47,17 @@ describe WorkoutsController do
       render_views
 
       it "assigns the requested workout to @workout" do
-        get 'show', { id: @workout.id }
+        get 'show', { id: @workout.id, username: @workout.user.username }
         expect(assigns(:workout)).to eq(@workout)
       end
 
       it "renders the :show template" do
-        get :show, id: @workout.id
+        get :show, id: @workout.id, username: @workout.user.username
         expect(response).to render_template :show
       end
 
       it "returns JSON data" do
-        get :show, format: :json, id: @workout
+        get :show, format: :json, id: @workout, username: @workout.user.username
         expect(response.body).to have_content @workout.to_json(only:  [:id, :title, :date_performed, :notes, :user_id, :workout_exercises])
       end
 
@@ -85,12 +85,12 @@ describe WorkoutsController do
 
     describe "GET 'edit'" do
       it "assigns the requested workout to @workout" do
-        get :edit, id: @workout
+        get :edit, id: @workout, username: @workout.user.username
         expect(assigns(:workout)).to eq @workout
       end
 
       it "renders the :edit template" do
-        get :edit, id: @workout
+        get :edit, id: @workout, username: @workout.user.username
         expect(response).to render_template :edit
       end
     end
@@ -159,20 +159,20 @@ describe WorkoutsController do
           expect(@workout.title).to eq("test")
         end
         it "redirects to the workout" do
-          put :update, id: @workout, workout: attributes_for(:workout)
+          put :update, id: @workout,  username: @workout.user.username, workout: attributes_for(:workout)
           expect(response).to redirect_to @workout
         end
       end
 
       context "with invalid attributes" do
         it "does not update the workout" do
-          put :update, id: @workout, workout: attributes_for(:invalid_workout, title: "test")
+          put :update, id: @workout, username: @workout.user.username,  workout: attributes_for(:invalid_workout, title: "test")
           @workout.reload
           expect(@workout.title).to eq("test")
         end
 
         it "re-renders the edit template" do
-          put :update, id: @workout, workout: attributes_for(:invalid_workout)
+          put :update, id: @workout, username: @workout.user, workout: attributes_for(:invalid_workout)
           expect(response).to render_template :edit
         end
       end
@@ -199,7 +199,7 @@ describe WorkoutsController do
     end
 
     it "GET 'show' assigns the specified workout to @workout" do
-      get 'show', { id: @workout.id }
+      get 'show', { id: @workout.id, username: @workout.user.username }
       response.should be_success
       expect(assigns(:workout)).to eq(@workout)
     end
@@ -210,7 +210,7 @@ describe WorkoutsController do
     end
 
     it "GET 'edit' redirects to sign in" do
-      get :edit, id: @workout.id
+      get :edit, id: @workout.id, username: @workout.user.username 
       expect(response).to redirect_to(new_user_session_path)
     end
 

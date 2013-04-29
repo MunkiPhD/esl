@@ -1,6 +1,8 @@
+<% if current_user == @workout.user %>
 <div class="workout-actions right">
-  <%= link_to "Edit", edit_workout_path(@workout), class: "btn" %>  <%= button_to 'Delete Workout', @workout, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+  <%= link_to "Edit", edit_user_workout_path(@workout.user.username, @workout), class: "btn" %>  <%= button_to 'Delete Workout', delete_user_workout_path(id: @workout, username: @workout.user.username), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 </div>
+<% end %>
 
 <div class="workout-general-info">
   <h2><%= @workout.title %></h2>
@@ -12,6 +14,9 @@
   Notes: <%= @workout.notes %>
 </div>
 <% end %>
+<div>
+  by: <%= @workout.user.username %>
+</div>
 </div>
 
 

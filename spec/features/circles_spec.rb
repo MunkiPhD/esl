@@ -93,7 +93,8 @@ feature "Circles" do
     visit circle_members_path(circle.id)
     expect(page).to_not have_content user.username
 
-    visit pending_circle_members_path(circle.id)
+    click_link "Awaiting Approval (1)"
+    #visit pending_circle_members_path(circle.id)
     expect(page).to have_content user.username
     expect(page).to have_button "Approve"
 

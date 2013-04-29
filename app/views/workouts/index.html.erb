@@ -1,9 +1,8 @@
-<h1>My Workouts</h1>
-
+<h1><%= workout_index_title @user %></h1>
 <div id="workouts">
   <ul>
   <% @workouts.each do |workout| %>
-    <li><%= link_to workout.title, workout %> <%= "(#{days_ago workout.date_performed})" %></li>
+    <li><%= link_to workout.title, user_workout_path(workout.user, workout) %> <%= "(#{days_ago workout.date_performed})" %></li>
   <% end %>
 </ul>
 </div>

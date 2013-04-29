@@ -12,4 +12,13 @@ module WorkoutsHelper
   def link_to_remove_fields(name, f)
     f.hidden_field(:_destroy) + link_to_function(name, "Workouts.remove_fields(this)")
   end
+
+
+  def workout_index_title(user)
+    if user.username == current_user.username
+      "My Workouts"
+    else
+      "#{user.username}'s Workouts"
+    end
+  end
  end
