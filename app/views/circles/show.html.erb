@@ -16,8 +16,7 @@
 <h3><%= @circle.motto %></h3>
 
 <p>
-<strong>Description:</strong>
-<%= @circle.description %>
+<%= @circle.description unless @circle.description.blank? %>
 </p>
 
 

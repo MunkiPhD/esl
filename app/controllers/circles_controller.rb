@@ -12,7 +12,7 @@ class CirclesController < ApplicationController
   # GET /circles/1
   # GET /circles/1.json
   def show
-    @workouts = Leaderboard.circle_member_workouts(@circle).limit(5)
+    @workouts = Leaderboard.circle_member_workouts(@circle)
   end
 
 
