@@ -6,12 +6,15 @@
       <th>Member</th>
       <th>Workout</th>
       <th>Date Performed</th>
+      <th>Weight</th>
     </tr>
   <% workouts.each do |workout| %>
     <tr>    
       <td><%= workout.user.username %></td>
       <td><%= link_to workout.title, user_workout_path(workout.user, workout) %></td>
       <td><%= days_ago workout.date_performed %></td>
+      <td><%= workout.weight %></td>
+      <td><%= workout.exercise_id %></td>
     </tr>
   <% end %>
 </table>

@@ -12,7 +12,8 @@ class CirclesController < ApplicationController
   # GET /circles/1
   # GET /circles/1.json
   def show
-    @workouts = Leaderboard.circle_member_workouts(@circle)
+    @exercise = Exercise.first
+    @workouts = Leaderboard.max_weight_for_exercise_on_circle(@circle, @exercise) #circle_member_workouts(@circle).max_weight(@exercise)
   end
 
 

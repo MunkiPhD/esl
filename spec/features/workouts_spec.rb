@@ -2,6 +2,8 @@ require 'spec_helper'
 
 feature "Workouts" do
   let(:user) { create(:user) }
+  let(:workout) { create(:workout, user: user) }
+
 
   before :each do 
     login_user user
@@ -32,10 +34,10 @@ feature "Workouts" do
   end
 
   scenario "user can edit a workout" do
-    workout = create(:workout, user: user)
-
-    visit workouts_path #(id: workout, username: workout.user.username)
+    visit workout_path(workout.id)
+    expect(page).to have_content workout.title
     expect(page).not_to have_content "NewWorkoutTitle"
+    #save_and_open_page
     click_link workout.title
 
     click_link "Edit"
@@ -50,7 +52,6 @@ feature "Workouts" do
 
   scenario "user can delete a workouts" do
     #save_and_open_page
-    workout = create(:workout, user: user)
 
     visit workouts_path(id: workout, username: workout.user.username)
     expect(page).to have_content "Workouts"
@@ -65,5 +66,29 @@ feature "Workouts" do
 
     expect(page).to have_content "Workouts"
     expect(page).to_not have_link workout.title
+  end
+
+  scenario "can be viewed by another user if theyre in the same circle" do
+    user2 = create(:user)
+    workout2 = create(:workout, user: user2)
+
+    circle = create(:circle)
+    circle.add_member(user)
+    circle.add_member(user2)
+
+    visit user_workout_path(user2, workout2)
+    expect(page).to have_content workout2.title
+  end
+
+  scenario "cannot be viewed by a user not in the same circle" do
+    user2 = create(:user)
+    workout2 = create(:workout, user: user2)
+
+    circle = create(:circle)
+    circle.add_member(user)
+
+    visit user_workout_path(user2, workout2)
+    expect(page).to_not have_content workout2.title
+    expect(page).to have_content "You are not authorized"
   end
 end

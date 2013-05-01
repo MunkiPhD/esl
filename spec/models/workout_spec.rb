@@ -94,8 +94,16 @@ describe Workout do
         workout2.workout_exercises[0].workout_sets[0].weight = 100
         workout2.save
 
-        max_workout = user.workouts.max_weight
+        expect(user.workouts.count).to eq 2
+        exercise = workout.workout_exercises[0]
+        
+        circle = create(:circle, user: user)
+        resource_ids = circle.members.pluck(:user_id)
+        expect(resource_ids).to eq [user.id]
+        expect(Exercise.exists?(exercise.id)).to eq true
+        max_workout = Leaderboard.max_weight_for_exercise_on_circle(circle, exercise)
 
+       
         expect(max_workout).to eq [workout]
       end
     end
