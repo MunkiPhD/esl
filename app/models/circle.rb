@@ -102,10 +102,12 @@ class Circle < ActiveRecord::Base
 
 
   private
+  # adds admin rights to the creator of the circle 
   def add_admin_role_to_creator
     add_admin self.user
   end
 
+  # checks to see if the user is in the specified role group
   def is_user_in_role_group(role_group, user)
     unless role_group.empty?
       !role_group.where('user_id = ?', user.id).take.nil?

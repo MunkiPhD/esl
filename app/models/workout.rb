@@ -26,33 +26,45 @@ class Workout < ActiveRecord::Base
 
   scope :latest, -> { order('date_performed DESC') }
 
-   def self.max_weight
 
-      find_by_sql("
-        WITH joined_table AS (
-          SELECT workout_sets.weight AS weight, 
-            workouts.user_id AS user_id, 
-            workouts.id AS workout_id, 
-        		workout_sets.id AS workout_set_id,
-        		workout_exercises.exercise_id AS exercise_id
-        	FROM workouts 
-        	INNER JOIN workout_exercises ON workout_exercises.workout_id = workouts.id 
-        	INNER JOIN workout_sets ON workout_sets.workout_exercise_id = workout_exercises.id       
-        	ORDER BY workout_sets.weight DESC
-        	),
-        
-        result_set AS (
-        	SELECT MAX(x.workout_id) AS workout_id, x.user_id, x.weight, x.workout_set_id, x.exercise_id
-        	FROM joined_table x
-          JOIN (SELECT p.user_id, MAX(weight) as weight
-        		FROM joined_table p
-        		GROUP BY p.user_id) y 
-        	ON y.user_id = x.user_id AND y.weight = x.weight
-        	GROUP BY x.user_id, x.weight, x.workout_set_id, x.exercise_id
-        	ORDER BY x.weight DESC)
-        
-        SELECT workouts.*, result_set.weight, result_set.workout_set_id, result_set.exercise_id
-        FROM workouts, result_set
-        WHERE workouts.id = result_set.workout_id")
+
+
+
+  def self.max_weight(exercise)
+=begin
+    selected_fields = <<-SELECT
+        workouts.id AS workout_id, 
+        workout_sets.weight AS weight,
+        workout_sets.id AS workout_set_id,
+        workout_exercises.exercise_id AS exercise_id,
+        ROW_NUMBER() OVER (
+           PARTITION BY workouts.user_id 
+           ORDER BY workout_sets.weight DESC, workouts.id DESC) as row_num
+      SELECT
+
+    joins(", (#{Workout.joins(workout_exercises: :workout_sets).select(selected_fields).to_sql}) as t")
+              .select("workouts.*, t.*")
+              .where("workouts.id = t.workout_id AND t.row_num = 1") # AND workouts.user_id IN (#{resource_ids.join(",")})")
+              .order("t.weight DESC")
+=end
+    selected_fields = <<-SELECT
+      workouts.id AS workout_id, 
+      workout_sets.weight,
+      workout_sets.id AS workout_set_id,
+      workout_exercises.exercise_id AS exercise_id,
+      ROW_NUMBER() OVER (
+        PARTITION BY workouts.user_id 
+        ORDER BY workout_sets.weight DESC, workouts.id DESC) as rowNum
+    SELECT
+
+    subquery = Workout.joins(workout_exercises: :workout_sets).select(selected_fields).for_exercise(exercise).to_sql
+    Workout.select("workouts.*, t.*").from(Arel.sql("workouts, (#{subquery}) as t"))
+    .where("t.rowNum = 1 AND workouts.id = t.workout_id")
+    .order("t.weight DESC")
+  end
+
+  private
+  def self.for_exercise(exercise)
+    where("exercise_id = ?", exercise.id)
   end
 end
