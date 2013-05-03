@@ -16,6 +16,9 @@
 # This will generate a new secret, then
 #   heroku config:set SECRET_TOKEN={{the secret token here }}
 #
+# Then, after setting the environment variable, you do can do the code push
+#   git push heroku master
+#
 # Or if you are deploying somewhere else, you can do it directly in the shell
 #   SECRET_TOKEN=the_secret_token rails server
 #
