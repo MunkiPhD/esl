@@ -14,18 +14,27 @@ module ApplicationHelper
     end
   end
 
+  # object can be anything
+  #   - if it's an array, it will iterate over the first level of items in the array, inspecting each
+  #   - twitter bootstrap close button is implemented so that the debug windows can be dismissed and the css can be viewed in it's truer fashion
   def debug(object)
     content_tag :div, class: "debug" do
-      content_tag(:h5, "Debug Object: #{object.class}") +
-      if object.kind_of?(ActiveRecord::Relation)
-        object.collect do |child|
-          content_tag(:div, child.inspect, class: 'debug-child-objects')
-        end.join.html_safe
-      else
-        object.inspect
+      begin
+        # this uses twitter bootstrap's close button functionality
+        button_tag(raw("&times;"), type: "button", class: "close", "data-dismiss" => "alert") +
+          content_tag(:h5, "Debug Object: #{object.class}") +
+        if object.kind_of?(ActiveRecord::Relation)
+          object.collect do |child|
+            content_tag(:div, child.inspect, class: 'debug-child-objects')
+          end.join.html_safe
+        else
+          object.inspect
+        end
+      rescue Exception => e
+        # attempt to display what went wrong as it might shed some light on another process
+        content_tag(:h5, "An exception was caught in #debug: #{e.message}") + 
+        content_tag(:div, e.backtrace.inspect)
       end
     end
-  rescue
-    "an error occured"
   end
 end
