@@ -97,6 +97,39 @@ describe Circle do
       let(:user) { create(:user) }
       let(:circle) { create(:circle) }
 
+      
+      describe '#intersecting_groups' do
+        let(:user2) { create(:user) }
+        let(:circle2) { create(:circle, user: user2) }
+      
+        context 'no groups in common' do
+          it 'returns an empty array' do
+            common_groups = Circle.intersecting_groups(user, user2)
+            expect(common_groups).to eq []
+          end
+        end
+
+        context 'groups in common' do
+          before :each do
+            random_admin = create(:user)
+            @common_circle = create(:circle, user: random_admin)
+
+            @common_circle.add_member user
+            @common_circle.add_member user2
+            @intersection = Circle.intersecting_groups(user, user2)
+          end
+
+          it 'returns the group in common' do
+            expect(@intersection).to eq [@common_circle]
+          end
+
+          it 'has a count equal to one' do
+            expect(@intersection.count).to eq 1 
+          end
+        end
+      end
+
+
       describe '#pending' do
         it 'returns a list of all users pending membership approval' do
           user2 = create(:user)
@@ -243,7 +276,7 @@ describe Circle do
       it "adds pending rights if circle is not public" do
         circle = create(:circle, is_public: false)
         expect(circle.is_member?(user)).to eq false
-  
+
         circle.add_pending(user)
 
         expect(circle.is_member?(user)).to eq false

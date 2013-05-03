@@ -10,6 +10,15 @@ class Circle < ActiveRecord::Base
   validates :motto, length: { maximum: 50 }
   validates :user, presence: true
   validates :is_public, inclusion: { in: [true, false] }
+  
+
+
+  # Compares the groups of two users and returns the intersection
+  def self.intersecting_groups(user_one, user_two)
+    user_one_circle_ids = Circle.find_roles(:member, user_one).pluck(:resource_id)
+    user_two_circle_ids = Circle.find_roles(:member, user_two).pluck(:resource_id)
+    Circle.where(id: user_one_circle_ids & user_two_circle_ids)
+  end
 
 
   # manages a users membership request
