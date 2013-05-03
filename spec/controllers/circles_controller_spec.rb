@@ -162,15 +162,14 @@ describe CirclesController do
 
 
 
-  context "for un-athenticated user" do
-    it "GET 'index' redirects to sign in" do
+  context "for un-authenticated user" do
+    it "GET 'index' displays the list of circles" do
       get :index
       expect(assigns(:circles)).to match_array [circle]
     end
 
     it "GET 'show' assigns the specified circle to circle" do
       get :show,  id: circle.id 
-      response.should be_success
       expect(assigns(:circle)).to eq(circle)
     end
 

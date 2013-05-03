@@ -10,25 +10,32 @@ describe Leaderboard do
         workout = create(:workout_with_exercises, user: user)
         workout2 = create(:workout_with_exercises, user: user)
 
+        exercise = workout.workout_exercises[0].exercise
+
         workout.workout_exercises[0].workout_sets[0].weight = 200
         workout.save
         workout2.workout_exercises[0].workout_sets[0].weight = 100
+        workout2.workout_exercises[0].exercise = exercise
         workout2.save
 
-        circle.add_member(user)
-
         user2 = create(:user)
+        circle.add_member(user)
+        circle.add_member(user2)
+
         workout3 = create(:workout_with_exercises, user: user2)
         workout4 = create(:workout_with_exercises, user: user2)
 
         workout3.workout_exercises[0].workout_sets[0].weight = 300
+        workout3.workout_exercises[0].exercise = exercise
         workout3.save
+
         workout4.workout_exercises[0].workout_sets[0].weight = 400
+        workout4.workout_exercises[0].exercise = exercise
         workout4.save
 
-        workouts = Leaderboard.circle_member_workouts(circle).max_weight
+        workouts = Leaderboard.max_weight_for_exercise_on_circle(circle, exercise)
 
-        expect(workouts).to eq [workout, workout4]
+        expect(workouts).to eq [workout4, workout]
       end
     end
   end

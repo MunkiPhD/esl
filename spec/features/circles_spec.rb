@@ -3,6 +3,12 @@ require 'spec_helper'
 feature "Circles" do
   let(:user) { create(:user) }
 
+  before :each do
+    create(:exercise, id: 1)
+    create(:exercise, id: 2)
+    create(:exercise, id: 3)
+  end
+
   scenario "are created by an authenticated user" do
     circle = build(:circle)
     login_user user
@@ -108,9 +114,12 @@ feature "Circles" do
   scenario "user applies for membership, but decides to cancel before he is approved" do
     circle = create(:circle, is_public: false)
 
-    login_user user
+    user2 = create(:user)
+    login_user user2
 
-    visit circle_path(circle)
+    visit circles_path
+    click_link circle.name
+
     expect(page).to have_button "Apply"
 
     click_button "Apply"
