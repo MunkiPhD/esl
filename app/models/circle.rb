@@ -15,6 +15,8 @@ class Circle < ActiveRecord::Base
 
   # Compares the groups of two users and returns the intersection
   def self.intersecting_groups(user_one, user_two)
+    return [] if user_one.blank? || user_two.blank?
+
     user_one_circle_ids = Circle.find_roles(:member, user_one).pluck(:resource_id)
     user_two_circle_ids = Circle.find_roles(:member, user_two).pluck(:resource_id)
     Circle.where(id: user_one_circle_ids & user_two_circle_ids)

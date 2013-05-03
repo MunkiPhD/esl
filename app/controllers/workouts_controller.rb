@@ -1,6 +1,7 @@
 class WorkoutsController < ApplicationController
   before_filter :authenticate_user!, except: [:show]
   before_action :set_workout, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_show, only: [:show]
   authorize_resource
   respond_to :html, :json, only: [:index, :show]
 
@@ -100,5 +101,14 @@ class WorkoutsController < ApplicationController
                                       ]
                                     ]
                                    )
+  end
+
+
+  def authorize_show
+    # check that the users arent the same. If they are, you could have the case where they are not in any 
+    # circles, in which case it with throw an AccessDenied exception
+    unless @workout.user == current_user
+      raise CanCan::AccessDenied if Circle.intersecting_groups(@workout.user, current_user).empty?
+    end
   end
 end

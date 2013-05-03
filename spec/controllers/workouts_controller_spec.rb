@@ -200,8 +200,7 @@ describe WorkoutsController do
 
     it "GET 'show' assigns the specified workout to @workout" do
       get 'show', { id: @workout.id, username: @workout.user.username }
-      response.should be_success
-      expect(assigns(:workout)).to eq(@workout)
+      expect(response).to redirect_to root_path
     end
 
     it "GET 'new' redirects to sign in" do

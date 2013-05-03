@@ -38,8 +38,8 @@ feature "Workouts" do
     visit workouts_path
     expect(page).to have_content workout.title
     expect(page).not_to have_content "NewWorkoutTitle"
-    #save_and_open_page
     click_link workout.title
+    #save_and_open_page
 
     click_link "Edit"
     click_link "Add Exercise"
@@ -52,7 +52,6 @@ feature "Workouts" do
   end
 
   scenario "user can delete a workouts" do
-    #save_and_open_page
 
     visit workouts_path(id: workout, username: workout.user.username)
     expect(page).to have_content "Workouts"
@@ -82,7 +81,6 @@ feature "Workouts" do
   end
 
   scenario "cannot be viewed by a user not in the same circle" do
-    pending
     user2 = create(:user)
     workout2 = create(:workout, user: user2)
 

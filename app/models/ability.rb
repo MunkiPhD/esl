@@ -33,13 +33,13 @@ class Ability
     if user.has_role? :super_admin
       can :manage, :all
     else
-      can :read, Circle #, is_public: true
+      can :read, Circle
       can :join, Circle, is_public: true # only allows you to join a page for a circle if it's public
       can :read, Circle, id: Circle.with_role(:member, user).map(&:id)
       can :leave, Circle, id: Circle.with_role(:member, user).map(&:id)
       can :manage, Circle, id: Circle.with_role(:admin, user).map(&:id) # allow the person that's an admin to modify a circle
       can :pending, Circle, id: Circle.with_role(:admin, user).map(&:id)
-      can :read, Workout #, id: Circle.with_role(:member, user).map(&:id)
+      can :read, Workout # needs to look at circles, so look at the :show of the WorkoutsController for the permissions
       can :manage, Workout, user_id: user.id
 
     end

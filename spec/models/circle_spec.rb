@@ -101,11 +101,26 @@ describe Circle do
       describe '#intersecting_groups' do
         let(:user2) { create(:user) }
         let(:circle2) { create(:circle, user: user2) }
+
+        context 'nil users' do
+          it 'returns an empty array if user_one is nil' do
+           expect(Circle.intersecting_groups(nil, user).empty?).to eq true
+          end
+
+          it 'returns an empty array if user_two is nil' do
+           expect(Circle.intersecting_groups(user, nil).empty?).to eq true
+          end
+        end
       
         context 'no groups in common' do
           it 'returns an empty array' do
             common_groups = Circle.intersecting_groups(user, user2)
             expect(common_groups).to eq []
+          end
+
+          it 'responds true to empty?' do
+            common_groups = Circle.intersecting_groups(user, user2)
+            expect(common_groups.empty?).to eq true
           end
         end
 
@@ -125,6 +140,11 @@ describe Circle do
 
           it 'has a count equal to one' do
             expect(@intersection.count).to eq 1 
+          end
+
+          it 'has same group if user is the same' do
+            intersection = Circle.intersecting_groups(user, user)
+            expect(intersection).to eq [@common_circle]
           end
         end
       end
