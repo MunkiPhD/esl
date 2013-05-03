@@ -9,27 +9,22 @@ class Leaderboard
     end
   end
 
+
+  # gets the latest workout for the users in the circle with the higheset weight for the specified exercise
+  # e.g. for Deadlifts for circle "Lifters of the Dead"
+  #   Mark
+  #     workout1: 400 lbs
+  #     workout2: 350 lbs
+  #
+  #   Steve
+  #     workout3: 380 lbs
+  #     workout4: 550 lbs
+  #
+  #   The result set would be [workout4, workout1]
+  #
   def self.max_weight_for_exercise_on_circle(circle, exercise)
     unless circle.members.blank?
-=begin
-      selected_fields = <<-SELECT
-        workouts.id AS workout_id, 
-        workout_sets.weight AS weight,
-        workout_sets.id AS workout_set_id,
-        workout_exercises.id AS exercise_id,
-        ROW_NUMBER() OVER (
-           PARTITION BY workouts.user_id 
-           ORDER BY workout_sets.weight DESC, workouts.id DESC) as row_num
-      SELECT
-
-      .joins(", (#{Workout.joins(:workout_exercises => :workout_sets).select(selected_fields).to_sql}) as t")
-              .select("workouts.*, t.*")
-              .where("workouts.id = t.workout_id AND t.row_num = 1") # AND workouts.user_id IN (#{resource_ids.join(",")})")
-              .order("t.weight DESC")
-=end
-
       circle_member_workouts(circle).max_weight(exercise)
-
     else
       []
     end
