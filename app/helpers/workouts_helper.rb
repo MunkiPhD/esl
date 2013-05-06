@@ -5,7 +5,7 @@ module WorkoutsHelper
       render(association.to_s + "_fields", :f => builder, exercises: @exercises)
     end
     
-    link_to_function(name, "Workouts.add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")")
+    link_to_function(name, "Workouts.add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", class: "btn btn-primary")
   end
 
 

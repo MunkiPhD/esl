@@ -62,11 +62,12 @@ describe WorkoutsController do
       end
 
       it "returns JSON data for the entire workout with sets" do
-        pending "find a way to make this test pass with the correct json data"
+        #pending "find a way to make this test pass with the correct json data"
         # the actual controller returns what I want, but i can't figure out how to create the data here
-        #workout = create(:workout_with_exercises)
-        #get :show, format: :json, id: workout
-        #expect(response.body).to have_content(Workout.includes(:workout_exercises).find(workout).to_json())
+        workout = create(:workout_with_exercises, user: @user)
+        get :show, format: :json, id: workout.id, username: @user.username
+        json_data = Workout.includes(:workout_exercises => [:workout_sets]).find(workout.id).to_json
+        expect(response.body).to have_content(json_data) #Workout.includes(:workout_exercises).find(workout).to_json())
       end
     end
 

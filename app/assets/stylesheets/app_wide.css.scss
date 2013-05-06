@@ -8,11 +8,18 @@ body {
 a {
   text-decoration: none;
   color: $link;
+    -webkit-transition-property: color;
+    -webkit-transition-duration: 0.25s;
+    -webkit-transition-timing-function: ease-out;
+
   &:visited {
     color: $link-visited;
   }
   &:hover {
     color: $link-hover;
+    -webkit-transition-property: color;
+    -webkit-transition-duration: 0.1s;
+    -webkit-transition-timing-function: linear, ease-out;
   }
 }
 
@@ -84,14 +91,18 @@ a {
     }
   }
 
-  a {
+  a, a:visited {
+    font-weight:bold;
     color: $grey;
-   
-    &:visited {
-      color: $grey;
-    }
+    -webkit-transition-property: color;
+    -webkit-transition-duration: 0.2s;
+    -webkit-transition-timing-function: ease-out;
+
     &:hover {
-      color: lighten($grey, 30%);
+      color: $secondary; //lighten($grey, 40%);
+      -webkit-transition-property:color;
+      -webkit-transition-duration:0.1s;
+      -webkit-transition-timing-function: linear, ease-out;
     }
   }
 }
@@ -137,9 +148,11 @@ footer {
 form.button_to {
   display:inline-block;
 }
+/*
 input[type='submit']{
   min-width:100px;
   //padding:7px;
   margin:3px 0px 3px 0px;
 }
+  */
 

@@ -8,7 +8,7 @@ class CircleMembersController < ApplicationController
   def index
     # this needs to be performed better, possibly a concern where it checks to see if the request is empty using 'base info' or something similar
     unless @circle.members.empty?
-      @members = @circle.members.select(:id, :username)
+      @members = @circle.members.select("id, username")
     else
       @members = @circle.members
     end

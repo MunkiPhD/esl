@@ -13,15 +13,15 @@
 
 <div class="workout-general-info">
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title %>
     <%= f.text_field :title, { placeholder: "Workout Title" } %>
   </div>
   <div class="field">
-    <%= f.label :date_performed %><br>
+    <%= f.label :date_performed %>
     <%= f.date_select :date_performed %>
   </div>
   <div class="field">
-    <%= f.label :notes %><br/>
+    <%= f.label :notes %>
     <%= f.text_area :notes, { placeholder: "Notes" } %>
   </div>
 </div>
@@ -35,7 +35,7 @@
   </div>
 </div>
 <div class="workout-actions">
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-primary" %>
 </div>
 
 <% end %>
