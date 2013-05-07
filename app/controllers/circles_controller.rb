@@ -14,7 +14,8 @@ class CirclesController < ApplicationController
   def show
     @exercises = Exercise.where(id: [1,2,3])
     @exercise = Exercise.find(params[:exercise_id] || 1)
-    @workouts = Leaderboard.max_weight_for_exercise_on_circle(@circle,@exercise) #circle_member_workouts(@circle).max_weight(@exercise)
+    @limit = 5
+    @workouts = Leaderboard.max_weight_for_exercise_on_circle(@circle,@exercise).limit(@limit) #circle_member_workouts(@circle).max_weight(@exercise)
   end
 
 

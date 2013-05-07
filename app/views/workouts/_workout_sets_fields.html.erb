@@ -1,16 +1,13 @@
 <tr class="fields">
   <td>
-    <%= f.label :set_number, "Set: " %>
-    <span class="set-number"><%= f.object.set_number ||= 1 %></span>&nbsp;---
+    <span class="set-number"><%= "Set: #{f.object.set_number ||= 1}" %></span>
     <%= f.hidden_field :set_number, { :class => "set-field" } %>
   </td>
   <td>  
-    <%= f.label :rep_count, "Reps: " %>
-    <%= f.text_field :rep_count %>
+    <%= f.text_field :rep_count, placeholder: "reps", class: "input-small" %>
   </td>
   <td>
-    <%= f.label :weight, "Weight: " %>
-    <%= f.text_field :weight %>
+    <%= f.text_field :weight, placeholder: "weight", class: "input-small" %>
   </td>
   <td>
     <%= link_to_remove_fields "remove", f %>

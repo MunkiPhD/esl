@@ -3,6 +3,10 @@
 #workout_exercises_container {
   float:left;
   margin-left:10px;
+
+  input[type='text'] {
+    margin-bottom:0px;
+  }
 }
 
 .workout-actions {
@@ -19,6 +23,7 @@
     min-width: 200px;
     text-align:center;
   }
+
 }
 
 .workout-general-info {
@@ -49,6 +54,17 @@
   .field {
     margin:15px;
   }
+
+  // These control the sizing of the date selection on workout create/edit
+  #workout_date_performed_1i {
+    width: 85px;
+  }
+  #workout_date_performed_2i {
+    width: 160px;
+  }
+  #workout_date_performed_3i {
+    width: 60px;
+  }
 }
 #workout_title {
   height:40px;
@@ -68,3 +84,4 @@ table {
     text-align:center;
   }
 }
+
