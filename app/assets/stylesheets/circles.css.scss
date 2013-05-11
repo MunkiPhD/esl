@@ -34,3 +34,11 @@ a.circle-members-awaiting-approval {
 #circle_control_panel {
   float:right;
 }
+.circle-members-list {
+  float:right;
+  border:1px solid $grey;
+  clear:right;
+  padding:10px;
+  width:185px;
+  margin-top:10px;
+}

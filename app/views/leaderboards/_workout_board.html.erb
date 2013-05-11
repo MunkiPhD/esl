@@ -4,9 +4,9 @@
   
   <li>
   <% if exercise == @exercise %>
-    <strong><%= link_to exercise.name, circle_path(circle, exercise_id: exercise.id) %></strong>
+  <%= link_to exercise.name, circle_path(circle, exercise_id: exercise.id), class: "btn btn-info" %>
   <% else %>
-    <%= link_to exercise.name, circle_path(circle, exercise_id: exercise.id) %>
+    <%= link_to exercise.name, circle_path(circle, exercise_id: exercise.id), class: "btn" %>
   <% end %>
   </li>
 <% end %>
@@ -19,7 +19,7 @@
     <tr>
       <th>Member</th>
       <th>Workout</th>
-      <th>Date Performed</th>
+      <th>When?</th>
       <th>Weight (lbs)</th>
     </tr>
     <% workouts.each do |workout| %>

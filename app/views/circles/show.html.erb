@@ -1,33 +1,56 @@
 <div id="circle_control_panel">
   <% if user_signed_in? %>
-  <%= link_to 'Edit Info', edit_circle_path(@circle), class: "btn" if @circle.is_admin? current_user %>
-  <%= join_leave_link(@circle) %>
-    <%= button_to 'Destroy', @circle, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if @circle.is_admin? current_user %>
+    <% if @circle.is_member?(current_user) %>
+      <div class="btn-group">
+      <button class="btn btn-primary">Settings</button>
+      <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><i class="icon-edit"><%= join_leave_link(@circle) %></i></li>
+        <% if @circle.is_admin? current_user %>
+        <li>
+          <%= link_to edit_circle_path(@circle) do %>
+            <i class="icon-pencil"></i>&nbsp;Edit Info
+          <% end %>
+          </li>
+        <li>
+        <%= link_to @circle, method: :delete, data: { confirm: 'Are you sure?' } do %>
+<i class="icon-trash"></i>&nbsp;Delete
+        <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+      <%= join_leave_link(@circle) %>
+  <% end %>
     <div>
-    <%= "This is a private group" if !@circle.is_public? %><br/>
-    <%= "You are a member" if @circle.is_member? current_user %><br/>
-    <%= "You are also an Administrator" if @circle.is_admin? current_user %><br/>
-    <%= link_to_awaiting_approval(@circle) %>
+      <%= "This is a private group" if !@circle.is_public? %><br/>
+      <%= "You are a member" if @circle.is_member? current_user %><br/>
+      <%= "You are also an Administrator" if @circle.is_admin? current_user %><br/>
+      <%= link_to_awaiting_approval(@circle) %>
+    </div>
+  <% end %>
   </div>
-<% end %>
-</div>
 
-<h1><%= @circle.name %></h1>
-<h3><%= @circle.motto %></h3>
+  <div class="circle-members-list">
+    <h3><%= link_to "Members", circle_members_path(@circle) %></h3>
+    <% @circle.members.each do |user| %>
+      <%= "#{user.username}" %><br>
+  <% end %>
+  </div>
+  <h1><%= @circle.name %></h1>
+  <h3><%= @circle.motto %></h3>
 
-<p>
-<%= @circle.description unless @circle.description.blank? %>
-</p>
+  <p>
+  <%= @circle.description unless @circle.description.blank? %>
+  </p>
 
 
-<%= render "leaderboards/workout_board", workouts: @workouts, exercises: @exercises, circle: @circle, limit: @limit %>
+  <%= render "leaderboards/workout_board", workouts: @workouts, exercises: @exercises, circle: @circle, limit: @limit %>
 
 
-<br><br>
 
-<%= link_to 'Back', circles_path %>
-<br><br>
-<h3><%= link_to "Members", circle_members_path(@circle) %></h3>
-<% @circle.members.each do |user| %>
-  <%= "#{user.username}" %><br>
-<% end %>
+  <br><br>
+  <%= link_to 'Back', circles_path %>

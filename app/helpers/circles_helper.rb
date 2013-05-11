@@ -3,11 +3,11 @@ module CirclesHelper
     return create_join_apply_button(circle) if current_user.blank?
 
     if circle.is_admin?(current_user)
-      return button_to 'Leave', leave_circle_members_path(circle.id), method: :post, data: { confirm: "Are you sure you want to leave this circle?" }, class: "btn btn-danger"
+      return link_to 'Leave', leave_circle_members_path(circle.id), method: :post, data: { confirm: "Are you sure you want to leave this circle?" }
     end
 
     if circle.is_member? current_user
-      return button_to 'Leave', leave_circle_members_path(circle.id), method: :post, data: { confirm: "Are you sure you want to leave this circle?" }, class: "btn btn-danger"
+      return link_to 'Leave', leave_circle_members_path(circle.id), method: :post, data: { confirm: "Are you sure you want to leave this circle?" }
     end
 
     if circle.is_pending? current_user
