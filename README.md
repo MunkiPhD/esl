@@ -9,3 +9,6 @@ Why not? Together we can make a better application. I'll just be the one to hose
 
 ### Want to contribute? ###
 Do the usual: fork, modify, write tests, issue pull request!
+
+### Where is everything? ###
+Anything that's currently being worked on will most likely live in the 'dev' branch. The master branch will hold anything that can be pushed to production. Keep in mind that this codebase is currently NOT in production, which is why master is essentially... empty.
