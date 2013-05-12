@@ -1,16 +1,13 @@
 <h3>Leaderboards</h3>
-<ul class="leaderboard-exercise-list">
+<div class="btn-group">
 <% exercises.each do |exercise| %>
-  
-  <li>
   <% if exercise == @exercise %>
   <%= link_to exercise.name, circle_path(circle, exercise_id: exercise.id), class: "btn btn-info" %>
   <% else %>
     <%= link_to exercise.name, circle_path(circle, exercise_id: exercise.id), class: "btn" %>
   <% end %>
-  </li>
 <% end %>
-</ul>
+</div>
 
 <h3><%= "Top #{@limit} Max Weight #{@exercise.name}" %></h3>
 <% if workouts.count > 0 %>

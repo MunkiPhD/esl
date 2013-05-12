@@ -7,7 +7,9 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><i class="icon-edit"><%= join_leave_link(@circle) %></i></li>
+        <li>
+            <%= join_leave_link(@circle) %>
+        </li>
         <% if @circle.is_admin? current_user %>
         <li>
           <%= link_to edit_circle_path(@circle) do %>
@@ -19,18 +21,18 @@
 <i class="icon-trash"></i>&nbsp;Delete
         <% end %>
         </li>
+        <li class="divider"></li>
+        <li><%= link_to "This is a private group", "#" if !@circle.is_public? %></li>
+        <li><%= link_to "You are a member", "#" if @circle.is_member? current_user %></li>
+        <li><%= link_to "You are also an Administrator", "#" if @circle.is_admin? current_user %></li>
+        <li><%= link_to_awaiting_approval(@circle) %></li>
+
         <% end %>
       </ul>
     </div>
   <% else %>
       <%= join_leave_link(@circle) %>
   <% end %>
-    <div>
-      <%= "This is a private group" if !@circle.is_public? %><br/>
-      <%= "You are a member" if @circle.is_member? current_user %><br/>
-      <%= "You are also an Administrator" if @circle.is_admin? current_user %><br/>
-      <%= link_to_awaiting_approval(@circle) %>
-    </div>
   <% end %>
   </div>
 
