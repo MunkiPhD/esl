@@ -21,13 +21,21 @@
    margin: 5px;
   }
 }
-a.circle-members-awaiting-approval {
+.circle-members-awaiting-approval {
   color: red;
   font-weight: bold;
 
   &:hover {
     text-decoration: underline;
     color: lighten(red, 15%);
+  }
+} 
+// we need to override the twitter bootstrap css
+.dropdown-menu > li > a.circle-members-awaiting-approval {
+  color: $color-one;
+  font-weight: bold;
+  &:hover {
+    color: $color-one;
   }
 }
 
