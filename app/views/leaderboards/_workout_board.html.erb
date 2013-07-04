@@ -1,0 +1,37 @@
+<h3>Leaderboards</h3>
+<div class="btn-group">
+<% exercises.each do |exercise| %>
+  <% if exercise == @exercise %>
+  <%= link_to exercise.name, circle_path(circle, exercise_id: exercise.id), class: "btn btn-info" %>
+  <% else %>
+    <%= link_to exercise.name, circle_path(circle, exercise_id: exercise.id), class: "btn" %>
+  <% end %>
+<% end %>
+</div>
+
+<h3><%= "Top #{@limit} Max Weight #{@exercise.name}" %></h3>
+<% if workouts.count > 0 %>
+  <div id="workouts">
+  <table>
+    <tr>
+      <th>Member</th>
+      <th>Workout</th>
+      <th>When?</th>
+      <th>Weight (lbs)</th>
+    </tr>
+    <% workouts.each do |workout| %>
+      <tr>    
+      <td><%= workout.user.username %></td>
+      <td><%= link_to workout.title, user_workout_path(workout.user, workout) %></td>
+      <td><%= days_ago workout.date_performed %></td>
+      <td><%= workout.weight %></td>
+    </tr>
+  <% end %>
+  </table>
+  <% debug @exercise %>
+  <% debug @workouts %>
+  <% debug params %>
+<% else %>
+    No workouts logged for users of this circle.
+<% end %>
+</div>

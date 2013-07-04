@@ -1,0 +1,14 @@
+<h1>Listing circles</h1>
+
+
+    <% @circles.each do |circle| %>
+      <div class="circle-short-listing">
+        <h3><%= link_to circle.name, circle %></h3>
+      <h4><%= circle.motto %></h4>
+      <p class="description"><%= circle.description %></p>
+    </div>
+    <% end %>
+ 
+<br />
+
+<%= link_to 'Create a Circle', new_circle_path %>

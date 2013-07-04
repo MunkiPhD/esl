@@ -1,0 +1,52 @@
+@import 'helpers/colors';
+
+.circle-short-listing {
+  border:1px solid $border;
+  padding:10px;
+  margin: 5px 0px 5px 0px;
+
+  h3 {
+  }
+
+  h4 {
+   color: $dark-grey;
+  }
+  
+  h3, h4 {
+    padding:0px;
+    margin:0px;
+  }
+
+  p.description {
+   margin: 5px;
+  }
+}
+.circle-members-awaiting-approval {
+  color: red;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+    color: lighten(red, 15%);
+  }
+} 
+// we need to override the twitter bootstrap css
+.dropdown-menu > li > a.circle-members-awaiting-approval {
+  color: $color-one;
+  font-weight: bold;
+  &:hover {
+    color: $color-one;
+  }
+}
+
+#circle_control_panel {
+  float:right;
+}
+.circle-members-list {
+  float:right;
+  border:1px solid $grey;
+  clear:right;
+  padding:10px;
+  width:185px;
+  margin-top:10px;
+}

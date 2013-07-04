@@ -1,0 +1,20 @@
+$grey: #ccc;
+$dark-grey: #888;
+$secondary: #ffaa00;
+$color-one: #ffaa00; 
+$color-two: #3498db;
+$color-three: #2980b9;
+
+// Borders
+$border: $grey;
+
+// Links
+$link: #444444;
+$link-visited: #444444;
+$link-hover: lighten($link, 30%);
+
+// Errors
+$error-text: #b94a48;
+$error-explanation-border: #eed3d7;
+$error-explanation-background: #f2dede;
+$error-explanation-text: #b94a48;

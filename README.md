@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 **NOTE** Current Development work is located on the ***dev*** branch
 
+=======
+>>>>>>> 8f4385bea8479e4c93484c6c8e9ae1c7376b26b3
 ESL
 ===
 
@@ -17,4 +20,7 @@ Anything that's currently being worked on will most likely live in the 'dev' bra
 
 **TODO:**
 - write more tests
+<<<<<<< HEAD
 - use issue tracker to actually add todo items :)
+=======
+>>>>>>> 8f4385bea8479e4c93484c6c8e9ae1c7376b26b3
