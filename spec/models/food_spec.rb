@@ -35,5 +35,20 @@ describe Food do
       f.serving_size = ("A" * 76)
       expect(f).to have(1).errors_on(:serving_size)
     end
+
+    it "calories are >= 0" do
+      f = Food.new(calories: -1)
+      expect(f).to have(1).errors_on(:calories)
+    end
+
+    it "calories from fat are >= 0" do
+      f = Food.new(calories_from_fat: -1)
+      expect(f).to have(1).errors_on(:calories_from_fat)
+    end
+
+    it "total_fat are >= 0" do
+      f = Food.new(total_fat: -1)
+      expect(f).to have(1).errors_on(:total_fat)
+    end
   end
 end
