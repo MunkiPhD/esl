@@ -4,7 +4,7 @@ describe Food do
   describe "validations" do
     it "has a name" do
       f = Food.new(name: nil)
-      expect(f).to have(1).errors_on(:name)
+      expect(f).to have(3).errors_on(:name)
     end
 
     it "has a name with at least two characters" do
@@ -25,7 +25,7 @@ describe Food do
 
     it "has a serving size that is not empty" do
       f = Food.new(serving_size: "")
-      expect(f).to have(1).errors_on(:serving_size)
+      expect(f).to have(2).errors_on(:serving_size)
     end
 
     it "has a serving size less than 75 characters" do
