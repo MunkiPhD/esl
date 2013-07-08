@@ -76,22 +76,22 @@ ActiveRecord::Schema.define(version: 20130707053501) do
     t.integer  "molybednum",                    default: 0,           null: false
     t.integer  "caffeine",                      default: 0,           null: false
     t.integer  "alcohol",                       default: 0,           null: false
-    t.decimal  "potassium",                                           null: false
+    t.decimal  "potassium",                     default: 0.0,         null: false
     t.integer  "folic_acid",                    default: 0,           null: false
-    t.decimal  "boron",                                               null: false
-    t.decimal  "decimal",                                             null: false
-    t.decimal  "cobalt",                                              null: false
-    t.decimal  "chloride",                                            null: false
-    t.decimal  "fluoride",                                            null: false
-    t.decimal  "acetic_acid",                                         null: false
-    t.decimal  "citric_acid",                                         null: false
-    t.decimal  "lactic_acid",                                         null: false
-    t.decimal  "malic_acid",                                          null: false
-    t.decimal  "choline",                                             null: false
-    t.decimal  "taurine",                                             null: false
-    t.decimal  "glutamine",                                           null: false
-    t.decimal  "creatine",                                            null: false
-    t.decimal  "sugar_alcohols",                                      null: false
+    t.decimal  "boron",                         default: 0.0,         null: false
+    t.decimal  "decimal",                       default: 0.0,         null: false
+    t.decimal  "cobalt",                        default: 0.0,         null: false
+    t.decimal  "chloride",                      default: 0.0,         null: false
+    t.decimal  "fluoride",                      default: 0.0,         null: false
+    t.decimal  "acetic_acid",                   default: 0.0,         null: false
+    t.decimal  "citric_acid",                   default: 0.0,         null: false
+    t.decimal  "lactic_acid",                   default: 0.0,         null: false
+    t.decimal  "malic_acid",                    default: 0.0,         null: false
+    t.decimal  "choline",                       default: 0.0,         null: false
+    t.decimal  "taurine",                       default: 0.0,         null: false
+    t.decimal  "glutamine",                     default: 0.0,         null: false
+    t.decimal  "creatine",                      default: 0.0,         null: false
+    t.decimal  "sugar_alcohols",                default: 0.0,         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

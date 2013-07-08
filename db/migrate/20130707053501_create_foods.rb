@@ -44,21 +44,21 @@ class CreateFoods < ActiveRecord::Migration
       t.integer :molybednum, :null => false, :default => 0
       t.integer :caffeine, :null => false, :default => 0
       t.integer :alcohol, :null => false, :default => 0
-      t.decimal :potassium, :null => false, :default => '0'
-      t.integer :folic_acid, :null => false, :default => '0'
-      t.decimal :boron, :decimal, :null => false, :default => '0'
-      t.decimal :cobalt, :null => false, :default => '0'
-      t.decimal :chloride, :null => false, :default => '0'
-      t.decimal :fluoride, :null => false, :default => '0'
-      t.decimal :acetic_acid, :null => false, :default => '0'
-      t.decimal :citric_acid, :null => false, :default => '0'
-      t.decimal :lactic_acid, :null => false, :default => '0'
-      t.decimal :malic_acid, :decimal, :null => false, :default => '0'
-      t.decimal :choline, :null => false, :default => '0'
-      t.decimal :taurine, :null => false, :default => '0'
-      t.decimal :glutamine, :null => false, :default => '0'
-      t.decimal :creatine, :null => false, :default => '0'
-      t.decimal :sugar_alcohols, :null => false, :default => '0'
+      t.decimal :potassium, :null => false, :default => 0
+      t.integer :folic_acid, :null => false, :default => 0
+      t.decimal :boron, :decimal, :null => false, :default => 0
+      t.decimal :cobalt, :null => false, :default => 0
+      t.decimal :chloride, :null => false, :default => 0
+      t.decimal :fluoride, :null => false, :default => 0
+      t.decimal :acetic_acid, :null => false, :default => 0
+      t.decimal :citric_acid, :null => false, :default => 0
+      t.decimal :lactic_acid, :null => false, :default => 0
+      t.decimal :malic_acid, :decimal, :null => false, :default => 0
+      t.decimal :choline, :null => false, :default => 0
+      t.decimal :taurine, :null => false, :default => 0
+      t.decimal :glutamine, :null => false, :default => 0
+      t.decimal :creatine, :null => false, :default => 0
+      t.decimal :sugar_alcohols, :null => false, :default => 0
 
       t.timestamps
     end
