@@ -107,6 +107,7 @@ class WorkoutsController < ApplicationController
   def authorize_show
     # check that the users arent the same. If they are, you could have the case where they are not in any 
     # circles, in which case it with throw an AccessDenied exception
+    # - in other words, you should only be able to view your workouts and those of people in the same circle(s) as yourself
     unless @workout.user == current_user
       raise CanCan::AccessDenied if Circle.intersecting_groups(@workout.user, current_user).empty?
     end
