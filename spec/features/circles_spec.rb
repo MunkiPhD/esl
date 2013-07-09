@@ -147,7 +147,7 @@ feature "Circles" do
     click_button "Join"
 
     visit circle_path(circle)
-    expect(page).to have_button "Leave"
+    expect(page).to have_link "Leave"
   end
 
   scenario "an admin of a private group can approve users who are pending" do

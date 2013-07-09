@@ -66,8 +66,17 @@ describe WorkoutsController do
         # the actual controller returns what I want, but i can't figure out how to create the data here
         workout = create(:workout_with_exercises, user: @user)
         get :show, format: :json, id: workout.id, username: @user.username
-        json_data = workout.to_json #Workout.includes(:workout_exercises => [:workout_sets]).find(workout.id).to_json
-        expect(response.body).to have_content(json_data) #Workout.includes(:workout_exercises).find(workout).to_json())
+        json_data = @user.workouts.find(workout.id).to_json(
+          :only => [:id, :title, :date_performed, :notes, :user_id],
+          :include => { :workout_exercises => 
+            { :include => { 
+                  :workout_sets => { :only => [:id, :workout_exercise_id, :set_number, :rep_count, :weight, :notes] }
+              },  
+              :only => [:id, :workout_id, :exercise_id] 
+            }
+            }
+        )
+            expect(response.body).to have_content(json_data) #Workout.includes(:workout_exercises).find(workout).to_json())
       end
     end
 
@@ -130,7 +139,7 @@ describe WorkoutsController do
       end
 =end
 
-  end
+      end
 
       context "with invalid attributes" do
         it "does now save the workout to the db" do
