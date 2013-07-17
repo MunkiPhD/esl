@@ -48,6 +48,15 @@ feature "Users" do
 
     click_button "Sign in"
 
+    expect(page).to have_content 'Invalid email or password.'
+  end
+
+
+  scenario "someone attempts to login with empty email" do
+    visit new_user_session_path
+
+    click_button "Sign in"
+
     expect(page).to have_content 'Invalid login or password.'
   end
 

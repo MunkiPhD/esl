@@ -19,9 +19,9 @@ end
 
 gem 'jquery-rails'
 gem 'pg'
-gem 'devise'
+gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'rails4'
 gem 'cancan'
-gem 'rolify'
+gem 'rolify', git: 'https://github.com/EppO/rolify.git'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   def self.find_for_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where("lower(username) = :value OR lower(email) = :value", { value: login.downcase }).first
+      where(conditions).by_login(login).first
     else
       where(conditions).first
     end
@@ -51,5 +51,12 @@ class User < ActiveRecord::Base
 
   def self.find(input)
     input.to_i == 0 ? find_by_username(input) : super
+  end
+
+
+  private 
+
+  def self.by_login(login_value)
+    where("lower(username) = :value OR lower(email) = :value", { value: login_value.downcase })
   end
 end
