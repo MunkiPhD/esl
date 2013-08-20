@@ -10,7 +10,9 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require frameworks/modernizr-2.6.2.min.js
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require frameworks/mustache.js
 //= require_tree .

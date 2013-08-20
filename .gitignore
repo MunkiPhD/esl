@@ -2,7 +2,6 @@
 *.sassc
 .sass-cache
 capybara-*.html
-.rspec
 /.bundle
 /vendor/bundle
 /log/*
@@ -15,4 +14,5 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 *.swp
+*.swo
 *.lock

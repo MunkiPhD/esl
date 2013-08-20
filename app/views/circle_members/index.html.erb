@@ -1,0 +1,9 @@
+<h1>Circles</h1>
+<% if @circle.is_admin? current_user %>
+  <%= link_to_awaiting_approval(@circle) %>
+<% end %>
+<div>
+  <% @members.each do |member| %>
+    <%= member.username %><br>
+<% end %>
+</div>

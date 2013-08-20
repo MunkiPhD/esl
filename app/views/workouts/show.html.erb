@@ -1,0 +1,43 @@
+<% if current_user == @workout.user %>
+<div class="workout-actions right">
+  <%= link_to "Edit", edit_user_workout_path(@workout.user.username, @workout), class: "btn" %>  <%= button_to 'Delete Workout', delete_user_workout_path(id: @workout, username: @workout.user.username), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+</div>
+<% end %>
+
+<div class="workout-general-info">
+  <h2><%= @workout.title %></h2>
+<div>
+  <%= format_date @workout.date_performed %>
+</div>
+<% unless @workout.notes.blank? %>
+<div>
+  Notes: <%= @workout.notes %>
+</div>
+<% end %>
+<div>
+  by: <%= @workout.user.username %>
+</div>
+</div>
+
+
+<div id="workout_exercises_container">
+<h3>Sets</h3>
+<% @workout.workout_exercises.each do |workout_exercise| %>
+  <table class="workout_exercise" id="<%= dom_id(workout_exercise) %>">
+    <thead>
+    <tr>
+      <th colspan="2"><h3><%= link_to workout_exercise.exercise.name, workout_exercise.exercise %></h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% workout_exercise.workout_sets.each do |workout_set| %>
+      <tr>
+        <td><%= workout_set.set_number %>:</td>
+        <td><%= workout_set.weight %>x<%= workout_set.rep_count %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+</div>
+

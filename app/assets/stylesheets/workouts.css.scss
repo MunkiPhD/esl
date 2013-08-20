@@ -1,0 +1,87 @@
+@import 'helpers/colors';
+
+#workout_exercises_container {
+  float:left;
+  margin-left:10px;
+
+  input[type='text'] {
+    margin-bottom:0px;
+  }
+}
+
+.workout-actions {
+  clear:both;
+  text-align:center;
+}
+
+.workouts_workout_exercise {
+  border: 0px solid $secondary;
+  padding: 5px;
+
+  select {
+    padding:5px;
+    min-width: 200px;
+    text-align:center;
+  }
+
+}
+
+.workout-general-info {
+  width: 355px;
+  background-color: $color-one;
+  border:1px solid darken($color-one, 8%);
+  padding: 10px;
+  float:left;
+
+  select {
+    font-size:20px;
+    text-align:center;
+    padding:3px;
+  }
+  
+  textarea {
+    font-size:12px;
+    width:320px;
+    height:100px;
+  }
+
+  input[type='text'] {
+    text-align:center;
+    font-size:26px;
+  }
+
+
+  .field {
+    margin:15px;
+  }
+
+  // These control the sizing of the date selection on workout create/edit
+  #workout_date_performed_1i {
+    width: 85px;
+  }
+  #workout_date_performed_2i {
+    width: 160px;
+  }
+  #workout_date_performed_3i {
+    width: 60px;
+  }
+}
+#workout_title {
+  height:40px;
+}
+
+table {
+  margin-top:10px;
+  td {
+  border: 1px solid #ccc;
+  padding: 4px;
+  min-width:85px;
+  }
+  th:not(:empty) {
+    background-color:#ddd;
+  }
+  tr > td { 
+    text-align:center;
+  }
+}
+

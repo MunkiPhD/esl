@@ -1,0 +1,15 @@
+@import 'helpers/colors';
+
+.circle-member-pending {
+  border: 1px solid $border;
+  padding: 15px;
+  width: 300px;
+  
+  form {
+    display: inline-block;
+  }
+
+  .user-name {
+    margin-left:10px;
+  }
+}

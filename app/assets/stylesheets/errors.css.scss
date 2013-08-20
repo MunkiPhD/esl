@@ -1,0 +1,40 @@
+@import 'helpers/colors';
+
+.field_with_errors {
+  color: $error-text;
+  input[type='text'] {
+    color: $error-text;
+    background-color: lighten($error-text, 50%);
+  }
+}
+
+#error_explanation {
+  max-width: 540px;
+  border: 2px solid $error-explanation-border;
+  padding: 15px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: $error-explanation-background;
+  color: $error-explanation-text;
+  margin: 10px auto;
+
+  h2 {
+    text-align: center;
+    font-weight: bold;
+    padding: 5px 5px 5px 5px;
+    font-size: 18px;
+    margin: -7px;
+    margin-bottom: 0px;
+    color: $error-explanation-text;
+  }
+
+  ul {  
+    margin:2px 0px 10px 0px;
+
+    li {
+      font-size: 14px;
+      list-style: square;
+    }
+}
+}
+

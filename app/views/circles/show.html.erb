@@ -1,0 +1,61 @@
+<div id="circle_control_panel">
+  <% if user_signed_in? %>
+    <% if @circle.is_member?(current_user) %>
+      <div class="btn-group">
+      <button class="btn btn-primary">Settings</button>
+      <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+            <%= join_leave_link(@circle) %>
+        </li>
+        <% if @circle.is_admin? current_user %>
+        <li>
+          <%= link_to edit_circle_path(@circle) do %>
+            <i class="icon-pencil"></i>&nbsp;Edit Info
+          <% end %>
+          </li>
+        <li>
+        <%= link_to @circle, method: :delete, data: { confirm: 'Are you sure?' } do %>
+<i class="icon-trash"></i>&nbsp;Delete
+        <% end %>
+        </li>
+        <li class="divider"></li>
+        <li class="disabled"><%= link_to "This is a private group", "#" if !@circle.is_public? %></li>
+        <li class="disabled"><%= link_to "You are a member", "#" if @circle.is_member? current_user %></li>
+        <% if @circle.is_admin? current_user %>
+          <li class="disabled"><%= link_to "You are also an Administrator", "#" %></li>
+          <li class="divider"></li>
+          <li><%= link_to_awaiting_approval(@circle) %></li>
+        <% end %>
+
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+      <%= join_leave_link(@circle) %>
+  <% end %>
+  <% end %>
+  </div>
+
+  <div class="circle-members-list">
+    <h3><%= link_to "Members", circle_members_path(@circle) %></h3>
+    <% @circle.members.each do |user| %>
+      <%= "#{user.username}" %><br>
+  <% end %>
+  </div>
+  <h1><%= @circle.name %></h1>
+  <h3><%= @circle.motto %></h3>
+
+  <p>
+  <%= @circle.description unless @circle.description.blank? %>
+  </p>
+
+
+  <%= render "leaderboards/workout_board", workouts: @workouts, exercises: @exercises, circle: @circle, limit: @limit %>
+
+
+
+  <br><br>
+  <%= link_to 'Back', circles_path %>

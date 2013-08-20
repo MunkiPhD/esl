@@ -1,0 +1,6 @@
+@mixin drop-shadow($size: 3px, $size2: 4px, $opacity: 0.10) {
+  position:relative;
+  box-shadow: $size $size $size2 rgba(0, 0, 0, $opacity);
+  -moz-box-shadow: $size $size $size2 rgba(0, 0, 0, $opacity);
+  -webkit-box-shadow: $size $size $size2 rgba(0, 0, 0, $opacity);
+}

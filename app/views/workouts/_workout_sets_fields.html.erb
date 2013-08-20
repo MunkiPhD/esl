@@ -1,0 +1,15 @@
+<tr class="fields">
+  <td>
+    <span class="set-number"><%= "Set: #{f.object.set_number ||= 1}" %></span>
+    <%= f.hidden_field :set_number, { :class => "set-field" } %>
+  </td>
+  <td>  
+    <%= f.text_field :rep_count, placeholder: "reps", class: "input-small input-reps" %>
+  </td>
+  <td>
+    <%= f.text_field :weight, placeholder: "weight", class: "input-small input-weight" %>
+  </td>
+  <td>
+    <%= link_to_remove_fields "remove", f %>
+  </td>
+</tr>

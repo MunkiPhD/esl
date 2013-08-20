@@ -1,14 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
-  <title>Esl</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+<title>EatSleepLift</title>
+<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+<%= csrf_meta_tags %>
+<meta name="viewport" content="width=device-width">
 </head>
 <body>
+<div id="masthead">
+  <div id="main-info">
+    <div id="header-logo">
+      <h1><%= link_to "EatSleepLift", root_path %></h1>
+    </div>
+    <%= render "layouts/user_login" %>
+  </div>
+  <div id="main-nav">
+    <nav>
+      <ul>
+        <li><%= link_to "circles", circles_path %></li>
+        <li><%= link_to "exercises", exercises_path %></li>
+        <li><%= link_to "workouts", workouts_path %></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div id="main-content-container" class="container">
+  <div id="main-content" class="clearfix">
+    <%= render "layouts/flash_messages" %>
+    <%= yield %>
+  </div>
+</div>
 
-<%= yield %>
-
+<footer class="container">
+  <div id="main-footer-content">
+    &copy; <%= Time.now.year %> EatSleepLift.com <br/>
+  </div>
+</footer>
 </body>
 </html>

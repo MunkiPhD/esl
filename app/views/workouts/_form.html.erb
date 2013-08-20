@@ -1,0 +1,41 @@
+<%= form_for(@workout) do |f| %>
+  <% if @workout.errors.any? %>
+  <div id="error_explanation">
+  <h2><%= pluralize(@workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
+
+  <ul>
+    <% @workout.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+  <% end %>
+
+<div class="workout-general-info">
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, { placeholder: "Workout Title", class: "input-xlarge" } %>
+  </div>
+  <div class="field">
+    <%= f.label :date_performed %>
+    <%= f.date_select :date_performed %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, { placeholder: "Notes" } %>
+  </div>
+</div>
+
+<div id="workout_exercises_container">
+  <%= f.fields_for :workout_exercises do |builder| %>
+    <%= render "workout_exercises_fields", f: builder, exercises: @exercises %>
+  <% end %>
+  <div class="prev-placeholder">
+    <%= link_to_add_fields "Add Exercise", f, :workout_exercises %><br/>
+  </div>
+</div>
+<div class="workout-actions">
+  <%= f.submit class: "btn btn-success btn-large" %>
+</div>
+
+<% end %>

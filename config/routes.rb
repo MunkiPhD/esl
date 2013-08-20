@@ -1,4 +1,38 @@
 Esl::Application.routes.draw do
+  resources :circles do
+    resources :members, controller: 'circle_members', only: [:index] do
+      collection do
+        get 'pending'
+        post 'join'
+        post 'leave'
+      end
+      member do
+        post 'approve'
+      end
+    end
+  end
+
+  resources :exercises
+  resources :workouts
+
+  #devise_for :users
+  devise_for :users, :controllers => {:registrations => "users/registrations", :passwords => "users/passwords", :sessions => "users/sessions"}
+
+  #resources :users, :path => "/:user_id" do
+  #  resources :workouts, controller: 'workouts', only: [:index, :show]
+  #end
+
+   # resources :users do
+   #   resources :workouts
+   # end
+
+   get ':username/workout/:id', to: 'workouts#show', as: :user_workout
+   get ':username/workouts', to: 'workouts#index', as: :user_workouts
+   get ':username/workout/:id/edit', to: 'workouts#edit', as: :edit_user_workout
+   delete ':username/workout/:id/delete', to: 'workouts#destroy', as: :delete_user_workout
+   put ':username/workout/:id/update', to: 'workouts#update', as: :update_user_workout
+
+  root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
