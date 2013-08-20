@@ -1,20 +1,21 @@
 require 'spec_helper'
 
-feature "Foods" do
+feature "User manages a food item" do
   let(:user) { create(:user) }
   let(:ice_cream) { build(:ice_cream) }
+  let(:bread) { create(:bread) }
 
-  scenario "User creates a new food" do
+  scenario "by creating a new food with valid information" do
     login_user user
 
-    visit "/foods/new"
+    visit "nutrition/foods/new"
     fill_in "Name", with: ice_cream.name
     fill_in "Brand", with: ice_cream.brand
     fill_in "Calories", with: ice_cream.calories
     fill_in "Protein", with: ice_cream.protein
 
     expect {
-    click_button "Create Food"
+      click_button "Create Food"
     }.to change(Food, :count).by(1)
 
     expect(page).to have_content ice_cream.name
@@ -22,19 +23,24 @@ feature "Foods" do
     expect(page).to have_content ice_cream.protein
   end
 
-  scenario "User can view an existing food" do
+  scenario "creates a new food with invalid information" do
     pending
   end
 
-  scenario "User edits an existing food" do
+  scenario "views an existing food" do
+    visit food_path(bread)
+    expect(page)
+  end
+
+  scenario "edits an existing food" do
     pending
   end
 
-  scenario "User can delete a food IF it is not logged by ANYONE" do
+  scenario "deletes a food that has not been logged by ANYONE" do
     pending
   end
 
-  scenario "User can search for a food by name and it shows the results" do
+  scenario "attempts to delete a food that HAS been logged by someone" do
     pending
   end
 end

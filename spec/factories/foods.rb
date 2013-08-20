@@ -12,4 +12,11 @@ FactoryGirl.define do
     carbs "25"
     protein "3"
   end
+
+  factory :bread do
+    name "100% Wheat Bread"
+    brand "Wonder"
+    calories "110"
+    carbs "15"
+  end
 end
