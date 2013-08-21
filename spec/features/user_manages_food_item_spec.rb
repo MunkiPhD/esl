@@ -23,24 +23,55 @@ feature "User manages a food item" do
     expect(page).to have_content ice_cream.protein
   end
 
-  scenario "creates a new food with invalid information" do
-    pending
+  scenario "cannot create a food with invalid information" do
+    login_user
+
+    visit "nutrition/foods/new"
+
+    fill_in "Name", ""
+    fill_in "Brand", with: ice_cream.brand
+    fill_in "Calories", ""
+    fill_in "Protein", with: ice_cream.protein
+
+    expect {
+      click_button "Create Food"
+    }.to change(Food, :count).by(0)
+
+    expect(page).to have_text "Invalid Name"
+    expect(page).to have_text "Calories must be a number"
   end
 
   scenario "views an existing food" do
     visit food_path(bread)
-    expect(page)
+
+    expect(page).to have_text bread.name
+    expect(page).to have_text bread.calories
+    expect(page).to have_text bread.brand
   end
 
   scenario "edits an existing food" do
-    pending
+    login_user
+    visit food_path(bread)
+    expect(page).to have_link "Edit"
+
+    click_link "Edit"
+
+    expect(page).to have_text "Editing #{bread.name}"
+    fill_in "Name", with: "Bread2"
+    fill_in "Brand", with: "Publix"
+
+    click_button "Update"
+    expect(page).to have_text "Bread2"
+    expect(page).to have_text "Publix"
+
+    expect(page).to have_text "Successfully updated #{bread.name}"
   end
 
   scenario "deletes a food that has not been logged by ANYONE" do
-    pending
+    pending "this has to be implemented when implementing the food logging scheme"
   end
 
   scenario "attempts to delete a food that HAS been logged by someone" do
-    pending
+    pending "this has to be implemented when implementing the food logging scheme"
   end
 end
