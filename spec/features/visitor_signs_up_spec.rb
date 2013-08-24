@@ -30,11 +30,11 @@ feature "Visitor signs up" do
     visit new_user_registration_path
 
     expect {
-    fill_in 'Username', with: username
-    fill_in 'Email', with: email
-    fill_in 'user_password', with: password
-    fill_in 'user_password_confirmation', with: password
-    click_button 'Sign up'
+      fill_in 'Username', with: username
+      fill_in 'Email', with: email
+      fill_in 'user_password', with: password
+      fill_in 'user_password_confirmation', with: password
+      click_button 'Sign up'
     }.to change(User, :count).by(1)
   end
 end

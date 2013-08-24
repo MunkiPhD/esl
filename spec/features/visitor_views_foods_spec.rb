@@ -1,0 +1,37 @@
+require 'spec_helper'
+
+feature "Visitor interacts with food" do
+  let(:bread) { create(:bread) }
+
+  scenario "views a food item" do
+    visit food_path(bread)
+
+    expect(page).to have_text bread.name
+    expect(page).to have_text bread.calories
+    expect(page).to have_text "login"
+    expect(page).to have_text "log this"
+  end
+
+  scenario "attempts to create an item" do
+    visit new_food_path
+    redirects_to_sign_in
+  end
+
+  scenario "attempts to edit a food item" do
+    visit edit_food_path(bread)
+    redirects_to_sign_in
+  end
+
+
+  scenario "attempts to log a food item" do
+    fail "need path to log a food item"
+    redirects_to_sign_in
+  end
+
+  def redirects_to_sign_in
+    expect(page).to redirects_to new_user_session_path
+    expect(page).to have_text "You must be logged in to perform that action"
+    expect(page).to have_text "Sign up"
+    expect(page).to have_button "Sign in"
+  end
+end 
