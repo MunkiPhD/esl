@@ -21,6 +21,7 @@ feature "User manages a food item" do
     expect(page).to have_content ice_cream.name
     expect(page).to have_content ice_cream.brand
     expect(page).to have_content ice_cream.protein
+    expect(page).to have_content "Food was successfully created."
   end
 
   scenario "cannot create a food with invalid information" do

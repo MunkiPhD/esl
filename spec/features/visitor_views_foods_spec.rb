@@ -29,8 +29,8 @@ feature "Visitor interacts with food" do
   end
 
   def redirects_to_sign_in
-    expect(page).to redirects_to new_user_session_path
-    expect(page).to have_text "You must be logged in to perform that action"
+    expect(current_path).to eq new_user_session_path
+    expect(page).to have_text "You need to sign in or sign up before continuing."
     expect(page).to have_text "Sign up"
     expect(page).to have_button "Sign in"
   end
