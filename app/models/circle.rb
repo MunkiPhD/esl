@@ -146,7 +146,7 @@ class Circle < ActiveRecord::Base
   def get_users_with_roles(role)
     assigned = self.roles.find_by_name(role)
     unless assigned.nil?
-      assigned.users
+      assigned.users.order("users.username ASC")
     else
       []
     end

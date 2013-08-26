@@ -1,4 +1,5 @@
 <h1>Foods#show</h1>
+<%= link_to "Edit", edit_food_path(@food) %>
 <p>Find me in app/views/foods/show.html.erb</p>
 <%= @food.name %>
 <%= @food.brand %>
@@ -14,8 +15,8 @@
 <%= @food.sodium %>
 <%= @food.carbs %>
 <%= @food.dietary_fiber %>
-<%= @food.sugars %>
-<%= @food.protein %>
+<%= @food.sugars %><br/>
+Protein: <%= @food.protein %><br/>
 <%= @food.vitamin_a %>
 <%= @food.vitamin_c %>
 <%= @food.calcium %>

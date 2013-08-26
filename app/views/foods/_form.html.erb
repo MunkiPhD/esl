@@ -1,0 +1,125 @@
+<%= form_for(@food) do |f| %>
+  <% if @food.errors.any? %>  
+    <div id="errorExplanation">  
+      <h2><%= pluralize(@food.errors.count, "error") %>  prohibited this food from being saved:</h2>  
+      <ul>  
+        <% @food.errors.full_messages.each do |msg| %>  
+          <li><%= msg %></li>  
+        <% end %>  
+      </ul>  
+    </div>  
+  <% end %> 
+
+<div class="food_label">
+<table class="food_table">
+  <tr>
+    <td style="border:none">
+      <%= f.label :name %>
+      <%= f.text_field :name, :style=>"width:280px;" %>
+      <%= f.label :brand %>
+      <%= f.text_field :brand, :style=>"width:280px;" %>
+    </td>
+  </tr>
+  <tr>
+    <td style="border:none"><%= f.label :serving_size %><%= f.text_field :serving_size, :style=>"width:200px;" %></td>
+  </tr>
+  <tr>
+    <td style="border-top:6px #000 solid"><b>Amount Per Serving</b></td>
+  </tr>
+  <tr>
+    <td><%= f.label :calories %>Calories&nbsp;</span> <%= f.text_field :calories %> <span class="right">Calories From Fat <%= f.text_field :calories_from_fat %></span></td>
+  </tr>
+  <tr>
+    <td style="border-top:4px #000 solid"><span class="right bold">% Daily Value*</span></td>
+  </tr>
+  <tr>
+    <td style="border-top:2px #000 solid"><b>Total Fat</b> <%= f.text_field :total_fat %>g</td>
+  </tr>
+  <tr>
+    <td class="left_indent">Saturated Fat <%= f.text_field :saturated_fat %>g</td>
+  </tr>
+  <tr>
+    <td class="left_indent">Polyunsaturated Fat <%= f.text_field :polyunsaturated_fat %>g</td>
+  </tr>
+  <tr>
+    <td class="left_indent">Monounsaturated Fat <%= f.text_field :monounsaturated_fat %>g</td>
+  </tr>
+  <tr>
+    <td><b>Cholesterol</b> <%= f.text_field :cholesterol %>mg</td>
+  </tr>
+  <tr>
+    <td><b>Sodium</b> <%= f.text_field :sodium %>mg</td>
+  </tr>
+  <tr>
+    <td><b>Potassium</b> <%= f.text_field :potassium %>mg</td>
+  </tr>
+  <tr>
+    <td><b>Total Carbohydrates</b> <%= f.text_field :carbs %>g</td>
+  </tr>
+  <tr>
+    <td class="left_indent">Dietary Fiber <%= f.text_field :dietary_fiber %></td>
+  </tr>
+  <tr>
+    <td class="left_indent">Sugars <%= f.text_field :sugars %>g</td>
+  </tr>
+  <tr>
+    <td class="left_indent">Sugar Alcohols<%= f.text_field :sugar_alcohols %>g</td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :protein %></b> <%= f.text_field :protein %>g</td>
+  </tr>
+  <tr>
+    <td style="border:none">
+      <table class="vitamin_table" style="width:100%">
+        <tr><td>Vitamin A</td><td class=\"align_right\"><%= f.text_field :vitamin_a %></td></tr>
+        <tr><td>Calcium</td><td class=\"align_right\"><%= f.text_field :calcium %></td></tr>
+        <tr><td>Vitamin D</td><td class=\"align_right\"><%= f.text_field :vitamin_d %></td></tr>
+        <tr><td>Iron</td><td class=\"align_right\"><%= f.text_field :iron %></td></tr>
+        <tr><td>Vitamin C</td><td class=\"align_right\"><%= f.text_field :vitamin_c %></td></tr>
+        <tr><td>Vitamin E</td><td class=\"align_right\"><%= f.text_field :vitamin_e %></td></tr>
+        <tr><td>Thiamin (Vitamin B1)</td><td class=\"align_right\"><%= f.text_field :thiamin %></td></tr>
+        <tr><td>Riboflavin (Vitamin B2)</td><td class=\"align_right\"><%= f.text_field :riboflavin %></td></tr>
+        <tr><td>Niacin (Vitamin B3)</td><td class=\"align_right\"><%= f.text_field :niacin %></td></tr>
+        <tr><td>Vitamin B6</td><td class=\"align_right\"><%= f.text_field :vitamin_b6 %></td></tr>
+        <tr><td>Biotin (Vitamin B7)</td><td class=\"align_right\"><%= f.text_field :biotin %></td></tr>
+        <tr><td>Folic Acid (Vitamin B9)</td><td class=\"align_right\"><%= f.text_field :folic_acid %></td></tr>
+        <tr><td>Pantothenic Acid (Vitamin B5)</td><td class=\"align_right\"><%= f.text_field :pantothenic_acid %></td></tr>
+        <tr><td>Phosphorus</td><td class=\"align_right\"><%= f.text_field :phosphorus %></td></tr>
+        <tr><td>Chloride</td><td class=\"align_right\"><%= f.text_field :chloride %></td></tr>
+        <tr><td>Choline</td><td class=\"align_right\"><%= f.text_field :choline %></td></tr>
+        <tr><td>Copper</td><td class=\"align_right\"><%= f.text_field :copper %></td></tr>
+        <tr><td>Iodine</td><td class=\"align_right\"><%= f.text_field :iodine %></td></tr>
+        <tr><td>Magnesium</td><td class=\"align_right\"><%= f.text_field :magnesium %></td></tr>
+        <tr><td>Manganese</td><td class=\"align_right\"><%= f.text_field :manganese %></td></tr>
+        <tr><td>Molybednum</td><td class=\"align_right\"><%= f.text_field :molybednum %></td></tr>
+        <tr><td>Selenium</td><td class=\"align_right\"><%= f.text_field :selenium %></td></tr>
+        <tr><td>Chromium</td><td class=\"align_right\"><%= f.text_field :chromium %></td></tr>
+        <tr><td>Zinc</td><td class=\"align_right\"><%= f.text_field :zinc %></td></tr>
+        <tr><td>Boron</td><td class=\"align_right\"><%= f.text_field :boron %></td></tr>
+        <tr><td>Cobalt</td><td class=\"align_right\"><%= f.text_field :cobalt %></td></tr>
+        <tr><td>Fluoride</td><td class=\"align_right\"><%= f.text_field :fluoride %></td></tr>
+        <tr><td>Acetic Acid</td><td class=\"align_right\"><%= f.text_field :acetic_acid %></td></tr>
+        <tr><td>Citric Acid</td><td class=\"align_right\"><%= f.text_field :citric_acid %></td></tr>
+        <tr><td>Lactic Acid</td><td class=\"align_right\"><%= f.text_field :lactic_acid %></td></tr>
+        <tr><td>Malic Acid</td><td class=\"align_right\"><%= f.text_field :malic_acid %></td></tr>
+        <tr><td>Taurine</td><td class=\"align_right\"><%= f.text_field :taurine %></td></tr>
+        <tr><td>Glutamine</td><td class=\"align_right\"><%= f.text_field :glutamine %></td></tr>
+        <tr><td>Creatine</td><td class=\"align_right\"><%= f.text_field :creatine %></td></tr>
+        <tr><td>Alcohol</td><td class=\"align_right\"><%= f.text_field :alcohol %></td></tr>
+        <tr><td>Caffeine</td><td class=\"align_right\"><%= f.text_field :caffeine %></td></tr>
+      </table>  
+    </td>
+    <tr>
+      <td>
+        <b>Ingredients:&nbsp;</b><br/><%= f.text_area :ingredients, :style=>"width:290px" %>
+      </td>
+    </tr>
+    <tr>
+      <td>*Percent daily values based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your caloric needs.</td>
+    </tr>
+  </table>
+</div>
+<%= f.submit %>
+<% end %>
+
+

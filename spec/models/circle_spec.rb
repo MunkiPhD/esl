@@ -109,11 +109,11 @@ describe Circle do
 
     describe 'methods' do
       let(:user) { create(:user) }
+      let(:user2) { create(:user) }
       let(:circle) { create(:circle) }
 
       
       describe '#intersecting_groups' do
-        let(:user2) { create(:user) }
         let(:circle2) { create(:circle, user: user2) }
 
         context 'nil users' do
@@ -166,7 +166,7 @@ describe Circle do
 
       describe '#pending' do
         it 'returns a list of all users pending membership approval' do
-          user2 = create(:user)
+          #user2 = create(:user)
           circle.add_pending(user)
           circle.add_pending(user2)
 
@@ -176,7 +176,7 @@ describe Circle do
 
       describe '#members' do
         it 'returns a list of all users with member role' do
-          user2 = create(:user)
+          #user2 = create(:user)
           circle2 = create(:circle, user: user)
           circle2.add_member(user)
           circle2.add_member(user2)
@@ -187,7 +187,7 @@ describe Circle do
 
       describe '#admins' do
         it 'returns a list of all users that are admins' do
-          user2 = create(:user)
+          #user2 = create(:user)
           circle2 = create(:circle, user: user)
           circle2.add_admin(user)
           circle2.add_admin(user2)

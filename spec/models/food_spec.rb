@@ -150,5 +150,23 @@ describe Food do
       food.destroy
       expect(food.destroyed?).to eq true
     end
+
+    it "#search_for returns items with similar names" do
+      food = create(:bread)
+      list = Food.search_for(food.name)
+      expect(list).to eq [food] 
+    end
+
+    it "#search_for will also return results that aren't in correct case" do
+      food = create(:bread)
+      list = Food.search_for(food.name.downcase)
+      expect(list).to eq [food]
+    end
+
+    it "#search_for returns empty array if string is nil" do
+      food = create(:bread)
+      list = Food.search_for(nil)
+      expect(list).to eq []
+    end
   end
 end

@@ -141,4 +141,16 @@ class Food < ActiveRecord::Base
   def self.find_by_param(input)
     find(input.to_i)
   end
+
+
+  #
+  # Searches for food items with the name or brand like the passed query. Very crude SQL implementation using LIKE
+  #
+  def self.search_for(query_string)
+    if query_string
+      where('lower(name) ILIKE ? OR lower(brand) ILIKE ?', "%#{query_string.downcase}%", "%#{query_string.downcase}%")
+    else
+      Food.none
+    end
+  end
 end

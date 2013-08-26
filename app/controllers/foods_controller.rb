@@ -4,6 +4,7 @@ class FoodsController < ApplicationController
 
   def search
     @search_phrase = params[:search] ||= nil
+    @results = Food.search_for(@search_phrase)
   end
 
   def show
@@ -14,7 +15,7 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = foods.build(food_params)
+    @food = Food.new(food_params)
     respond_to do |format|
       if @food.save
         format.html { redirect_to @food, notice: 'Food was successfully created.' }
@@ -45,6 +46,6 @@ class FoodsController < ApplicationController
       #params.require(:food).permit()
       # this needs to be based off of the list of whitelisted attributes (which is a lot...)
       # but for now, we're just going to return the params list
-      params.require(:food)
+      params.require(:food).permit(:name, :brand, :calories, :serving_size)
     end
 end

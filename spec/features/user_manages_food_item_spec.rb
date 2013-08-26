@@ -23,24 +23,25 @@ feature "User manages a food item" do
 
     expect(page).to have_content ice_cream.name
     expect(page).to have_content ice_cream.brand
-    expect(page).to have_content ice_cream.protein
+    expect(page).to have_text ice_cream.protein
     expect(page).to have_content "Food was successfully created."
   end
 
   scenario "cannot create a food with invalid information" do
     visit new_food_path #"nutrition/foods/new"
 
-    fill_in "Name", ""
+    fill_in "Name", with: ""
     fill_in "Brand", with: ice_cream.brand
-    fill_in "Calories", ""
+    fill_in "Calories", with: ""
     fill_in "Protein", with: ice_cream.protein
 
     expect {
       click_button "Create Food"
     }.to change(Food, :count).by(0)
 
-    expect(page).to have_text "Invalid Name"
-    expect(page).to have_text "Calories must be a number"
+    expect(page).to have_text "Name can't be blank"
+    expect(page).to have_text "Name is too short"
+    expect(page).to have_text "Calories is not a number"
   end
 
   scenario "views an existing food" do
@@ -61,7 +62,7 @@ feature "User manages a food item" do
     fill_in "Name", with: "Bread2"
     fill_in "Brand", with: "Publix"
 
-    click_button "Update"
+    click_button "Update Food"
     expect(page).to have_text "Bread2"
     expect(page).to have_text "Publix"
 

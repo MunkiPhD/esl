@@ -29,6 +29,7 @@ feature "Visitor interacts with food" do
   end
 
   scenario "searches for a food item" do
+    create(:bread)
     visit search_food_path
     expect(page).to have_text "Search for a food!"
 
@@ -36,7 +37,7 @@ feature "Visitor interacts with food" do
     click_button "Search"
 
     expect(page).to have_content "Searched for: 'bread'"
-    expect(page).to have_content bread.name
+    expect(page).to have_link bread.name
   end
 
   def redirects_to_sign_in
