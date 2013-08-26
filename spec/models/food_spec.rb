@@ -131,7 +131,7 @@ describe Food do
     expect(f.to_param).to eq "#{f.id}-chicken-breast"
   end
 
-  it 'finds by param with the name' do
+  it '#find_by_param with the name' do
     f = Food.create(name: "chicken")
     found = Food.find_by_param(f.to_param)
     expect(f).to eq found
@@ -147,7 +147,8 @@ describe Food do
 
     it "#destroy deletes the item" do
       food = create(:bread)
-      expect(food.destroy).to eq true
+      food.destroy
+      expect(food.destroyed?).to eq true
     end
   end
 end

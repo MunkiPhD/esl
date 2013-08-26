@@ -1,14 +1,5 @@
 Esl::Application.routes.draw do
 
-#  get "foods/show"
-#  get "foods/new"
-#  get "foods/edit"
-# get "foods/destroy"
-
-  resources :nutrition do
-    resources :foods, controller: "foods", except: [:index]
-  end
-
   resources :circles do
     resources :members, controller: 'circle_members', only: [:index] do
       collection do
@@ -42,9 +33,10 @@ Esl::Application.routes.draw do
    delete ':username/workout/:id/delete', to: 'workouts#destroy', as: :delete_user_workout
    put ':username/workout/:id/update', to: 'workouts#update', as: :update_user_workout
 
+   get 'nutrition/foods', to: 'foods#search', as: :search_food
+   get 'nutrition/foods/new', to: 'foods#new', as: :new_food # this has to come before the following routes or it will be cause in the :id 
    get 'nutrition/foods/:id', to: 'foods#show', as: :food
    get 'nutrition/foods/:id/edit', to: 'foods#edit', as: :edit_food
-   get 'nutrition/foods/new', to: 'foods#new', as: :new_food
    put 'nutrition/foods/:id/update', to: 'foods#update', as: :update_food
    delete 'nutrition/foods/:id/delete', to: 'foods#destroy', as: :delete_food
 

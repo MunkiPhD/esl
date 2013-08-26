@@ -5,10 +5,13 @@ feature "User manages a food item" do
   let(:ice_cream) { build(:ice_cream) }
   let(:bread) { create(:bread) }
 
-  scenario "by creating a new food with valid information" do
+  before(:each) do
     login_user user
+  end
 
-    visit "nutrition/foods/new"
+  scenario "by creating a new food with valid information" do
+    visit new_food_path #"nutrition/foods/new"
+
     fill_in "Name", with: ice_cream.name
     fill_in "Brand", with: ice_cream.brand
     fill_in "Calories", with: ice_cream.calories
@@ -25,9 +28,7 @@ feature "User manages a food item" do
   end
 
   scenario "cannot create a food with invalid information" do
-    login_user
-
-    visit "nutrition/foods/new"
+    visit new_food_path #"nutrition/foods/new"
 
     fill_in "Name", ""
     fill_in "Brand", with: ice_cream.brand
@@ -51,7 +52,6 @@ feature "User manages a food item" do
   end
 
   scenario "edits an existing food" do
-    login_user
     visit food_path(bread)
     expect(page).to have_link "Edit"
 

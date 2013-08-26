@@ -1,6 +1,10 @@
 class FoodsController < ApplicationController
-  before_filter :authenticate_user!, except: [:show]
+  before_filter :authenticate_user!, except: [:show, :search]
   before_action :set_food, only: [:show, :edit, :update, :destroy]
+
+  def search
+    @search_phrase = params[:search] ||= nil
+  end
 
   def show
   end

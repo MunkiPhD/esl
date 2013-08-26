@@ -9,7 +9,7 @@ feature "Visitor interacts with food" do
     expect(page).to have_text bread.name
     expect(page).to have_text bread.calories
     expect(page).to have_text "login"
-    expect(page).to have_text "log this"
+    expect(page).to have_link "Log this"
   end
 
   scenario "attempts to create an item" do
@@ -24,8 +24,19 @@ feature "Visitor interacts with food" do
 
 
   scenario "attempts to log a food item" do
-    fail "need path to log a food item"
+    pending "need path to log a food item"
     redirects_to_sign_in
+  end
+
+  scenario "searches for a food item" do
+    visit search_food_path
+    expect(page).to have_text "Search for a food!"
+
+    fill_in "search", with: "bread"
+    click_button "Search"
+
+    expect(page).to have_content "Searched for: 'bread'"
+    expect(page).to have_content bread.name
   end
 
   def redirects_to_sign_in

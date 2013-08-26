@@ -1,0 +1,6 @@
+<%= unless @search_phrase.nil? then "Searched for: '#{@search_phrase}'" end %>
+<h2>Search for a food!</h2>
+<br/>
+<%= form_tag search_food_path, method: 'get' do %>
+    Search Foods: <%= search_field_tag :search, params[:search] %><%= submit_tag "Search", class: "btn btn-primary", name: nil %>
+<% end %>
