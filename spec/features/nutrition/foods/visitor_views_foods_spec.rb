@@ -38,6 +38,18 @@ feature "Visitor interacts with food" do
     redirects_to_sign_in
   end
 
+  scenario "searches for a food item" do
+    create(:bread)
+    visit search_food_path
+    expect(page).to have_text "Search for a food!"
+
+    fill_in "search", with: "bread"
+    click_button "Search"
+
+    expect(page).to have_content "Searched for: 'bread'"
+    expect(page).to have_link bread.name
+    expect(page).to have_content "Found 1 result."
+  end
 
   def redirects_to_sign_in
     expect(current_path).to eq new_user_session_path
