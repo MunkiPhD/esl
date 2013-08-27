@@ -1,33 +1,33 @@
 <%= form_for(@food) do |f| %>
   <% if @food.errors.any? %>  
-    <div id="errorExplanation">  
-      <h2><%= pluralize(@food.errors.count, "error") %>  prohibited this food from being saved:</h2>  
-      <ul>  
-        <% @food.errors.full_messages.each do |msg| %>  
-          <li><%= msg %></li>  
-        <% end %>  
-      </ul>  
-    </div>  
+  <div id="errorExplanation">  
+  <h2><%= pluralize(@food.errors.count, "error") %>  prohibited this food from being saved:</h2>  
+  <ul>  
+    <% @food.errors.full_messages.each do |msg| %>  
+      <li><%= msg %></li>  
+  <% end %>  
+  </ul>  
+</div>  
   <% end %> 
 
 <div class="food_label">
-<table class="food_table">
-  <tr>
-    <td style="border:none">
-      <%= f.label :name %>
-      <%= f.text_field :name, :style=>"width:280px;" %>
-      <%= f.label :brand %>
-      <%= f.text_field :brand, :style=>"width:280px;" %>
-    </td>
-  </tr>
-  <tr>
-    <td style="border:none"><%= f.label :serving_size %><%= f.text_field :serving_size, :style=>"width:200px;" %></td>
-  </tr>
-  <tr>
-    <td style="border-top:6px #000 solid"><b>Amount Per Serving</b></td>
-  </tr>
-  <tr>
-    <td><%= f.label :calories %>Calories&nbsp;</span> <%= f.text_field :calories %> <span class="right">Calories From Fat <%= f.text_field :calories_from_fat %></span></td>
+  <table class="food_table">
+    <tr>
+      <td style="border:none">
+        <%= f.label :name %>
+        <%= f.text_field :name, :style=>"width:280px;" %>
+        <%= f.label :brand %>
+        <%= f.text_field :brand, :style=>"width:280px;" %>
+      </td>
+    </tr>
+    <tr>
+      <td style="border:none"><%= f.label :serving_size %><%= f.text_field :serving_size, :style=>"width:200px;" %></td>
+    </tr>
+    <tr>
+      <td style="border-top:6px #000 solid"><b>Amount Per Serving</b></td>
+    </tr>
+    <tr>
+      <td><%= f.label :calories %>Calories&nbsp;</span> <%= f.text_field :calories %> <span class="right">Calories From Fat <%= f.text_field :calories_from_fat %></span></td>
   </tr>
   <tr>
     <td style="border-top:4px #000 solid"><span class="right bold">% Daily Value*</span></td>
@@ -109,15 +109,16 @@
         <tr><td>Caffeine</td><td class=\"align_right\"><%= f.text_field :caffeine %></td></tr>
       </table>  
     </td>
-    <tr>
+  </tr>
+  <!--<tr>
       <td>
         <b>Ingredients:&nbsp;</b><br/><%= f.text_area :ingredients, :style=>"width:290px" %>
       </td>
-    </tr>
-    <tr>
-      <td>*Percent daily values based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your caloric needs.</td>
-    </tr>
-  </table>
+    </tr>-->
+  <tr>
+    <td>*Percent daily values based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your caloric needs.</td>
+  </tr>
+</table>
 </div>
 <%= f.submit %>
 <% end %>

@@ -139,6 +139,7 @@ describe Food do
 
   describe "methods" do
     it '#destroy does not delete item because it has been logged' do
+      pending 'need to implement'
       logged_food = create(:eaten_bread)
       bread = Food.find(logged_food.food_id) # get the food item tied to the logged food
       

@@ -12,18 +12,19 @@ feature "User manages a food item" do
   scenario "by creating a new food with valid information" do
     visit new_food_path #"nutrition/foods/new"
 
-    fill_in "Name", with: ice_cream.name
-    fill_in "Brand", with: ice_cream.brand
-    fill_in "Calories", with: ice_cream.calories
-    fill_in "Protein", with: ice_cream.protein
-
     expect {
+      fill_in "Name", with: ice_cream.name
+      fill_in "Brand", with: ice_cream.brand
+      fill_in "Calories", with: ice_cream.calories
+      fill_in "Protein", with: ice_cream.protein
+      fill_in "Serving size", with: "1 scoop"
+
       click_button "Create Food"
     }.to change(Food, :count).by(1)
 
     expect(page).to have_content ice_cream.name
     expect(page).to have_content ice_cream.brand
-    expect(page).to have_text ice_cream.protein
+    expect(page).to have_content ice_cream.protein
     expect(page).to have_content "Food was successfully created."
   end
 
@@ -66,7 +67,7 @@ feature "User manages a food item" do
     expect(page).to have_text "Bread2"
     expect(page).to have_text "Publix"
 
-    expect(page).to have_text "Successfully updated #{bread.name}"
+    expect(page).to have_text "Food successfully updated!"
   end
 
   scenario "deletes a food that has not been logged by ANYONE" do
