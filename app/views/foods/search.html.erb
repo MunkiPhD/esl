@@ -2,14 +2,14 @@
 <h2>Search for a food!</h2>
 <br/>
 <%= form_tag search_food_path, method: 'get' do %>
-    Search Foods: <%= search_field_tag :search, params[:search] %><%= submit_tag "Search", class: "btn btn-primary", name: nil %>
+    <%= search_field_tag :search, params[:search], placeholder: "Search for a food" %><%= submit_tag "Search", class: "btn btn-primary", name: nil %>
 <% end %>
 <% @results.each do |food_item| %>
   <%= link_to food_item.name, food_item %>
 <% end %>
+<%= "Found #{pluralize(@results.length, "result")}." unless @search_phrase.blank? %>
 <br/>
-<%= link_to "Create a Food", new_food_path %>
+<%= link_to new_food_path, class: "btn btn-success" do %>
+  <i class="icon-plus icon-white"></i> Create a food
+<% end %>
 <br/>
-Results Length: <%= @results.length %>
-<br/>
-Search Phrase: <%= @search_phrase %>
