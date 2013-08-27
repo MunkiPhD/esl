@@ -3,6 +3,16 @@ require 'spec_helper'
 feature "Visitor interacts with food" do
   let(:bread) { create(:bread) }
 
+  scenario "by clicking on 'foods' on the main page" do
+    visit root_path
+
+    click_link "foods"
+
+    expect(current_path).to eq foods_path
+    expect(page).to have_content "Search for a food!"
+    expect(page).to have_button "Search"
+  end
+
   scenario "views a food item" do
     visit food_path(bread)
 
