@@ -24,7 +24,7 @@ class Workout < ActiveRecord::Base
 
   accepts_nested_attributes_for :workout_exercises, allow_destroy: true
 
-  scope :latest, -> { order('date_performed DESC') }
+  default_scope order('date_performed DESC')
 
 
 

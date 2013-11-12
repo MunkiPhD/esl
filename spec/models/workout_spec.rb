@@ -62,12 +62,10 @@ describe Workout do
   end
 
 
-  it "fetches workouts latest first" do
-    workout_one = create(:workout_with_exercises, user: user) 
-    workout_two = build(:workout_with_exercises, user: user)
-    workout_three = build(:workout_with_exercises, user: user)
-    workout_three.save # going to stagger the saving to make sure about the pattern 
-    workout_two.save
+  it "fetches workouts based on date performed, latest first" do
+    workout_one = create(:workout_with_exercises, user: user, date_performed: Date.today - 3) 
+    workout_two = create(:workout_with_exercises, user: user, date_performed: Date.today - 1)
+    workout_three = create(:workout_with_exercises, user: user, date_performed: Date.today - 2)
     expect(user.workouts.all).to eq [workout_two, workout_three, workout_one]
   end
 
