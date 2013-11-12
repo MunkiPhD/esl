@@ -61,6 +61,18 @@ describe Workout do
     end
   end
 
+
+  it "fetches workouts latest first" do
+    workout_one = create(:workout_with_exercises, user: user) 
+    workout_two = build(:workout_with_exercises, user: user)
+    workout_three = build(:workout_with_exercises, user: user)
+    workout_three.save # going to stagger the saving to make sure about the pattern 
+    workout_two.save
+    expect(user.workouts.all).to eq [workout_two, workout_three, workout_one]
+  end
+
+
+
   describe "is in-valid with" do
     it "a title longer than 200 characters" do
       expect(Workout.new(title: "a" * 201)).to have(1).errors_on(:title)
