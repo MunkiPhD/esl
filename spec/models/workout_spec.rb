@@ -66,7 +66,7 @@ describe Workout do
     workout_one = create(:workout_with_exercises, user: user, date_performed: Date.today - 3) 
     workout_two = create(:workout_with_exercises, user: user, date_performed: Date.today - 1)
     workout_three = create(:workout_with_exercises, user: user, date_performed: Date.today - 2)
-    expect(user.workouts.all).to eq [workout_two, workout_three, workout_one]
+    expect(user.workouts).to eq [workout_two, workout_three, workout_one]
   end
 
 

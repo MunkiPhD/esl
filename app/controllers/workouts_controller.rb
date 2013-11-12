@@ -8,7 +8,7 @@ class WorkoutsController < ApplicationController
   def index
     params[:username] ||= current_user.username
     @user = User.find_by_username(params[:username])
-    @workouts = @user.workouts.latest
+    @workouts = @user.workouts
   end
 
   def show
