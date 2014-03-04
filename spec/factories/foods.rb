@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: foods
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)      default("")
+#  brand       :string(255)      default("")
+#  ndb_no      :string(6)        default("")
+#  ingredients :text             default("")
+#  usda        :boolean          default(FALSE)
+#  decimal     :decimal(, )      default(0.0), not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

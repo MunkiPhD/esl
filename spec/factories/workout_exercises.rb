@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: workout_exercises
+#
+#  id          :integer          not null, primary key
+#  workout_id  :integer          not null
+#  exercise_id :integer          not null
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
