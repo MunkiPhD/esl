@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130707053501) do
+ActiveRecord::Schema.define(version: 20140305180631) do
 
   create_table "circles", force: true do |t|
     t.string   "name",                       null: false
@@ -108,19 +108,20 @@ ActiveRecord::Schema.define(version: 20130707053501) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                              default: "", null: false
-    t.string   "encrypted_password",     limit: 128, default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0
+    t.integer  "sign_in_count",          default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "username",                           default: "", null: false
+    t.string   "username",               default: "", null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -149,7 +150,12 @@ ActiveRecord::Schema.define(version: 20130707053501) do
     t.integer  "workout_exercise_id",              null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "exercise_id",                      null: false
+    t.integer  "workout_id",                       null: false
   end
+
+  add_index "workout_sets", ["exercise_id"], name: "index_workout_sets_on_exercise_id", using: :btree
+  add_index "workout_sets", ["workout_id"], name: "index_workout_sets_on_workout_id", using: :btree
 
   create_table "workouts", force: true do |t|
     t.string   "title",                       null: false

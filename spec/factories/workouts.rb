@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: workouts
+#
+#  id             :integer          not null, primary key
+#  title          :string(255)      not null
+#  date_performed :date             not null
+#  notes          :text             default(""), not null
+#  user_id        :integer          not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

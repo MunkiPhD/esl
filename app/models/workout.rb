@@ -16,6 +16,7 @@
 class Workout < ActiveRecord::Base
   belongs_to :user
   has_many :workout_exercises, :dependent => :destroy, inverse_of: :workout
+  has_many :workout_sets, :dependent => :destroy
 
   validates :title, presence: true, length: {minimum: 2, maximum: 200}
   validates :user_id, presence: true
@@ -30,21 +31,6 @@ class Workout < ActiveRecord::Base
   def self.max_weight(exercise)
 =begin
     selected_fields = <<-SELECT
-        workouts.id AS workout_id, 
-        workout_sets.weight AS weight,
-        workout_sets.id AS workout_set_id,
-        workout_exercises.exercise_id AS exercise_id,
-        ROW_NUMBER() OVER (
-           PARTITION BY workouts.user_id 
-           ORDER BY workout_sets.weight DESC, workouts.id DESC) as row_num
-      SELECT
-
-    joins(", (#{Workout.joins(workout_exercises: :workout_sets).select(selected_fields).to_sql}) as t")
-              .select("workouts.*, t.*")
-              .where("workouts.id = t.workout_id AND t.row_num = 1") # AND workouts.user_id IN (#{resource_ids.join(",")})")
-              .order("t.weight DESC")
-=end
-    selected_fields = <<-SELECT
       workouts.id AS workout_id, 
       workout_sets.weight,
       workout_sets.id AS workout_set_id,
@@ -58,6 +44,10 @@ class Workout < ActiveRecord::Base
     Workout.select("workouts.*, t.*").from(Arel.sql("workouts, (#{subquery}) as t"))
     .where("t.rowNum = 1 AND workouts.id = t.workout_id")
     .order("t.weight DESC")
+=end
+   # Workout.joins(:workout_sets).for_exercise(exercise).order("workout_sets.weight DESC")
+    #WorkoutSet.where("exercise_id = ?", exercise.id).order("workout_sets.weight DESC").workout
+    joins(:workout_sets).where("workout_sets.exercise_id = ?", exercise.id).order("workout_sets.weight DESC")
   end
 
   private

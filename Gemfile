@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0'
+gem 'rails', '4.1.0.rc1'
 
 #gem 'sqlite3'
 
@@ -19,7 +19,7 @@ end
 
 gem 'jquery-rails'
 gem 'pg'
-gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'rails4'
+gem 'devise' #, git: 'https://github.com/plataformatec/devise.git', branch: 'rails4'
 gem 'cancan'
 gem 'rolify', git: 'https://github.com/EppO/rolify.git'
 
