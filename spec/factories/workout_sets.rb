@@ -21,5 +21,7 @@ FactoryGirl.define do
     weight 1
     notes ""
     workout_exercise
+    workout
+    exercise
   end
 end

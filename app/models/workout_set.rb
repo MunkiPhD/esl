@@ -16,8 +16,12 @@
 
 class WorkoutSet < ActiveRecord::Base
   belongs_to :workout_exercise, inverse_of: :workout_sets
+  belongs_to :workout
+  belongs_to :exercise
 
-  # validates :workout_id, presence: true
+  validates :workout, presence: true
+  validates :exercise, presence: true
+
   validates :workout_exercise, presence: true
   validates :notes, length: { maximum: 250 }
   validates :set_number, presence: true,
