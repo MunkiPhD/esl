@@ -18,7 +18,7 @@ class Workout < ActiveRecord::Base
 
   belongs_to :user
   has_many :workout_exercises, :dependent => :destroy, inverse_of: :workout
-  has_many :workout_sets, :dependent => :destroy, inverse_of: :workout_set
+  has_many :workout_sets, :dependent => :destroy, inverse_of: :workout
 
   validates :title, presence: true, length: {minimum: 2, maximum: 200}
   validates :user_id, presence: true
@@ -33,6 +33,16 @@ class Workout < ActiveRecord::Base
 
   def self.max_weight(exercise)
 =begin
+#
+# This is the query we want to work off of
+#
+SELECT workoutjoin.user_id, workoutjoin.workout_id, MAX(workoutjoin.weight) as weight
+FROM (
+  SELECT workouts.id as workout_id, workouts.user_id as user_id, workout_sets.weight as weight
+  FROM workouts INNER JOIN workouts_sets ON workouts.id = workout_sets.workout_id
+  WHERE workout_sets.exercise_id = 1) as workoutjoin
+GROUP BY workoutjoin.user_id, workoutjoin.workout_id
+=end
     selected_fields = <<-SELECT
       workouts.id AS workout_id, 
       workout_sets.weight,
@@ -47,17 +57,20 @@ class Workout < ActiveRecord::Base
     Workout.select("workouts.*, t.*").from(Arel.sql("workouts, (#{subquery}) as t"))
     .where("t.rowNum = 1 AND workouts.id = t.workout_id")
     .order("t.weight DESC")
-=end
+=begin
     # Workout.joins(:workout_sets).for_exercise(exercise).order("workout_sets.weight DESC")
     #WorkoutSet.where("exercise_id = ?", exercise.id).order("workout_sets.weight DESC").workout
-    joins(:workout_sets).where("workout_sets.exercise_id = ?", exercise.id).order("workout_sets.weight DESC")
+    joins(:workout_sets).for_exercise(exercise).order("workout_sets.weight DESC")
+=end
+
   end
 
+
+  def self.for_exercise(exercise)
+    where("workout_sets.exercise_id = ?", exercise.id)
+  end
 
   private
-  def self.for_exercise(exercise)
-    where("exercise_id = ?", exercise.id)
-  end
 
   # makes sure that the correct IDs are set for all the workout sets
   def prepare_workout_for_validation

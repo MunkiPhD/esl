@@ -51,8 +51,7 @@ feature "Workouts" do
     expect(page).to have_content "Workout was successfully updated."
   end
 
-  scenario "user can delete a workouts" do
-
+  scenario "user can delete a workout" do
     visit workouts_path(id: workout, username: workout.user.username)
     expect(page).to have_content "Workouts"
     expect(page).to have_link workout.title
