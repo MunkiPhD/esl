@@ -28,21 +28,11 @@ class Workout < ActiveRecord::Base
   accepts_nested_attributes_for :workout_exercises, allow_destroy: true
   accepts_nested_attributes_for :workout_sets, allow_destroy: true
 
-  default_scope  { order('date_performed DESC') }
+  #default_scope  { order('date_performed DESC') }
 
 
   def self.max_weight(exercise)
-=begin
-#
-# This is the query we want to work off of
-#
-SELECT workoutjoin.user_id, workoutjoin.workout_id, MAX(workoutjoin.weight) as weight
-FROM (
-  SELECT workouts.id as workout_id, workouts.user_id as user_id, workout_sets.weight as weight
-  FROM workouts INNER JOIN workouts_sets ON workouts.id = workout_sets.workout_id
-  WHERE workout_sets.exercise_id = 1) as workoutjoin
-GROUP BY workoutjoin.user_id, workoutjoin.workout_id
-=end
+
     selected_fields = <<-SELECT
       workouts.id AS workout_id, 
       workout_sets.weight,

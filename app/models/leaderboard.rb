@@ -38,6 +38,47 @@ class Leaderboard
 =end
     #Workout.joins(:workout_sets).select("DISTINCT(workouts.user_id, workouts.id), workout_sets.weight, workouts.*").for_exercise(exercise).order("workout_sets.weight DESC").where(user_id: circle_member_ids)
 
-    circle_member_workouts(circle).max_weight(exercise)
+   ##### circle_member_workouts(circle).max_weight(exercise)
+
+=begin
+#
+# This is the query we want to work off of
+#
+SELECT workoutjoin.user_id, workoutjoin.workout_id, MAX(workoutjoin.weight) as weight
+FROM (
+  SELECT workouts.id as workout_id, workouts.user_id as user_id, workout_sets.weight as weight
+  FROM workouts INNER JOIN workouts_sets ON workouts.id = workout_sets.workout_id
+  WHERE workout_sets.exercise_id = 1) as workoutjoin
+GROUP BY workoutjoin.user_id, workoutjoin.workout_id
+
+
+
+select workouts.*, groupeduser.weight
+from workouts
+inner join
+  (SELECT workoutjoin.user_id, MAX(workoutjoin.weight) as weight
+    FROM (
+      SELECT workouts.user_id as user_id, workout_sets.weight as weight
+      FROM workouts INNER JOIN workout_sets ON workouts.id = workout_sets.workout_id
+      WHERE workout_sets.exercise_id = 1) as workoutjoin
+  GROUP BY workoutjoin.user_id) as groupeduser
+  ON workouts.user_id = groupeduser.user_id
+  INNER JOIN workout_sets
+  ON groupeduser.weight = workout_sets.weight AND workout_sets.workout_id = workouts.id
+=end
+
+    circle_member_ids = circle.members.pluck(:user_id)
+    sql_statement = Workout.select("workouts.id as workout_id, workouts.user_id as user_id, workout_sets.weight as weight")
+      .joins(:workout_sets)
+      .for_exercise(exercise)
+      .where(user_id: circle_member_ids).to_sql
+
+    workouts = Workout.select("workoutjoin.workout_id as id, workoutjoin.user_id as user_id, MAX(workoutjoin.weight) as weight")
+      .from("( #{sql_statement} ) as workoutjoin")
+      .group(["workoutjoin.workout_id", "workoutjoin.user_id"])
+
+    workout_ids = workouts.pluck("workout_id")
+    Workout.where(id: workout_ids) #"workouts.id Iid: workout_ids)
+
   end
 end
