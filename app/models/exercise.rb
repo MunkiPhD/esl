@@ -12,7 +12,7 @@
 class Exercise < ActiveRecord::Base
   belongs_to :user
   has_many :workout_exercises
-  has_many :workout_sets
+  has_many :workout_sets, inverse_of: :exercise
 
   validates :name, presence: true, uniqueness: true, length: {minimum: 3, maximum:45}
   validates :user_id, presence: true

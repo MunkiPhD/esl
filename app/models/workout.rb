@@ -14,9 +14,11 @@
 
 
 class Workout < ActiveRecord::Base
+  before_save :set_ids
+
   belongs_to :user
   has_many :workout_exercises, :dependent => :destroy, inverse_of: :workout
-  has_many :workout_sets, :dependent => :destroy
+  has_many :workout_sets, :dependent => :destroy, inverse_of: :workout_set
 
   validates :title, presence: true, length: {minimum: 2, maximum: 200}
   validates :user_id, presence: true
@@ -46,7 +48,7 @@ class Workout < ActiveRecord::Base
     .where("t.rowNum = 1 AND workouts.id = t.workout_id")
     .order("t.weight DESC")
 =end
-   # Workout.joins(:workout_sets).for_exercise(exercise).order("workout_sets.weight DESC")
+    # Workout.joins(:workout_sets).for_exercise(exercise).order("workout_sets.weight DESC")
     #WorkoutSet.where("exercise_id = ?", exercise.id).order("workout_sets.weight DESC").workout
     joins(:workout_sets).where("workout_sets.exercise_id = ?", exercise.id).order("workout_sets.weight DESC")
   end
@@ -54,5 +56,18 @@ class Workout < ActiveRecord::Base
   private
   def self.for_exercise(exercise)
     where("exercise_id = ?", exercise.id)
+  end
+
+  def set_ids
+    begin
+      @workout.workout_exercises.each do |workout_exercise|
+        workout_exercise.workout_sets.each do |workout_set|
+          workout_set.workout = @workout
+          workout_set.exercise = workout_exercise.exercise
+        end
+      end
+    rescue
+      logger.info "error occured while massaging the workout"
+    end
   end
 end
