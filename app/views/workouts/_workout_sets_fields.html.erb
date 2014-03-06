@@ -2,6 +2,8 @@
   <td>
     <span class="set-number"><%= "Set: #{f.object.set_number ||= 1}" %></span>
     <%= f.hidden_field :set_number, { :class => "set-field" } %>
+    <%= f.hidden_field :exercise_id %>
+    <%= f.hidden_field :workout_id %>
   </td>
   <td>  
     <%= f.text_field :rep_count, placeholder: "reps", class: "input-small input-reps" %>

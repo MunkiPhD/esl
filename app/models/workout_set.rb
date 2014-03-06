@@ -19,8 +19,8 @@ class WorkoutSet < ActiveRecord::Base
   belongs_to :workout
   belongs_to :exercise
 
-  validates :workout, presence: true
-  validates :exercise, presence: true
+  #validates :workout, presence: { :message => "missing workout id in workoutset" }
+  #validates :exercise, presence: { :message => "missing exercise id in workoutset" }
 
   validates :workout_exercise, presence: true
   validates :notes, length: { maximum: 250 }
@@ -29,4 +29,14 @@ class WorkoutSet < ActiveRecord::Base
                          numericality: { greater_than_or_equal_to: 1, only_integer: true } 
   validates :rep_count, presence: true, 
                         numericality: { greater_than_or_equal_to: 0, only_integer: true }
+
+  before_create :set_workout_and_exercise_ids
+
+
+  private
+
+  def set_workout_and_exercise_ids
+    workout_id = workout.id
+    exercise_id = workout_exercise.exercise_id
+  end
 end

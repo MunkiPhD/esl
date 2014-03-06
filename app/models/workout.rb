@@ -24,6 +24,7 @@ class Workout < ActiveRecord::Base
   validates :notes, presence: true, allow_blank: true
 
   accepts_nested_attributes_for :workout_exercises, allow_destroy: true
+  accepts_nested_attributes_for :workout_sets, allow_destroy: true
 
   default_scope  { order('date_performed DESC') }
 
