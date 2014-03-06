@@ -35,7 +35,7 @@ describe Leaderboard do
 
         workouts = Leaderboard.max_weight_for_exercise_on_circle(circle, exercise)
 
-        expect(workouts).to eq [workout4, workout]
+        expect(workouts) =~ [workout4, workout]
       end
     end
   end

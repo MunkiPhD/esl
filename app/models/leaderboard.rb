@@ -66,19 +66,34 @@ inner join
   INNER JOIN workout_sets
   ON groupeduser.weight = workout_sets.weight AND workout_sets.workout_id = workouts.id
 =end
-
     circle_member_ids = circle.members.pluck(:user_id)
+=begin
     sql_statement = Workout.select("workouts.id as workout_id, workouts.user_id as user_id, workout_sets.weight as weight")
       .joins(:workout_sets)
       .for_exercise(exercise)
       .where(user_id: circle_member_ids).to_sql
 
-    workouts = Workout.select("workoutjoin.workout_id as id, workoutjoin.user_id as user_id, MAX(workoutjoin.weight) as weight")
+    workouts = Workout.select("workoutjoin.user_id as user_id, MAX(workoutjoin.weight) as weight")
       .from("( #{sql_statement} ) as workoutjoin")
-      .group(["workoutjoin.workout_id", "workoutjoin.user_id"])
+      .group("workoutjoin.user_id")
 
     workout_ids = workouts.pluck("workout_id")
     Workout.where(id: workout_ids) #"workouts.id Iid: workout_ids)
+=end
+   results = Workout.find_by_sql("select workouts.id
+from workouts
+inner join
+  (SELECT workoutjoin.user_id, MAX(workoutjoin.weight) as weight
+    FROM (
+      SELECT workouts.user_id as user_id, workout_sets.weight as weight
+      FROM workouts INNER JOIN workout_sets ON workouts.id = workout_sets.workout_id
+      WHERE workout_sets.exercise_id = #{exercise.id}) as workoutjoin
+  GROUP BY workoutjoin.user_id) as groupeduser
+  ON workouts.user_id = groupeduser.user_id
+  INNER JOIN workout_sets
+  ON groupeduser.weight = workout_sets.weight AND workout_sets.workout_id = workouts.id
+  ORDER BY groupeduser.weight DESC")
+  Workout.where(id: results).where(user_id: circle_member_ids)
 
   end
 end
