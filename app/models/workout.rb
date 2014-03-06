@@ -14,7 +14,7 @@
 
 
 class Workout < ActiveRecord::Base
-  before_save :set_ids
+  before_validation :prepare_workout_for_validation
 
   belongs_to :user
   has_many :workout_exercises, :dependent => :destroy, inverse_of: :workout
@@ -53,21 +53,23 @@ class Workout < ActiveRecord::Base
     joins(:workout_sets).where("workout_sets.exercise_id = ?", exercise.id).order("workout_sets.weight DESC")
   end
 
+
   private
   def self.for_exercise(exercise)
     where("exercise_id = ?", exercise.id)
   end
 
-  def set_ids
+  # makes sure that the correct IDs are set for all the workout sets
+  def prepare_workout_for_validation
     begin
-      @workout.workout_exercises.each do |workout_exercise|
+      workout_exercises.each do |workout_exercise|
         workout_exercise.workout_sets.each do |workout_set|
-          workout_set.workout = @workout
+          workout_set.workout = self
           workout_set.exercise = workout_exercise.exercise
         end
       end
-    rescue
-      logger.info "error occured while massaging the workout"
+    rescue => e
+      logger.info "!----- error occured while massaging the workout #{e}"
     end
   end
 end

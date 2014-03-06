@@ -24,6 +24,8 @@ class WorkoutsController < ApplicationController
   def create
     @workout = current_user.workouts.build(workout_params)
 
+    #@workout.prepare_workout_for_save
+
     respond_to do |format|
       if @workout.save
         flash[:success] = 'Workout was successfully created.'
@@ -48,6 +50,7 @@ class WorkoutsController < ApplicationController
         format.html { redirect_to @workout }
         format.json { head :no_content, status: :unprocessable_entity }
       end
+
 
       if @workout.update(workout_params)
         flash[:success] = "Workout was successfully updated."

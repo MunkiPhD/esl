@@ -2,8 +2,8 @@
   <td>
     <span class="set-number"><%= "Set: #{f.object.set_number ||= 1}" %></span>
     <%= f.hidden_field :set_number, { :class => "set-field" } %>
-    <%= f.hidden_field :exercise_id %>
-    <%= f.hidden_field :workout_id %>
+    <%= f.hidden_field :exercise_id, value: f.object.exercise_id %>
+    <%= f.hidden_field :workout_id, value: f.object.exercise_id %>
   </td>
   <td>  
     <%= f.text_field :rep_count, placeholder: "reps", class: "input-small input-reps" %>
@@ -13,5 +13,10 @@
   </td>
   <td>
     <%= link_to_remove_fields "remove", f %>
+  </td>
+</tr>
+<tr>
+  <td colspan=4>
+    <%= debug f.object %>
   </td>
 </tr>
