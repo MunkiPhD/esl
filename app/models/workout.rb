@@ -45,7 +45,7 @@ class Workout < ActiveRecord::Base
     SELECT
 
     subquery = Workout.joins(workout_exercises: :workout_sets).select(selected_fields).for_exercise(exercise).to_sql
-    Workout.select("workouts.*, t.*").from(Arel.sql("workouts, (#{subquery}) as t"))
+    Workout.select("workouts.*, t.*, COUNT(id)").from(Arel.sql("workouts, (#{subquery}) as t"))
     .where("t.rowNum = 1 AND workouts.id = t.workout_id")
     .order("t.weight DESC")
 =begin

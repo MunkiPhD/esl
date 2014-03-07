@@ -22,7 +22,7 @@ class Leaderboard
   #
   #   The result set would be [workout4, workout1]
   #
-  def self.max_weight_for_exercise_on_circle(circle, exercise)
+  def self.max_weight_for_exercise_on_circle(circle, exercise, limit = 5)
     if circle.members.blank?
       return Workout.none
     end
@@ -80,20 +80,22 @@ inner join
     workout_ids = workouts.pluck("workout_id")
     Workout.where(id: workout_ids) #"workouts.id Iid: workout_ids)
 =end
-   results = Workout.find_by_sql("select workouts.id
+   results = Workout.find_by_sql(["select workouts.*, groupeduser.weight
 from workouts
 inner join
   (SELECT workoutjoin.user_id, MAX(workoutjoin.weight) as weight
     FROM (
       SELECT workouts.user_id as user_id, workout_sets.weight as weight
       FROM workouts INNER JOIN workout_sets ON workouts.id = workout_sets.workout_id
-      WHERE workout_sets.exercise_id = #{exercise.id}) as workoutjoin
+      WHERE workout_sets.exercise_id = :exercise_id
+      AND workouts.user_id IN (:circle_member_ids)) as workoutjoin
   GROUP BY workoutjoin.user_id) as groupeduser
   ON workouts.user_id = groupeduser.user_id
   INNER JOIN workout_sets
   ON groupeduser.weight = workout_sets.weight AND workout_sets.workout_id = workouts.id
-  ORDER BY groupeduser.weight DESC")
-  Workout.where(id: results).where(user_id: circle_member_ids)
-
+  ORDER BY groupeduser.weight DESC
+  LIMIT :limit", { exercise_id: exercise.id, circle_member_ids: circle_member_ids, limit: limit}])
+  #Workout.where(id: results).where(user_id: circle_member_ids)
+  results
   end
 end
