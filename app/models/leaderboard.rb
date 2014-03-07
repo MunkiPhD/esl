@@ -24,7 +24,7 @@ class Leaderboard
   #
   def self.max_weight_for_exercise_on_circle(circle, exercise)
     if circle.members.blank?
-      return []
+      return Workout.none
     end
 
 =begin

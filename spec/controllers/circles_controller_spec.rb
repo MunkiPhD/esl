@@ -170,7 +170,8 @@ describe CirclesController do
 
     it "GET 'show' assigns the specified circle to circle" do
       get :show,  id: circle.id 
-      expect(assigns(:circle)).to eq(circle)
+      #expect(assigns(:circle)).to eq(circle)
+      expect(response).to redirect_to(new_user_session_path)
     end
 
     it "GET 'new' redirects to sign in" do

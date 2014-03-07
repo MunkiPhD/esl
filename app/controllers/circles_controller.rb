@@ -1,5 +1,5 @@
 class CirclesController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :authenticate_user!, except: [:index]
   load_and_authorize_resource except: [:index, :new, :create] #only: [:show, :edit, :update, :destroy]
 
   # GET /circles
@@ -15,15 +15,7 @@ class CirclesController < ApplicationController
     @exercises = Exercise.where(id: [1,2,3])
     @exercise = Exercise.find(params[:exercise_id] || 1)
     @limit = 5
-    @workouts = []
     @workouts = Leaderboard.max_weight_for_exercise_on_circle(@circle,@exercise).limit(@limit)
-=begin
-    if workouts.empty?
-      @workouts = workouts.limit(@limit)
-    else
-      @workouts = []
-    end
-=end
   end
 
 
