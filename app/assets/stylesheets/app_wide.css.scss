@@ -37,6 +37,10 @@ a {
     padding: 0px;
     margin: 0px;
     font-style: italic;
+    color: $color-one;
+    a, a:visited {
+      color: $color-one;
+    }
   }
 }
 
@@ -110,14 +114,21 @@ a {
 
 #main-info {
   margin:0 auto;
-  border-bottom: 1px dotted lighten($color-two, 15%);
+  border-bottom: 1px dotted lighten($color-two, 9%);
 }
 
 #user-login {
-  background-color: $secondary;
-  border:2px solid $color-three;
+  background-color: $color-one;
+  border:1px solid $color-three;
   padding:8px;
   text-align:right;
+  margin-right:4px;
+  -webkit-border-bottom-right-radius: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 
