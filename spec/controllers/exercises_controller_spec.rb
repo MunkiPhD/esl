@@ -188,6 +188,14 @@ describe ExercisesController do
       }.to change(Exercise, :count).by(-1)
     end
 
+    it "does not destroy exercise if it belongs to a workout" do
+      workout_set = create(:workout_set)
+      exercise = workout_set.exercise
+      expect {
+        delete :destroy, { :id => exercise.to_param }
+      }.to_not change(Exercise, :count)
+    end
+
     it "redirects to the exercises list" do
       exercise = Exercise.create! valid_attributes
       delete :destroy, {:id => exercise.to_param}

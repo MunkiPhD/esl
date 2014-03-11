@@ -2,6 +2,7 @@ require 'spec_helper'
 
 feature "Exercises" do
   let(:user) { create(:user) }
+  let(:workout) { create(:workout, user: user) }
 
   scenario "can create an exercise" do
     login_user user
@@ -30,7 +31,17 @@ feature "Exercises" do
     pending
   end
 
-  scenario "cannot delete an exercise without permission" do
+  scenario "can delete an exercise not tied to a workout" do
     pending
+  end
+
+  scenario "cannot delete an exercise without permission" do
+    create(:workout_set)
+
+    expect {
+      login_user user
+      visit exercises_path
+      first(:link, "Destroy").click
+    }.to_not change(Exercise, :count)
   end
 end

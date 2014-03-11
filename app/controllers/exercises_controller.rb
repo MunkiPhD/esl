@@ -61,25 +61,35 @@ class ExercisesController < ApplicationController
   # DELETE /exercises/1.json
   def destroy
     respond_to do |format|
-      if @exercise.user_id == current_user.id
-        @exercise.destroy
-        format.html { redirect_to exercises_url }
+      if @exercise.user != current_user
+        format.html { redirect_to @exercise, notice: "You cannot delete an exercise you did not create."}
+        format.json { head :no_content }
+      elsif is_logged
+        format.html { redirect_to @exercise, notice: "You cannot delete an exercise that has already been logged in a workout."}
         format.json { head :no_content }
       else
-        format.html { redirect_to @exercise, notice: "You cannot delete an exercise you did not create"}
+        @exercise.destroy
+        format.html { redirect_to exercises_url, notice: "#{@exercise.name} was deleted." }
         format.json { head :no_content }
       end
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_exercise
-      @exercise = Exercise.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def exercise_params
-      params.require(:exercise).permit(:name)
-    end
+  # verify that the exercise can be deleted
+  def is_logged
+      WorkoutSet.where(exercise: @exercise).count > 0
+  end
+
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_exercise
+    @exercise = Exercise.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def exercise_params
+    params.require(:exercise).permit(:name)
+  end
 end
