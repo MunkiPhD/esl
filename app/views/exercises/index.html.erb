@@ -1,12 +1,9 @@
 <h1>Listing exercises</h1>
 
-<table>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Submitted by</th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -14,11 +11,6 @@
     <% @exercises.each do |exercise| %>
     <tr>
       <td><%= link_to exercise.name, exercise %></td>
-      <td><%= exercise.user.username %></td>
-      <td><%= link_to 'Edit', edit_exercise_path(exercise) %></td>
-      <% if exercise.user == current_user %>
-        <td><%= link_to 'Destroy', exercise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
     </tr>
     <% end %>
   </tbody>
