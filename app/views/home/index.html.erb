@@ -1,20 +1,17 @@
-<div class="hero-unit">
-  <% unless user_signed_in? %>
-    <h1>Well, hello there!</h1>
-    <p>
-      <%= link_to 'Login', new_user_session_path %> or try it out by 
-        <%= link_to "Signing up", new_user_registration_path %><br />
-      </p>
-  <% else %>
-    <h2>hai!</h2>
-  <% end %>
+<% unless user_signed_in? %>
+  <div class="hero-unit">
+  <h1>Well, hello there!</h1>
+  <p>
+  <%= link_to 'Login', new_user_session_path, class: "btn btn-primary" %> or try it out by 
+  <%= link_to "Signing up", new_user_registration_path, class: "btn btn-success" %><br />
+  </p>
 </div>
+  <% end %>
 
 <% if user_signed_in? %>
   <h2>My Circles</h2>
-<% memberships = Circle.memberships_for_user(current_user) %>
-<%= "Not a member of any circles!" if memberships.empty? %>
-<% memberships.each do |circle| %>
+<%= "Not a member of any circles!" if @memberships.empty? %>
+<% @memberships.each do |circle| %>
   <%= link_to circle.name, circle %><br>
   <% end %>
 <% end %>
