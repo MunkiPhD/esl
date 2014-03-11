@@ -23,9 +23,11 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :is_public %><br />
-    <%= f.check_box :is_public %>
+  <div class="checkbox">
+    <%= f.check_box :is_public %>Make this circle public!
+    <div class="private-circle-detailed-info">
+      This means that anyone can join. If you decide to make the circle private, each person will have to apply and be confirmed by an administrator.
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>
