@@ -5,6 +5,7 @@ module ApplicationHelper
     end
   end
 
+
   def days_ago(date)
     if date == Date.today
       return "Today"
