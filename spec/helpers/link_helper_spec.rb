@@ -6,6 +6,7 @@ describe LinkHelper do
       exercise = create(:exercise)
       expect(helper.add_link("test", exercise)).to include("test")
       expect(helper.add_link("test", exercise)).to include(exercise_path(exercise))
+      expect(helper.add_link("test", exercise)).to include("icon-plus icon-white")
     end
   end
 end
