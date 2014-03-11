@@ -22,8 +22,21 @@ describe CirclesController do
 
 
     describe "GET show" do
+      it "is valid response" do
+        pending "This test fails as it issues a redirect. Can't figure out what is wrong. Hand tested and it works as intended. Will have to investigate further"
+        some_circle = Circle.find(circle)
+        get :show, { :id => some_circle.to_param }
+
+        expect(assigns(:circle)).to eq (some_circle)
+        expect(some_circle.user).to eq user
+
+        expect(controller.current_user).to eq user
+        save_and_open_page
+        expect(response.status).to eq 200
+      end
+
       it "assigns the requested circle as circle" do
-        get :show, {:id => circle.to_param}
+        get :show, { :id => circle.to_param }
         expect(assigns(:circle)).to eq(circle)
       end
 
