@@ -7,6 +7,7 @@
 <p>
 Submitted by: <%= @exercise.user.username %>
 </p>
-<%= link_to 'Edit', edit_exercise_path(@exercise), class: "btn btn-primary" %> <%= link_to 'Destroy', @exercise, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } if @exercise.user == current_user %>
+<%= link_to 'Edit', edit_exercise_path(@exercise), class: "btn btn-primary" %> 
+<%= link_to_destroy "Delete", @exercise %>
 <br/><br/>
 <%= link_to 'Back', exercises_path %>
