@@ -9,6 +9,8 @@
 <% end %>
 </div>
 
+<br/><br/>
+
 <h3><%= "Top #{@limit} Max Weight #{@exercise.name}" %></h3>
 <% if workouts.count > 0 %>
   <div id="workouts">
@@ -32,6 +34,6 @@
   <% debug @workouts %>
   <% debug params %>
 <% else %>
-    No workouts logged for users of this circle.
+  No workouts with <%= "'#{@exercise.name}'" %> logged for users of this circle.
 <% end %>
 </div>
