@@ -4,7 +4,7 @@
       <th colspan="4">
         <h4>
           <%= f.collection_select(:exercise_id, exercises, :id, :name) %>
-          <%= link_to_remove_fields "remove exercise", f %>
+          <%= link_to_remove_fields "remove", f %>
         </h4>
       </th>
     </tr>
@@ -14,7 +14,9 @@
       <%= render "workout_sets_fields", f: set  %>
     <% end %>
     <tr class="prev-placeholder">
-      <td colspan="4"><%= link_to_add_fields "Add Set", f, :workout_sets %></td>
+      <td colspan="4">
+        <br/><%= link_to_add_fields "Add Set", f, :workout_sets %>
+    </td>
     </tr>
   </tbody>
 </table>

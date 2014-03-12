@@ -5,12 +5,12 @@ module WorkoutsHelper
       render(association.to_s + "_fields", :f => builder, exercises: @exercises)
     end
     
-    link_to(name, "#", onClick: "Workouts.add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\"); return false;", class: "btn btn-primary")
+    link_to_add(name, "#", onClick: "Workouts.add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\"); return false;")
   end
 
 
   def link_to_remove_fields(name, f)
-    f.hidden_field(:_destroy) + link_to(name, "#", onClick: "Workouts.remove_fields(this); return false;")
+    f.hidden_field(:_destroy) + link_to_destroy(name, "#", onClick: "Workouts.remove_fields(this); return false;")
   end
 
 
