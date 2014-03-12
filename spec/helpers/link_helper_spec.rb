@@ -26,7 +26,7 @@ describe LinkHelper do
       result = helper.link_to_destroy(text, item)
       expect(result).to include(text)
       expect(result).to include(item_path) 
-      expect(result).to include("data-method=\"delete\"") 
+      expect(result).to include("type=\"submit\"") 
       expect(result).to include("btn btn-danger") 
       expect(result).to include("data-confirm=\"Are you sure?\"") 
       expect(result).to include("icon-remove icon-white")
