@@ -49,10 +49,7 @@ class WorkoutsController < ApplicationController
         flash[:error] = 'You cannot update an workout not created by you.'
         format.html { redirect_to @workout }
         format.json { head :no_content, status: :unprocessable_entity }
-      end
-
-
-      if @workout.update(workout_params)
+      elsif @workout.update(workout_params)
         flash[:success] = "Workout was successfully updated."
         format.html { redirect_to @workout }
         format.json { head :no_content }
