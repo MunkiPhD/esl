@@ -30,6 +30,7 @@ describe LinkHelper do
       expect(result).to include("btn btn-danger") 
       expect(result).to include("data-confirm=\"Are you sure?\"") 
       expect(result).to include("icon-remove icon-white")
+      expect(result).to include("value=\"delete\"")
     end
 
     it "does not conflict with other html options" do
