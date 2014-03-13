@@ -41,7 +41,9 @@ feature "Exercises" do
     expect {
       login_user user
       visit exercises_path
-      first(:link, "Destroy").click
+      within ".button_to" do
+        click_button(" Delete")
+      end
     }.to_not change(Exercise, :count)
   end
 end
