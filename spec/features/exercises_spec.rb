@@ -44,6 +44,21 @@ feature "Exercises" do
     }.to change(Exercise, :count).by -1
   end
 
+  scenario "cannot delete an exercise tied to a workout" do
+    login_user user
+    exercise = create(:exercise, user: user)
+    workout_set = create(:workout_set, exercise: exercise)
+
+    expect {
+      visit exercises_path
+      click_link exercise.name
+      within '.button_to' do
+        click_button('Delete')
+      end
+    }.to change(Exercise, :count).by 0
+    expect(page).to have_content "You cannot delete an exercise that has already been logged in a workout."
+  end
+
   scenario "cannot delete an exercise without permission" do
     workout_set = create(:workout_set)
 
