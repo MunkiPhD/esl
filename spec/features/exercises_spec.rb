@@ -4,9 +4,11 @@ feature "Exercises" do
   let(:user) { create(:user) }
   let(:workout) { create(:workout, user: user) }
 
-  scenario "can create an exercise" do
+  before :each do
     login_user user
+  end
 
+  scenario "can create an exercise" do
     visit root_path
     expect(page).to have_link "exercises"
 
@@ -32,7 +34,6 @@ feature "Exercises" do
   end
 
   scenario "can delete an exercise not tied to a workout" do
-    login_user user
     exercise = create(:exercise, user: user)
 
     expect {  
@@ -45,7 +46,6 @@ feature "Exercises" do
   end
 
   scenario "cannot delete an exercise tied to a workout" do
-    login_user user
     exercise = create(:exercise, user: user)
     workout_set = create(:workout_set, exercise: exercise)
 
@@ -63,7 +63,6 @@ feature "Exercises" do
     workout_set = create(:workout_set)
 
     expect {
-      login_user user
       visit exercises_path
       click_link workout_set.exercise_name
       within ".button_to" do
