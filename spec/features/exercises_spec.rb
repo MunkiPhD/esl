@@ -36,13 +36,14 @@ feature "Exercises" do
   end
 
   scenario "cannot delete an exercise without permission" do
-    create(:workout_set)
+    workout_set = create(:workout_set)
 
     expect {
       login_user user
       visit exercises_path
+      click_link workout_set.exercise.name
       within ".button_to" do
-        click_button(" Delete")
+        click_button('Delete')
       end
     }.to_not change(Exercise, :count)
   end
