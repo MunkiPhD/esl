@@ -15,6 +15,11 @@
 require 'spec_helper'
 
 describe WorkoutSet do
+  it 'returns exercise name' do
+    workout_set = build(:workout_set)
+    expect(workout_set.exercise_name).to eq workout_set.exercise.name
+  end
+
   describe "validations" do
 
     context "with valid data" do

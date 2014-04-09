@@ -30,4 +30,5 @@ class WorkoutSet < ActiveRecord::Base
   validates :rep_count, presence: true, 
                         numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
+  delegate :name, to: :exercise, prefix: true
 end
