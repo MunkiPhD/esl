@@ -29,8 +29,16 @@ feature "Exercises" do
     expect(page).to have_content exercise.name
   end
 
-  scenario "can edit and update an exercise" do
-    pending
+  scenario "can edit and update an exercise created by the user" do
+    exercise = create(:exercise, user: user)
+    new_name = "#{exercise.name}2"
+    visit exercises_path
+    click_link exercise.name
+    click_link 'Edit'
+    fill_in "exercise_name", with: new_name
+    click_button 'Update Exercise'
+    expect(page).to have_content "Exercise was successfully updated."
+    expect(page).to have_content new_name
   end
 
   scenario "can delete an exercise not tied to a workout" do
