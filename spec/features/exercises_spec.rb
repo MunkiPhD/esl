@@ -32,7 +32,16 @@ feature "Exercises" do
   end
 
   scenario "can delete an exercise not tied to a workout" do
-    pending
+    login_user user
+    exercise = create(:exercise, user: user)
+
+    expect {  
+      visit exercises_path
+      click_link exercise.name
+      within '.button_to' do
+        click_button('Delete')
+      end
+    }.to change(Exercise, :count).by -1
   end
 
   scenario "cannot delete an exercise without permission" do
@@ -41,7 +50,7 @@ feature "Exercises" do
     expect {
       login_user user
       visit exercises_path
-      click_link workout_set.exercise.name
+      click_link workout_set.exercise_name
       within ".button_to" do
         click_button('Delete')
       end
