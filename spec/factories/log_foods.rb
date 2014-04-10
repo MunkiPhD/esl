@@ -5,6 +5,6 @@ FactoryGirl.define do
     servings "9.99"
     log_date "2014-04-10"
     user
-    bread
+    food
   end
 end
