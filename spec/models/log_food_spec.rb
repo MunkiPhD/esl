@@ -16,6 +16,12 @@ require 'spec_helper'
 describe LogFood do
   let(:user) { build(:user) }
 
+  it 'responds to food_name' do
+    bread = build(:bread)
+    logged_food = LogFood.new(food: bread)
+    expect(logged_food.food_name).to eq bread.name
+  end
+
   context 'validation' do
     it 'has a valid factory' do
       expect(build(:log_food)).to be_valid

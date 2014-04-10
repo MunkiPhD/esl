@@ -20,4 +20,6 @@ class LogFood < ActiveRecord::Base
   validates :log_date, presence: true
   validates :servings, presence: true,
     numericality:  { greater_than: 0, less_than_or_equal_to: 1000 }
+
+  delegate :name, to: :food, prefix: true
 end
