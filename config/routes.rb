@@ -15,6 +15,7 @@ Esl::Application.routes.draw do
 
   resources :exercises
   resources :workouts
+  resources :log_foods
 
   #devise_for :users
   devise_for :users, :controllers => {:registrations => "users/registrations", :passwords => "users/passwords", :sessions => "users/sessions"}
