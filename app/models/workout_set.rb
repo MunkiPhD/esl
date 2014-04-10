@@ -10,9 +10,9 @@
 #  workout_exercise_id :integer          not null
 #  created_at          :datetime
 #  updated_at          :datetime
+#  exercise_id         :integer          not null
+#  workout_id          :integer          not null
 #
-
-
 
 class WorkoutSet < ActiveRecord::Base
   belongs_to :workout_exercise, inverse_of: :workout_sets

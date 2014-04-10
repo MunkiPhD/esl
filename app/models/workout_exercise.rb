@@ -16,5 +16,10 @@ class WorkoutExercise < ActiveRecord::Base
   validates :workout, presence: true
   validates :exercise, presence: true
 
-  accepts_nested_attributes_for :workout_sets, allow_destroy: true
+  accepts_nested_attributes_for :workout_sets, allow_destroy: true, reject_if: :reject_workout_sets
+
+  private
+  def reject_workout_sets(attributes)
+    attributes['rep_count'].blank? || attributes['weight'].blank?
+  end
 end

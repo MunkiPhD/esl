@@ -10,6 +10,8 @@
 #  workout_exercise_id :integer          not null
 #  created_at          :datetime
 #  updated_at          :datetime
+#  exercise_id         :integer          not null
+#  workout_id          :integer          not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
