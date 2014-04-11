@@ -1,5 +1,5 @@
-<%= link_to "Log Item", new_log_food_path(food_id: @food.id) %>
-<%= link_to "Edit", edit_food_path(@food) %>
+<%= link_to_add "Log Item", new_log_food_path(food_id: @food.id) %>
+<%= link_to_edit "Edit", edit_food_path(@food) %>
 
 <div class="food_label">
   <table class="food_table">

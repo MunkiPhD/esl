@@ -19,7 +19,7 @@ feature "Visitor interacts with food" do
     expect(page).to have_text bread.name
     expect(page).to have_text bread.calories
     expect(page).to have_text "login"
-    expect(page).to have_link "Log this"
+    expect(page).to have_link "Log Item"
   end
 
   scenario "attempts to create an item" do

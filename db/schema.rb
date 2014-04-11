@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20140410223041) do
 
   create_table "log_foods", force: true do |t|
     t.decimal  "servings",   default: 1.0,          null: false
-    t.date     "log_date",   default: '2014-04-10', null: false
+    t.date     "log_date",   default: '2014-04-11', null: false
     t.integer  "food_id",                           null: false
     t.integer  "user_id",                           null: false
     t.datetime "created_at"
