@@ -1,4 +1,4 @@
-**NOTE** Typicall, current cevelopment work is located on a branch, usually the ***dev*** branch
+**NOTE** Typically, current development work is located on a branch, usually the ***dev*** branch
 
 ESL
 ===
