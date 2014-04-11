@@ -1,61 +1,115 @@
-<h1>Foods#show</h1>
 <%= link_to "Log Item", new_log_food_path(food_id: @food.id) %>
 <%= link_to "Edit", edit_food_path(@food) %>
-<p>Find me in app/views/foods/show.html.erb</p>
-<%= @food.name %>
-<%= @food.brand %>
-<%= @food.serving_size %>
-<%= @food.calories %>
-<%= @food.calories_from_fat %>
-<%= @food.total_fat %>
-<%= @food.saturated_fat %>
-<%= @food.trans_fat %>
-<%= @food.polyunsaturated_fat %>
-<%= @food.monounsaturated_fat %>
-<%= @food.cholesterol %>
-<%= @food.sodium %>
-<%= @food.carbs %>
-<%= @food.dietary_fiber %>
-<%= @food.sugars %><br/>
-Protein: <%= @food.protein %><br/>
-<%= @food.vitamin_a %>
-<%= @food.vitamin_c %>
-<%= @food.calcium %>
-<%= @food.iron %>
-<%= @food.vitamin_d %>
-<%= @food.vitamin_e %>
-<%= @food.vitamin_k %>
-<%= @food.thiamin %>
-<%= @food.riboflavin %>
-<%= @food.niacin %>
-<%= @food.vitamin_b6 %>
-<%= @food.biotin %>
-<%= @food.pantothenic_acid %>
-<%= @food.phosphorus %>
-<%= @food.iodine %>
-<%= @food.magnesium %>
-<%= @food.zinc %>
-<%= @food.selenium %>
-<%= @food.copper %>
-<%= @food.manganese %>
-<%= @food.chromium %>
-<%= @food.molybednum %>
-<%= @food.caffeine %>
-<%= @food.alcohol %>
-<%= @food.potassium %>
-<%= @food.folic_acid %>
-<%= @food.boron %>
-<%= @food.cobalt %>
-<%= @food.fluoride %>
-<%= @food.acetic_acid %>
-<%= @food.citric_acid %>
-<%= @food.lactic_acid %>
-<%= @food.malic_acid %>
-<%= @food.choline %>
-<%= @food.taurine %>
-<%= @food.glutamine %>
-<%= @food.creatine %>
-<%= @food.sugar_alcohols %>
-<%= @food.chloride %>
 
-<%= link_to "Log this", "#" %>
+<div class="food_label">
+  <table class="food_table">
+    <tr>
+      <td style="border:none"><h3><%= @food.name %></h3>
+        <% unless @food.brand == '' %>
+          by <%= @food.brand %>
+      <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td style="border:none"><%= @food.serving_size %></td>
+    </tr>
+    <tr>
+      <td style="border-top:6px #000 solid"><b>Amount Per Serving</b></td>
+    </tr>
+    <tr>
+      <td><span class="left bold">Calories&nbsp;</span> <%= @food.calories %> <span class="right">Calories From Fat <%= @food.calories_from_fat %></span></td>
+    </tr>
+    <tr>
+      <td style="border-top:4px #000 solid"><span class="right bold">% Daily Value*</span></td>
+    </tr>
+    <tr>
+      <td style="border-top:2px #000 solid"><b>Total Fat</b> <%= @food.total_fat %>g</td>
+    </tr>
+    <tr>
+      <td class="left_indent">Saturated Fat <%= @food.saturated_fat %>g</td>
+    </tr>
+    <tr>
+      <td class="left_indent">Polyunsaturated Fat <%= @food.polyunsaturated_fat %>g</td>
+    </tr>
+    <tr>
+      <td class="left_indent">Monounsaturated Fat <%= @food.monounsaturated_fat %>g</td>
+    </tr>
+    <tr>
+      <td><b>Cholesterol</b> <%= @food.cholesterol %>mg</td>
+    </tr>
+    <tr>
+      <td><b>Sodium</b> <%= @food.sodium %>mg</td>
+    </tr>
+    <tr>
+      <td><b>Potassium</b> <%= @food.potassium %>mg</td>
+    </tr>
+    <tr>
+      <tr>
+        <td><b>Total Carbohydrates</b> <%= @food.carbs %>g</td>
+      </tr>
+      <tr>
+        <td class="left_indent">Dietary Fiber <%= @food.dietary_fiber %></td>
+      </tr>
+      <tr>
+        <td class="left_indent">Sugars <%= @food.sugars %>g</td>
+      </tr>
+      <tr>
+        <td class="left_indent">Sugar Alcohols <%= @food.sugar_alcohols %>g</td>
+      </tr>
+      <tr>
+        <td><b>Protein</b> <%= @food.protein %>g</td>
+      </tr>
+      <tr>
+        <td style="border:none">
+          <table class="vitamin_table">
+            <%= display_vitamin "Vitamin A", @food.vitamin_a %>
+            <%= display_vitamin "Calcium", @food.calcium %>
+            <%= display_vitamin "Vitamin D", @food.vitamin_d %>
+            <%= display_vitamin "Iron", @food.iron %>
+            <%= display_vitamin "Vitamin C", @food.vitamin_c %>
+            <%= display_vitamin "Vitamin E", @food.vitamin_e %>
+            <%= display_vitamin "Thiamin (Vitamin B1)", @food.thiamin %>
+            <%= display_vitamin "Riboflavin (Vitamin B2)", @food.riboflavin %>
+            <%= display_vitamin "Niacin (Vitamin B3)", @food.niacin %>
+            <%= display_vitamin "Vitamin B6", @food.vitamin_b6 %>
+            <%= display_vitamin "Biotin (Vitamin B7)", @food.biotin %>
+            <%= display_vitamin "Folic Acid (Vitamin B9)", @food.folic_acid %>
+            <%= display_vitamin "Pantothenic Acid (Vitamin B5)", @food.pantothenic_acid %>
+            <%= display_vitamin "Phosphorus", @food.phosphorus %>
+            <%= display_vitamin "Chloride", @food.chloride %>
+            <%= display_vitamin "Choline", @food.choline %>
+            <%= display_vitamin "Copper", @food.copper %>
+            <%= display_vitamin "Iodine", @food.iodine %>
+            <%= display_vitamin "Magnesium", @food.magnesium %>
+            <%= display_vitamin "Manganese", @food.manganese %>
+            <%= display_vitamin "Molybednum", @food.molybednum %>
+            <%= display_vitamin "Selenium", @food.selenium %>
+            <%= display_vitamin "Chromium", @food.chromium %>
+            <%= display_vitamin "Zinc", @food.zinc %>
+            <%= display_vitamin "Boron", @food.boron %>
+            <%= display_vitamin "Cobalt", @food.cobalt %>
+            <%= display_vitamin "Fluoride", @food.fluoride %>
+            <%= display_vitamin "Acetic Acid", @food.acetic_acid %>
+            <%= display_vitamin "Citric Acid", @food.citric_acid %>
+            <%= display_vitamin "Lactic Acid", @food.lactic_acid %>
+            <%= display_vitamin "Malic Acid", @food.malic_acid %>
+            <%= display_vitamin "Taurine", @food.taurine %>
+            <%= display_custom "Glutamine", @food.glutamine, "g" %>
+            <%= display_custom "Creatine", @food.creatine, "g" %>
+            <%= display_vitamin "Alcohol", @food.alcohol %>
+            <%= display_vitamin "Caffeine", @food.caffeine %>
+            <% unless @food.ingredients.nil? %>
+              <tr>
+              <td>
+                <b>Ingredients:&nbsp;</b><br/><div style="width:290px"><%= @food.ingredients %></div>
+              </td>
+              <td></td>
+            </tr>
+          <% end %>
+          </table>  
+        </td>
+        <tr>
+          <td>*Percent daily values based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your caloric needs.</td>
+        </tr>
+      </table>
+    </div>
