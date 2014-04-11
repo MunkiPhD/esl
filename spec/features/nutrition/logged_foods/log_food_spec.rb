@@ -31,5 +31,19 @@ feature "user logs a food item" do
       expect(page).to have_content expected_str
     end
 
+    scenario 'after logging a food item, it appears in the nutrition dashboard' do
+      food = create(:food)
+      visit nutrition_path
+      expect(page).to_not have_content food.name
+      visit new_log_food_path(food_id: food)
+      click_button 'Log'
+      visit nutrition_path
+      expect(page).to have_content food.name
+    end
+
+    scenario 'edits a food item' do
+     pending 
+    end
+
   end
 end
