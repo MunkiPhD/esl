@@ -46,4 +46,5 @@ RSpec.configure do |config|
 
   # add the macros for feature specs
   config.include(LoginMacros, :type => :feature)
+  config.include(SelectDateHelper, :type => :feature)
 end
