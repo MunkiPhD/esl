@@ -9,6 +9,8 @@
   <% end %>
 
 <% if user_signed_in? %>
+  <h1>Dashboard</h1>
+  <hr />
   <h2>My Circles</h2>
 <%= "Not a member of any circles!" if @memberships.empty? %>
 <% @memberships.each do |circle| %>
