@@ -1,2 +1,6 @@
 <h1>LogFoods#index</h1>
-<p>Find me in app/views/log_foods/index.html.erb</p>
+<ul>
+<% @logged_foods.each do |food| %>
+  <li><%= food.food_name %>
+<% end %>
+</ul>

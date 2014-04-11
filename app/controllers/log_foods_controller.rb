@@ -1,27 +1,26 @@
 class LogFoodsController < ApplicationController
   before_filter :authenticate_user!
-  respond_to :html
+  respond_to :html, :json
 
   def index
+    @logged_foods = LogFood.all
   end
 
   def show
   end
 
   def new
+    @logged_food = LogFood.new
     food_id = params[:food_id].to_i
-    food = Food.find(food_id)
-    @logged_food = LogFood.new(food: food)
+    @logged_food.food = Food.find(food_id)
   end
 
   def create
-    food = Food.find(logged_food_params[:food_id])
     @logged_food = current_user.log_foods.build(logged_food_params)
-    @logged_food.food = food
     
     respond_to do |format|
       if @logged_food.save
-        format.html { redirect_to index, notice: "Logged #{@logged_food.servings} servings of #{@logged_food.food_name}" }
+        format.html { redirect_to log_foods_path, notice: "Logged #{@logged_food.servings} servings of #{@logged_food.food_name}" }
       else
         format.html { render action: 'new' }
       end

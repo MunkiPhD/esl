@@ -5,7 +5,7 @@
     <%= search_field_tag :search, params[:search], placeholder: "Search for a food" %><%= submit_tag "Search", class: "btn btn-primary", name: nil %>
 <% end %>
 <% @results.each do |food_item| %>
-  <%= link_to food_item.name, food_item %>
+  <%= link_to food_item.name, food_item %><br/>
 <% end %>
 <%= "Found #{pluralize(@results.length, "result")}." unless @search_phrase.blank? %>
 <br/>

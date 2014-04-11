@@ -19,7 +19,7 @@
     <%= f.label :log_date, "Log Date" %><br />
     <%= f.date_select :log_date %>
   </div>
-  <%= hidden_field_tag :food_id, @logged_food.food.id %>
+  <%= f.hidden_field :food_id, value: @logged_food.food.id %>
   <div class="actions">
     <%= f.submit class: "btn btn-info" %>
   </div>

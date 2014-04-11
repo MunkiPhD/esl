@@ -27,7 +27,8 @@ feature "user logs a food item" do
       fill_in 'Servings', with: "1"
       select_date '2014,January,2', from: 'Log Date'
       click_button 'Log'
-      expect(page).to have_content "Logged 1 servings of #{food.name}"
+      expected_str = "Logged 1.0 servings of #{food.name}"
+      expect(page).to have_content expected_str
     end
 
   end
