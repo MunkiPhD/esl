@@ -25,9 +25,9 @@ feature "user logs a food item" do
       expect(page).to have_content food.name
       click_link 'Log Item'
       fill_in 'Servings', with: "1"
-      fill_in 'Date', with: Date.today.to_s
+      select_date '2014,January,2', from: 'Log Date'
       click_button 'Log'
-      expect(page).to have_content "Logged 1 serving of #{food.name}"
+      expect(page).to have_content "Logged 1 servings of #{food.name}"
     end
 
   end
