@@ -13,5 +13,4 @@ describe NutritionController do
       response.should redirect_to(new_user_session_path)
     end
   end
-
 end
