@@ -37,15 +37,8 @@ Esl::Application.routes.draw do
    scope '/nutrition' do
      resources :foods, except: [:index]
      get 'foods', to: 'foods#search', as: :search_food
+     get '/', to: 'nutrition#index', as: :nutrition
    end
-=begin  
-   get 'nutrition/foods', to: 'foods#search', as: :search_food
-   get 'nutrition/foods/new', to: 'foods#new', as: :new_food # this has to come before the following routes or it will be cause in the :id 
-   get 'nutrition/foods/:id', to: 'foods#show', as: :food
-   get 'nutrition/foods/:id/edit', to: 'foods#edit', as: :edit_food
-   put 'nutrition/foods/:id/update', to: 'foods#update', as: :update_food
-   delete 'nutrition/foods/:id/delete', to: 'foods#destroy', as: :delete_food
-=end
 
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
