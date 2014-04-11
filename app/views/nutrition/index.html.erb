@@ -1,0 +1,4 @@
+<h1>Nutrition#index</h1>
+<% @logged_foods.each do |logged| %>
+  <%= logged.servings %> Servings of: <%= logged.food_name %>
+<% end %>

@@ -1,5 +1,6 @@
 Esl::Application.routes.draw do
 
+
   resources :circles do
     resources :members, controller: 'circle_members', only: [:index] do
       collection do
