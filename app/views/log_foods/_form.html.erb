@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :log_date, "Log Date" %><br />
-    <%= f.date_select :log_date %>
+    <%= f.date_select :log_date, order: [:day, :month, :year]  %>
   </div>
   <%= f.hidden_field :food_id, value: @logged_food.food.id %>
   <div class="actions">

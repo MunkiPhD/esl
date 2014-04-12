@@ -10,7 +10,7 @@ class LogFoodsController < ApplicationController
   end
 
   def new
-    @logged_food = LogFood.new
+    @logged_food = LogFood.new(log_date: Date.today)
     food_id = params[:food_id].to_i
     @logged_food.food = Food.find(food_id)
   end
