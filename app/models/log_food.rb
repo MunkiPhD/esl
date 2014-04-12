@@ -24,4 +24,5 @@ class LogFood < ActiveRecord::Base
   delegate :name, to: :food, prefix: true
 
   scope :on_date, ->(date) { where("log_date = ?", date) }
+  scope :for_food, ->(food) { where("food_id = ?", food) }
 end

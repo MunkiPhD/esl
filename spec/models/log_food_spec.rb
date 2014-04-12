@@ -31,6 +31,15 @@ describe LogFood do
     end
   end
 
+  describe "#for_food" do
+    it 'returns the logged foods for the specified food' do
+      food = create(:food)
+      food2 = create(:food)
+      logged = create(:log_food, food: food)
+      expect(LogFood.for_food(food)).to eq [logged]
+    end
+  end
+
   context 'validation' do
     it 'has a valid factory' do
       expect(build(:log_food)).to be_valid
