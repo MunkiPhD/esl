@@ -1,2 +1,19 @@
 <h1>Nutrition Dashboard</h1>
+<div id="selected_date">
+  <span id="selected_date_display">
+    <% if @current_date == Date.today %>
+      Today
+    <% else %>
+      <%= time_ago_in_words(@current_date) %> ago<br/>
+    <% end %>
+  </span>
+  <%= form_tag(nutrition_path, method: 'GET') do %>
+    <%= select_date(@current_date, order: [:day, :month, :year], prefix: "log_date") %>
+  <%= submit_tag "Go" %>
+  <br/>
+  <% if @current_date != Date.today %>
+   <%= link_to "Go back to today", nutrition_path %>
+  <% end %>
+<% end %>
+</div>
 <%= render 'logged_foods', logged_foods: @logged_foods %>
