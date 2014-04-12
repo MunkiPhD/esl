@@ -3,7 +3,8 @@ class LogFoodsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @logged_foods = LogFood.all
+    @food = Food.find_by_param(params[:food_id])
+    @logged_foods = current_user.log_foods.for_food(@food)
   end
 
   def show

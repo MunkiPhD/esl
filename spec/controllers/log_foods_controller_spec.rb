@@ -9,7 +9,7 @@ describe LogFoodsController do
 
   describe "GET 'index'" do
     it "returns http success" do
-      get 'index', { food_id: logged_food } #path
+      get 'index', { food_id: logged_food.food } #path
       response.should be_success
     end
   end

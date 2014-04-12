@@ -17,6 +17,14 @@ feature "User food item logging" do
       login_user user
     end
 
+    scenario "viewing the index displays all the instances of that food logged" do
+      logged_food = create(:log_food, user: user, log_date: Date.today, food: food)
+      logged_food2 = create(:log_food, user: user, log_date: Date.yesterday, food: create(:food))
+      visit food_log_foods_path(food_id: food)
+      expect(page).to have_content food.name
+      expect(page).to_not have_content logged_food2.food_name
+    end
+
     scenario "searches for a food and logs it" do
       visit foods_path
       fill_in 'search', with: food.name
