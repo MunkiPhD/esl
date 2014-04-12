@@ -22,4 +22,6 @@ class LogFood < ActiveRecord::Base
     numericality:  { greater_than: 0, less_than_or_equal_to: 1000 }
 
   delegate :name, to: :food, prefix: true
+
+  scope :on_date, ->(date) { where("log_date = ?", date) }
 end

@@ -22,6 +22,15 @@ describe LogFood do
     expect(logged_food.food_name).to eq bread.name
   end
 
+  describe "#on_date" do
+    it 'returns the logged foods on specified date' do
+      yesterday = create(:log_food, log_date: Date.yesterday, user: user)
+      today = create(:log_food, log_date: Date.today, user: user)
+      expect(user.log_foods.on_date(Date.today)).to eq [today]
+      expect(user.log_foods.on_date(Date.yesterday)).to eq [yesterday]
+    end
+  end
+
   context 'validation' do
     it 'has a valid factory' do
       expect(build(:log_food)).to be_valid
