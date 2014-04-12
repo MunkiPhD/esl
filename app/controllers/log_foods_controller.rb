@@ -20,7 +20,7 @@ class LogFoodsController < ApplicationController
     
     respond_to do |format|
       if @logged_food.save
-        format.html { redirect_to log_foods_path, notice: "Logged #{@logged_food.servings} servings of #{@logged_food.food_name}" }
+        format.html { redirect_to nutrition_path, notice: "Logged #{@logged_food.servings} servings of #{@logged_food.food_name}" }
       else
         format.html { render action: 'new' }
       end

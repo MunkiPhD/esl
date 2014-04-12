@@ -16,7 +16,6 @@ Esl::Application.routes.draw do
 
   resources :exercises
   resources :workouts
-  resources :log_foods
 
   #devise_for :users
   devise_for :users, :controllers => {:registrations => "users/registrations", :passwords => "users/passwords", :sessions => "users/sessions"}
@@ -36,7 +35,10 @@ Esl::Application.routes.draw do
    put ':username/workout/:id/update', to: 'workouts#update', as: :update_user_workout
 
    scope '/nutrition' do
-     resources :foods, except: [:index]
+     resources :foods, except: [:index] do
+       # foods/1-chicken-breast/log is the desired path
+       resources :log_foods, path: '/log', shallow: true
+     end
      get 'foods', to: 'foods#search', as: :search_food
      get '/', to: 'nutrition#index', as: :nutrition
    end

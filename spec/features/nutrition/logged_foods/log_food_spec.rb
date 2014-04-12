@@ -33,7 +33,7 @@ feature "User food item logging" do
 
     scenario 'has food default to todays date and a serving size of 1' do
       food = create(:food)
-      visit new_log_food_path(food_id: food)
+      visit new_food_log_food_path(food_id: food)
 
       expect(find_by_id('log_food_servings').value).to eq "1.0"
 
@@ -48,7 +48,7 @@ feature "User food item logging" do
       food = create(:food)
       visit nutrition_path
       expect(page).to_not have_content food.name
-      visit new_log_food_path(food_id: food)
+      visit new_food_log_food_path(food_id: food)
       click_button 'Log'
       visit nutrition_path
       expect(page).to have_content food.name
