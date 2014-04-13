@@ -14,37 +14,16 @@ $(document).ready(function(){
 		}
 
 		var url = $theEntry.attr('href');
-		var result = ""; // this will hold the result message
-		var templateId = ""; // this will hold the template ID to use for the selector 
 
-		$.ajax({
-			type: "DELETE",
-			url: url,
-			dataType: "json"
-		}).done(function(data, status, xhr){
-			console.log(data);
-			console.log(status);
-
-			result = "Food log entry deleted.";
-			templateId = "#template_alert_success";
-			
-			$theEntry.parents(".logged-food-entry").slideUp();
-
-		}).fail(function(xhr, status, error){
-			console.log(status);
-			console.log(error);
-			
-			result = "An error occured while attempting to delete the entry.";
-			templateId = "#template_alert_error";
-
-		}).always(function(){
-			var templateHtml = $(templateId).html();
-			Mustache.parse(templateHtml);
-			var rendered = Mustache.render(templateHtml, { message: result });
-			$("#flash_messages").append(rendered);
-			console.log("done with DELETE request");
+		// use a lambda expression to handle the success event
+		FoodLog.DeleteFoodLogEntry(url, function(){
+			$theEntry.parents(".logged-food-entry").slideUp('slow', function(){
+				// animation complete															  
+				// eventually issue an update to the screen for modified data
+			});
 		});
 
 		return false;
 	});
 });
+
