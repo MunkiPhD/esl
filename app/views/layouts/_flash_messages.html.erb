@@ -1,3 +1,4 @@
+<div id="flash_messages">
 <% unless notice.blank? %>
   <div class="alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -25,4 +26,18 @@
     <span class="text-info"><%= flash[:info] %></span>
   </div>
 <% end %>
+</div>
 
+<script id="template_alert_success" type="x-templ-mustache">
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <span class="text-success">{{message}}</span>
+  </div>
+</script>
+
+<script id="template_alert_error" type="x-templ-mustache">
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <span class="text-success">{{message}}</span>
+  </div>
+</script>

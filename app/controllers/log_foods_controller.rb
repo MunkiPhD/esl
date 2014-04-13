@@ -53,6 +53,26 @@ class LogFoodsController < ApplicationController
     end
   end
 
+  def destroy
+    @logged_food = current_user.log_foods.find(params[:id].to_i)
+    respond_to do |format|
+      if @logged_food.user != current_user
+        format.html { redirect_to nutrition_path, error: "You cannot delete an entry that does not belong to you" }
+        format.json { head :no_content }
+      else
+        if @logged_food.destroy
+          format.html { redirect_to nutrition_path, notice: "Food log entry deleted." }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to nutrition_path, error: "Could not delete the entry." }
+          format.json { render json: @logged_food.errors, status: :unprocessable_entity }
+        end
+      end
+
+      
+    end 
+  end
+
   private 
   def logged_food_params
     params.require(:log_food).permit(:servings, :log_date, :food_id)

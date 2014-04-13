@@ -51,6 +51,21 @@ feature "User food item logging" do
       expect(find_by_id("log_date")).to have_content "over 1 year ago"
     end
 
+    scenario "deletes a log entry from the nutrition dashboard" do
+      # this test does not take into account JS that has been added on the front end
+      logged_food = create(:log_food, user: user, log_date: Date.parse("12-April-2014"), servings: 1)
+      visit nutrition_path
+      select '12', from: 'log_date_day'
+      select 'April', from: 'log_date_month'
+      select '2014', from: 'log_date_year'
+      click_button 'Go'
+
+      expect(page).to have_content logged_food.food_name
+      first('.logged-food-entry').click_link('Delete')
+      expect(page).to have_content "Food log entry deleted."
+      expect(page).to_not have_content logged_food.food_name
+    end
+
     scenario "searches for a food and logs it" do
       visit foods_path
       fill_in 'search', with: food.name
@@ -87,10 +102,5 @@ feature "User food item logging" do
       visit nutrition_path
       expect(page).to have_content food.name
     end
-
-    scenario 'edits a food item' do
-     pending 
-    end
-
   end
 end
