@@ -1,3 +1,50 @@
-// Place all the styles related to the Nutrition controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'helpers/colors';
+
+#selected_date {
+  border:1px solid $border; 
+  padding:10px;
+  width: auto;
+  display: inline-block;
+  margin:5px;
+
+  form {
+    margin:0px;
+  }
+
+  .main-date {
+    width: 100%;
+    text-align:center;
+    font-size:25px;
+  }
+
+  .time-ago {
+    width:100%;
+    text-align:center;
+    font-style:none;
+    color: $dark-grey;
+  }
+
+  .go-back-to-today {
+    padding: 4px;
+    text-align:right;
+    position:relative;
+    bottom: -6px;
+  }
+}
+
+#log_date_day, #log_food_log_date_3i {
+  width: 55px;
+}
+
+#log_date_month, #log_food_log_date_2i {
+  width: 115px;
+}
+
+#log_date_year, #log_food_log_date_1i {
+  width: 70px;
+}
+
+#log_food_servings {
+  width:45px;
+  text-align:center;
+}

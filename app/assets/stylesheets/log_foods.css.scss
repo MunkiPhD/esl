@@ -1,3 +1,18 @@
-// Place all the styles related to the LogFoods controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "helpers/colors";
+
+.logged-food-entry {
+  /*margin: 0 auto;*/
+  margin-top: 10px;
+  width: 400px;
+
+  .entry-top {
+    border-bottom: 1px solid $border;
+
+    .food-name {
+      font-size: 20px;
+    }
+    .control-panel {
+      float: right;
+    }
+  }
+}

@@ -4,8 +4,14 @@
 <% else %>
   <% logged_foods.each do |logged| %>
   <div class="logged-food-entry">
-    <%= logged.servings %> Servings of: <%= logged.food_name %> (<%= link_to "Edit", edit_log_food_path(logged) %>) 
-    <%= link_to "Delete", logged, data: { confirm: "Are you sure you want to delete #{logged.servings} servings of #{logged.food_name}?", method: "DELETE" } %>
+    <div class="entry-top">
+    <span class="control-panel">
+      <%= link_to "Edit", edit_log_food_path(logged) %>&nbsp;|&nbsp;
+      <%= link_to "Delete", logged, data: { confirm: "Are you sure you want to delete #{logged.servings} servings of #{logged.food_name}?", method: "DELETE" } %>
+    </span>
+    <div class="food-name"><%= logged.food_name %></div>
+  </div>
+    <%= logged.servings %> Servings
   </div>
 <% end %>
   <% end %>
