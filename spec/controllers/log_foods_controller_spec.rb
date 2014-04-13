@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe LogFoodsController do
-  let(:logged_food){ create(:log_food) }
+  let(:user) { create(:user) }
+  let(:logged_food){ create(:log_food, user: user) }
+
   before(:each) do
-    @user = FactoryGirl.create(:user) #User.new(id: 1)
-    sign_in @user
+    sign_in user
   end
 
   describe "GET 'index'" do

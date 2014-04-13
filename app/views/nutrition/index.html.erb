@@ -1,11 +1,7 @@
 <h1>Nutrition Dashboard</h1>
 <div id="selected_date">
   <span id="selected_date_display">
-    <% if @current_date == Date.today %>
-      Today
-    <% else %>
-      <%= time_ago_in_words(@current_date) %> ago<br/>
-    <% end %>
+    <%= format_date @current_date %> (<%= days_ago @current_date %>)
   </span>
   <%= form_tag(nutrition_path, method: 'GET') do %>
     <%= select_date(@current_date, order: [:day, :month, :year], prefix: "log_date") %>
