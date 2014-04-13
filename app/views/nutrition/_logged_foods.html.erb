@@ -1,7 +1,11 @@
+<div id="logged_foods">
 <% if logged_foods.count == 0 %>
   <b>No foods logged yet for today!</b>
 <% else %>
   <% logged_foods.each do |logged| %>
-    <%= logged.servings %> Servings of: <%= logged.food_name %><br/>
+  <div class="logged-food-entry">
+    <%= logged.servings %> Servings of: <%= logged.food_name %> (<%= link_to "Edit", edit_log_food_path(logged) %>)
+  </div>
 <% end %>
   <% end %>
+</div>
