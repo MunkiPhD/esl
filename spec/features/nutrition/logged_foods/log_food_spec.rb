@@ -25,6 +25,25 @@ feature "User food item logging" do
       expect(page).to_not have_content logged_food2.food_name
     end
 
+    scenario "edits a logged food item" do
+      logged_food = create(:log_food, user: user, log_date: Date.parse("12-April-2014"), servings: 1)
+      visit log_food_path(logged_food)
+      expect(find_by_id("servings")).to have_content "1.0"
+      expect(page).to have_link "Edit"
+      expect(page).to have_content "Today"
+
+      click_link "Edit"
+      fill_in 'Servings', with: "2.25"
+      select_date '2013,January,2', from: 'Log Date'
+      click_button 'Update'
+
+      expect(page).to have_content "Successfully updated food log entry!"
+      visit log_food_path(logged_food)
+      expect(find_by_id("servings")).to have_content "2.25"
+      expect(find_by_id("log_date")).to have_content "over 1 year ago"
+
+    end
+
     scenario "searches for a food and logs it" do
       visit foods_path
       fill_in 'search', with: food.name

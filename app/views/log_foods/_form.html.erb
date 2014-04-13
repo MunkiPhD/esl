@@ -1,4 +1,4 @@
-<%= form_for(@logged_food, url: food_log_foods_path) do |f| %>
+<%= form_for(@logged_food, url: path_url) do |f| %>
   <% if @logged_food.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@logged_food.errors.count, "error") %> prohibited this food from being logged:</h2>

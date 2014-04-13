@@ -1,2 +1,8 @@
-<h1>LogFoods#show</h1>
-<p>Find me in app/views/log_foods/show.html.erb</p>
+<h2><%= @logged_food.food_name %></h2>
+<span id="servings"><%= @logged_food.servings %> servings</span>
+<br/>
+<span id="log_date">
+    <%= format_date @logged_food.log_date %> (<%= days_ago @logged_food.log_date %>)
+  </span>
+<br/>
+<%= link_to_edit "Edit", edit_log_food_path(@logged_food) %>

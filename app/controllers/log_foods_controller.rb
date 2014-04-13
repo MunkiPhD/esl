@@ -8,6 +8,7 @@ class LogFoodsController < ApplicationController
   end
 
   def show
+    @logged_food = current_user.log_foods.find(params[:id].to_i)
   end
 
   def new
@@ -30,6 +31,26 @@ class LogFoodsController < ApplicationController
   end
 
   def edit
+    @logged_food = current_user.log_foods.find(params[:id].to_i)
+  end
+
+  def update
+    @logged_food = current_user.log_foods.find(params[:id])
+
+    respond_to do |format|
+      if @logged_food.nil?
+        format.html { redirect_to nutrition_path, notice: "You cannot edit an item that does not belong to you!" }
+        format.json { head :no_content }
+      end
+
+      if @logged_food.update(logged_food_params)
+        format.html { redirect_to nutrition_path, notice: "Successfully updated food log entry!" }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @logged_food.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private 
