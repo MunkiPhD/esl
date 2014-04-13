@@ -37,7 +37,7 @@ $(document).ready(function(){
 			result = "An error occured while attempting to delete the entry.";
 			templateId = "#template_alert_error";
 
-		}).done(function(){
+		}).always(function(){
 			var templateHtml = $(templateId).html();
 			Mustache.parse(templateHtml);
 			var rendered = Mustache.render(templateHtml, { message: result });
