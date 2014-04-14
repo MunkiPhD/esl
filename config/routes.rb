@@ -24,24 +24,28 @@ Esl::Application.routes.draw do
   #  resources :workouts, controller: 'workouts', only: [:index, :show]
   #end
 
-   # resources :users do
-   #   resources :workouts
-   # end
+  # resources :users do
+  #   resources :workouts
+  # end
 
-   get ':username/workout/:id', to: 'workouts#show', as: :user_workout
-   get ':username/workouts', to: 'workouts#index', as: :user_workouts
-   get ':username/workout/:id/edit', to: 'workouts#edit', as: :edit_user_workout
-   delete ':username/workout/:id/delete', to: 'workouts#destroy', as: :delete_user_workout
-   put ':username/workout/:id/update', to: 'workouts#update', as: :update_user_workout
+  get ':username/workout/:id', to: 'workouts#show', as: :user_workout
+  get ':username/workouts', to: 'workouts#index', as: :user_workouts
+  get ':username/workout/:id/edit', to: 'workouts#edit', as: :edit_user_workout
+  delete ':username/workout/:id/delete', to: 'workouts#destroy', as: :delete_user_workout
+  put ':username/workout/:id/update', to: 'workouts#update', as: :update_user_workout
 
-   scope '/nutrition' do
-     resources :foods, except: [:index] do
-       # foods/1-chicken-breast/log is the desired path
-       resources :log_foods, path: '/log', shallow: true
-     end
-     get 'foods', to: 'foods#search', as: :search_food
-     get '/', to: 'nutrition#index', as: :nutrition
-   end
+  scope '/nutrition' do
+    resources :foods, except: [:index] do
+      # foods/1-chicken-breast/log is the desired path
+      resources :log_foods, path: '/log', shallow: true
+    end
+    get 'foods', to: 'foods#search', as: :search_food
+    get '/', to: 'nutrition#index', as: :nutrition
+  end
+
+  scope '/api' do
+    get 'nutrition/log/daily_totals', to: 'log_foods#daily_totals', as: 'log_food_daily_totals'
+  end
 
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.

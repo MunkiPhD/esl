@@ -73,6 +73,35 @@ class LogFoodsController < ApplicationController
     end 
   end
 
+
+  def daily_totals
+    date = Date.parse(params[:date])
+    logged_foods = current_user.log_foods.on_date(date)
+    
+    @protein = 0.0
+    @carbs = 0.0
+    @fat = 0.0
+    @date = date
+
+    puts "is logged_foods nil? #{logged_foods.nil?}"
+
+    unless logged_foods.nil?
+      logged_foods.each do |x|
+        puts "item name: #{x.food_name}"
+        @protein += x.entry_protein
+        @carbs += x.entry_carbs
+        @fat += x.entry_fat
+      end
+    end 
+
+    respond_to do |format|
+      puts "Format type: #{format}"
+      format.html { redirect_to nutrition_path, notice: "This call is meant for API calls only!" }
+      format.json { render 'daily_totals' }
+    end
+
+  end
+
   private 
   def logged_food_params
     params.require(:log_food).permit(:servings, :log_date, :food_id)
