@@ -22,7 +22,7 @@ describe LogFood do
     expect(logged_food.food_name).to eq bread.name
   end
 
-  describe "#on_date" do
+  describe ".on_date" do
     it 'returns the logged foods on specified date' do
       yesterday = create(:log_food, log_date: Date.yesterday, user: user)
       today = create(:log_food, log_date: Date.today, user: user)
@@ -31,12 +31,36 @@ describe LogFood do
     end
   end
 
-  describe "#for_food" do
+  describe ".for_food" do
     it 'returns the logged foods for the specified food' do
       food = create(:food)
       food2 = create(:food)
       logged = create(:log_food, food: food)
       expect(LogFood.for_food(food)).to eq [logged]
+    end
+  end
+
+  describe "#entry_protein" do
+    it 'it returns the correct amount of protein for the entry' do
+      food = Food.new(protein: 2)
+      log_entry = LogFood.new(food: food, servings: 2)
+      expect(log_entry.entry_protein).to eq 4
+    end
+  end
+
+  describe "#entry_carbs" do
+    it 'returns the correct amount of carbs for the entry' do
+      food = Food.new(carbs: 2)
+      log_entry = LogFood.new(food: food, servings: 3)
+      expect(log_entry.entry_carbs).to eq 6
+    end
+  end
+
+  describe "#entry_fat" do
+    it 'returns the correct amount of fat for the entry' do
+      food = Food.new(total_fat: 2)
+      log_entry = LogFood.new(food: food, servings: 2.5)
+      expect(log_entry.entry_fat).to eq 5
     end
   end
 

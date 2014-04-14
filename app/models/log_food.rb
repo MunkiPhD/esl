@@ -25,4 +25,16 @@ class LogFood < ActiveRecord::Base
 
   scope :on_date, ->(date) { where("log_date = ?", date) }
   scope :for_food, ->(food) { where("food_id = ?", food) }
+
+  def entry_protein
+    return food.protein * servings
+  end
+
+  def entry_carbs
+    return food.carbs * servings
+  end
+
+  def entry_fat
+    return food.total_fat * servings
+  end
 end
