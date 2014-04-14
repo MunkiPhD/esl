@@ -1,4 +1,9 @@
 <h1>Nutrition Dashboard</h1>
+<div id="nutrition_breakdown_totals">
+  totals
+</div>
+
+<div class="nutrition_right_col">
 <div id="selected_date">
   <span id="selected_date_display">
     <div class="main-date"><%= format_date @current_date %></div>
@@ -13,5 +18,13 @@
     <%= link_to "Go back to today", nutrition_path%>
   </div>
 <% end %>
+</div>
+
+<div id="nutrition_search_box">
+  <form class="form-inline">
+  <%= text_field_tag "search", '',  { placeholder: "Search for foods" } %>
+  <button class="btn btn-primary">Go</button>
+</form>
+</div>
 </div>
 <%= render 'logged_foods', logged_foods: @logged_foods %>
