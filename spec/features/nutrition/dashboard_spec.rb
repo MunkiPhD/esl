@@ -45,5 +45,14 @@ feature "user visits the dashboard" do
       expect(page).to have_content "about 2 years ago"
       expect(page).to have_link "Go back to today"
     end
+
+    scenario "searches for a food item" do
+      food = create(:food)
+      visit nutrition_path
+      expect(page).to_not have_link food.name
+      fill_in 'search', with: food.name
+      click_button 'Search'
+      expect(page).to have_link food.name
+    end
   end
 end

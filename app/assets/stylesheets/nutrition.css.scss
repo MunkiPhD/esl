@@ -23,6 +23,8 @@
   border: 1px solid $border;
   padding: 10px;
   background-color: lighten($color-one, 36%);
+  margin: 0 auto;
+  text-align:center;
 
   form {
     margin: 0px;
@@ -59,5 +61,7 @@
 }
 
 #logged_foods {
+  margin: 5px;
   float: left;
+  clear: left;
 }

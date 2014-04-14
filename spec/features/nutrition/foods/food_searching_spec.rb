@@ -6,7 +6,7 @@ feature "Person searching for food" do
 
     perform_search("bread")
 
-    expect(page).to have_content "Searched for: 'bread'"
+    expect(page).to have_content "Showing results for: 'bread'"
     expect(page).to have_link bread.name
     expect(page).to have_content "Found 1 result."
   end
@@ -17,7 +17,7 @@ feature "Person searching for food" do
 
     perform_search("bread")
 
-    expect(page).to have_content "Searched for: 'bread'"
+    expect(page).to have_content "Showing results for: 'bread'"
     expect(page).to have_link bread.name
     expect(page).to have_link bread2.name
     expect(page).to have_content "Found 2 results."

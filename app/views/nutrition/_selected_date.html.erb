@@ -1,0 +1,15 @@
+<div id="selected_date">
+  <span id="selected_date_display">
+    <div class="main-date"><%= format_date selected_date %></div>
+    <div class="time-ago"><%= days_ago selected_date %></div>
+  </span>
+  <%= form_tag(nutrition_path, method: 'GET', class: "form-inline", id: "nutrition_date_select") do %>
+    <%= select_date(selected_date, order: [:day, :month, :year], prefix: "log_date") %>
+    <%= submit_tag "Go" %>
+  <% end %>
+  <% if selected_date != Date.today %>
+    <div class="go-back-to-today">
+      <%= link_to "Go back to today", nutrition_path%>
+    </div>
+  <% end %>
+</div>

@@ -46,7 +46,7 @@ feature "Visitor interacts with food" do
     fill_in "search", with: "bread"
     click_button "Search"
 
-    expect(page).to have_content "Searched for: 'bread'"
+    expect(page).to have_content "Showing results for: 'bread'"
     expect(page).to have_link bread.name
     expect(page).to have_content "Found 1 result."
   end
