@@ -64,6 +64,20 @@ describe LogFood do
     end
   end
 
+  describe "#total_calories" do
+    it 'returns the calories based on macronutrients (fat)' do
+      food = Food.new(total_fat: 2)
+      log_entry = LogFood.new(food: food, servings: 2)
+      expect(log_entry.total_calories).to eq 36
+    end
+
+    it 'returns the calories based on macronutrients (protein)' do
+      food = Food.new(total_fat: 2, protein: 1, carbs: 2)
+      log_entry = LogFood.new(food: food, servings: 1.2)
+      expect(log_entry.total_calories).to eq ((9*2 + 4*1 + 4*2) * 1.2)
+    end
+  end
+
   context 'validation' do
     it 'has a valid factory' do
       expect(build(:log_food)).to be_valid

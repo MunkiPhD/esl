@@ -37,4 +37,8 @@ class LogFood < ActiveRecord::Base
   def entry_fat
     return food.total_fat * servings
   end
+
+  def total_calories
+    (entry_protein * 4) + (entry_carbs * 4) + (entry_fat * 9)
+  end
 end
