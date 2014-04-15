@@ -33,3 +33,55 @@ window.FoodLog.DeleteFoodLogEntry = function(url, successFunction){
 
 	return false;
 }
+
+
+window.FoodLog.CreateDataForPieChart = function(json){
+	// parse the numbers to get them into numerical format //
+	var protein = parseFloat(json.protein);
+	var carbs = parseFloat(json.carbs);
+	var fat = parseFloat(json.fat);
+	var total = protein + carbs + fat;
+
+	console.log(total);
+
+	/* calculate the percentage for each macronutrient */
+	var proteinPercent = (protein / total) * 100;
+	var carbPercent = (carbs / total) * 100;
+	var fatPercent = (fat / total) * 100;
+
+	var proteinData = {
+		start_position: 0,
+		end_position: proteinPercent,
+		color: "#FFAA00",
+		title_text: "Protein",
+		amount_grams: protein,
+		percent_of_total: proteinPercent
+	};
+	
+	var carbData = {
+		start_position: proteinPercent,
+		end_position: proteinPercent + carbPercent,
+		color: "#FF8800",
+		title_text: "Carbs",
+		amount_grams: carbs,
+		percent_of_total: carbPercent
+	};
+
+	var fatData = {
+		start_position: proteinPercent + carbPercent,
+		end_position: 100,
+		color: "#FFEE00",
+		title_text: "Fat",
+		amount_grams: fat,
+		percent_of_total: fatPercent
+	};
+
+	var data = [];
+	data.push(proteinData);
+	data.push(carbData);
+	data.push(fatData);
+
+	console.log(data);
+
+	return data;
+}

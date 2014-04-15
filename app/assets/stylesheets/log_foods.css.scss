@@ -33,3 +33,48 @@
   width:45px;
   text-align:center;
 }
+
+
+#totals_pie_chart_svg {
+  height:200px;
+}
+
+#totals_pie_chart {
+  border: 1px solid $border;
+  margin-top:5px;
+  padding: 5px;
+  width: 320px;
+  text-align:center;
+
+  .block {
+    width: 15px;
+    height: 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .protein-color {
+    background-color: #FFAA00;
+  }
+
+  .carbs-color {
+    background-color: #FFAA00;
+  }
+
+  .fat-color {
+    background-color: #FFEE00;
+  }
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 4px;
+  pointer-events: none;
+}

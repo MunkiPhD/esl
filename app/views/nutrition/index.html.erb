@@ -5,9 +5,16 @@
   totals
 </div>
 -->
+<svg width="50" height="50">
+  <circle cx="25" cy="25" r="25" fill="purple"></circle>
+</svg>
+<script>
+</script>
 
 <div class="nutrition_right_col">
   <%= render 'selected_date', selected_date: @current_date %>
   <%= render 'foods/search' %>
+  <%= render 'log_foods/pie_chart' %>
 </div>
 <%= render 'logged_foods', logged_foods: @logged_foods %>
+<%= hidden_field_tag "selected_date_value", format_date(@current_date) %>
