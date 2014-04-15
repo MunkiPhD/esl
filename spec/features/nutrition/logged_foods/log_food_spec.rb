@@ -102,5 +102,12 @@ feature "User food item logging" do
       visit nutrition_path
       expect(page).to have_content food.name
     end
+
+    scenario 'can go to the logged food from the nutrition dashboard' do
+      logged_food = create(:log_food, user: user, log_date: Date.today)
+      visit nutrition_path
+      click_link logged_food.food_name
+      expect(page).to have_content logged_food.food_name
+    end
   end
 end

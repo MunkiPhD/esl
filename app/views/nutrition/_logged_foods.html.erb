@@ -9,7 +9,7 @@
       <%= link_to "Edit", edit_log_food_path(logged) %>&nbsp;|&nbsp;
       <%= link_to "Delete", logged, data: { confirm: "Are you sure you want to delete #{logged.servings} servings of #{logged.food_name}?", method: "DELETE" } %>
     </span>
-    <div class="food-name"><%= logged.food_name %></div>
+    <div class="food-name"><%= link_to logged.food_name, logged.food %></div>
   </div>
     <%= logged.servings %> Servings
   </div>
