@@ -42,7 +42,10 @@ window.FoodLog.CreateDataForPieChart = function(json){
 	var fat = parseFloat(json.fat);
 	var total = protein + carbs + fat;
 
-	console.log(total);
+	if(total == 0){
+		total = 1;
+	}
+	console.log("Total:" + total);
 
 	/* calculate the percentage for each macronutrient */
 	var proteinPercent = (protein / total) * 100;

@@ -18,3 +18,9 @@
 </div>
 <%= render 'logged_foods', logged_foods: @logged_foods %>
 <%= hidden_field_tag "selected_date_value", format_date(@current_date) %>
+<script>
+$(document).ready(function(){
+	// generate the pie chart of daily totals
+	RefreshDailyTotalsPieChart();
+});
+</script>

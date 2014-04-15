@@ -20,14 +20,13 @@ $(document).ready(function(){
 			$theEntry.parents(".logged-food-entry").slideUp('slow', function(){
 				// animation complete															  
 				// eventually issue an update to the screen for modified data
+				RefreshDailyTotalsPieChart() // refresh the daily totals
 			});
 		});
 
 		return false;
 	});
 
-	// generate the pie chart of daily totals
-	RefreshDailyTotalsPieChart();
 });
 
 
@@ -37,15 +36,30 @@ $(document).ready(function(){
 function RefreshDailyTotalsPieChart(){
 	/* get the json data from the api call */
 	try {
-		var currentDate = $("#selected_date_value").value; 
+		var currentDate = $("#selected_date_value").val(); 
 		console.log("date: " + currentDate);
 
-		var jsonData = { "protein": 150, "carbs": 230, "fat": 30, "date":"14-April-2014" };	
-		var data = FoodLog.CreateDataForPieChart(jsonData);
-		console.log("data:");
-		console.log(data);
+		$.ajax({
+			type: "GET",
+			data: { date: currentDate },
+			dataType: "json",
+			url: 'api/nutrition/log/daily_totals'
+		}).done(function(data, status, xhr){
+			console.log(data);
+			var jsonData = FoodLog.CreateDataForPieChart(data);
+			console.log("data:");
+			console.log(jsonData);
 
-		CreatePieChart(data, "#daily_totals_chart");
+			$("#daily_totals_chart").empty();
+			CreatePieChart(jsonData, "#daily_totals_chart");
+
+		}).fail(function(xhr, status, error){
+			console.log(e);
+		}).always(function(){
+			// do nothing
+		});
+
+	//	CreatePieChart(data, "#daily_totals_chart");
 	}catch(e){
 		console.log(e);
 	}
