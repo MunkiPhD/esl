@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410223041) do
+ActiveRecord::Schema.define(version: 20140416230643) do
 
   create_table "circles", force: true do |t|
     t.string   "name",                       null: false
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20140410223041) do
   create_table "exercises", force: true do |t|
     t.string   "name",       null: false
     t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "favorite_foods", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "food_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -98,7 +105,7 @@ ActiveRecord::Schema.define(version: 20140410223041) do
 
   create_table "log_foods", force: true do |t|
     t.decimal  "servings",   default: 1.0,          null: false
-    t.date     "log_date",   default: '2014-04-11', null: false
+    t.date     "log_date",   default: '2014-04-10', null: false
     t.integer  "food_id",                           null: false
     t.integer  "user_id",                           null: false
     t.datetime "created_at"

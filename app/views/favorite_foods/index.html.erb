@@ -1,0 +1,8 @@
+<div id="favorite_foods_list">
+  <%= @favorite_foods.each do |favorite_food| %>
+    <div class="favorite-food-item">
+      <%= link_to favorite_food.food_name, foods_path(favorite_food.food) %>
+      <%= link_to_add "Log Item", new_food_log_food_path(food_id: favorite_food.food) %>
+    </div>
+  <% end %>
+</div>

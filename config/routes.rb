@@ -34,7 +34,9 @@ Esl::Application.routes.draw do
   delete ':username/workout/:id/delete', to: 'workouts#destroy', as: :delete_user_workout
   put ':username/workout/:id/update', to: 'workouts#update', as: :update_user_workout
 
+
   scope '/nutrition' do
+    resources :favorite_foods, path: '/nutrition/foods/favorites'
     resources :foods, except: [:index] do
       # foods/1-chicken-breast/log is the desired path
       resources :log_foods, path: '/log', shallow: true
