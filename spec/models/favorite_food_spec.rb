@@ -8,4 +8,15 @@ describe FavoriteFood do
       expect(favorite_food.food_name).to eq food.name
     end
   end
+
+  describe ".for_food" do
+    it 'returns favorites for the specified id' do
+      food = create(:food)
+      food2 = create(:food)
+      favorite_food = create(:favorite_food, food: food)
+      favorite_food2 = create(:favorite_food, food: food2)
+
+      expect(FavoriteFood.for_food(food)).to eq [favorite_food]
+    end
+  end
 end
