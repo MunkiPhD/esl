@@ -7,7 +7,7 @@
     <%= submit_tag "Add to Favorites" %>
   <% end %>
 <% else %>
-    <%= button_to "Remove from Favorites", @favorite_food, method: "delete" %>
+    <%= link_to_destroy "Remove from Favorites", @favorite_food, method: "delete" %>
 <% end %>
 
 <div class="food_label">

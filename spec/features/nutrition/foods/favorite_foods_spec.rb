@@ -98,4 +98,18 @@ feature "User manages favorite foods" do
       expect(page).to_not have_link food.name
     end
   end
+
+  scenario 'only shows the option to remove a favorite if it is already a favorite of user' do
+    food = create(:food)
+    favorite_food = create(:favorite_food, user: create(:user), food: food)
+
+    visit favorite_foods_path
+    within("#favorite_foods_list") do
+      expect(page).to_not have_link food.name
+    end
+
+    visit food_path(food)
+    expect(page).to_not have_button "Remove from Favorites"
+    expect(page).to have_button "Add to Favorites"
+  end
 end
