@@ -26,6 +26,8 @@ feature "User manages favorite foods" do
     food = create(:food)
     visit food_path(food)
     click_button "Add to Favorites"
+
+    visit nutrition_path
     click_link "View your Favorites"
 
     within("#favorite_foods_list") do
@@ -77,6 +79,23 @@ feature "User manages favorite foods" do
   end
 
   scenario 'removes the food from favorites from the food items page' do
-    fail
+    food = create(:food)
+    visit food_path(food)
+
+    expect(page).to_not have_button "Remove from Favorites"
+    click_button "Add to Favorites"
+    
+    visit food_path(food)
+
+    expect(page).to_not have_button "Add to Favorites"
+    click_button "Remove from Favorites"
+
+    expected_str = "#{food.name} was removed from your favorites"
+    expect(page).to have_css ".text-success", text: expected_str
+    
+    visit favorite_foods_path
+    within("#favorite_foods_list") do
+      expect(page).to_not have_link food.name
+    end
   end
 end
