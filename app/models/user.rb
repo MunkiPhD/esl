@@ -58,6 +58,11 @@ class User < ActiveRecord::Base
   end
 
 
+  def favorite_food(food)
+    self.favorite_foods.for_food(food).first
+  end
+
+
   private 
 
   def self.by_login(login_value)

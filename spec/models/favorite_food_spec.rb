@@ -30,7 +30,8 @@ describe FavoriteFood do
       expect(FavoriteFood.for_food(food)).to eq [favorite_food]
     end
   end
-  
+
+
   describe "validation" do
     it "is unique for user/food pair" do
       food = create(:food)

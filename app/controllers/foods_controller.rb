@@ -8,7 +8,7 @@ class FoodsController < ApplicationController
   end
 
   def show
-    current_user ? @favorite_food = current_user.favorite_foods.for_food(@food).first : @favorite_food = FavoriteFood.new
+    @favorite_food = current_user.favorite_food(@food) if current_user
   end
 
   def new

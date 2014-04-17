@@ -28,57 +28,74 @@ describe User do
     expect(user).to be_valid
   end
 
-  context "username" do
-    it "is unique" do
-      user = create(:user, username: "steve")
-      user2 = build(:user, username: "steve")
-      expect {
-        user2.save
-      }.to change(User, :count).by(0)
-
-      expect(user2).to have(1).errors_on(:username)
+  describe "#favorite_food" do
+    it 'returns the favorite food for the specified item' do
+      user = create(:user)
+      food = create(:food)
+      favorite_food = create(:favorite_food, food: food, user: user)
+      expect(user.favorite_food(food)).to eq favorite_food
     end
 
-
-    it "has no spaces" do
-      user = build(:user, username: "steve martin")
-      expect(user).to have(1).errors_on(:username)
+    it 'returns a blank favorite food if it does not exist' do
+      user = create(:user)
+      food = create(:food)
+      expect(user.favorite_food(food)).to be_blank
     end
+  end
 
-    it "can only be alphanumeric" do
-      user = build(:user, username: "steve!martin")
-      expect(user).to have(1).errors_on(:username)
+  context 'validations' do
+    describe 'username' do
+      it "is unique" do
+        user = create(:user, username: "steve")
+        user2 = build(:user, username: "steve")
+        expect {
+          user2.save
+        }.to change(User, :count).by(0)
 
-      user.username = "stevemartin2"
-      expect(user).to have(0).errors_on(:username)
-    end
+        expect(user2).to have(1).errors_on(:username)
+      end
 
-    it "allows _ character" do
-      user = build(:user, username: "steve_martin")
-      expect(user).to have(0).errors_on(:username)
-    end
 
-    it "does not allow - character" do
-      user = build(:user, username: "steve-martin")
-      expect(user).to have(1).errors_on(:username)
-    end
+      it "has no spaces" do
+        user = build(:user, username: "steve martin")
+        expect(user).to have(1).errors_on(:username)
+      end
 
-    it 'does not allow just numbers' do
-      user = build(:user, username: "12346")
-      expect(user).to have(1).errors_on(:username)
-    end
+      it "can only be alphanumeric" do
+        user = build(:user, username: "steve!martin")
+        expect(user).to have(1).errors_on(:username)
 
-    it 'has at least one letter' do
-      user = build(:user, username: "a12346")
-      expect(user).to have(0).errors_on(:username)
-    end
+        user.username = "stevemartin2"
+        expect(user).to have(0).errors_on(:username)
+      end
 
-    it 'does not have to start with a letter' do
-      user = build(:user, username: "1stevemartin")
-      expect(user).to have(0).errors_on(:username)
+      it "allows _ character" do
+        user = build(:user, username: "steve_martin")
+        expect(user).to have(0).errors_on(:username)
+      end
 
-      user.username = "_stevemartin"
-      expect(user).to have(0).errors_on(:username)
+      it "does not allow - character" do
+        user = build(:user, username: "steve-martin")
+        expect(user).to have(1).errors_on(:username)
+      end
+
+      it 'does not allow just numbers' do
+        user = build(:user, username: "12346")
+        expect(user).to have(1).errors_on(:username)
+      end
+
+      it 'has at least one letter' do
+        user = build(:user, username: "a12346")
+        expect(user).to have(0).errors_on(:username)
+      end
+
+      it 'does not have to start with a letter' do
+        user = build(:user, username: "1stevemartin")
+        expect(user).to have(0).errors_on(:username)
+
+        user.username = "_stevemartin"
+        expect(user).to have(0).errors_on(:username)
+      end
     end
   end
 
