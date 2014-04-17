@@ -36,7 +36,7 @@ Esl::Application.routes.draw do
 
 
   scope '/nutrition' do
-    resources :favorite_foods, path: '/nutrition/foods/favorites'
+    resources :favorite_foods, path: '/foods/favorites', only: [:index, :create, :destroy]
     resources :foods, except: [:index] do
       # foods/1-chicken-breast/log is the desired path
       resources :log_foods, path: '/log', shallow: true

@@ -42,6 +42,7 @@ class Ability
       can :read, Workout # needs to look at circles, so look at the :show of the WorkoutsController for the permissions
       can :manage, Workout, user_id: user.id
       can :manage, LogFood, user_id: user.id
+      can :manage, FavoriteFood, user_id: user.id
     end
   end
 end
