@@ -30,4 +30,14 @@ describe FavoriteFood do
       expect(FavoriteFood.for_food(food)).to eq [favorite_food]
     end
   end
+  
+  describe "validation" do
+    it "is unique for user/food pair" do
+      food = create(:food)
+      user = create(:user)
+      existing_favorite = create(:favorite_food, food: food, user: user)
+      new_favorite = build(:favorite_food, food: food, user: user)
+      expect(new_favorite).to_not be_valid
+    end
+  end
 end
