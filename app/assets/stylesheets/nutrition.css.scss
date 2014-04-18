@@ -22,7 +22,7 @@
 
 #nutrition_search_box {
   border: 1px solid $border;
-  padding: 10px;
+  padding: 10px 10px 0px 10px;
   background-color: lighten($color-one, 36%);
   margin: 0 auto;
   text-align:center;
@@ -30,6 +30,11 @@
   form {
     margin: 0px;
   }
+}
+
+#view_favorite_foods_link {
+  padding:5px;
+  display: inline-block;
 }
 
 #selected_date {
@@ -66,3 +71,4 @@
   float: left;
   clear: left;
 }
+
