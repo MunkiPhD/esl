@@ -44,6 +44,23 @@ feature "User manages favorite foods" do
   end
 
 
+  scenario 'can go to an item from the favorites food list' do
+    food = create(:food)
+    visit food_path(food)
+    click_button "Add to Favorites"
+
+    visit nutrition_path
+    click_link "View your Favorites"
+
+    within("#favorite_foods_list") do
+      click_link food.name
+    end
+
+    expect(page).to have_content food.name
+    expect(page).to have_button "Remove from Favorites"
+  end
+
+
   scenario "Only sees favorite foods that belong to them" do
     food = create(:bread)
     favorite_food_one = create(:favorite_food, food: food, user: create(:user))
