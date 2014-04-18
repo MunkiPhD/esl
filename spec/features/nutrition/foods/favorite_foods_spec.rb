@@ -74,9 +74,6 @@ feature "User manages favorite foods" do
     end
   end
 
-  scenario 'User attempts to remove an item from favorites that belongs to someone else' do
-    pending
-  end
 
   scenario 'removes the food from favorites from the food items page' do
     food = create(:food)
