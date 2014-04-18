@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0.rc1'
+gem 'rails', '4.1.0'
 
 #gem 'sqlite3'
 
@@ -30,21 +30,16 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
 
 group :development do
-  gem "guard-rspec"
   gem "annotate"
-  gem 'libnotify'
 end
 
 group :development, :test do
   gem "rspec-rails"
-  gem "factory_girl_rails"
 end
 
 group :test do
-  gem "faker"
+  gem "factory_girl_rails"
   gem "capybara", "~> 2.0.2"
-  gem "database_cleaner"
-  gem "launchy"
   gem "fuubar"
 end
 # To use ActiveModel has_secure_password
