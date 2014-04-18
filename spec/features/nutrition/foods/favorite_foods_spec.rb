@@ -7,13 +7,10 @@ feature "User manages favorite foods" do
     login_user user
   end
 
-  scenario "Can add a food to favorites from the food items page" do
+  scenario "Can add a food to favorites from a food items page" do
     food = create(:food)
-    visit food_path(food)
 
-    click_button "Add to Favorites"
-    expected_str = "#{food.name} was added to your favorites"
-    expect(page).to have_content expected_str
+		add_food_to_favorites(food)
 
     visit nutrition_path
     click_link "View your Favorites"
@@ -22,10 +19,18 @@ feature "User manages favorite foods" do
     end
   end
 
+	scenario 'Favoriting a food displays a flash messages' do
+		food = create(:food)
+		add_food_to_favorites(food)
+
+		user_sees_message "#{food.name} was added to your favorites"
+	end
+
+
   scenario "Logs a food entry from their favorites list" do
     food = create(:food)
-    visit food_path(food)
-    click_button "Add to Favorites"
+
+		add_food_to_favorites(food)
 
     visit nutrition_path
     click_link "View your Favorites"
@@ -46,19 +51,15 @@ feature "User manages favorite foods" do
 
   scenario 'can go to an item from the favorites food list' do
     food = create(:food)
-    visit food_path(food)
-    click_button "Add to Favorites"
 
-    visit nutrition_path
-    click_link "View your Favorites"
+		add_food_to_favorites(food)
 
-    within("#favorite_foods_list") do
-      click_link food.name
-    end
+		go_to_food_from_favorites(food)
 
     expect(page).to have_content food.name
-    expect(page).to have_button "Remove from Favorites"
+    user_sees_button "Remove from Favorites"
   end
+
 
 
   scenario "Only sees favorite foods that belong to them" do
@@ -66,11 +67,8 @@ feature "User manages favorite foods" do
     favorite_food_one = create(:favorite_food, food: food, user: create(:user))
     favorite_food_mine = create(:favorite_food, user: user)
 
-    visit favorite_foods_path
-    within("#favorite_foods_list") do
-      expect(page).to have_link favorite_food_mine.food_name
-      expect(page).to_not have_link favorite_food_one.food_name
-    end
+		user_does_not_see_food_in_favorites_list(food)
+		user_sees_food_in_favorites_list(favorite_food_mine.food)
   end
 
   scenario "User can remove an item from their favorites page" do
@@ -82,13 +80,8 @@ feature "User manages favorite foods" do
       click_button "Remove"
     end
 
-    expected_str = "#{favorite_food.food_name} was removed from your favorites"
-    expect(page).to have_content expected_str
-
-    visit favorite_foods_path
-    within("#favorite_foods_list") do
-      expect(page).to_not have_link favorite_food.food_name
-    end
+    user_sees_message "#{favorite_food.food_name} was removed from your favorites"
+		user_does_not_see_food_in_favorites_list(favorite_food.food)
   end
 
 
@@ -96,34 +89,69 @@ feature "User manages favorite foods" do
     food = create(:food)
     visit food_path(food)
 
-    expect(page).to_not have_button "Remove from Favorites"
+    user_does_not_see_button "Remove from Favorites"
     click_button "Add to Favorites"
     
     visit food_path(food)
-
-    expect(page).to_not have_button "Add to Favorites"
+    user_does_not_see_button "Add to Favorites"
     click_button "Remove from Favorites"
 
-    expected_str = "#{food.name} was removed from your favorites"
-    expect(page).to have_css ".text-success", text: expected_str
+    user_sees_message "#{food.name} was removed from your favorites"
     
-    visit favorite_foods_path
-    within("#favorite_foods_list") do
-      expect(page).to_not have_link food.name
-    end
+		user_does_not_see_food_in_favorites_list(food)
   end
 
   scenario 'only shows the option to remove a favorite if it is already a favorite of user' do
     food = create(:food)
     favorite_food = create(:favorite_food, user: create(:user), food: food)
 
+		user_does_not_see_food_in_favorites_list(food)
+
+		visit food_path(food)
+		user_does_not_see_button("Remove from Favorites")
+		user_sees_button("Add to Favorites")
+  end
+
+	def user_sees_food_in_favorites_list(food)
+    visit favorite_foods_path
+    within("#favorite_foods_list") do
+      expect(page).to have_link food.name
+    end
+	end
+
+	def user_does_not_see_food_in_favorites_list(food)
     visit favorite_foods_path
     within("#favorite_foods_list") do
       expect(page).to_not have_link food.name
     end
+	end
 
-    visit food_path(food)
-    expect(page).to_not have_button "Remove from Favorites"
-    expect(page).to have_button "Add to Favorites"
-  end
+	def user_sees_message(message)
+    expect(page).to have_css "#flash_messages", text: message
+	end
+
+	def user_sees_button(button_text)
+		expect(page).to have_button button_text
+	end
+
+
+	def user_does_not_see_button(button_text)
+		expect(page).to_not have_button button_text
+	end
+
+
+	def go_to_food_from_favorites(food)
+    visit nutrition_path
+    click_link "View your Favorites"
+
+    within("#favorite_foods_list") do
+      click_link food.name
+    end
+	end
+
+
+	def add_food_to_favorites(food)
+		visit food_path(food)
+		click_button "Add to Favorites"
+	end
 end
