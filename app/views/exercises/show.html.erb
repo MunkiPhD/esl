@@ -9,5 +9,3 @@ Submitted by: <%= @exercise.user.username %>
 </p>
 <%= link_to_edit 'Edit', edit_exercise_path(@exercise) %> 
 <%= link_to_destroy "Delete", @exercise, data: { confirm: "Are you sure?"}, method: "delete" %>
-<br/><br/>
-<%= link_to 'Back', exercises_path %>
