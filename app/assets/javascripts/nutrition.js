@@ -18,8 +18,7 @@ $(document).ready(function(){
 		// use a lambda expression to handle the success event
 		FoodLog.DeleteFoodLogEntry(url, function(){
 			$theEntry.parents(".logged-food-entry").slideUp('slow', function(){
-				// animation complete															  
-				// eventually issue an update to the screen for modified data
+				//* animation complete*/
 				RefreshDailyTotalsPieChart() // refresh the daily totals
 			});
 		});
@@ -58,8 +57,6 @@ function RefreshDailyTotalsPieChart(){
 		}).always(function(){
 			// do nothing
 		});
-
-	//	CreatePieChart(data, "#daily_totals_chart");
 	}catch(e){
 		console.log(e);
 	}
@@ -76,14 +73,14 @@ function CreatePieChart(data, id){
 	var width = 310;
 	var height = 200;
 	visSVG.attr("height", height)
-				.attr("width", width);
+	.attr("width", width);
 
 
 	var linearScale = d3.scale.linear().domain([0,100]).range([0, Math.PI *2]);
 	var arc = d3.svg.arc()
 	.innerRadius(50)
 	.outerRadius(function(d){
-			return 100; //d.start_position * 10;						
+		return 100; //d.start_position * 10;						
 	})
 	.startAngle(function(d){
 		return linearScale(d.start_position);
@@ -93,24 +90,24 @@ function CreatePieChart(data, id){
 	});
 
 	var div = d3.select("body").append("div")
-			.attr("class", "tooltip")
-			.style("opacity", 0);
+	.attr("class", "tooltip")
+	.style("opacity", 0);
 
 
 	visSVG.selectAll("path")
-		.data(data)
-		.enter()
-		.append("path")
-		.attr("d", arc)
-		.style("fill", function(d){
-			return d.color;
-		})
-		.attr("transform", function(d){
-			var xLoc = width / 2;
-			var yLoc = height / 2;
-			var translateStr = "translate(" + xLoc + "," + yLoc + ")";
-			return translateStr;
-		})
+	.data(data)
+	.enter()
+	.append("path")
+	.attr("d", arc)
+	.style("fill", function(d){
+		return d.color;
+	})
+	.attr("transform", function(d){
+		var xLoc = width / 2;
+		var yLoc = height / 2;
+		var translateStr = "translate(" + xLoc + "," + yLoc + ")";
+		return translateStr;
+	})
 	.on("mouseover", function(d) {
 		div.transition()
 		.duration(200)

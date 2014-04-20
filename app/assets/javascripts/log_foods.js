@@ -12,22 +12,16 @@ window.FoodLog.DeleteFoodLogEntry = function(url, successFunction){
 		console.log(data);
 		console.log(status);
 
-		result = "Food log entry deleted.";
-		templateId = "#template_alert_success";
-		successFunction();
+		UserMessages.DisplaySuccess("Food log entry deleted.");
+		successFunction(); // execute the callback that was passed in with this function
 
 	}).fail(function(xhr, status, error){
 		console.log(status);
 		console.log(error);
 
-		result = "An error occured while attempting to delete the entry.";
-		templateId = "#template_alert_error";
+		UserMessages.DisplayError("An error occured while attempting to delete the entry.");
 
 	}).always(function(){
-		var templateHtml = $(templateId).html();
-		Mustache.parse(templateHtml);
-		var rendered = Mustache.render(templateHtml, { message: result });
-		$("#flash_messages").append(rendered);
 		console.log("done with DELETE request");
 	});
 
