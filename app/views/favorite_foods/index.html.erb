@@ -1,14 +1,22 @@
 <div id="favorite_foods_list">
-  <% @favorite_foods.each do |favorite_food| %>
-    <div class="favorite-food-item">
-      <%= link_to favorite_food.food_name, food_path(favorite_food.food), class: "food-name" %>
-      <span class="control-panel">
-	      <%= link_to_add "Log Item", new_food_log_food_path(food_id: favorite_food.food) %>
-	      <%= link_to_destroy "Remove", favorite_food_path(favorite_food), method: :delete %>
-      </span>
-      <div class="food-stats">
-	      <b>Calories:</b> <%= favorite_food.food.calories %> <b>Protein:</b> <%= favorite_food.food.protein %> <b>Carbs:</b> <%= favorite_food.food.carbs %> <b>Fat:</b> <%= favorite_food.food.total_fat %>
-      </div>
-    </div>
-  <% end %>
+	<% @favorite_foods.each do |favorite_food| %>
+		<div class="favorite-food-item">
+			<div class="food-item-info">
+				<div class="control-panel">
+					<%= link_to_add "Log Item", new_food_log_food_path(food_id: favorite_food.food), :date => { id: favorite_food.food.id } %>
+					<%= link_to_destroy "Remove", favorite_food_path(favorite_food), method: :delete %>
+				</div>
+				<h4><%= link_to favorite_food.food_name, food_path(favorite_food.food) %></h4>
+				<h3></h3>
+				<div class="summary-panel">
+					<span class="macronutrient-summary-item">Calories:</span> <%= favorite_food.food.calories %> 
+					<span class="macronutrient-summary-item">Protein:</span> <%= favorite_food.food.protein %> 
+					<span class="macronutrient-summary-item">Carbs:</span> <%= favorite_food.food.carbs %> 
+					<span class="macronutrient-summary-item">Fat:</span> <%= favorite_food.food.total_fat %>
+				</div>
+				<div class="serving-size"><%= favorite_food.food.serving_size %></div>
+			</div>
+			<div class="food-item-image"></div>
+		</div>
+	<% end %>
 </div>
