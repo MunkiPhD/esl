@@ -5,7 +5,7 @@
 				<div class="control-panel">
 						  <%= link_to_add "Log Item", new_food_log_food_path(food_id: favorite_food.food), 
 									 :data => { id: favorite_food.food.id, 
-												url: food_log_foods_path(favorite_food.food) } %>
+												url: food_log_foods_path(favorite_food.food), "food-name" => favorite_food.food.name } %>
 					<%= link_to_destroy "Remove", favorite_food_path(favorite_food), method: :delete %>
 				</div>
 				<h4><%= link_to favorite_food.food_name, food_path(favorite_food.food) %></h4>
@@ -24,14 +24,11 @@
 </div>
 
 <script id="template_log_food" type="x-templ-mustache">
-<form class="food-item-log-new" action="{{ url }}">
+<form class="food-item-log-new form-inline" action="{{ url }}" data-food-name="{{ food_name }}">
 	<input name="authenticity_token" type="hidden" value="{{ auth }}">
-		<div class="field">
 			<label for="log_food_servings">Servings</label>
-			<input id="log_food_servings" name="log_food[servings]" type="text" value="1.0">
-		</div>
+			<input id="log_food_servings" name="log_food[servings]" class="food-servings" type="text" value="1.0">
 
-		<div class="field">
 			<label for="log_food_log_date">Log Date</label>
 				<select id="log_food_log_date_3i" name="log_food[log_date(3i)]">
 					 <option value="1">1</option>
@@ -93,10 +90,9 @@
 					 <option value="2018">2018</option>
 					 <option value="2019">2019</option>
 		  </select>
-  </div>
   <input id="log_food_food_id" name="log_food[food_id]" type="hidden" value="{{ food_id }}">
   <div class="actions">
-	 <a class="btn btn-success btn-submit" href="#">Create Log food</a>
+	 <a class="btn btn-success btn-submit" href="#">Log Item</a>
 	 <a class="btn btn-info btn-cancel" href="#">Cancel</a>
   </div>
 </form>

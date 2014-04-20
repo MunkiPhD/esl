@@ -78,3 +78,23 @@ div.tooltip {
   border-radius: 4px;
   pointer-events: none;
 }
+
+
+form.food-item-log-new {
+	position: relative;
+	border: 1px solid $border;
+	padding: 5px;
+	width: 612px;
+	height: 75px;
+	text-align: center;
+	background-color: lighten($color-one, 30%);
+
+	.food-servings {
+		margin: 10px 20px 10px 10px;
+	}
+	.actions {
+		position: absolute;
+		right: 5px;
+		bottom: 5px;	
+	}
+}
