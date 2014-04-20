@@ -4,7 +4,7 @@ $(document).ready(function(){
 		var authToken = Security.GetCSRFToken();
 		var foodId = $(this).attr('data-id');
 		var postUrl = $(this).attr('data-url');
-		console.log(authToken);
+		var foodName = $(this).attr('data-food-name');
 
 		var templateHtml = $("#template_log_food").html();
 		Mustache.parse(templateHtml);
@@ -15,21 +15,38 @@ $(document).ready(function(){
 	});
 });
 
+
+
 $(document).on("click", "form.food-item-log-new a.btn-submit", function(e){
 	e.preventDefault();
 
-	// perform ajax submit
 	var $parent = $(this).parents("form.food-item-log-new");
 	var serializedData = $parent.serialize(); // This gets all the data from the form
-
-	console.log(serializedData);
-
-	$parent.slideUp(400, function(e){
-		$(this).remove();
-	});
-
+	var actionUrl = $parent.attr("action");
+	console.log(actionUrl);
+	
+	// perform ajax submit
+	$.ajax({
+		type: "POST",
+		url: actionUrl,
+		dataType: "json",
+		data: serializedData
+	}).done(function(data, status, xhr){
+		UserMessages.DisplaySuccess("Food item was logged");
+	}).fail(function(xhr, status, error){
+		UserMessages.DisplayError("Failed to log the food item.");
+	}).always(function(){
+		console.log("AJAX post completed");	
+		$parent.slideUp(400, function(e){
+			$(this).remove();
+		});
+	});	
+  
 	return false;
 });
+
+
+
 /*
  * Adds an event handler to the cancel button for logging a food item
  */
@@ -42,3 +59,4 @@ $(document).on("click", "form.food-item-log-new a.btn-cancel", function(e){
 
 		return false;
 });
+
