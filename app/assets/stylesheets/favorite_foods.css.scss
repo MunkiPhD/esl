@@ -1,0 +1,26 @@
+@import 'helpers/colors';
+
+#favorite_foods_list {
+   .favorite-food-item {
+      .food-name {
+	 font-size: 20px;
+      }
+
+      border: 1px solid $border;
+      padding: 5px;
+      margin: 10px 0px 10px 0px;
+      min-height: 70px;
+      width: 550px;
+
+      .control-panel {
+	 float: right;
+	 clear: right;
+      }
+
+      .food-stats {
+	      font-size: 14px;
+	      position:relative;
+	      bottom: -30px;
+      }
+   }
+}
