@@ -51,4 +51,22 @@ describe LogFoodsController do
     end
   end
 
+	describe "POST 'create'" do
+		render_views
+
+		it 'creates the item with valid json' do
+			food = create(:food)
+			log_food = build(:log_food, user: user, food: food)
+			post :create, { :format => 'json', :log_food => log_food.attributes, :food_id => food.id }
+			puts response.body
+			expect(response.status).to eq 201
+		end
+
+		it 'returns errors if missing attributes' do
+			food = create(:food)
+			post :create, { :format => 'json', :log_food => { trash: "test"}, :food_id => food.id}
+			puts response.body
+			expect(response.status).to eq 422
+		end
+	end
 end
