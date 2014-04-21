@@ -85,14 +85,12 @@ class LogFoodsController < ApplicationController
     @fat = 0.0
     @date = date
 
-    puts "is logged_foods nil? #{logged_foods.nil?}"
-
     unless logged_foods.nil?
       logged_foods.each do |x|
         puts "item name: #{x.food_name}"
-        @protein += x.entry_protein
-        @carbs += x.entry_carbs
-        @fat += x.entry_fat
+        @protein += x.protein
+        @carbs += x.carbs
+        @fat += x.total_fat
       end
     end 
 

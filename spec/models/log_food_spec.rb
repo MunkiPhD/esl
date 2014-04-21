@@ -40,27 +40,27 @@ describe LogFood do
     end
   end
 
-  describe "#entry_protein" do
+  describe "#protein" do
     it 'it returns the correct amount of protein for the entry' do
       food = Food.new(protein: 2)
       log_entry = LogFood.new(food: food, servings: 2)
-      expect(log_entry.entry_protein).to eq 4
+      expect(log_entry.protein).to eq 4
     end
   end
 
-  describe "#entry_carbs" do
+  describe "#carbs" do
     it 'returns the correct amount of carbs for the entry' do
       food = Food.new(carbs: 2)
       log_entry = LogFood.new(food: food, servings: 3)
-      expect(log_entry.entry_carbs).to eq 6
+      expect(log_entry.carbs).to eq 6
     end
   end
 
-  describe "#entry_fat" do
+  describe "#total_fat" do
     it 'returns the correct amount of fat for the entry' do
       food = Food.new(total_fat: 2)
       log_entry = LogFood.new(food: food, servings: 2.5)
-      expect(log_entry.entry_fat).to eq 5
+      expect(log_entry.total_fat).to eq 5
     end
   end
 
@@ -68,13 +68,13 @@ describe LogFood do
     it 'returns the calories based on macronutrients (fat)' do
       food = Food.new(total_fat: 2)
       log_entry = LogFood.new(food: food, servings: 2)
-      expect(log_entry.total_calories).to eq 36
+      expect(log_entry.calories).to eq 36
     end
 
     it 'returns the calories based on macronutrients (protein)' do
       food = Food.new(total_fat: 2, protein: 1, carbs: 2)
       log_entry = LogFood.new(food: food, servings: 1.2)
-      expect(log_entry.total_calories).to eq ((9*2 + 4*1 + 4*2) * 1.2)
+      expect(log_entry.calories).to eq ((9*2 + 4*1 + 4*2) * 1.2)
     end
   end
 

@@ -44,9 +44,9 @@ describe LogFoodsController do
       json = response.body
       parsed_response = JSON.parse(json) if json && json.length >= 2
 
-      expect(parsed_response['protein']).to eq food_entry.entry_protein
-      expect(parsed_response['carbs']).to eq food_entry.entry_carbs
-      expect(parsed_response['fat']).to eq food_entry.entry_fat
+      expect(parsed_response['protein']).to eq food_entry.protein
+      expect(parsed_response['carbs']).to eq food_entry.carbs
+      expect(parsed_response['fat']).to eq food_entry.total_fat
       expect(Date.parse(parsed_response['date'])).to eq food_entry.log_date
     end
   end
