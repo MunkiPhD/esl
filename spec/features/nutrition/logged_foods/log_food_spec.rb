@@ -93,21 +93,29 @@ feature "User food item logging" do
     
     end
 
-    scenario 'after logging a food item, it appears in the nutrition dashboard' do
-      food = create(:food)
-      visit nutrition_path
-      expect(page).to_not have_content food.name
-      visit new_food_log_food_path(food_id: food)
-      click_button 'Log'
-      visit nutrition_path
-      expect(page).to have_content food.name
-    end
+	 scenario 'nutrition dashboard displays the entry name and macronutrient summary after a log' do
+		 food = create(:food, protein: 10, carbs: 20, total_fat: 30)
+		 visit nutrition_path
+		 expect(page).to_not have_content food.name
+		 visit new_food_log_food_path(food_id: food)
 
-    scenario 'can go to the logged food from the nutrition dashboard' do
-      logged_food = create(:log_food, user: user, log_date: Date.today)
-      visit nutrition_path
-      click_link logged_food.food_name
-      expect(page).to have_content logged_food.food_name
-    end
+		 fill_in "Servings", with: "2"
+		 click_button "Log"
+
+		 visit nutrition_path
+		 within('#logged_foods .logged-food-entry') do
+			 expect(page).to have_content food.name
+			 expect(page).to have_content "Protein:20.0g"
+			 expect(page).to have_content "Carbs:40.0g"
+			 expect(page).to have_content "Fat:60.0g"
+		 end
+	 end
+
+	 scenario 'can go to the logged food from the nutrition dashboard' do
+		 logged_food = create(:log_food, user: user, log_date: Date.today)
+		 visit nutrition_path
+		 click_link logged_food.food_name
+		 expect(page).to have_content logged_food.food_name
+	 end
   end
 end
