@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 		var templateHtml = $("#template_log_food").html();
 		Mustache.parse(templateHtml);
-		var rendered = Mustache.render(templateHtml, { url: postUrl, food_id: foodId, auth: authToken, food_name: foodName });
+		var rendered = Mustache.render(templateHtml, { url: postUrl, food_id: foodId, auth: authToken });
 		var $parent = $(this).parents(".favorite-food-item");
 		$(rendered).hide().insertAfter($parent).slideDown();
 
@@ -24,7 +24,6 @@ $(document).on("click", "form.food-item-log-new a.btn-submit", function(e){
 	var $parent = $(this).parents("form.food-item-log-new");
 	var serializedData = $parent.serialize(); // This gets all the data from the form
 	var actionUrl = $parent.attr("action");
-	var foodName = $parent.attr("data-food-name");
 
 	// perform ajax submit
 	$.ajax({
@@ -35,7 +34,9 @@ $(document).on("click", "form.food-item-log-new a.btn-submit", function(e){
 
 	}).done(function(data, status, xhr){
 		console.log(data);
-		var successMessage = data["log_food"]["servings"] + " servings of " + foodName + " was logged.";
+		var servings = data["log_food"]["servings"];
+		var foodName = data["food_name"];
+		var successMessage = servings + " servings of " + foodName + " was logged.";
 		UserMessages.DisplaySuccess(successMessage);
 
 	}).fail(function(xhr, status, error){

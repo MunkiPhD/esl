@@ -5,7 +5,7 @@
 				<div class="control-panel">
 						  <%= link_to_add "Log Item", new_food_log_food_path(food_id: favorite_food.food), 
 									 :data => { id: favorite_food.food.id, 
-												url: food_log_foods_path(favorite_food.food), "food-name" => favorite_food.food.name } %>
+												url: food_log_foods_path(favorite_food.food) } %>
 					<%= link_to_destroy "Remove", favorite_food_path(favorite_food), method: :delete %>
 				</div>
 				<h4><%= link_to favorite_food.food_name, food_path(favorite_food.food) %></h4>
@@ -24,7 +24,7 @@
 </div>
 
 <script id="template_log_food" type="x-templ-mustache">
-<form class="food-item-log-new form-inline" action="{{ url }}" data-food-name="{{ food_name }}">
+<form class="food-item-log-new form-inline" action="{{ url }}">
 	<input name="authenticity_token" type="hidden" value="{{ auth }}">
 			<label for="log_food_servings">Servings</label>
 			<input id="log_food_servings" name="log_food[servings]" class="food-servings" type="text" value="1.0">
