@@ -10,12 +10,7 @@
 				</div>
 				<h4><%= link_to favorite_food.food_name, food_path(favorite_food.food) %></h4>
 				<h3></h3>
-				<div class="summary-panel">
-					<span class="macronutrient-summary-item">Calories:</span> <%= favorite_food.food.calories %> 
-					<span class="macronutrient-summary-item">Protein:</span> <%= favorite_food.food.protein %> 
-					<span class="macronutrient-summary-item">Carbs:</span> <%= favorite_food.food.carbs %> 
-					<span class="macronutrient-summary-item">Fat:</span> <%= favorite_food.food.total_fat %>
-				</div>
+				<%= macronutrient_summary_display(favorite_food.food) %>
 				<div class="serving-size"><%= favorite_food.food.serving_size %></div>
 			</div>
 			<div class="food-item-image"></div>
