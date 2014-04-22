@@ -58,6 +58,7 @@ class FoodsController < ApplicationController
       # but for now, we're just going to return the params list
       params.require(:food).permit(:name, 
                                    :brand,
+																	 :food_image,
                                    :serving_size,
                                    :calories, 
                                    :calories_from_fat,

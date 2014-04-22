@@ -1,4 +1,4 @@
-<%= form_for(@food) do |f| %>
+<%= form_for(@food, html: { multipart: true }) do |f| %>
   <% if @food.errors.any? %>  
   <div id="errorExplanation">  
   <h2><%= pluralize(@food.errors.count, "error") %>  prohibited this food from being saved:</h2>  
@@ -27,7 +27,7 @@
       <td style="border-top:6px #000 solid"><b>Amount Per Serving</b></td>
     </tr>
     <tr>
-      <td><%= f.label :calories %>Calories&nbsp;</span> <%= f.text_field :calories %> <span class="right">Calories From Fat <%= f.text_field :calories_from_fat %></span></td>
+				<td><span><%= f.label :calories %>Calories&nbsp;</span> <%= f.text_field :calories %> <span class="right">Calories From Fat <%= f.text_field :calories_from_fat %></span></td>
   </tr>
   <tr>
     <td style="border-top:4px #000 solid"><span class="right bold">% Daily Value*</span></td>
@@ -110,17 +110,22 @@
       </table>  
     </td>
   </tr>
-  <!--<tr>
+  <tr>
       <td>
         <b>Ingredients:&nbsp;</b><br/><%= f.text_area :ingredients, :style=>"width:290px" %>
       </td>
-    </tr>-->
+    </tr>
   <tr>
     <td>*Percent daily values based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your caloric needs.</td>
   </tr>
 </table>
+
+<div id="food_image_upload">
+		  <%= f.label :food_image %>
+		  <%= f.file_field :food_image %>
 </div>
-<%= f.submit %>
+</div>
+<%= f.submit class: "btn btn-success" %>
 <% end %>
 
 
