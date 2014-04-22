@@ -30,6 +30,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
 
 gem 'paperclip', '~> 4.1'
+gem 'aws-sdk', '~> 1.5.7'
 
 group :development do
   gem "annotate"
