@@ -207,4 +207,6 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
   config.password_length = 8..128
+
+  config.secret_key = Rails.application.secrets.devise_secret_key
 end
