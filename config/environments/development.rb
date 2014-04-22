@@ -24,4 +24,7 @@ Esl::Application.configure do
 
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = false
+	
+  #paper clip needs access to imagemagik
+  Paperclip.options[:command_path] = "/user/bin/convert"
 end

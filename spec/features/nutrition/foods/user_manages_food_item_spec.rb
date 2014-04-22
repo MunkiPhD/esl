@@ -77,4 +77,23 @@ feature "User manages a food item" do
   scenario "attempts to delete a food that HAS been logged by someone" do
     pending "this has to be implemented when implementing the food logging scheme"
   end
+
+
+	scenario 'can attach an image to food item' do
+    visit new_food_path #"nutrition/foods/new"
+
+    expect {
+      fill_in "Name", with: ice_cream.name
+      fill_in "Brand", with: ice_cream.brand
+      fill_in "Calories", with: ice_cream.calories
+      fill_in "Protein", with: ice_cream.protein
+      fill_in "Serving size", with: "1 scoop"
+			attach_file "Food image", "#{Rails.root}/spec/fixtures/ron.jpg"
+
+      click_button "Create Food"
+		}.to change(Food, :count).by(1)		
+
+		expect(page.find("#food_image")['src']).to_not have_content "medium/apple.png"
+		expect(page.find("#food_image")['src']).to have_content "ron.jpg"
+	end
 end
