@@ -16,3 +16,5 @@ pickle-email-*.html
 *.swp
 *.swo
 *.lock
+public/images/*
+config/secrets.yml
