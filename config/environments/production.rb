@@ -77,4 +77,12 @@ Esl::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+	config.paperclip_defaults = {
+    storage: 's3',
+    url: "images/:hash:styles.:extension",
+    hash_secret: Rails.application.secrets.image_secret_hash,
+    path: "images/:hash:styles.:extension",
+    s3_credentials: "#{::Rails.root}/config/aws.yml"
+	}
 end

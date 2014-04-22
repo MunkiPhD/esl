@@ -29,8 +29,8 @@ Esl::Application.configure do
   Paperclip.options[:command_path] = "/user/bin/convert"
 
   config.paperclip_defaults = {
-		path:  "#{Rails.root}/public/images/:style/:hash.:extension",
+		path:  "#{Rails.root}/public/images/:hash:styles.:extension",
 		hash_secret: Rails.application.secrets.image_secret_hash,
-		url:  "/images/:style/:hash.:extension"
+		url:  ":hash:styles.:extension"
   }
 end

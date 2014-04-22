@@ -69,8 +69,8 @@
 class Food < ActiveRecord::Base
 	has_many :log_foods
 	has_attached_file :food_image,
-		styles: { medium: "250x250", thumb: "50x50" }, 
-		default_url: ":style/apple.png"
+		styles: { medium: "250x250>", thumb: "50x50>" }, 
+		default_url: ":style_apple.png"
 
 	validates_attachment :food_image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png"] }
 	validates_attachment_size :food_image, less_than_or_equal_to: 2.megabytes, if: Proc.new { |import| !import.food_image.file? }
