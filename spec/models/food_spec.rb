@@ -137,37 +137,54 @@ describe Food do
     expect(f).to eq found
   end
 
+  it 'image content type validation' do
+	food = create(:food)
+	food.should validate_attachment_content_type(:food_image)
+		.allowing('image/png', 'image/jpg', 'image/jpeg')
+		.rejecting('text/plain', 'text/xml')
+  end
+
+  it 'has an attached image file' do
+	  create(:food).should have_attached_file(:food_image)
+  end
+
+  # it seems like the validate attachment size isnt working correctly in the test
+  #it 'has a size less than 2 MBs' do
+  #		food = build(:food, food_image: File.new("#{Rails.root}/spec/fixtures/ron.jpg"))
+  #		food.should validate_attachment_size(:food_image).in(0..2.megabytes)
+  #  end
+
   describe "methods" do
-    it '#destroy does not delete item because it has been logged' do
-      pending 'need to implement'
-      logged_food = create(:eaten_bread)
-      bread = Food.find(logged_food.food_id) # get the food item tied to the logged food
-      
-      expect(bread.destroy).to eq false # check that the food's destroy item returns false since it's already been logged
-    end
+	  it '#destroy does not delete item because it has been logged' do
+		  pending 'need to implement'
+		  logged_food = create(:eaten_bread)
+		  bread = Food.find(logged_food.food_id) # get the food item tied to the logged food
 
-    it "#destroy deletes the item" do
-      food = create(:bread)
-      food.destroy
-      expect(food.destroyed?).to eq true
-    end
+		  expect(bread.destroy).to eq false # check that the food's destroy item returns false since it's already been logged
+	  end
 
-    it "#search_for returns items with similar names" do
-      food = create(:bread)
-      list = Food.search_for(food.name)
-      expect(list).to eq [food] 
-    end
+	  it "#destroy deletes the item" do
+		  food = create(:bread)
+		  food.destroy
+		  expect(food.destroyed?).to eq true
+	  end
 
-    it "#search_for will also return results that aren't in correct case" do
-      food = create(:bread)
-      list = Food.search_for(food.name.downcase)
-      expect(list).to eq [food]
-    end
+	  it "#search_for returns items with similar names" do
+		  food = create(:bread)
+		  list = Food.search_for(food.name)
+		  expect(list).to eq [food] 
+	  end
 
-    it "#search_for returns empty array if string is nil" do
-      food = create(:bread)
-      list = Food.search_for(nil)
-      expect(list).to eq []
-    end
+	  it "#search_for will also return results that aren't in correct case" do
+		  food = create(:bread)
+		  list = Food.search_for(food.name.downcase)
+		  expect(list).to eq [food]
+	  end
+
+	  it "#search_for returns empty array if string is nil" do
+		  food = create(:bread)
+		  list = Food.search_for(nil)
+		  expect(list).to eq []
+	  end
   end
 end
