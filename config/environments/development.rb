@@ -27,4 +27,10 @@ Esl::Application.configure do
 	
   #paper clip needs access to imagemagik
   Paperclip.options[:command_path] = "/user/bin/convert"
+
+  config.paperclip_defaults = {
+		path:  "#{Rails.root}/public/images/:style/:hash.:extension",
+		hash_secret: Rails.application.secrets.image_secret_hash,
+		url:  "/images/:style/:hash.:extension"
+  }
 end
