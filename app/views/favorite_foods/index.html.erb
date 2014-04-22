@@ -13,7 +13,7 @@
 				<%= macronutrient_summary_display(favorite_food.food) %>
 				<div class="serving-size"><%= favorite_food.food.serving_size %></div>
 			</div>
-			<div class="food-item-image"></div>
+			<div class="food-item-image"><%= image_tag favorite_food.food.food_image.url(:thumb) %></div>
 		</div>
 	<% end %>
 </div>

@@ -20,12 +20,15 @@
 .food-item-image {
 	border: 1px solid $border;
 	width: 50px;
-	height: 50px;
+	max-height: 50px;
 	position:absolute;
 	top:0px;
 	left:0px;
 	margin:5px;
+	padding: 2px;
+	vertical-align:middle; 
     }
+
     h4 {
 	    font-size: 20px;
 	    padding: 0px;
