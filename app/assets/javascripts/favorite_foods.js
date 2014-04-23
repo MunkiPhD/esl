@@ -10,7 +10,18 @@ $(document).ready(function(){
 		Mustache.parse(templateHtml);
 		var rendered = Mustache.render(templateHtml, { url: postUrl, food_id: foodId, auth: authToken });
 		var $parent = $(this).parents(".favorite-food-item");
-		$(rendered).hide().insertAfter($parent).slideDown();
+		var $rendered = $(rendered);
+		$rendered.hide().insertAfter($parent).slideDown();
+
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth() + 1;
+		var year = today.getFullYear();
+
+		$rendered.find("select.select-day").val(day);
+		$rendered.find('select.select-month option[value="' + month + '"]').prop('selected', true);
+		$rendered.find('select.select-year option[value="' + year + '"]').prop('selected', true);
+
 
 		return false;
 	});
