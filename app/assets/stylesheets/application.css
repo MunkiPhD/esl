@@ -13,5 +13,6 @@
  *= require vendor/bootstrap/bootstrap 
  *= require_self
  *= require app_wide
+ *= require jquery.ui.dialog
  *= require_tree .
  */

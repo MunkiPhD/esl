@@ -116,7 +116,7 @@
 		  <%= image_tag @food.food_image.url(:medium), id: "food_image" %>
 </div>
 <div id="food_control_panel">
-		  <%= link_to_add "Log Item", new_food_log_food_path(food_id: @food) %>
+		  <%= link_to_log_food @food %>
 		  <%= link_to_edit "Edit", edit_food_path(@food) %>
 
 		  <% if @favorite_food.blank? %>
@@ -128,3 +128,5 @@
 					 <%= link_to_destroy "Remove from Favorites", @favorite_food, method: "delete" %>
 <% end %>
 </div>
+
+<%= render "template_log_food" %>

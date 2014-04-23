@@ -1,42 +1,71 @@
 $(document).ready(function(){
-	$("#favorite_foods_list .control-panel a").click(function(e){
+	$("a.link-to-log-food").click(function(e){
 		e.preventDefault();
+		console.log("in here!");
 		var authToken = Security.GetCSRFToken();
 		var foodId = $(this).attr('data-id');
 		var postUrl = $(this).attr('data-url');
-		var foodName = $(this).attr('data-food-name');
 
 		var templateHtml = $("#template_log_food").html();
 		Mustache.parse(templateHtml);
 		var rendered = Mustache.render(templateHtml, { url: postUrl, food_id: foodId, auth: authToken });
-		var $parent = $(this).parents(".favorite-food-item");
 		var $rendered = $(rendered);
-		$rendered.hide().insertAfter($parent).slideDown();
 
-		var today = new Date();
-		var day = today.getDate();
-		var month = today.getMonth() + 1;
-		var year = today.getFullYear();
+		SetTodaysDateOnSelects($rendered);
 
-		$rendered.find("select.select-day").val(day);
-		$rendered.find('select.select-month option[value="' + month + '"]').prop('selected', true);
-		$rendered.find('select.select-year option[value="' + year + '"]').prop('selected', true);
+		var $foodDialogDiv = $("#log_food_dialog");
+		$foodDialogDiv.html($rendered);
 
+		$foodDialogDiv.dialog({
+			resizable: false,
+			width: 550,
+			modal: true,
+			buttons: [
+				{
+					text: "Log Item",
+					class: "btn btn-success",
+					click: function(){
+						$(this).dialog("close");
+						LogFood($foodDialogDiv);
+						$foodDialogDiv.empty();
+					}
+				},
+				{
+					text: "Cancel",
+					class: "btn btn-primary",
+					click: function(){
+						$(this).dialog("close");
+						$foodDialogDiv.empty();
+					}
+				}
+			]
+		});
 
 		return false;
 	});
 });
 
 
+function SetTodaysDateOnSelects($container){
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth() + 1;
+		var year = today.getFullYear();
 
-$(document).on("click", "form.food-item-log-new a.btn-submit", function(e){
-	e.preventDefault();
+		$container.find("select.select-day").val(day);
+		$container.find('select.select-month option[value="' + month + '"]').prop('selected', true);
+		$container.find('select.select-year option[value="' + year + '"]').prop('selected', true);
 
-	var $parent = $(this).parents("form.food-item-log-new");
+		return false;
+}
+
+
+function LogFood($container){
+	console.log("inside LogFood()");
+	var $parent = $container.find("form.food-item-log-new");
 	var serializedData = $parent.serialize(); // This gets all the data from the form
 	var actionUrl = $parent.attr("action");
 
-	// perform ajax submit
 	$.ajax({
 		type: "POST",
 		url: actionUrl,
@@ -55,26 +84,7 @@ $(document).on("click", "form.food-item-log-new a.btn-submit", function(e){
 
 	}).always(function(){
 		console.log("AJAX post completed");	
-		$parent.slideUp(400, function(e){
-			$(this).remove();
-		});
 	});	
 
 	return false;
-});
-
-
-
-/*
- * Adds an event handler to the cancel button for logging a food item
- */
-$(document).on("click", "form.food-item-log-new a.btn-cancel", function(e){
-	e.preventDefault();
-	var $parent = $(this).parents("form.food-item-log-new");
-	$parent.slideUp(400, function(e){
-		$(this).remove();
-	});
-
-	return false;
-});
-
+}

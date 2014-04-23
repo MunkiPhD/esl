@@ -13,6 +13,7 @@
 //= require frameworks/modernizr-2.6.2.min.js
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.dialog
 //= require turbolinks
 //= require frameworks/mustache.js
 //= require_tree .

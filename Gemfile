@@ -18,6 +18,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'pg'
 gem 'devise' #, git: 'https://github.com/plataformatec/devise.git', branch: 'rails4'
 gem 'cancan'
