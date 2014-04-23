@@ -1,3 +1,22 @@
+@import 'helpers/colors';
+
 .food_label {
   width: 500px;
+  float: right;
+  margin: 10px;
+  clear: none;
+}
+#add_food_to_favorites_form {
+	display: inline-block;
+}
+
+#food_image_container {
+	border: 1px solid $border;
+	padding: 3px;
+	float:left;
+}
+#food_control_panel {
+	float: left;
+	clear:left;
+	padding: 10px 0px 10px 0px;
 }
