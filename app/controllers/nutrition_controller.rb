@@ -3,7 +3,7 @@ class NutritionController < ApplicationController
 
   def index
     @current_date = selected_date 
-    @logged_foods = current_user.log_foods.on_date(@current_date)
+    @logged_foods = current_user.log_foods.on_date(@current_date).latest
   end
 
 

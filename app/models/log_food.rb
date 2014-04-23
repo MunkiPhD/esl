@@ -25,6 +25,7 @@ class LogFood < ActiveRecord::Base
 
   scope :on_date, ->(date) { where("log_date = ?", date) }
   scope :for_food, ->(food) { where("food_id = ?", food) }
+	scope :latest, -> { order(created_at: :desc) }
 
   def protein
     return food.protein * servings

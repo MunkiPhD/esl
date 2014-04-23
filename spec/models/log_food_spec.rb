@@ -40,6 +40,15 @@ describe LogFood do
     end
   end
 
+
+	describe '.latest' do
+		it 'returns the logged foods by order of time logged, most recent first' do
+			logged_first = create(:log_food, user: user, created_at: Time.now)
+			logged_later = create(:log_food, user: user, created_at: (Time.now + 1.hour))
+			expect(LogFood.latest).to eq [logged_later, logged_first]
+		end
+	end
+
   describe "#protein" do
     it 'it returns the correct amount of protein for the entry' do
       food = Food.new(protein: 2)
