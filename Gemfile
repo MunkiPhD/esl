@@ -34,6 +34,8 @@ gem 'aws-sdk', '~> 1.5.7'
 
 group :development do
   gem "annotate"
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :development, :test do
