@@ -41,3 +41,28 @@
 <% end %>
 </div>
 
+<div id="graph" class="aGraph" data-workout-data='<%= @workout.workout_exercises[0].workout_sets.to_json %>'></div>
+<script>
+$(document).ready(function(){
+		  var workoutData = $("#graph").data("workout-data");
+		  var reps = [];
+		  var weight = [];
+		  for(var i = 0; i < workoutData.length; i++){
+					 reps.push(workoutData[i].rep_count);
+					 weight.push(workoutData[i].weight);
+		  }
+
+		  console.log(workoutData);
+		  console.log("Reps: " + reps);
+		  console.log("Weight: " + weight);
+
+		  var arguments = {
+			y1Data: reps,
+			y2Data: weight,
+			y1Title: "Reps",
+			y2Title: "Weight",
+			xTitle: "Sets"
+		  };
+		  WorkoutGraphs.DualYAxisGraph(arguments); 
+});
+</script>
