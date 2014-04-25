@@ -17,8 +17,8 @@
     <%= f.text_field :title, { placeholder: "Workout Title", class: "input-xlarge" } %>
   </div>
   <div class="field">
-    <%= f.label :date_performed %>
-    <%= f.date_select :date_performed %>
+			 <%= f.label :date_performed %><br/>
+	 <%= f.date_select :date_performed, { order: [:day, :month, :year] } %>
   </div>
   <div class="field">
     <%= f.label :notes %>
