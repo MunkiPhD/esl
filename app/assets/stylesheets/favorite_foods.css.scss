@@ -1,68 +1,68 @@
 @import 'helpers/colors';
 
-#favorite_foods_list {
-   .favorite-food-item {
-	   border: 1px solid $border;
-	   margin: 10px 0px 10px 0px;
-	   padding: 5px;
-	   position: relative;
-	   min-height: 75px;
-	   width: 612px;
+.food-item {
+		  border: 1px solid $border;
+		  margin: 10px 0px 10px 0px;
+		  padding: 5px;
+		  position: relative;
+		  min-height: 75px;
+		  width: 612px;
 
-	   .food-item-info {
-		   border-left: 1px solid $border;
-		   position:relative;
-		   min-height: 75px;
-		   left:60px;
-		   width: 550px;
-		   padding-left: 5px;
-}
-.food-item-image {
-	border: 1px solid $border;
-	width: 56px;
-	max-height: 56px;
-	position:absolute;
-	top:0px;
-	left:0px;
-	margin:5px;
-	padding: 2px;
-	vertical-align:middle; 
+		  .food-item-info {
+					 border-left: 1px solid $border;
+					 position:relative;
+					 min-height: 75px;
+					 left:60px;
+					 width: 550px;
+					 padding-left: 5px;
+ 			}
 
-	img {
-		max-width:50px;
-		max-height:50px;
-		margin:0px;
-		padding:0px;
+		  	.food-item-image {
+				border: 1px solid $border;
+				width: 56px;
+				max-height: 56px;
+				position:absolute;
+				top:0px;
+				left:0px;
+				margin:5px;
+				padding: 2px;
+				vertical-align:middle; 
+	
+				img {
+					  max-width:50px;
+					  max-height:50px;
+					  margin:0px;
+					  padding:0px;
+				}
+		 }
+
+	 	h4 {
+				font-size: 20px;
+				padding: 0px;
+				margin: 0px 0px 0px 0px;
+		}
+		h5 {
+				font-size: 15px;
+				padding:0px;
+				margin:0px;
+				color: #666;
+		}
+		.summary-panel {
+				/*border: 1px solid $border;*/
+				position: absolute;
+				bottom: -5px;
+				left: 5px;
 	}
-    }
+	.serving-size {
+				/*border: 1px solid $border;*/
+				right: 10px;
+				bottom: -5px;
+				position: absolute;
+	 }
+	 .control-panel {
+				position: absolute;
+				top: 2px;
+				right: 10px;
+	 }
 
-    h4 {
-	    font-size: 20px;
-	    padding: 0px;
-	    margin: 0px 0px 0px 0px;
-    }
-    h5 {
-	    font-size: 15px;
-	    padding:0px;
-	    margin:0px;
-	    color: #666;
-    }
-    .summary-panel {
-	    /*border: 1px solid $border;*/
-	    position: absolute;
-	    bottom: -5px;
-	    left: 5px;
-    }
-    .serving-size {
-	    /*border: 1px solid $border;*/
-	    right: 10px;
-	    bottom: -5px;
-	    position: absolute;
-    }
-    .control-panel {
-	    position: absolute;
-	    top: 2px;
-	    right: 10px;
-    }
-}
 }

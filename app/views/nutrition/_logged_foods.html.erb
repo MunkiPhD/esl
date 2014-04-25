@@ -1,19 +1,19 @@
-<div id="logged_foods">
-<% if logged_foods.count == 0 %>
-		  <div class="alert alert-info"><strong>No foods logged yet for today!</strong></div>
+	<% if logged_foods.count == 0 %>
+		<div class="alert alert-info"><strong>No foods logged yet for today!</strong></div>
 <% else %>
-  <% logged_foods.each do |logged| %>
-  <div class="logged-food-entry">
-    <div class="entry-top">
-    <span class="control-panel">
-      <%= link_to "Edit", edit_log_food_path(logged) %>&nbsp;|&nbsp;
-      <%= link_to "Delete", logged, data: { confirm: "Are you sure you want to delete #{logged.servings} servings of #{logged.food_name}?", method: "DELETE" } %>
-    </span>
-    <div class="food-name"><%= link_to logged.food_name, logged.food %></div>
-  <%= macronutrient_summary_display(logged) %>
-  <%= logged.servings %> Servings
-  </div>
-  </div>
+		<% logged_foods.each do |logged| %>
+		<div class="food-item">
+		<div class="food-item-info">
+			<div class="control-panel">
+				<%= link_to_edit "Edit", edit_log_food_path(logged) %>
+				<%= link_to_destroy "Delete", logged, data: { confirm: "Are you sure you want to delete #{logged.servings} servings of #{logged.food_name}?", method: "DELETE" } %>
+			</div>
+			<h4><%= link_to logged.food_name, logged.food %></h4>
+			<h3></h3>
+			<%= macronutrient_summary_display(logged) %>
+			<div class="serving-size"><%= logged.servings %> servings</div>
+		</div>
+		<div class="food-item-image"><%= image_tag logged.food.food_image.url(:thumb) %></div>
+	</div>
 <% end %>
-  <% end %>
-</div>
+<% end %>

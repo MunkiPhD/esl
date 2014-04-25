@@ -1,21 +1,21 @@
 <h1>Nutrition Dashboard</h1>
 <div class="row">
-		  <div class="col-md-8">
-					 <%= render 'logged_foods', logged_foods: @logged_foods %>
-		  </div>
-		  <div class="col-md-4">
-					 <div class="nutrition_right_col">
-								<%= render 'selected_date', selected_date: @current_date %>
-								<%= render 'foods/search' %>
-								<%= render 'log_foods/pie_chart' %>
-					 </div>
-		  </div>
+	<div class="col-md-8">
+		<%= render 'logged_foods', logged_foods: @logged_foods %>
+	</div>
+	<div class="col-md-4">
+		<div class="nutrition_right_col">
+			<%= render 'selected_date', selected_date: @current_date %>
+			<%= render 'foods/search' %>
+			<%= render 'log_foods/pie_chart' %>
+		</div>
+	</div>
 </div>
 <%= hidden_field_tag "selected_date_value", format_date(@current_date) %>
 
 <script>
 $(document).ready(function(){
-		  // generate the pie chart of daily totals
-		  RefreshDailyTotalsPieChart();
+	// generate the pie chart of daily totals
+	RefreshDailyTotalsPieChart();
 });
 </script>

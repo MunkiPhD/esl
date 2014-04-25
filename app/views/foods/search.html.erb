@@ -2,18 +2,27 @@
 <br/>
 <%= render 'search' %>
 <% unless @search_phrase.nil? %> 
-  <br/>
-  <div>
-  Showing results for: '<%= @search_phrase %>' 
-  <hr/>
-</div>
+	<br/>
  <% end %>
-<% @results.each do |food_item| %>
-  <%= link_to food_item.name, food_item %><br/>
+ <div id="food_search_results" class="center-block">
+	 <%= "Search for '#{@search_phrase}' found #{pluralize(@results.length, "result")}." %>
+<% @results.each do |food| %>
+	<div class="food-item">
+	<div class="food-item-info">
+		<div class="control-panel">
+			<%= link_to_log_food food %>
+		</div>
+		<h4><%= link_to food.name, food_path(food) %></h4>
+		<h3></h3>
+		<%= macronutrient_summary_display(food) %>
+		<div class="serving-size"><%= food.serving_size %></div>
+	</div>
+	<div class="food-item-image"><%= image_tag food.food_image.url(:thumb) %></div>
+</div>
 <% end %>
-<%= "Found #{pluralize(@results.length, "result")}." unless @search_phrase.blank? %>
+</div>
 <br/>
 <%= link_to new_food_path, class: "btn btn-success" do %>
-  <i class="icon-plus icon-white"></i> Create a food
+	<i class="icon-plus icon-white"></i> Create a food
 <% end %>
 <br/>
