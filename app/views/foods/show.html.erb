@@ -1,4 +1,24 @@
+<div class="container-fluid">
+	<div class="col-md-5">
+		<div id="food_image_container">
+		  <%= image_tag @food.food_image.url(:medium), id: "food_image" %>
+		</div>
+		<div id="food_control_panel">
+		  <%= link_to_log_food @food %>
+		  <%= link_to_edit "Edit", edit_food_path(@food) %>
 
+		  <% if @favorite_food.blank? %>
+					 <%= form_tag(favorite_foods_path, method: "POST", id: "add_food_to_favorites_form") do %>
+						<%= hidden_field_tag "id", @food.id %>
+						<%= submit_tag "Add to Favorites", class: "btn btn-success" %>
+					<% end %>
+			<% else %>
+					 <%= link_to_destroy "Remove from Favorites", @favorite_food, method: "delete" %>
+			<% end %>
+		</div>
+		</div>
+
+		<div class="col-md-7">
 <div class="food_label">
 		  <table class="food_table">
 					 <tr>
@@ -112,21 +132,6 @@
 								</table>
 					 </div>
 
-<div id="food_image_container">
-		  <%= image_tag @food.food_image.url(:medium), id: "food_image" %>
 </div>
-<div id="food_control_panel">
-		  <%= link_to_log_food @food %>
-		  <%= link_to_edit "Edit", edit_food_path(@food) %>
-
-		  <% if @favorite_food.blank? %>
-					 <%= form_tag(favorite_foods_path, method: "POST", id: "add_food_to_favorites_form") do %>
-					 <%= hidden_field_tag "id", @food.id %>
-		  <%= submit_tag "Add to Favorites", class: "btn btn-success" %>
-<% end %>
-<% else %>
-					 <%= link_to_destroy "Remove from Favorites", @favorite_food, method: "delete" %>
-<% end %>
 </div>
-
 <%= render "template_log_food" %>

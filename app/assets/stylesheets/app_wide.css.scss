@@ -72,12 +72,13 @@ a {
   margin:5px auto;
   border:1px solid lighten($border, 10%);
   min-height: 500px;
+  width:1280px;
 }
 
 #main-content {
-  float: left;
-  padding: 15px;
-  width: 80%;
+  border-left:1px solid lighten($color-three, 35%);
+	margin: 0 auto;
+  padding: 25px;
   /*@include drop-shadow;*/
   
   h1, h2, h3, h4, h5 {
@@ -85,12 +86,9 @@ a {
   }
 }
 
-#main-nav > nav {
-  float:left;
-  border-right:1px solid lighten($color-three, 30%);
-  padding: 10px 30px 0px 5px;
-  margin: 10px 10px 10px 10px;
-
+#main-nav {
+  /*border-right:1px solid lighten($color-three, 30%);*/
+	padding: 10px 3px 3px 3px;
   > ul {
     list-style: none;
     padding:0px;

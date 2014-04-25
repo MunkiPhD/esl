@@ -17,22 +17,16 @@
     <%= render "layouts/user_login" %>
   </div>
 </div>
-<div id="main-content-container" class="container clearfix">
-  <div id="main-nav">
-    <nav>
-      <ul>
-        <li><%= link_to "circles", circles_path %></li>
-        <li><%= link_to "nutrition", nutrition_path %></li>
-        <li><%= link_to "foods", foods_path %></li>
-        <li><%= link_to "workouts", workouts_path %></li>
-        <li><%= link_to "exercises", exercises_path %></li>
-      </ul>
-    </nav>
-  </div>
-  <div id="main-content" class="clearfix">
-    <%= render "layouts/flash_messages" %>
-    <%= yield %>
-  </div>
+<div id="main-content-container" class="container-fluid clearfix center-block">
+	<div class="row">
+		<div class="col-md-1">
+				  <%= render "layouts/navigation" %>	
+		</div>
+		<div class="col-md-11" id="main-content" class="clearfix">
+				<%= render "layouts/flash_messages" %>
+				<%= yield %>
+	 	</div>
+	</div>
 </div>
 
 <footer class="container">
