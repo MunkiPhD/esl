@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.dialog
+//= require bootstrap
 //= require turbolinks
 //= require frameworks/mustache.js
 //= require_tree .

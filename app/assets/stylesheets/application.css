@@ -10,7 +10,6 @@
  *
  * !!!! The normalize.min MUST COME FIRST as it is the HTML5 reset to normalize on all browsers !!!!
  *= require vendor/normalize.min 
- *= require vendor/bootstrap/bootstrap 
  *= require_self
  *= require app_wide
  *= require jquery.ui.dialog

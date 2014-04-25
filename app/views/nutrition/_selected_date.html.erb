@@ -4,8 +4,8 @@
     <div class="time-ago"><%= days_ago selected_date %></div>
   </span>
   <%= form_tag(nutrition_path, method: 'GET', class: "form-inline", id: "nutrition_date_select") do %>
-    <%= select_date(selected_date, order: [:day, :month, :year], prefix: "log_date") %>
-    <%= submit_tag "Go" %>
+			 <%= select_date(selected_date, { order: [:day, :month, :year], prefix: "log_date" } , class: "form-control") %>
+    <%= submit_tag "Go", class: "btn btn-primary" %>
   <% end %>
   <% if selected_date != Date.today %>
     <div class="go-back-to-today">
