@@ -113,9 +113,9 @@ describe WorkoutsController do
             post :create, workout: attributes_for(:workout)
           }.to change(Workout, :count).by(1)
         end
-        it "redirects to the workouts homepage" do
+        it "redirects to the newly created workout" do
           post :create, workout: attributes_for(:workout)
-          expect(response).to redirect_to workouts_path
+          expect(response).to redirect_to Workout.last
         end
 
         it "saves with workout exercises" do
