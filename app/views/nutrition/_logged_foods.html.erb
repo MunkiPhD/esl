@@ -1,6 +1,6 @@
 <div id="logged_foods">
 <% if logged_foods.count == 0 %>
-  <b>No foods logged yet for today!</b>
+		  <div class="alert alert-info"><strong>No foods logged yet for today!</strong></div>
 <% else %>
   <% logged_foods.each do |logged| %>
   <div class="logged-food-entry">

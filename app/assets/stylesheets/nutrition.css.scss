@@ -1,7 +1,6 @@
 @import 'helpers/colors';
 
 #nutrition_breakdown_totals {
-  float: left;
   width: 530px;
   margin: 5px;
   padding: 10px;
@@ -10,9 +9,7 @@
 }
 
 .nutrition_right_col {
-  float:right;
   width: 340px;
-  display: inline-block;
   margin:5px;
 
   div {
@@ -68,7 +65,5 @@
 
 #logged_foods {
   margin: 5px;
-  float: left;
-  clear: left;
 }
 
