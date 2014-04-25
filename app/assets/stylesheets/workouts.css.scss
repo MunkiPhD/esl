@@ -67,19 +67,3 @@
 #workout_title {
   height:40px;
 }
-
-table {
-  margin-top:10px;
-  td {
-  border: 1px solid #ccc;
-  padding: 4px;
-  min-width:85px;
-  }
-  th:not(:empty) {
-    background-color:#ddd;
-  }
-  tr > td { 
-    text-align:center;
-  }
-}
-

@@ -26,16 +26,20 @@
 		  <div class="workout-exercise-container" id="<%= dom_id(workout_exercise) %>" data-workoutset="<%= workout_exercise.workout_sets.to_json %>" data-exercise-name="<%= workout_exercise.exercise.name %>">
 					 <div class="row">
 								<div class="col-md-4">
-		  <table class="workout_exercise" clas="table">
+		  <table class="table table-striped">
     <thead>
     <tr>
       <th colspan="2"><h3><%= link_to workout_exercise.exercise.name, workout_exercise.exercise %></h3></th>
     </tr>
+	 <tr>
+				<th>Set</th>
+				<th>Weight x Reps</th>
+	 </tr>
   </thead>
   <tbody>
     <% workout_exercise.workout_sets.each do |workout_set| %>
       <tr>
-        <td><%= workout_set.set_number %>:</td>
+        <td><%= workout_set.set_number %></td>
         <td><%= workout_set.weight %>x<%= workout_set.rep_count %></td>
       </tr>
     <% end %>
@@ -60,6 +64,8 @@ $(document).ready(function(){
 					 console.log(exerciseName);
 					 if(data.length > 2){
 						WorkoutGraphs.RepsAndWeightPerSetGraph(data, exerciseName, containerId);
+					 } else {
+								$(containerId).html("<div class='alert alert-info'><strong>No graph available.</strong></div>");
 					 }
 			
 		  });
