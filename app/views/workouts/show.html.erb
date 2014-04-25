@@ -24,7 +24,7 @@
 <div id="workout_exercises_container">
 <h3>Sets</h3>
 <% @workout.workout_exercises.each do |workout_exercise| %>
-		  <div class="workout-exercise-container" id="<%= dom_id(workout_exercise) %>" data-workoutset="<%= workout_exercise.workout_sets.to_json %>">
+		  <div class="workout-exercise-container" id="<%= dom_id(workout_exercise) %>" data-workoutset="<%= workout_exercise.workout_sets.to_json %>" data-exercise-name="<%= workout_exercise.exercise.name %>">
 		  <table class="workout_exercise"  >
     <thead>
     <tr>
@@ -50,15 +50,13 @@ $(document).ready(function(){
 					 console.log(key);
 					 var data = $(value).data("workoutset");
 					 var containerId = "#" + $(value).attr("id");
+					 var exerciseName = $(value).data("exercise-name");
 					 console.log(containerId);
+					 console.log(exerciseName);
 					 if(data.length > 2){
-						WorkoutGraphs.CreateDataForRepsAndWeightPerSetGraph(data, containerId);
+						WorkoutGraphs.RepsAndWeightPerSetGraph(data, exerciseName, containerId);
 					 }
 			
 		  });
-
-		  //var workoutData = $("#graph").data("workout-data");
-
-		  //WorkoutGraphs.CreateDataForRepsAndWeightPerSetGraph(workoutData, "#graph");
-		  });
+});
 </script>

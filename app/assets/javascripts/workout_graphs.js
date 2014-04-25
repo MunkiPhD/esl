@@ -1,6 +1,6 @@
 var WorkoutGraphs = window.WorkoutGraphs || {};
 
-WorkoutGraphs.CreateDataForRepsAndWeightPerSetGraph = function(workoutExerciseData, containerId){
+WorkoutGraphs.RepsAndWeightPerSetGraph = function(workoutExerciseData, exerciseName, containerId){
 	var reps = [];
 	var weight = [];
 	for(var i = 0; i < workoutExerciseData.length; i++){
@@ -12,37 +12,44 @@ WorkoutGraphs.CreateDataForRepsAndWeightPerSetGraph = function(workoutExerciseDa
 	console.log("Reps: " + reps);
 	console.log("Weight: " + weight);
 
+	var graphTitle = "Reps & Weight per Set (" + exerciseName + ")";
+
 	var arguments = {
 		y1Data: reps,
 		y2Data: weight,
 		y1Title: "Reps",
 		y2Title: "Weight",
-		xTitle: "Set Number"
+		xTitle: "Set Number",
+		graphTitle: graphTitle
 	};
-	WorkoutGraphs.RepsAndWeightPerSetGraph(arguments, containerId); 
+	WorkoutGraphs.DrawRepsAndWeightPerSetGraph(arguments, containerId); 
 
 }
 
-WorkoutGraphs.RepsAndWeightPerSetGraph = function(argsObj, containerId){
+WorkoutGraphs.DrawRepsAndWeightPerSetGraph = function(argsObj, containerId){
 	var data1 = argsObj.y1Data;
 	var data2 = argsObj.y2Data;
 	var y1Title = argsObj.y1Title;
 	var y2Title = argsObj.y2Title;
 	var xTitle = argsObj.xTitle;
+	var graphTitle = argsObj.graphTitle;
 
 
 	var margin = [60,65,60,65];
 	var width = 500 - margin[1] - margin[3];
 	var height = 400 - margin[0] - margin[2];
 
-	var y1Max = d3.max(data1, function(d){ return +d; });
-	var y2Max = d3.max(data2, function(d){ return +d; });
+	var y1Max = d3.max(data1, function(d){ return +d; }) * 1.1;
+	var y2Max = d3.max(data2, function(d){ return +d; }) * 1.1;
+
+	var y1Min = d3.min(data1, function(d){ return d; }) * 0.8;
+	var y2Min = d3.min(data2, function(d){ return d; }) * 0.8;
 
 	// X scale will fit all values from data[] within pixels 0-w
 	var x = d3.scale.linear().domain([1, data1.length]).range([0, width]);
 	// Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
-	var y1 = d3.scale.linear().domain([0, (1.1 * y1Max)]).range([height, 0]); // in real world the domain would be dynamically calculated from the data
-	var y2 = d3.scale.linear().domain([0, (1.1 * y2Max) ]).range([height, 0]); // in real world the domain would be dynamically calculated from the data
+	var y1 = d3.scale.linear().domain([y1Min, y1Max]).range([height, 0]); // in real world the domain would be dynamically calculated from the data
+	var y2 = d3.scale.linear().domain([y2Min, y2Max ]).range([height, 0]); // in real world the domain would be dynamically calculated from the data
 	// automatically determining max range can work something like this
 	// var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
 
@@ -81,8 +88,8 @@ WorkoutGraphs.RepsAndWeightPerSetGraph = function(argsObj, containerId){
 	//add the axes labels
 	graph.append("text")
 	.attr("class", "axis-label")
-	.attr("text-anchor", "end")
-	.attr("x", width / 2 + 40)
+	.attr("text-anchor", "middle")
+	.attr("x", width / 2)
 	.attr("y", height + 36)
 	.text(xTitle);
 	//
@@ -90,24 +97,24 @@ WorkoutGraphs.RepsAndWeightPerSetGraph = function(argsObj, containerId){
 	graph.append("text")
 	.attr("class", "axis-label")
 	.attr("style", "font-weight: bold")
-	.attr("text-anchor", "end")
-	.attr("x", width / 2 + 40)
+	.attr("text-anchor", "middle")
+	.attr("x", width / 2 )
 	.attr("y", -36)
-	.text("Reps & Weight per Set");
+	.text(graphTitle);
 
 	graph.append("text")
 	.attr("class", "axis-label axisRight")
-	.attr("text-anchor", "end")
+	.attr("text-anchor", "middle")
 	.attr("y", -30)
-	.attr("x", -(height / 2) + 15)
+	.attr("x", -(height / 2))
 	.attr("transform", "rotate(-90)")
 	.text(y1Title);
 
 	graph.append("text")
 	.attr("class", "axis-label axisLeft")
-	.attr("text-anchor", "end")
+	.attr("text-anchor", "middle")
 	.attr("y", width + 55)
-	.attr("x", -(height / 2) + 25)
+	.attr("x", -(height / 2))
 	.attr("transform", "rotate(-90)")
 	.text(y2Title);
 
