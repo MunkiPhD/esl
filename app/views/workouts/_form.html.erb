@@ -31,14 +31,14 @@
     <%= render "workout_exercises_fields", f: builder, exercises: @exercises %>
   <% end %>
   <div class="prev-placeholder">
-    <br/>
     <%= link_to_add_fields "Add Exercise", f, :workout_exercises %>
-    <br/>
     <br/>
   </div>
 </div>
 <div class="workout-actions">
-  <%= f.submit class: "btn btn-info btn-large" %>
+		  <%= button_tag type: 'submit', class: "btn btn-primary btn-large" do %>
+					 <span class="glyphicon glyphicon-ok"></span> Save Workout
+			<% end %>
 </div>
 
 <% end %>
