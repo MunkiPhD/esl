@@ -3,10 +3,10 @@
 <form class="food-item-log-new form-inline" action="{{ url }}" id="log-food-dialog">
 	<input name="authenticity_token" type="hidden" value="{{ auth }}">
 			<label for="log_food_servings">Servings</label>
-			<input id="log_food_servings" name="log_food[servings]" class="food-servings" type="text" value="1.0">
+			<input id="log_food_servings" name="log_food[servings]" class="food-servings form-control" type="text" value="1.0">
 
 			<label for="log_food_log_date">Log Date</label>
-				<select id="log_food_log_date_3i" name="log_food[log_date(3i)]" class="select-day">
+				<select id="log_food_log_date_3i" name="log_food[log_date(3i)]" class="select-day form-control">
 					 <option value="1">1</option>
 					 <option value="2">2</option>
 					 <option value="3">3</option>
@@ -39,7 +39,7 @@
 					 <option value="30">30</option>
 					 <option value="31">31</option>
 		  </select>
-		  <select id="log_food_log_date_2i" name="log_food[log_date(2i)]" class="select-month">
+		  <select id="log_food_log_date_2i" name="log_food[log_date(2i)]" class="select-month form-control">
 					 <option value="1">January</option>
 					 <option value="2">February</option>
 					 <option value="3">March</option>
@@ -53,7 +53,7 @@
 					 <option value="11">November</option>
 					 <option value="12">December</option>
 		  </select>
-		  <select id="log_food_log_date_1i" name="log_food[log_date(1i)]" class="select-year">
+		  <select id="log_food_log_date_1i" name="log_food[log_date(1i)]" class="select-year form-control">
 					 <option value="2009">2009</option>
 					 <option value="2010">2010</option>
 					 <option value="2011">2011</option>
