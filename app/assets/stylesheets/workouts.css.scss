@@ -1,7 +1,6 @@
 @import 'helpers/colors';
 
 #workout_exercises_container {
-  float:left;
   margin-left:10px;
 
   input[type='text'] {
@@ -31,7 +30,6 @@
   background-color: $color-one;
   border:1px solid darken($color-one, 8%);
   padding: 10px;
-  float:left;
 
   select {
     font-size:20px;

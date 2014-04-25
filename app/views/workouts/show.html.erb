@@ -1,6 +1,7 @@
 <% if current_user == @workout.user %>
 <div class="workout-actions right">
-  <%= link_to_edit "Edit", edit_user_workout_path(@workout.user.username, @workout), class: "btn" %>  <%= button_to 'Delete Workout', delete_user_workout_path(id: @workout, username: @workout.user.username), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+		  <%= link_to_edit "Edit", edit_user_workout_path(@workout.user.username, @workout) %>  
+		  <%= link_to_destroy "Delete Workout", delete_user_workout_path(id: @workout, username: @workout.user.username), method: :delete, data: { confirm: 'Are you sure?' }%>
 </div>
 <% end %>
 
@@ -23,7 +24,8 @@
 <div id="workout_exercises_container">
 <h3>Sets</h3>
 <% @workout.workout_exercises.each do |workout_exercise| %>
-  <table class="workout_exercise" id="<%= dom_id(workout_exercise) %>">
+		  <div class="workout-exercise-container" id="<%= dom_id(workout_exercise) %>" data-workoutset="<%= workout_exercise.workout_sets.to_json %>">
+		  <table class="workout_exercise"  >
     <thead>
     <tr>
       <th colspan="2"><h3><%= link_to workout_exercise.exercise.name, workout_exercise.exercise %></h3></th>
@@ -38,31 +40,25 @@
     <% end %>
     </tbody>
   </table>
+</div>
 <% end %>
 </div>
 
-<div id="graph" class="aGraph" data-workout-data='<%= @workout.workout_exercises[0].workout_sets.to_json %>'></div>
 <script>
 $(document).ready(function(){
-		  var workoutData = $("#graph").data("workout-data");
-		  var reps = [];
-		  var weight = [];
-		  for(var i = 0; i < workoutData.length; i++){
-					 reps.push(workoutData[i].rep_count);
-					 weight.push(workoutData[i].weight);
-		  }
+		  var groupData = $.each($("div.workout-exercise-container"), function(key, value){
+					 console.log(key);
+					 var data = $(value).data("workoutset");
+					 var containerId = "#" + $(value).attr("id");
+					 console.log(containerId);
+					 if(data.length > 2){
+						WorkoutGraphs.CreateDataForRepsAndWeightPerSetGraph(data, containerId);
+					 }
+			
+		  });
 
-		  console.log(workoutData);
-		  console.log("Reps: " + reps);
-		  console.log("Weight: " + weight);
+		  //var workoutData = $("#graph").data("workout-data");
 
-		  var arguments = {
-			y1Data: reps,
-			y2Data: weight,
-			y1Title: "Reps",
-			y2Title: "Weight",
-			xTitle: "Sets"
-		  };
-		  WorkoutGraphs.DualYAxisGraph(arguments); 
-});
+		  //WorkoutGraphs.CreateDataForRepsAndWeightPerSetGraph(workoutData, "#graph");
+		  });
 </script>

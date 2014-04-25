@@ -18,7 +18,9 @@ path {
 	stroke-opacity: .5;
 }
 .x.axis path {
-	display: none;
+	/*display: none;*/
+	fill: none;
+	stroke: #000;
 }
 .x.axis text {
 font-size: 14;
@@ -36,4 +38,17 @@ font-size: 14;
 .y.axisLeft text {
 	fill: steelblue;
 }
-
+svg.workout-exercise-rep-weight-graph {
+	display: inline-block;
+	/*border:1px solid red;*/
+}
+div.workout-exercise-container {
+		  padding:5px;
+		  margin:5px;
+	/*border:1px solid #ccc;*/
+	vertical-align:middle;
+}
+div.workout-exercise-container table {
+	vertical-align:top;
+	display: inline-block;
+}
