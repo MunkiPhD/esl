@@ -13,14 +13,15 @@ a {
     -webkit-transition-duration: 0.25s;
     -webkit-transition-timing-function: ease-out;
 
-  &:visited {
+  /*&:visited {
     color: $link-visited;
-  }
+  }*/
   &:hover {
     color: $link-hover;
     -webkit-transition-property: color;
     -webkit-transition-duration: 0.1s;
     -webkit-transition-timing-function: linear, ease-out;
+	 text-decoration:none;
   }
 }
 
