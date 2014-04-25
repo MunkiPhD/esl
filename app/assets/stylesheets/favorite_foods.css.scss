@@ -19,8 +19,8 @@
 }
 .food-item-image {
 	border: 1px solid $border;
-	width: 50px;
-	max-height: 50px;
+	width: 56px;
+	max-height: 56px;
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -31,6 +31,8 @@
 	img {
 		max-width:50px;
 		max-height:50px;
+		margin:0px;
+		padding:0px;
 	}
     }
 
@@ -53,14 +55,14 @@
     }
     .serving-size {
 	    /*border: 1px solid $border;*/
-	    right: 5px;
+	    right: 10px;
 	    bottom: -5px;
 	    position: absolute;
     }
     .control-panel {
 	    position: absolute;
 	    top: 2px;
-	    right: 2px;
+	    right: 10px;
     }
 }
 }
