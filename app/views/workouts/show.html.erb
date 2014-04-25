@@ -21,11 +21,12 @@
 </div>
 
 
-<div id="workout_exercises_container">
-<h3>Sets</h3>
+<div id="workout_exercises_container" class="container-fluid">
 <% @workout.workout_exercises.each do |workout_exercise| %>
 		  <div class="workout-exercise-container" id="<%= dom_id(workout_exercise) %>" data-workoutset="<%= workout_exercise.workout_sets.to_json %>" data-exercise-name="<%= workout_exercise.exercise.name %>">
-		  <table class="workout_exercise"  >
+					 <div class="row">
+								<div class="col-md-4">
+		  <table class="workout_exercise" clas="table">
     <thead>
     <tr>
       <th colspan="2"><h3><%= link_to workout_exercise.exercise.name, workout_exercise.exercise %></h3></th>
@@ -41,6 +42,10 @@
     </tbody>
   </table>
 </div>
+<div class="col-md-8" id="<%= dom_id(workout_exercise) %>_graph">
+</div>
+</div>
+</div>
 <% end %>
 </div>
 
@@ -49,7 +54,7 @@ $(document).ready(function(){
 		  var groupData = $.each($("div.workout-exercise-container"), function(key, value){
 					 console.log(key);
 					 var data = $(value).data("workoutset");
-					 var containerId = "#" + $(value).attr("id");
+					 var containerId = "#" + $(value).attr("id") + "_graph";
 					 var exerciseName = $(value).data("exercise-name");
 					 console.log(containerId);
 					 console.log(exerciseName);
