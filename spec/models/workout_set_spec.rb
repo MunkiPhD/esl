@@ -22,6 +22,24 @@ describe WorkoutSet do
     expect(workout_set.exercise_name).to eq workout_set.exercise.name
   end
 
+	describe "#for_exercise" do
+		it 'retrieves workout sets for the specified exercise' do
+			exercise = create(:exercise)
+			workout_set1 = create(:workout_set, exercise: exercise)
+			workout_set2 = create(:workout_set, exercise: create(:exercise))
+			expect(WorkoutSet.for_exercise(exercise)).to eq [workout_set1]
+		end
+	end
+
+	describe "#by_weight_desc" do
+		it 'orders the workout sets by weight, highest first' do
+			workout_set1 = create(:workout_set, weight: 100)
+			workout_set2 = create(:workout_set, weight: 300)
+			workout_set3 = create(:workout_set, weight: 200)
+			expect(WorkoutSet.by_weight_desc).to eq [workout_set2, workout_set3, workout_set1]
+		end
+	end
+
   describe "validations" do
 
     context "with valid data" do

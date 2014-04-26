@@ -22,6 +22,9 @@ class WorkoutSet < ActiveRecord::Base
   validates_presence_of :workout, :message => " !missing workout id in workoutset" 
   validates_presence_of :exercise, :message => " !missing exercise id in workoutset"
 
+	scope :for_exercise, -> (exercise) { where("workout_sets.exercise_id = ?", exercise) }
+	scope :by_weight_desc, -> { order("workout_sets.weight DESC") }
+
   validates :workout_exercise, presence: true
   validates :notes, length: { maximum: 250 }
   validates :set_number, presence: true,
