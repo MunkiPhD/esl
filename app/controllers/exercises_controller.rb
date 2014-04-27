@@ -11,8 +11,10 @@ class ExercisesController < ApplicationController
   # GET /exercises/1
   # GET /exercises/1.json
   def show
-		@logged_orm = WorkoutQueries.max_weight_for_exercise_and_user(@exercise, current_user).first	
-		@calculated_orm = OneRepMax.epley_formula(@logged_orm.weight, @logged_orm.rep_count) unless @logged_orm.blank?
+		if current_user
+			@logged_orm_workout_set = WorkoutQueries.max_weight_for_exercise_and_user(@exercise, current_user).first	
+			@calculated_orm = OneRepMax.epley_formula(@logged_orm_workout_set.weight, @logged_orm_workout_set.rep_count) unless @logged_orm_workout_set.blank?
+		end
   end
 
   # GET /exercises/new
@@ -81,7 +83,7 @@ class ExercisesController < ApplicationController
 
   # verify that the exercise can be deleted
   def is_logged
-      WorkoutSet.where(exercise: @exercise).count > 0
+		WorkoutSet.where(exercise: @exercise).count > 0
   end
 
 

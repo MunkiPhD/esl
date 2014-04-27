@@ -19,9 +19,9 @@ feature 'Can view the one rep max for an individual exercise' do
 
 		visit exercise_path(exercise)
 		within "#one_rep_max" do
-			expect(page).to have_content "Calculated One Rep Max"
+			expect(page).to have_content "Calculated ORM"
 			expect(page).to have_content one_rm.to_i
-			expect(page).to have_content "Highest Logged:"
+			expect(page).to have_content "Logged Max Weight:"
 			expect(page).to have_content workout_set.weight
 		end
 	end

@@ -1,29 +1,22 @@
-<div id="one_rep_max">
-	Calculated One Rep Max:<br/>
-	<% if @logged_orm.blank? %>
-		No Data
-	<% else %>
-			<%= @calculated_orm.to_i %>
-			<button id="orm_popover_btn" type="button" class="btn btn-primary btn-xs" 
-				data-container="body" data-toggle="popover" data-placement="bottom" 
-				data-content="Your calculated one rep maximum uses the Epley formula and is based off of your highest recorded weight with the reps performed in that set.">
-		<span class="glyphicon glyphicon-question-sign icon-white"></span></button>
-				<br/>
-			Highest Logged:<br/>
-			<%= @logged_orm.weight %>
-	<% end %>
+<div class="row">
+	<div class="col-md-9">
+		<p>
+		<strong>Name:</strong>
+		<%= @exercise.name %>
+		</p>
+
+		<p>
+		Submitted by: <%= @exercise.user.username %>
+		</p>
+		<%= link_to_edit 'Edit', edit_exercise_path(@exercise) %> 
+		<%= link_to_destroy "Delete", @exercise, data: { confirm: "Are you sure?"}, method: "delete" %>
+	</div>
+	<div class="col-md-3">
+		<% if current_user %>
+			<%= render 'one_rep_max', logged_orm_workout_set: @logged_orm_workout_set, calculated_orm: @calculated_orm %>
+		<% end %>
+	</div>
 </div>
-<p>
-  <strong>Name:</strong>
-  <%= @exercise.name %>
-</p>
-
-<p>
-Submitted by: <%= @exercise.user.username %>
-</p>
-<%= link_to_edit 'Edit', edit_exercise_path(@exercise) %> 
-<%= link_to_destroy "Delete", @exercise, data: { confirm: "Are you sure?"}, method: "delete" %>
-
 <script>
 $(document).ready(function(){
 	$("#orm_popover_btn").on('click', function(){
