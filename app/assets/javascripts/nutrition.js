@@ -17,7 +17,7 @@ $(document).ready(function(){
 
 		// use a lambda expression to handle the success event
 		FoodLog.DeleteFoodLogEntry(url, function(){
-			$theEntry.parents(".logged-food-entry").slideUp('slow', function(){
+			$theEntry.parents(".logged-food-entry").fadeOut('slow', function(){
 				//* animation complete*/
 				RefreshDailyTotalsPieChart() // refresh the daily totals
 			});

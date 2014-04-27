@@ -11,6 +11,8 @@ class ExercisesController < ApplicationController
   # GET /exercises/1
   # GET /exercises/1.json
   def show
+		@logged_orm = WorkoutQueries.max_weight_for_exercise_and_user(@exercise, current_user).first	
+		@calculated_orm = OneRepMax.epley_formula(@logged_orm.weight, @logged_orm.rep_count) unless @logged_orm.blank?
   end
 
   # GET /exercises/new

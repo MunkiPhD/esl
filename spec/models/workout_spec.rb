@@ -113,20 +113,20 @@ describe Workout do
         workout = create(:workout_with_exercises, user: user)
         workout_1 = create(:workout_with_exercises, user: user)
 
-        workout.workout_exercises[0].workout_sets[0].weight = 200
+        workout.workout_exercises[0].workout_sets[0].weight += 200
         workout.save
 
         exercise = workout.workout_exercises[0].exercise
 
         workout_1.workout_exercises[0].exercise = exercise
-        workout_1.workout_exercises[0].workout_sets[0].weight = 100
+        workout_1.workout_exercises[0].workout_sets[0].weight += 100
         workout_1.save
 
         # a user that did the same exercise
         user2 = create(:user)
         workout2 = create(:workout_with_exercises, user: user2)
         workout2.workout_exercises[0].exercise = exercise
-        workout2.workout_exercises[0].workout_sets[0].weight = 150
+        workout2.workout_exercises[0].workout_sets[0].weight += 150
         workout2.save
 
 
@@ -135,7 +135,7 @@ describe Workout do
         exercise2 = create(:exercise)
         workout3 = create(:workout_with_exercises, user: user3)
         workout3.workout_exercises[0].exercise = exercise2
-        workout3.workout_exercises[0].workout_sets[0].weight = 350
+        workout3.workout_exercises[0].workout_sets[0].weight += 350
         workout3.save
 
         expect(exercise).to_not eq exercise2

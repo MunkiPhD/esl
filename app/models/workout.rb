@@ -31,6 +31,7 @@ class Workout < ActiveRecord::Base
 
   #default_scope  { order('date_performed DESC') }
   scope :date_desc, ->  { order('date_performed DESC') }
+	scope :for_user, -> (user) { where("workouts.user_id = ?", user) }
 
 
   def self.max_weight(exercise)

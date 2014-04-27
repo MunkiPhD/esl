@@ -20,7 +20,7 @@ FactoryGirl.define do
   factory :workout_set do
     set_number 1
     rep_count 1
-    weight 1
+    weight 300
     notes ""
     workout_exercise
     workout

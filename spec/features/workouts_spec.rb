@@ -26,7 +26,7 @@ feature "Workouts" do
     end
 
     expect {
-      click_button "Create Workout"
+      click_button "Save Workout"
     }.to change(Workout, :count).by(1)
 
     expect(page).to have_content "back exercise" # redirects to the index
@@ -46,7 +46,7 @@ feature "Workouts" do
     # change the title
     fill_in "workout[title]", with: "NewWorkoutTitle"
 
-    click_button "Update Workout"
+    click_button "Save Workout"
     expect(page).to have_content "NewWorkoutTitle"
     expect(page).to have_content "Workout was successfully updated."
   end

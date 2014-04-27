@@ -1,20 +1,5 @@
 @import "helpers/colors";
 
-.logged-food-entry {
-  margin-top: 10px;
-  width: 400px;
-
-  .entry-top {
-    border-bottom: 1px solid $border;
-
-    .food-name {
-      font-size: 20px;
-    }
-    .control-panel {
-      float: right;
-    }
-  }
-}
 
 #log_date_day, #log_food_log_date_3i {
   width: 65px;

@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 feature 'Can view the one rep max for an individual exercise' do
-	NO_1RM_MESSAGE = "No 1RM"
+	NO_1RM_MESSAGE = "No Data"
 	let(:user) { create(:user) }
 
 	before :each do
 		login_user user
 	end
 
-	scenario 'user visits exercise page and sees one rep max' do
+	scenario 'user visits exercise page and sees one rep max and calculated one rep max' do
 		exercise = create(:exercise)
 		workout = create(:workout_with_exercises, user: user)
 		workout_set = build(:workout_set, rep_count: 10, weight: 315, exercise: exercise)
@@ -19,7 +19,10 @@ feature 'Can view the one rep max for an individual exercise' do
 
 		visit exercise_path(exercise)
 		within "#one_rep_max" do
-			expect(page).to have_content one_rm
+			expect(page).to have_content "Calculated One Rep Max"
+			expect(page).to have_content one_rm.to_i
+			expect(page).to have_content "Highest Logged:"
+			expect(page).to have_content workout_set.weight
 		end
 	end
 

@@ -1,5 +1,17 @@
 <div id="one_rep_max">
-	No 1RM
+	Calculated One Rep Max:<br/>
+	<% if @logged_orm.blank? %>
+		No Data
+	<% else %>
+			<%= @calculated_orm.to_i %>
+			<button id="orm_popover_btn" type="button" class="btn btn-primary btn-xs" 
+				data-container="body" data-toggle="popover" data-placement="bottom" 
+				data-content="Your calculated one rep maximum uses the Epley formula and is based off of your highest recorded weight with the reps performed in that set.">
+		<span class="glyphicon glyphicon-question-sign icon-white"></span></button>
+				<br/>
+			Highest Logged:<br/>
+			<%= @logged_orm.weight %>
+	<% end %>
 </div>
 <p>
   <strong>Name:</strong>
@@ -11,3 +23,11 @@ Submitted by: <%= @exercise.user.username %>
 </p>
 <%= link_to_edit 'Edit', edit_exercise_path(@exercise) %> 
 <%= link_to_destroy "Delete", @exercise, data: { confirm: "Are you sure?"}, method: "delete" %>
+
+<script>
+$(document).ready(function(){
+	$("#orm_popover_btn").on('click', function(){
+		$(this).popover('show');
+	});
+});
+</script>

@@ -32,7 +32,7 @@ feature "User food item logging" do
       select 'April', from: 'log_date_month'
       select '2014', from: 'log_date_year'
       click_button 'Go'
-      first('.logged-food-entry').click_link("Edit")
+      first('.food-item').click_link("Edit")
       
       #Possible changes in the future where you go view the actual entry
       #visit log_food_path(logged_food)
@@ -61,7 +61,7 @@ feature "User food item logging" do
       click_button 'Go'
 
       expect(page).to have_content logged_food.food_name
-      first('.logged-food-entry').click_link('Delete')
+      first('.food-item').click_link('Delete')
       expect(page).to have_content "Food log entry deleted."
       expect(page).to_not have_content logged_food.food_name
     end
@@ -103,7 +103,7 @@ feature "User food item logging" do
 		 click_button "Log"
 
 		 visit nutrition_path
-		 within('#logged_foods .logged-food-entry') do
+		 within('#logged_foods .food-item') do
 			 expect(page).to have_content food.name
 			 expect(page).to have_content "Protein:20.0g"
 			 expect(page).to have_content "Carbs:40.0g"

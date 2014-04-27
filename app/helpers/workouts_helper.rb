@@ -10,7 +10,7 @@ module WorkoutsHelper
 
 
   def link_to_remove_fields(name, f)
-    f.hidden_field(:_destroy) + link_to_destroy(name, "#", onClick: "Workouts.remove_fields(this); return false;")
+    f.hidden_field(:_destroy) + link_to('x', "#", class: "btn btn-danger", onClick: "Workouts.remove_fields(this); return false;")
   end
 
 

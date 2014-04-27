@@ -14,6 +14,14 @@ module LinkHelper
     end
   end
 
+  def link_to_ajax_destroy(body, url, html_options = {})
+		html_options[:method] = "DELETE"
+    set_html_options(html_options, "btn btn-danger")
+    link_to url, html_options do
+      content_tag(:span, nil, class: "glyphicon glyphicon-remove icon-white") + " " + body
+    end
+  end
+
 
   def link_to_edit(body, url, html_options = {})
     set_html_options(html_options, "btn btn-primary")

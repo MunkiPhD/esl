@@ -6,9 +6,8 @@ feature "Person searching for food" do
 
     perform_search("bread")
 
-    expect(page).to have_content "Showing results for: 'bread'"
     expect(page).to have_link bread.name
-    expect(page).to have_content "Found 1 result."
+    expect(page).to have_content "Search for 'bread' found 1 result."
   end
 
   scenario "recieves more than one result" do
@@ -16,11 +15,11 @@ feature "Person searching for food" do
     bread2 = create(:bread, name: "Sourdough Bread")
 
     perform_search("bread")
+		
 
-    expect(page).to have_content "Showing results for: 'bread'"
     expect(page).to have_link bread.name
     expect(page).to have_link bread2.name
-    expect(page).to have_content "Found 2 results."
+    expect(page).to have_content "Search for 'bread' found 2 results."
   end
 
   def perform_search(terms)

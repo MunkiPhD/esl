@@ -43,6 +43,20 @@ describe User do
     end
   end
 
+	describe '.workout_sets' do
+		it 'responds to workout_sets' do
+			user = create(:user)
+			expect(user).to respond_to :workout_sets
+		end
+
+		it 'retrieves the workout_sets' do
+			user = create(:user)
+			workout = create(:workout_with_exercises, user: user)
+			workout2 = create(:workout_with_exercises, user: create(:user))
+			expect(user.workout_sets).to eq workout.workout_sets
+		end
+	end
+
   context 'validations' do
     describe 'username' do
       it "is unique" do

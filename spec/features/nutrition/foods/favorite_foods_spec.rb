@@ -44,7 +44,7 @@ feature "User manages favorite foods" do
 
     within("#logged_foods") do
       expect(page).to have_link food.name
-      expect(page).to have_content "1.2 Servings"
+      expect(page).to have_content "1.2 servings"
     end
   end
 
