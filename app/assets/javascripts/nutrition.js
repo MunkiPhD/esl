@@ -53,7 +53,8 @@ function RefreshDailyTotalsPieChart(){
 			CreatePieChart(jsonData, "#daily_totals_chart");
 
 		}).fail(function(xhr, status, error){
-			console.log(e);
+			Security.HandleStatusCode(xhr, status, error);
+
 		}).always(function(){
 			// do nothing
 		});

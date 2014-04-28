@@ -16,10 +16,7 @@ window.FoodLog.DeleteFoodLogEntry = function(url, successFunction){
 		successFunction(); // execute the callback that was passed in with this function
 
 	}).fail(function(xhr, status, error){
-		console.log(status);
-		console.log(error);
-
-		UserMessages.DisplayError("An error occured while attempting to delete the entry.");
+		Security.HandleStatusCode(xhr, status, error);
 
 	}).always(function(){
 		console.log("done with DELETE request");

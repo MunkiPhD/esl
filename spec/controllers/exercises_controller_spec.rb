@@ -42,13 +42,11 @@ describe ExercisesController do
 	end
 
 	context 'authenticated user' do
-		def valid_attributes
-			FactoryGirl.build(:exercise, user_id: @user.id).attributes
-		end
+		let(:user) { create(:user) }
+		let(:valid_attributes) { build(:exercise, user_id: user.id).attributes }
 
 		before(:each) do
-			@user = FactoryGirl.create(:user) #User.new(id: 1)
-			sign_in @user
+			sign_in user
 		end
 
 		describe "GET index" do
@@ -105,14 +103,12 @@ describe ExercisesController do
 
 			describe "with invalid params" do
 				it "assigns a newly created but unsaved exercise as @exercise" do
-					# Trigger the behavior that occurs when invalid params are submitted
 					Exercise.any_instance.stub(:save).and_return(false)
 					post :create, {:exercise => { "name" => "invalid value" }}
 					assigns(:exercise).should be_a_new(Exercise)
 				end
 
 				it "re-renders the 'new' template" do
-					# Trigger the behavior that occurs when invalid params are submitted
 					Exercise.any_instance.stub(:save).and_return(false)
 					post :create, {:exercise => { "name" => "invalid value" }}
 					response.should render_template("new")
@@ -182,39 +178,34 @@ describe ExercisesController do
 			end
 
 			it "does not destroy exercise if it belongs to a workout" do
-				workout_set = create(:workout_set)
-				exercise = workout_set.exercise
+				exercise = create(:exercise)
+				workout_set = create(:workout_set, exercise: exercise)
+
 				expect {
 					delete :destroy, { :id => exercise.to_param }
 				}.to_not change(Exercise, :count)
 			end
 
-			it "redirects to the exercises list" do
-				exercise = Exercise.create! valid_attributes
-				delete :destroy, {:id => exercise.to_param}
-				response.should redirect_to(exercises_url)
+
+			it "does not delete if not created by the user" do
+				exercise = create(:exercise, user_id: 99)
+				Exercise.any_instance.should_not_receive(:destroy).with({"id" => exercise.id})
+				expect {
+					delete :destroy, {:id => exercise.to_param}
+				}.to change(Exercise, :count).by(0)
+				response.should redirect_to(exercise)
 			end
 
-			describe "not authorized" do
 
-				it "does not delete if not created by the user" do
-					exercise = create(:exercise, user_id: 99)
-					Exercise.any_instance.should_not_receive(:destroy).with({"id" => exercise.id})
-					expect {
-						delete :destroy, {:id => exercise.to_param}
-					}.to change(Exercise, :count).by(0)
-					response.should redirect_to(exercise)
-				end
+			it "deletes it if created by user" do
+				user = create(:user)
+				sign_in user
+				exercise = create(:exercise, user: user)
 
-				it "only deletes if created by user AND is not logged in a workout" do
-					pending "this test isnt correct yet"
-					set = create(:workout_set)
-					exercise = set.exercise
-					expect {
-						delete :destroy, {:id => exercise.to_param}
-					}.to change(Exercise, :count).by(0)
-					response.should redirect_to(exercise)
-				end
+				expect {
+					delete :destroy, {:id => exercise.to_param}
+				}.to change(Exercise, :count).by(-1)
+				response.should redirect_to(exercises_path)
 			end
 		end
 	end

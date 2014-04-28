@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 feature "Users" do
-  scenario "allows a user to sign in" do
-    user = create(:user)
+	let(:user) { create(:user) }
 
+  scenario "allows a user to sign in" do
     login_user user
 
     visit root_path
@@ -12,8 +12,6 @@ feature "Users" do
   end
 
   scenario "allows a user to sign in using either email or username" do
-    user = create(:user)
-   
     visit root_path
     click_link 'login'
     fill_in "Login", with: user.email
@@ -62,8 +60,6 @@ feature "Users" do
 
 
   scenario "allow someone to create an account" do
-    user = build(:user)
-
     visit new_user_registration_path
     expect(page).to have_content "Sign up"
 
@@ -80,6 +76,13 @@ feature "Users" do
     expect(page).to have_content 'logout'
   end
 
-  pending "user can log out successfully"
+  scenario "user can log out successfully" do
+		login_user user
+		visit root_path
+		expect(page).to have_content 'logout'
+		click_link 'logout'
+		expect(page).to have_content 'login'
+	end
+
   pending "can change their email and password"
 end

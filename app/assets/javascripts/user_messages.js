@@ -1,7 +1,7 @@
-var UserMessages = window.UserMessaeges || {};
+var UserMessages = window.UserMessages || {};
 
 UserMessages.DisplayError = function(message){
-	UserMessage.DisplayMessage("#template_alert_error", message);
+	UserMessages.DisplayMessage("#template_alert_error", message);
 	return true;
 }
 

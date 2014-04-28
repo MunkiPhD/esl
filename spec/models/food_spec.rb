@@ -171,20 +171,6 @@ describe Food do
   #  end
 
   describe "methods" do
-	  it '#destroy does not delete item because it has been logged' do
-		  pending 'need to implement'
-		  logged_food = create(:eaten_bread)
-		  bread = Food.find(logged_food.food_id) # get the food item tied to the logged food
-
-		  expect(bread.destroy).to eq false # check that the food's destroy item returns false since it's already been logged
-	  end
-
-	  it "#destroy deletes the item" do
-		  food = create(:bread)
-		  food.destroy
-		  expect(food.destroyed?).to eq true
-	  end
-
 	  it "#search_for returns items with similar names" do
 		  food = create(:bread)
 		  list = Food.search_for(food.name)

@@ -34,7 +34,9 @@ feature "Visitor interacts with food" do
 
 
   scenario "attempts to log a food item" do
-    pending "need path to log a food item"
+    visit food_path(bread)
+		click_link "Log Item"
+
     redirects_to_sign_in
   end
 

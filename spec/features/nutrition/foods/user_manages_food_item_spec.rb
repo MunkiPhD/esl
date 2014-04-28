@@ -67,14 +67,6 @@ feature "User manages a food item" do
     expect(page).to have_text "Food successfully updated!"
   end
 
-  scenario "deletes a food that has not been logged by ANYONE" do
-    pending "this has to be implemented when implementing the food logging scheme"
-  end
-
-  scenario "attempts to delete a food that HAS been logged by someone" do
-    pending "this has to be implemented when implementing the food logging scheme"
-  end
-
 
 	scenario 'can attach an image to food item' do
     visit new_food_path #"nutrition/foods/new"

@@ -80,7 +80,7 @@ function LogFood($container){
 		UserMessages.DisplaySuccess(successMessage);
 
 	}).fail(function(xhr, status, error){
-		UserMessages.DisplayError("Failed to log the food item.");
+		Security.HandleStatusCode(xhr, status, error);
 
 	}).always(function(){
 		console.log("AJAX post completed");	
