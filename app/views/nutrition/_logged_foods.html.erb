@@ -5,13 +5,14 @@
 		<div class="food-item logged-food-entry">
 		<div class="food-item-info">
 			<div class="control-panel">
-				<%= link_to_edit "Edit", edit_log_food_path(logged) %>
-				<%= link_to_ajax_destroy "Delete", logged, data: { confirm: "Are you sure you want to delete #{logged.servings} servings of #{logged.food_name}?" }%>
+					  <%= link_to_edit "", edit_log_food_path(logged), class: "btn-xs" %>
+					  <%= link_to_ajax_destroy "", logged, class: "btn-xs", data: { confirm: "Are you sure you want to delete #{logged.servings} servings of #{logged.food_name}?" }%>
 			</div>
 			<h4><%= link_to logged.food_name, logged.food %></h4>
 			<h3></h3>
 			<%= macronutrient_summary_display(logged) %>
-			<div class="serving-size"><%= logged.servings %> servings</div>
+			<div class="serving-size"><%= logged.servings %> servings
+			</div>
 		</div>
 		<div class="food-item-image"><%= image_tag logged.food.food_image.url(:thumb) %></div>
 	</div>

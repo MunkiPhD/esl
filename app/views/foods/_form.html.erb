@@ -15,7 +15,7 @@
     <tr>
       <td style="border:none">
         <%= f.label :name %>
-        <%= f.text_field :name, :style=>"width:280px;" %>
+		  <%= f.text_field :name, :style=>"width:280px;" %><br/>
         <%= f.label :brand %>
         <%= f.text_field :brand, :style=>"width:280px;" %>
       </td>
@@ -128,9 +128,9 @@
 		  <%= f.label :food_image %>
 		  <%= f.file_field :food_image %>
 </div>
-</div>
 <%= f.submit class: "btn btn-success" %>
 <% end %>
+</div>
 
 
 <script>
