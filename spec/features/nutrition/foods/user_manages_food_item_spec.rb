@@ -15,7 +15,6 @@ feature "User manages a food item" do
     expect {
       fill_in "Name", with: ice_cream.name
       fill_in "Brand", with: ice_cream.brand
-      fill_in "Calories", with: ice_cream.calories
       fill_in "Protein", with: ice_cream.protein
       fill_in "Serving size", with: "1 scoop"
 
@@ -33,7 +32,6 @@ feature "User manages a food item" do
 
     fill_in "Name", with: ""
     fill_in "Brand", with: ice_cream.brand
-    fill_in "Calories", with: ""
     fill_in "Protein", with: ice_cream.protein
 
     expect {
@@ -42,7 +40,6 @@ feature "User manages a food item" do
 
     expect(page).to have_text "Name can't be blank"
     expect(page).to have_text "Name is too short"
-    expect(page).to have_text "Calories is not a number"
   end
 
   scenario "views an existing food" do
@@ -85,7 +82,6 @@ feature "User manages a food item" do
     expect {
       fill_in "Name", with: ice_cream.name
       fill_in "Brand", with: ice_cream.brand
-      fill_in "Calories", with: ice_cream.calories
       fill_in "Protein", with: ice_cream.protein
       fill_in "Serving size", with: "1 scoop"
 			attach_file "Food image", "#{Rails.root}/spec/fixtures/ron.jpg"

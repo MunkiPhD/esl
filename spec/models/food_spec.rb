@@ -73,6 +73,18 @@
 require 'spec_helper'
 
 describe Food do
+	describe 'callbacks' do
+		describe 'before_validation' do
+			it 'calculates the correct number of calories based on macronutrients' do
+					food = build(:food, protein: 2, total_fat: 2, carbs: 2)
+					food.valid?
+					total_calories = (food.protein * 4 + food.carbs * 4 + food.total_fat * 9)
+					expect(food.calories).to eq total_calories
+					expect(food.calories_from_fat).to eq (food.total_fat * 9)
+			end
+		end
+	end
+
   describe "validations" do
     it "has a name" do
       f = Food.new(name: nil)
@@ -115,12 +127,12 @@ describe Food do
 
     it "calories are >= 0" do
       f = Food.new(calories: -1)
-      expect(f).to have(1).errors_on(:calories)
+      expect(f).to have(0).errors_on(:calories)
     end
 
     it "calories from fat are >= 0" do
       f = Food.new(calories_from_fat: -1)
-      expect(f).to have(1).errors_on(:calories_from_fat)
+      expect(f).to have(0).errors_on(:calories_from_fat)
     end
 
     it "total_fat are >= 0" do

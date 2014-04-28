@@ -71,6 +71,8 @@
 #
 
 class Food < ActiveRecord::Base
+	before_validation :sum_calories
+
 	has_many :log_foods
 	has_attached_file :food_image,
 		styles: { medium: "250x250>", thumb: "50x50>" }, 
@@ -165,5 +167,12 @@ class Food < ActiveRecord::Base
 		else
 			Food.none
 		end
+	end
+
+	private
+
+	def sum_calories
+		self.calories_from_fat = (9 * self.total_fat)
+		self.calories = (4 * self.protein) + (4 * self.carbs) + self.calories_from_fat
 	end
 end

@@ -27,7 +27,11 @@
       <td style="border-top:6px #000 solid"><b>Amount Per Serving</b></td>
     </tr>
     <tr>
-				<td><span><%= f.label :calories %>Calories&nbsp;</span> <%= f.text_field :calories %> <span class="right">Calories From Fat <%= f.text_field :calories_from_fat %></span></td>
+		 <td><span><%= f.label :calories %><br/>Calories&nbsp;</span> 
+	 		 <button id="calories_popover_btn" type="button" class="btn btn-primary btn-xs" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Calories are calculated based on protein, fat, and carbohydrates."><span class="glyphicon glyphicon-question-sign icon-white"></span></button>
+		<br/>
+			 <span class="left">Calories From Fat </span>
+	 </td>
   </tr>
   <tr>
     <td style="border-top:4px #000 solid"><span class="right bold">% Daily Value*</span></td>
@@ -129,3 +133,10 @@
 <% end %>
 
 
+<script>
+$(document).ready(function(){
+	$("#calories_popover_btn").on('click', function(){
+		$(this).popover('show');
+	});
+});
+</script>
