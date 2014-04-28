@@ -4,7 +4,7 @@
 			<div class="food-item-info">
 				<div class="control-panel">
 					<%= link_to_log_food favorite_food.food %>
-					<%= link_to_destroy "", favorite_food_path(favorite_food), method: :delete, data: { confirm: "Are you sure you want to remove #{favorite_food.food.name} from your favorites?" } %>
+					<%= link_to_destroy "", favorite_food_path(favorite_food), name: "Remove", method: :delete, data: { confirm: "Are you sure you want to remove #{favorite_food.food.name} from your favorites?" } %>
 				</div>
 				<h4><%= link_to favorite_food.food_name, food_path(favorite_food.food) %></h4>
 				<h3></h3>

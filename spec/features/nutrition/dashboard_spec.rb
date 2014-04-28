@@ -43,12 +43,11 @@ feature "user visits the dashboard" do
       # go back to a date in a previous year
 			
       date = 2.years.ago
-			puts "2 years ago: #{date}"
       select date.day.to_s, from: 'log_date_day'
       select date.strftime("%B"), from: 'log_date_month'
       select date.year.to_s, from: 'log_date_year'
       click_button 'Go'
-      expect(page).to have_content "almost 2 years ago"
+      expect(page).to have_content "about 2 years ago"
       expect(page).to have_link "Go back to today"
     end
 

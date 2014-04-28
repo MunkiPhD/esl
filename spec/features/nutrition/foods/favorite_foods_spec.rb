@@ -71,17 +71,18 @@ feature "User manages favorite foods" do
 		user_sees_food_in_favorites_list(favorite_food_mine.food)
   end
 
+
   scenario "User can remove an item from their favorites page" do
     favorite_food = create(:favorite_food, user: user)
     visit favorite_foods_path
 
     within("#favorite_foods_list") do
       expect(page).to have_link favorite_food.food_name
-      click_button "Remove"
+		click_remove_button
     end
 
     user_sees_message "#{favorite_food.food_name} was removed from your favorites"
-		user_does_not_see_food_in_favorites_list(favorite_food.food)
+	 user_does_not_see_food_in_favorites_list(favorite_food.food)
   end
 
 
@@ -154,4 +155,8 @@ feature "User manages favorite foods" do
 		visit food_path(food)
 		click_button "Add to Favorites"
 	end
+
+  def click_remove_button
+	  find(:css, 'button[name="Remove"]').click
+  end
 end

@@ -32,7 +32,10 @@ feature "User food item logging" do
       select 'April', from: 'log_date_month'
       select '2014', from: 'log_date_year'
       click_button 'Go'
-      first('.food-item').click_link("Edit")
+		within first('.food-item') do
+			click_edit_button
+		end
+      #first('.food-item').click_link("Edit")
       
       #Possible changes in the future where you go view the actual entry
       #visit log_food_path(logged_food)
@@ -61,7 +64,10 @@ feature "User food item logging" do
       click_button 'Go'
 
       expect(page).to have_content logged_food.food_name
-      first('.food-item').click_link('Delete')
+      #first('.food-item').click_link('Delete')
+      within first('.food-item') do
+			click_delete_button
+		end
       expect(page).to have_content "Food log entry deleted."
       expect(page).to_not have_content logged_food.food_name
     end
@@ -105,9 +111,9 @@ feature "User food item logging" do
 		 visit nutrition_path
 		 within('#logged_foods .food-item') do
 			 expect(page).to have_content food.name
-			 expect(page).to have_content "Protein:20.0g"
-			 expect(page).to have_content "Carbs:40.0g"
-			 expect(page).to have_content "Fat:60.0g"
+			 expect(page).to have_content "Protein: 20.0g"
+			 expect(page).to have_content "Carbs: 40.0g"
+			 expect(page).to have_content "Fat: 60.0g"
 		 end
 	 end
 
@@ -117,5 +123,13 @@ feature "User food item logging" do
 		 click_link logged_food.food_name
 		 expect(page).to have_content logged_food.food_name
 	 end
+  end
+
+  def click_delete_button
+	  find(:css, 'a[name="Delete"]').click
+  end
+
+  def click_edit_button
+	  find(:css, 'a[name="Edit"]').click
   end
 end
