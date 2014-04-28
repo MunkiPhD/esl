@@ -34,9 +34,9 @@ describe LogFoodsController do
     render_views
 
     it 'returns correct json' do
-      food = create(:food)
+      food = create(:food, protein: 2, carbs: 3, total_fat: 5)
       date_str = format_date(Date.today)
-      food_entry = create(:log_food, user: user, log_date: date_str, servings: 1.24, food: food)
+      food_entry = create(:log_food, user: user, log_date: date_str, servings: 2, food: food)
       get 'daily_totals', date: date_str, format: "json"
 
       response.should be_success
@@ -44,9 +44,9 @@ describe LogFoodsController do
       json = response.body
       parsed_response = JSON.parse(json) if json && json.length >= 2
 
-      expect(parsed_response['protein']).to eq food_entry.protein
-      expect(parsed_response['carbs']).to eq food_entry.carbs
-      expect(parsed_response['fat']).to eq food_entry.total_fat
+      expect(parsed_response['protein']).to eq "4.0"
+      expect(parsed_response['carbs']).to eq "6.0"
+      expect(parsed_response['fat']).to eq "10.0"
       expect(Date.parse(parsed_response['date'])).to eq food_entry.log_date
     end
   end

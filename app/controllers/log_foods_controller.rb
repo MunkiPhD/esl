@@ -78,21 +78,7 @@ class LogFoodsController < ApplicationController
 
   def daily_totals
     date = Date.parse(params[:date])
-    logged_foods = current_user.log_foods.on_date(date)
-    
-    @protein = 0.0
-    @carbs = 0.0
-    @fat = 0.0
-    @date = date
-
-    unless logged_foods.nil?
-      logged_foods.each do |x|
-        puts "item name: #{x.food_name}"
-        @protein += x.protein
-        @carbs += x.carbs
-        @fat += x.total_fat
-      end
-    end 
+    @totals = DailyNutritionTotals.new(current_user).on_date(date)
 
     respond_to do |format|
       puts "Format type: #{format}"
