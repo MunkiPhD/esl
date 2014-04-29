@@ -32,10 +32,10 @@ module LinkHelper
 
 
   def button_to_submit(value="Save Changes", options={})
-    set_html_options(options, "btn btn-info")
+    set_html_options(options, "btn btn-primary")
     options[:name] = "commit"
 
-    button_tag(type: "submit", name: "commit", class: "btn btn-info", options: options) do
+    button_tag(type: "submit", name: "commit", class: "btn btn-primary", options: options) do
       content_tag(:snap, nil, class: "glyphicon glyphicon-ok icon-white") + " " + value
     end
   end

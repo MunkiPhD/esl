@@ -64,7 +64,7 @@ describe LinkHelper do
       result = button_to_submit(text)
       expect(result).to include(text)
       expect(result).to include("type=\"submit\"")
-      expect(result).to include("btn btn-info")
+      expect(result).to include("btn btn-primary")
       expect(result).to include("icon-ok icon-white")
       expect(result).to include("name=\"commit\"")
     end
@@ -76,7 +76,7 @@ describe LinkHelper do
 
     it "does not conflict with other options" do
       result = button_to_submit(text, class: "test")
-      expect(result).to include("test btn btn-info")
+      expect(result).to include("test btn btn-primary")
     end
   end
 end

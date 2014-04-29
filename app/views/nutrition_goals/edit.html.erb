@@ -1,12 +1,22 @@
 <h3>Modifying Daily Nutrition Goals</h3>
 
 <%= form_for @nutrition_goal do |f| %>
-	<%= f.label :protein %>
-	<%= f.text_field :protein %>
-	<%= f.label :carbs %>
-	<%= f.text_field :carbs %>
-	<%= f.label :total_fat %>
-	<%= f.text_field :total_fat %>
-
-	<%= f.submit "Update Goals" %>
+		  <div class="form-group">
+	<%= f.label :calories, class: 'control-label' %>
+	<%= f.text_field :calories, class: 'form-control' %>
+	</div>
+		  <div class="form-group">
+	<%= f.label :protein, class: 'control-label' %>
+	<%= f.text_field :protein, class: 'form-control' %>
+	</div>
+		  <div class="form-group">
+	<%= f.label :carbs, class: 'control-label' %>
+	<%= f.text_field :carbs, class: 'form-control' %>
+	</div>
+		  <div class="form-group">
+	<%= f.label :total_fat, class: 'control-label' %>
+	<%= f.text_field :total_fat, class: 'form-control' %>
+	</div>
+	<br/>
+	<%= button_to_submit "Update Goals" %>
 <% end %>

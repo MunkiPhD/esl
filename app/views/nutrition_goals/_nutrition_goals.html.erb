@@ -1,0 +1,8 @@
+<div id="nutrition_goals">
+	<h3>Daily Goals</h3>
+	<%= render 'nutrition_goals/progress_bar', { presenter: render_entry_row(macro_totals, nutrition_goal, :calories, ' kCal') } %>
+	<%= render 'nutrition_goals/progress_bar', { presenter: render_entry_row(macro_totals, nutrition_goal, :protein, 'g') } %>
+	<%= render 'nutrition_goals/progress_bar', { presenter: render_entry_row(macro_totals, nutrition_goal, :carbs, 'g') } %>
+	<%= render 'nutrition_goals/progress_bar', { presenter: render_entry_row(macro_totals, nutrition_goal, :total_fat, 'g') } %>
+	<div class="pull-right "><%= link_to "Manage Goals", edit_nutrition_goal_path %></div><br/>
+</div>

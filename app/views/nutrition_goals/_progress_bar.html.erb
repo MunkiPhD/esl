@@ -1,0 +1,17 @@
+<div class="<%= "#{presenter.field}" %>-goal">
+		  <div class="row">
+					 <div class="col-md-2">
+								<%= "#{(presenter.field.to_s).titleize}" %> 
+					 </div>
+					 <div class="col-md-7">
+								<div class="progress">
+										  <div class="progress-bar <%= presenter.css_class %>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= presenter.percent %>%">
+													 <span class="pull-left">&nbsp;<%= presenter.percent %>%</span>
+										  </div>
+								</div>
+					 </div>
+					 <div class="col-md-3">
+								<span class="value-recorded"><%= "#{presenter.macro_totals.send(presenter.field).to_i}" %></span><span class="value-recorded-measurement"><%= "#{presenter.display_unit_value}" %></span><span class="nutrition-goal-value"> / <%= "#{presenter.nutrition_goal.send(presenter.field)}#{presenter.display_unit_measurement}" %></span>
+					 </div>
+		  </div>
+</div>
