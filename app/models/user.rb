@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :log_foods
   has_many :favorite_foods
 	has_many :workout_sets, through: :workouts
+	has_one :nutrition_goal
 
   validates :username, uniqueness: true,
                       format: { with: /\A(?=.*[a-z])[a-z\_\d]+\Z/i, message: "Only alphanumeric letters and underscores allowed" }

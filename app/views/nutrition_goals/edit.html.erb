@@ -1,0 +1,12 @@
+<h3>Modifying Daily Nutrition Goals</h3>
+
+<%= form_for @nutrition_goal do |f| %>
+	<%= f.label :protein %>
+	<%= f.text_field :protein %>
+	<%= f.label :carbs %>
+	<%= f.text_field :carbs %>
+	<%= f.label :total_fat %>
+	<%= f.text_field :total_fat %>
+
+	<%= f.submit "Update Goals" %>
+<% end %>
