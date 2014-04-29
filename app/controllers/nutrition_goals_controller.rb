@@ -1,4 +1,5 @@
 class NutritionGoalsController < ApplicationController
+	before_filter :authenticate_user!
 	before_filter :set_goal, only: [:edit, :update]
 
 	def edit
