@@ -45,8 +45,7 @@
       <%= "#{user.username}" %><br>
   <% end %>
   </div>
-  <h1><%= @circle.name %></h1>
-  <h3><%= @circle.motto %></h3>
+  <h1><%= @circle.name %>&nbsp;<small><%= @circle.motto %></small></h1>
 
   <p>
   <%= @circle.description unless @circle.description.blank? %>

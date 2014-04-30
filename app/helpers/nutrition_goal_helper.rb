@@ -22,20 +22,10 @@ module NutritionGoalHelper
 	end
 
 	def get_correct_css(percent)
-		if percent <= 84
-			return 'danger'
-		end
-		if percent <= 94
-			return 'warning'
-		end
-		if percent <= 104
-			return 'success'
-		end
-		if percent <= 109
-			return 'warning'
-		end
-		if percent >= 110
-			return 'danger'
-		end
+		return 'danger' if percent <= 84
+		return 'warning' if percent <= 94
+		return 'success' if percent <= 104
+		return 'warning' if percent <= 109
+		return 'danger'	if percent >= 110
 	end
 end
