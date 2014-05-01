@@ -12,6 +12,19 @@ module NutritionGoalHelper
 									 display_unit_measurement: display_unit)
 	end
 
+
+	def protein_in_grams_to_percentage(protein_in_grams, total_calories)
+		(((protein_in_grams.to_f * 4) / total_calories.to_f) * 100)
+	end
+
+	def carbs_in_grams_to_percentage(carbs_in_grams, total_calories)
+		(((carbs_in_grams.to_f * 4) / total_calories.to_f) * 100)
+	end
+
+	def total_fat_in_grams_to_percentage(total_fat_in_grams, total_calories)
+		(((total_fat_in_grams.to_f * 9) / total_calories.to_f) * 100)
+	end
+
 	private
 	def calculate_percent(macro_total, nutrition_goal)
 		if nutrition_goal <= 0 

@@ -20,6 +20,33 @@
 	}		  
 }
 
-form.edit_nutrition_goal {
-	max-width: 100px;
+#edit_daily_nutrition_goal {	
+	#edit_nutrition_goal_preset_selection {
+		border: 1px solid $border;
+	}
+	#custom_percentages_entry {
+		display:none;
+	}
+	#custom_percentages_entry input[type=text] {
+		width:100px;
+	}
+	#custom_percentage_entry_sum {
+		margin-top:5px;
+	}
+	#edit_nutrition_goal_1 {
+		width: 600px;
+		margin:10px;
+		padding:10px;
+		border: 1px solid $border;
+	}
+	#desired_calories{
+		width:70px;
+		text-align:center;
+	}
+	.form-control {
+		width: 100px;
+	}
+	#protein_calories, #carbs_calories, #total_fat_calories {
+		border: 0px solid red;
+	}
 }
