@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	$("a.link-to-log-food").click(function(e){
 		e.preventDefault();
-		console.log("in here!");
 		var authToken = Security.GetCSRFToken();
 		var foodId = $(this).attr('data-id');
 		var postUrl = $(this).attr('data-url');

@@ -42,3 +42,11 @@
 </div>
 
 <% end %>
+
+<%= link_to_add "Add Missing Exercise", "#", id: "btn_add_missing_exercise" %>
+<%= render 'exercises/template_create_exercise', exercise: @new_exercise %>
+<script>
+	$(document).ready(function(){
+		AttachHandlerToAddExercise("#btn_add_missing_exercise", AddExerciseToWorkoutList);
+	});
+</script>

@@ -1,1 +1,1 @@
-json.extract! @exercise, :name, :created_at
+json.extract! @exercise, :name, :id, :created_at

@@ -1,0 +1,21 @@
+<div id="create_exercise_dialog" title="Add an Exercise" style="display: hidden"></div>
+<script id="template_create_exercise" type="x-templ-mustache">
+<%= form_for(exercise) do |f| %>
+  <% if exercise.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
+
+      <ul>
+      <% exercise.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+<% end %>
+</script>

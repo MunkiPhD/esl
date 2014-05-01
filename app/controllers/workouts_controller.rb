@@ -15,6 +15,7 @@ class WorkoutsController < ApplicationController
   end
 
   def new
+		@new_exercise = Exercise.new
     @exercises = Exercise.all
     @workout = Workout.new
     1.times { @workout.workout_exercises.build }

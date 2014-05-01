@@ -82,6 +82,37 @@ describe ExercisesController do
 		end
 
 		describe "POST create" do
+			describe 'as JSON' do
+				render_views
+		
+				let(:user) { create(:user) }
+				before :each do 
+					sign_in user
+				end
+
+				it 'with valid attributes returns the exercise' do
+					exercise = build(:exercise, user: user)
+					expect {
+						post :create, { format: 'json', exercise: exercise.attributes }
+						parsed_json = JSON.parse(response.body)
+						expect(response.status).to eq 201
+						expect(parsed_json["name"]).to eq exercise.name
+						expect(parsed_json["id"]).to_not be_nil
+					}.to change(Exercise, :count).by(1)
+				end
+				
+				it 'with not valid attributes returns errors' do
+					exercise = build(:exercise, user: user, name: "")
+					expect {
+						post :create, { format: 'json', exercise: exercise.attributes }
+						parsed_json = JSON.parse(response.body)
+						puts parsed_json
+						expect(response.status).to eq 422
+						expect(parsed_json["name"]).to eq "can't be blank"
+
+					}.to change(Exercise, :count).by(0)
+				end
+			end
 			describe "with valid params" do
 				it "creates a new Exercise" do
 					expect {
