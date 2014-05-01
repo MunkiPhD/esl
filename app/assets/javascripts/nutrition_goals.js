@@ -2,7 +2,7 @@ var NutritionGoals = window.NutritionGoals || {};
 
 $(document).keypress(function(e) {
 	if(e.which == 13) {
-		UpdateTotals2();
+		EnterKeyPressedHandler();
 		return false;
 	}
 	return true;
@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 	$("#desired_calories").keypress(function(e) {
 		if(e.which == 13) {
-			DesiredCaloriesChangedHandler(); //CalculatePresetValues($('input[name=presets]:checked'));
+			DesiredCaloriesChangedHandler(); 
 			return false;
 		}
 		return true;
@@ -47,7 +47,7 @@ $(document).ready(function(){
 });
 
 
-function UpdateTotals2(){
+function EnterKeyPressedHandler(){
 	if(IsCustomPercentageChecked()){
 		UpdateTotalsByMacroPercentages();
 	} else {

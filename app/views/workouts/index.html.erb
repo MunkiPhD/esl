@@ -1,10 +1,17 @@
 <h1><%= workout_index_title @user %></h1>
 <div id="workouts">
-  <ul>
+		  <table class="table table-striped">
   <% @workouts.each do |workout| %>
-    <li><%= link_to workout.title, user_workout_path(workout.user, workout) %> <%= "(#{days_ago workout.date_performed})" %></li>
+			 <tr>
+						<td>
+								  <%= link_to workout.title, user_workout_path(workout.user, workout) %>
+						</td>
+						<td>
+								  <small class="text-muted"><%= "(#{days_ago workout.date_performed})" %></small>
+						</td>
+			 </tr>
   <% end %>
-</ul>
+</table>
 </div>
 
 <%= link_to_add "new workout", new_workout_path %>
