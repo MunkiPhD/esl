@@ -1,5 +1,14 @@
 window.FoodLog = {};
 
+$(document).ready(function(){
+	$("a.link-to-log-food").click(function(e){
+		e.preventDefault();
+		LogFoodItemHandler(this);
+	})
+});
+
+
+
 window.FoodLog.DeleteFoodLogEntry = function(url, successFunction){
 	var result = ""; // this will hold the result message
 	var templateId = ""; // this will hold the template ID to use for the selector 
@@ -21,6 +30,81 @@ window.FoodLog.DeleteFoodLogEntry = function(url, successFunction){
 	}).always(function(){
 		console.log("done with DELETE request");
 	});
+
+	return false;
+}
+
+
+
+function LogFoodItemHandler(link) {
+		var authToken = Security.GetCSRFToken();
+		var foodId = $(link).attr('data-id');
+		var postUrl = $(link).attr('data-url');
+
+		var templateHtml = $("#template_log_food").html();
+		Mustache.parse(templateHtml);
+		var rendered = Mustache.render(templateHtml, { url: postUrl, food_id: foodId, auth: authToken });
+		var $rendered = $(rendered);
+
+		SetTodaysDateOnSelects($rendered);
+
+		var $foodDialogDiv = $("#log_food_dialog");
+		$foodDialogDiv.html($rendered);
+
+		$foodDialogDiv.dialog({
+			resizable: false,
+			width: 550,
+			modal: true,
+			buttons: [
+				{
+					text: "Log Item",
+					class: "btn btn-success",
+					click: function(){
+						$(this).dialog("close");
+						LogFood($foodDialogDiv);
+						$foodDialogDiv.empty();
+					}
+				},
+				{
+					text: "Cancel",
+					class: "btn btn-primary",
+					click: function(){
+						$(this).dialog("close");
+						$foodDialogDiv.empty();
+					}
+				}
+			]
+		});
+
+		return false;
+}
+
+
+function LogFood($container){
+	console.log("inside LogFood()");
+	var $parent = $container.find("form.food-item-log-new");
+	var serializedData = $parent.serialize(); // This gets all the data from the form
+	var actionUrl = $parent.attr("action");
+
+	$.ajax({
+		type: "POST",
+		url: actionUrl,
+		dataType: "json",
+		data: serializedData
+
+	}).done(function(data, status, xhr){
+		console.log(data);
+		var servings = data["log_food"]["servings"];
+		var foodName = data["food_name"];
+		var successMessage = servings + " servings of " + foodName + " was logged.";
+		UserMessages.DisplaySuccess(successMessage);
+
+	}).fail(function(xhr, status, error){
+		Security.HandleStatusCode(xhr, status, error);
+
+	}).always(function(){
+		console.log("AJAX post completed");	
+	});	
 
 	return false;
 }
