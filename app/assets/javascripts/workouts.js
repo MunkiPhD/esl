@@ -1,4 +1,4 @@
-console.clear();
+//console.clear();
 //http://jsfiddle.net/MunkiPhD/gJHL4/
 
 function Workout(id) {
@@ -52,11 +52,13 @@ var exercises = [{
 var x = new Workout(2);
 console.log(x.WorkoutExercises);
 
+$(document).on('click', '#btn_add_workout_exercise', function(){
+	AddNewWorkoutExercise();
+   return false;
+});
 $(document).ready(function () {
-    $("#btn_add_workout_exercise").on('click', function (e) {
-        AddNewWorkoutExercise();
-        return false;
-    });
+    //$("#btn_add_workout_exercise").on('click', function (e) {
+    //});
 
     $("#btn_add_new_exercise").on('click', function () {
         var id = GenerateUniqueId();

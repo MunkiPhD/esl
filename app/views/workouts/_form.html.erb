@@ -42,6 +42,7 @@
 </div>
 
 <% end %>
+<a href="#" id="btn_add_new_exercise">Add New Exercise</a>
 
 <%= link_to_add "Add Missing Exercise", "#", id: "btn_add_missing_exercise" %>
 <%= render 'exercises/template_create_exercise', exercise: @new_exercise %>
@@ -50,3 +51,22 @@
 		AttachHandlerToAddExercise("#btn_add_missing_exercise", AddExerciseToWorkoutList);
 	});
 </script>
+
+
+
+<div id="template_workout_exercise" class="workout-exercise-container">Select an exercise:
+	<select class="exercise-select"></select>
+	<hr/>workout sets:
+	<div class="workout-sets-container"></div> <a href="#" class="btn-add-set">Add a set</a>
+
+</div>
+
+<div id="template_workout_set" class="workout-set" style="display: none">
+	<span class="set-number"></span>
+	Reps:
+	<input type="text" class="reps" />Weight:
+	<input type="text" class="weight" />
+	<input type="hidden" name="id" value="" />
+	<input type="hidden" name="_destroy" value="false" />
+	<a href="#" class="btn-remove-set">Remove</a>
+</div>
