@@ -3,39 +3,39 @@
 
 function Workout(id) {
     this.id = id;
-    this.DatePerformed = new Date();
-    this.Notes = "";
-    this.Title = "";
-    this.WorkoutExercises = [];
+    this.date_performed = new Date();
+    this.notes = "";
+    this.title = "";
+    this.workout_exercises = [];
 }
 
 Workout.prototype.AddWorkoutExercise = function AddWorkoutExerciseFunction(workoutExercise) {
-    workoutExercise.WorkoutId = this.id;
-    this.WorkoutExercises.push(workoutExercise);
+    workoutExercise.workout_id = this.id;
+    this.workout_exercises.push(workoutExercise);
 }
 
 function WorkoutExercise(id) {
     this.id = id;
-    this.WorkoutId = -1;
-    this.Destroy = false;
-    this.ExerciseId = -1;
+    this.workout_id = -1;
+    this._destroy = false;
+    this.exercise_id = -1;
 
-    this.WorkoutSets = [];
+    this.workout_sets = [];
 }
 
 WorkoutExercise.prototype.AddSet = function AddSetFunction(workoutSet) {
-    workoutSet.ExerciseId = this.ExerciseId;
-    this.WorkoutSets.push(workoutSet);
+    workoutSet.exercise_id = this.exercise_id;
+    this.workout_sets.push(workoutSet);
 }
 
 function WorkoutSet(id) {
     this.id = id;
-    this.Destroy = false;
-    this.ExerciseId = -1;
-    this.Reps = 0;
-    this.SetNumber = 0;
-    this.Weight = 0;
-    this.WorkoutId = "";
+    this.set_number = 0;
+    this.rep_count = 0;
+    this.weight = 0;
+    this.exercise_id = -1;
+    this.workout_id = "";
+    this._destroy = false;
 }
 
 var exercises = [{
@@ -151,17 +151,19 @@ function CreateWorkoutObject() {
 
     $("#workout .workout-exercise-container").each(function () {
         var workoutExercise = new WorkoutExercise(GenerateUniqueId());
-        workoutExercise.ExerciseId = $(this).find("select.exercise-select :selected").val();
+        workoutExercise.exercise_id = $(this).find("select.exercise-select :selected").val();
 
         $(this).find(".workout-set").each(function () {
             var workoutSet = new WorkoutSet(GenerateUniqueId());
-            workoutSet.Reps = $(this).find("input.reps").val();
-            workoutSet.Weight = $(this).find("input.weight").val();
+            workoutSet.rep_count = $(this).find("input.reps").val();
+            workoutSet.weight = $(this).find("input.weight").val();
+				workoutSet._destroy = $(this).find("input[name='_destroy']").val();
 
             workoutExercise.AddSet(workoutSet);
-
         });
         workout.AddWorkoutExercise(workoutExercise);
     });
     console.log(workout);
+	 var jsonStr = JSON.stringify(workout);
+	 console.log(jsonStr);
 }
