@@ -52,38 +52,43 @@ var exercises = [{
 var x = new Workout(2);
 console.log(x.WorkoutExercises);
 
-$(document).on('click', '#btn_add_workout_exercise', function(){
+$(document).on('click', '#btn_add_workout_exercise', function(e){
+		  console.log("in the handler");
+	e.preventDefault();
 	AddNewWorkoutExercise();
    return false;
 });
-$(document).ready(function () {
+
+//$(document).ready(function () {
     //$("#btn_add_workout_exercise").on('click', function (e) {
     //});
 
-    $("#btn_add_new_exercise").on('click', function () {
-        var id = GenerateUniqueId();
-        var name = "test-" + id;
-        exercises.push({
-            id: id,
-            name: name
-        });
-        console.log(exercises);
-        $("select.exercise-select").each(function () {
-            var selectedOption = $(this).find(":selected").val();
-            $(this).empty();
-            $(this).html(GenerateExerciseOptions(exercises));
-            console.log(selectedOption);
-            $(this).find("option[value='" + selectedOption + "']").attr("selected", "selected");
-        });
-    });
-
-    $("#btn_generate_json").on('click', function () {
-        CreateWorkoutObject();
-        return false;
-    });
+$(document).on('click', '#btn_add_new_exercise', function (e) {
+		  e.preventDefault();
+		  var id = GenerateUniqueId();
+		  var name = "test-" + id;
+		  exercises.push({
+					 id: id,
+					 name: name
+		  });
+		  console.log(exercises);
+		  $("select.exercise-select").each(function () {
+					 var selectedOption = $(this).find(":selected").val();
+					 $(this).empty();
+					 $(this).html(GenerateExerciseOptions(exercises));
+					 console.log(selectedOption);
+					 $(this).find("option[value='" + selectedOption + "']").attr("selected", "selected");
+		  });
 });
 
-$(document).on('click', "a.btn-add-set", function () {
+$(document).on('click', '#btn_generate_json', function (e) {
+		  e.preventDefault();
+		  CreateWorkoutObject();
+		  return false;
+});
+
+$(document).on('click', "a.btn-add-set", function (e) {
+		  e.preventDefault();
     var $container = $(this).prev();
     console.log($container);
     AddWorkoutSetToContainer($container);

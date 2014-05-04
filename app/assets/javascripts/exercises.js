@@ -3,6 +3,7 @@ function AttachHandlerToAddExercise(btnId, successBlock){
 		e.preventDefault();
 		var exerciseView = new ExerciseView();
 		exerciseView.AjaxCreate(successBlock);
+		return false;
 	});
 }
 

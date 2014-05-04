@@ -42,7 +42,6 @@
 </div>
 
 <% end %>
-<a href="#" id="btn_add_new_exercise">Add New Exercise</a>
 
 <%= link_to_add "Add Missing Exercise", "#", id: "btn_add_missing_exercise" %>
 <%= render 'exercises/template_create_exercise', exercise: @new_exercise %>
@@ -53,12 +52,17 @@
 </script>
 
 
+<div style="border: 1px solid blue; margin: 5px; padding: 5px;">
+		  
+<a href="#" id="btn_add_workout_exercise" class="btn btn-primary">Add Workout Set</a>
+<a href="#" id="btn_add_new_exercise" class="btn btn-success">Add Missing Exercise</a>
 
-<div id="template_workout_exercise" class="workout-exercise-container">Select an exercise:
+<div id="workout">
+</div>
+<div id="template_workout_exercise" class="workout-exercise-container" style="display:none;">Select an exercise:
 	<select class="exercise-select"></select>
 	<hr/>workout sets:
 	<div class="workout-sets-container"></div> <a href="#" class="btn-add-set">Add a set</a>
-
 </div>
 
 <div id="template_workout_set" class="workout-set" style="display: none">
@@ -69,4 +73,5 @@
 	<input type="hidden" name="id" value="" />
 	<input type="hidden" name="_destroy" value="false" />
 	<a href="#" class="btn-remove-set">Remove</a>
+</div>
 </div>
