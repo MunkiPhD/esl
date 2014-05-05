@@ -34,6 +34,7 @@ class WorkoutsController < ApplicationController
 				format.json { render action: 'show', status: :created, location: @workout }
 			else
 				@exercises = Exercise.all
+				@new_exercise = Exercise.new
 				format.html { render action: 'new' }
 				format.json { render json: @workout.errors, status: :unprocessable_entity }
 			end

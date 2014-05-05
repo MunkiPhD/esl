@@ -88,8 +88,9 @@ $(document).on('click', '#btn_generate_json', function (e) {
 });
 
 $(document).on('click', "a.btn-add-set", function (e) {
-		  e.preventDefault();
-    var $container = $(this).prev();
+	e.preventDefault();
+    //var $container = $(this).prev();
+	var $container = $(this).parents('tr');
     console.log($container);
     AddWorkoutSetToContainer($container);
 });
@@ -108,7 +109,8 @@ function AddWorkoutSetToContainer(containerId) {
     //console.log(templateHtml);
 
     //console.log(templateHtml);
-    $(templateHtml).appendTo($container).slideDown('fast');
+	 //console.log($container);
+    $(templateHtml).insertBefore($container).slideDown('fast');
     return false;
 }
 
@@ -121,7 +123,7 @@ function AddNewWorkoutExercise() {
   
     var exerciseOptions = GenerateExerciseOptions(exercises);
     templateHtml.find("select.exercise-select").html(exerciseOptions);
-    AddWorkoutSetToContainer(templateHtml.find(".workout-sets-container"));
+    AddWorkoutSetToContainer(templateHtml.find("tbody>tr"));
     
     $(templateHtml).appendTo("#workout").slideDown('fast'); 
   }

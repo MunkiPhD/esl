@@ -67,18 +67,46 @@
 
 <a href="#" id="btn_generate_json">Generate JSON</a>
 
-<div id="template_workout_exercise" class="workout-exercise-container" style="display:none;">Select an exercise:
-	<select name="exercise-select" class="exercise-select"></select>
-	<div class="workout-sets-container"></div> <a href="#" class="btn-add-set">Add a set</a>
-</div>
+<!-- templates -->
+<table id="template_workout_exercise" class="workout-exercise-container fields table" style="display:none;">
+	 <thead>
+    <tr>
+      <th colspan="4">
+        <h4>
+			 <select name="exercise-select" class="exercise-select"></select>
+        </h4>
+      </th>
+    </tr>
+    <tr>
+      <th>Set</th>
+      <th>Reps</th>
+      <th>Weight</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="prev-placeholder">
+		<td colspan="4">
+        <br/><a href="#" class="btn-add-set">Add a set</a>
+		</td>
+    </tr>
+  </tbody>
 
-<div id="template_workout_set" class="workout-set" style="display: none">
-	<span class="set-number"></span>
-	Reps:
-	<input type="text" name="reps" class="reps form-control" />Weight:
-	<input type="text" name="weight" class="weight form-control" />
-	<input type="hidden" name="id" value="" />
-	<input type="hidden" name="_destroy" value="false" />
-	<a href="#" class="btn btn-danger btn-sm btn-remove-set"><span class="glyphicon glyphicon-remove"></span></a>
-</div>
+</table>
+	<div class="workout-sets-container"></div>
+
+<table style="display: none">
+<tr id="template_workout_set" class="workout-set" style="display: none">
+	<td>
+		<span class="set-number"></span>
+		<input type="hidden" name="id" value="" />
+		<input type="hidden" name="_destroy" value="false" />
+	</td>
+	<td><input type="text" name="reps" class="reps form-control input-small" placeholder="reps" /></td>
+	<td><input type="text" name="weight" class="weight form-control input-small" placeholder="weight" /></td>
+	<td><a href="#" class="btn btn-danger btn-sm btn-remove-set"><span class="glyphicon glyphicon-remove"></span></a></td>
+</tr>
+</table>
+<!-- end templates -->
+
 </div>
