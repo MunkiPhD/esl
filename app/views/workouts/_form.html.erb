@@ -30,11 +30,14 @@
   <%= f.fields_for :workout_exercises, include_id: false do |builder| %>
     <%= render "workout_exercises_fields", f: builder, exercises: @exercises %>
   <% end %>
+</div>
+
   <div class="prev-placeholder">
     <%= link_to_add_fields "Add Exercise", f, :workout_exercises %>
+		<a href="#" id="btn_add_workout_exercise" class="btn btn-primary">Add Workout Set</a>
     <br/>
-  </div>
-</div>
+ </div>
+
 <div class="workout-actions">
 	<%= button_tag class: "btn btn-primary btn-large", type: 'submit' do %>
 		<span class="glyphicon glyphicon-check icon-white"></span> Save Workout
@@ -190,7 +193,7 @@
 
 
 	<script type="x-templ-mustache" id="template_workout_set">
-<tr class="fields">
+<tr class="workout-set">
   <td>
 	  <span class="set-number">{{ set_number }}</span>
 	 <input class="set-field"

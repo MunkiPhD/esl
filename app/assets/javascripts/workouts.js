@@ -123,7 +123,7 @@ function AddWorkoutSetToContainer(containerId) {
 
     //console.log(templateHtml);
 	 //console.log($container);
-    $rendered.insertBefore($container).slideDown('fast');
+    $rendered.insertBefore($container).slideDown('slow');
     return false;
 }
 
@@ -141,7 +141,7 @@ function AddNewWorkoutExercise() {
     $rendered.find("select.exercise-select").html(exerciseOptions);
     AddWorkoutSetToContainer($rendered.find("tbody>tr"));
     
-    $rendered.appendTo("#workout_exercises_box").slideDown('fast'); 
+    $rendered.appendTo("#workout_exercises_container").slideDown('fast'); 
   }
 
 function GenerateExerciseOptions(exercises) {

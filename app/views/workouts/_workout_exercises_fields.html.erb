@@ -1,10 +1,12 @@
-<table class="workouts_workout_exercise fields table" data-id="<%= f.object.id %>">
+<table class="workouts_workout_exercise fields table" data-index="<%= f.index %>">
   <thead>
     <tr>
       <th colspan="4">
+		 <%= f.hidden_field :id %>
         <h4>
-          <%= f.collection_select(:exercise_id, exercises, :id, :name) %>
+			  <%= f.collection_select(:exercise_id, exercises, :id, :name, {}, { class: 'exercise-select' }) %>
           <%= link_to_remove_fields "remove", f %>
+						<%= f.hidden_field :_destroy, value: "false" %>
         </h4>
       </th>
     </tr>
@@ -16,12 +18,12 @@
     </tr>
   </thead>
   <tbody>
-    <%= f.fields_for :workout_sets do |set| %>
+    <%= f.fields_for :workout_sets, include_id: false do |set| %>
       <%= render "workout_sets_fields", f: set  %>
     <% end %>
     <tr class="prev-placeholder">
       <td colspan="4">
-        <br/><%= link_to_add_fields "Add Set", f, :workout_sets %>
+        	<br/><a href="#" class="btn-add-set">Add a set</a>
     </td>
     </tr>
   </tbody>
