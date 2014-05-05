@@ -53,7 +53,6 @@ var x = new Workout(2);
 console.log(x.WorkoutExercises);
 
 $(document).on('click', '#btn_add_workout_exercise', function(e){
-		  console.log("in the handler");
 	e.preventDefault();
 	AddNewWorkoutExercise();
    return false;
@@ -93,39 +92,56 @@ $(document).on('click', "a.btn-add-set", function (e) {
 	var $container = $(this).parents('tr');
     console.log($container);
     AddWorkoutSetToContainer($container);
+	 return false;
 });
 
 $(document).on('click', 'a.btn-remove-set', function(){
-   $(this).prev("input[name='_destroy']").val(true);
-    $(this).parent('.workout-set').fadeOut('slow');
+   $(this).prev("input[name*='_destroy']").val(true);
+    $(this).parents('tr.workout-set').fadeOut('slow');
     return false;
 });
 
 function AddWorkoutSetToContainer(containerId) {
     var $container = $(containerId);
-    var templateHtml = $("#template_workout_set").clone().hide();
-    var id = GenerateUniqueId();
-    templateHtml.attr('id', id);
+
+	var set_number = 1;
+	var workout_exercise_index = $container.parents("table").data('index');
+	console.log("workout_exercise_id: " + workout_exercise_id);
+	var workout_set_id = GenerateUniqueId();
+
+    var templateHtml = $("#template_workout_set").html();
+	// console.log(templateHtml);
+		Mustache.parse(templateHtml);
+		var rendered = Mustache.render(templateHtml, { set_number: set_number, workout_exercise_index: workout_exercise_index, workout_set_id: workout_set_id });
+		var $rendered = $(rendered);
+		//console.log(rendered);
+
+
+    //var id = GenerateUniqueId();
+    //templateHtml.attr('id', id);
     //console.log(templateHtml);
 
     //console.log(templateHtml);
 	 //console.log($container);
-    $(templateHtml).insertBefore($container).slideDown('fast');
+    $rendered.insertBefore($container).slideDown('fast');
     return false;
 }
 
 
 function AddNewWorkoutExercise() {
-    var id = GenerateUniqueId();
-    var workoutExercise = new WorkoutExercise(id);
-    var templateHtml = $("#template_workout_exercise").clone().hide();
-    templateHtml.attr('id', id);
+    var workout_exercise_index = GenerateUniqueId();
   
+	 var templateHtml = $("#template_workout_exercise").html();
+	 Mustache.parse(templateHtml);
+	 var rendered = Mustache.render(templateHtml, { workout_exercise_index: workout_exercise_index });
+	 var $rendered = $(rendered);
+
+
     var exerciseOptions = GenerateExerciseOptions(exercises);
-    templateHtml.find("select.exercise-select").html(exerciseOptions);
-    AddWorkoutSetToContainer(templateHtml.find("tbody>tr"));
+    $rendered.find("select.exercise-select").html(exerciseOptions);
+    AddWorkoutSetToContainer($rendered.find("tbody>tr"));
     
-    $(templateHtml).appendTo("#workout").slideDown('fast'); 
+    $rendered.appendTo("#workout_exercises_box").slideDown('fast'); 
   }
 
 function GenerateExerciseOptions(exercises) {
