@@ -57,23 +57,28 @@
 <a href="#" id="btn_add_workout_exercise" class="btn btn-primary">Add Workout Set</a>
 <a href="#" id="btn_add_new_exercise" class="btn btn-success">Add Missing Exercise</a>
 
+
+
+
+
+
 <div id="workout">
 </div>
 
 <a href="#" id="btn_generate_json">Generate JSON</a>
 
 <div id="template_workout_exercise" class="workout-exercise-container" style="display:none;">Select an exercise:
-	<select class="exercise-select"></select>
+	<select name="exercise-select" class="exercise-select"></select>
 	<div class="workout-sets-container"></div> <a href="#" class="btn-add-set">Add a set</a>
 </div>
 
 <div id="template_workout_set" class="workout-set" style="display: none">
 	<span class="set-number"></span>
 	Reps:
-	<input type="text" class="reps" />Weight:
-	<input type="text" class="weight" />
+	<input type="text" name="reps" class="reps form-control" />Weight:
+	<input type="text" name="weight" class="weight form-control" />
 	<input type="hidden" name="id" value="" />
 	<input type="hidden" name="_destroy" value="false" />
-	<a href="#" class="btn-remove-set">Remove</a>
+	<a href="#" class="btn btn-danger btn-sm btn-remove-set"><span class="glyphicon glyphicon-remove"></span></a>
 </div>
 </div>

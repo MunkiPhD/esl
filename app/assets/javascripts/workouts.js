@@ -151,12 +151,12 @@ function CreateWorkoutObject() {
 
     $("#workout .workout-exercise-container").each(function () {
         var workoutExercise = new WorkoutExercise(GenerateUniqueId());
-        workoutExercise.exercise_id = $(this).find("select.exercise-select :selected").val();
+        workoutExercise.exercise_id = $(this).find("select[name='exercise-select'] :selected").val();
 
         $(this).find(".workout-set").each(function () {
             var workoutSet = new WorkoutSet(GenerateUniqueId());
-            workoutSet.rep_count = $(this).find("input.reps").val();
-            workoutSet.weight = $(this).find("input.weight").val();
+            workoutSet.rep_count = $(this).find("input[name='reps']").val();
+            workoutSet.weight = $(this).find("input[name='weight']").val();
 				workoutSet._destroy = $(this).find("input[name='_destroy']").val();
 
             workoutExercise.AddSet(workoutSet);
