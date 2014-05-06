@@ -47,7 +47,7 @@ feature "user visits the dashboard" do
       select date.strftime("%B"), from: 'log_date_month'
       select date.year.to_s, from: 'log_date_year'
       click_button 'Go'
-      expect(page).to have_content "about 2 years ago"
+      expect(page).to have_content "2 years ago"
       expect(page).to have_link "Go back to today"
     end
 

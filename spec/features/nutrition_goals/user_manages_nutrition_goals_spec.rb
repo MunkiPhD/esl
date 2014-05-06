@@ -44,7 +44,7 @@ feature 'User manages nutrition goals' do
 		fat = 300
 		calorie_total = (protein * 4) + (carbs * 4) + (fat * 9)
 
-		fill_in "Calories", with: calorie_total
+		fill_in "nutrition_goal_calories", with: calorie_total
 		fill_in "Protein", with: protein
 		fill_in "Carbs", with: carbs
 		fill_in "Total fat", with: fat

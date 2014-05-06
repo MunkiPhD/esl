@@ -25,10 +25,8 @@ class Workout < ActiveRecord::Base
   validates :date_performed, presence: true
   validates :notes, presence: true, allow_blank: true
 
-  accepts_nested_attributes_for :workout_exercises, allow_destroy: true, 
-    reject_if: proc { |attributes| attributes['workout_sets_attributes'].nil? }
-  #accepts_nested_attributes_for :workout_sets, allow_destroy: true
-
+  accepts_nested_attributes_for :workout_exercises, allow_destroy: true
+	
   #default_scope  { order('date_performed DESC') }
   scope :date_desc, ->  { order('date_performed DESC') }
 	scope :for_user, -> (user) { where("workouts.user_id = ?", user) }
@@ -64,6 +62,7 @@ class Workout < ActiveRecord::Base
   end
 
   private
+
 
   # makes sure that the correct IDs are set for all the workout sets
   def prepare_workout_for_validation

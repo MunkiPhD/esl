@@ -33,11 +33,9 @@
 </div>
 
   <div class="prev-placeholder">
-    <%= link_to_add_fields "Add Exercise", f, :workout_exercises %>
-		<a href="#" id="btn_add_workout_exercise" class="btn btn-primary">Add Workout Set</a>
+	  <a href="#" id="btn_add_workout_exercise" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Performed Exercise</a>
     <br/>
- </div>
-
+  </div>
 <div class="workout-actions">
 	<%= button_tag class: "btn btn-primary btn-large", type: 'submit' do %>
 		<span class="glyphicon glyphicon-check icon-white"></span> Save Workout
@@ -54,103 +52,6 @@
 	});
 </script>
 
-	<!------------------------------------------------------------------------------- -->
-	<hr/>-----------------------------------------------------------<hr/>
-
-	<div style="border: 1px solid blue; margin: 5px; padding: 5px;">
-
-		<%= form_for(@workout) do |f| %>
-			<% if @workout.errors.any? %>
-			<div id="error_explanation">
-			<h2><%= pluralize(@workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
-
-			<ul>
-				<% @workout.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-			<% end %>
-			</ul>
-		</div>
-	<% end %>
-		<div class="workout-general-info">
-			<div class="field">
-				<%= f.label :title %>
-				<%= f.text_field :title, { placeholder: "Workout Title", class: "input-xlarge" } %>
-			</div>
-			<div class="field">
-				<%= f.label :date_performed %><br/>
-				<%= f.date_select :date_performed, { order: [:day, :month, :year] } %>
-			</div>
-			<div class="field">
-				<%= f.label :notes %>
-				<%= f.text_area :notes, { placeholder: "Notes" } %>
-			</div>
-		</div>
-		<div id="workout_exercises_box">
-
-			<%= f.fields_for :workout_exercises, include_id: false do |workout_exercise| %>
-				<table class="workout-exercise-container fields table" data-index="<%= workout_exercise.index %>">
-				<thead>
-					<tr>
-						<th colspan="4">
-							<h4>
-								<%= workout_exercise.collection_select(:exercise_id, @exercises, :id, :name, {}, { class: 'exercise-select' }) %>
-							</h4>
-						</th>
-					</tr>
-					<tr>
-						<th>Set</th>
-						<th>Reps</th>
-						<th>Weight</th>
-						<th>Remove</th>
-					</tr>
-				</thead>
-				<tbody>
-
-				<%= workout_exercise.fields_for :workout_sets, include_id: false do |workout_set| %>
-					<tr id="" class="workout-set" style="">
-					<td>
-						<%= f.hidden_field :set_number, value: workout_set.object.set_number %>
-						<%= f.hidden_field :exercise_id, value: workout_set.object.exercise_id %>
-						<%= f.hidden_field :workout_id, value: workout_set.object.exercise_id %>
-					</td>
-					<td>
-						<%= workout_set.text_field :rep_count, placeholder: "reps", class: "input-small input-reps form-control" %>
-					</td>
-					<td>
-						<%= workout_set.text_field :weight, placeholder: "weight", class: "input-small input-weight form-control" %>
-					</td>
-					<td>
-						<%= workout_set.hidden_field :_destroy, value: "false" %>
-						<a href="#" class="btn btn-danger btn-sm btn-remove-set"><span class="glyphicon glyphicon-remove"></span></a>
-					</td>
-				</tr>
-			<% end %>
-
-				<tr class="prev-placeholder">
-					<td colspan="4">
-						<br/><a href="#" class="btn-add-set">Add a set</a>
-					</td>
-				</tr>
-				</tbody>
-
-			</table>
-
-			<div class="workout-actions">
-				<%= button_tag class: "btn btn-primary btn-large", type: 'submit' do %>
-					<span class="glyphicon glyphicon-check icon-white"></span> Save Workout
-			<% end %>
-			</div>
-		<% end %>
-		</div>
-	<% end %>
-
-		<a href="#" id="btn_add_workout_exercise" class="btn btn-primary">Add Workout Set</a>
-		<a href="#" id="btn_add_new_exercise" class="btn btn-success">Add Missing Exercise</a>
-		<a href="#" id="btn_generate_json">Generate JSON</a>
-
-
-	</div>
-
 
 
 	<script type="x-templ-mustache" id="template_workout_exercise">
@@ -160,7 +61,7 @@
 		<th colspan="4">
 		  <h4>
 			  <select 
-				id="workout_workout_exercises_attributes_{{ workout_exercise_index }}exercise_id" 
+				id="workout_workout_exercises_attributes_{{ workout_exercise_index }}_exercise_id" 
 				name="workout[workout_exercises_attributes][{{ workout_exercise_index }}][exercise_id]"
 				class="exercise-select"></select>
 
@@ -181,7 +82,7 @@
   <tbody>
 		  <tr class="prev-placeholder">
 		<td colspan="4">
-		  <br/><a href="#" class="btn-add-set">Add a set</a>
+		  <br/><a href="#" class="btn-add-set btn btn-success">Add a set</a>
 	 </td>
 	 </tr>
   </tbody>

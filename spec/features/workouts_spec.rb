@@ -42,7 +42,7 @@ feature "Workouts" do
     #save_and_open_page
 
     click_link "Edit"
-    click_link "Add Exercise"
+    click_link "Add Performed Exercise"
     # change the title
     fill_in "workout[title]", with: "NewWorkoutTitle"
 

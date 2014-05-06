@@ -1,31 +1,31 @@
 <table class="workouts_workout_exercise fields table" data-index="<%= f.index %>">
-  <thead>
-    <tr>
-      <th colspan="4">
-		 <%= f.hidden_field :id %>
-        <h4>
-			  <%= f.collection_select(:exercise_id, exercises, :id, :name, {}, { class: 'exercise-select' }) %>
-          <%= link_to_remove_fields "remove", f %>
-						<%= f.hidden_field :_destroy, value: "false" %>
-        </h4>
-      </th>
-    </tr>
-    <tr>
-      <th>Set</th>
-      <th>Reps</th>
-      <th>Weight</th>
-      <th>Remove</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= f.fields_for :workout_sets, include_id: false do |set| %>
-      <%= render "workout_sets_fields", f: set  %>
-    <% end %>
-    <tr class="prev-placeholder">
-      <td colspan="4">
-        	<br/><a href="#" class="btn-add-set">Add a set</a>
-    </td>
-    </tr>
-  </tbody>
+	<thead>
+		<tr>
+			<th colspan="4">
+				<%= f.hidden_field :id %>
+				<h4>
+					<%= f.collection_select(:exercise_id, exercises, :id, :name, {}, { class: 'exercise-select' }) %>
+					<%= f.hidden_field :_destroy, value: "false" %>
+					<a href="#" class="btn btn-danger btn-sm btn-remove-exercise"><span class="glyphicon glyphicon-remove"></span></a>
+				</h4>
+			</th>
+		</tr>
+		<tr>
+			<th>Set</th>
+			<th>Reps</th>
+			<th>Weight</th>
+			<th>Remove</th>
+		</tr>
+	</thead>
+	<tbody>
+	<%= f.fields_for :workout_sets, include_id: false do |set| %>
+		<%= render "workout_sets_fields", f: set  %>
+<% end %>
+	<tr class="prev-placeholder">
+		<td colspan="4">
+			<a href="#" class="btn-add-set btn btn-success">Add a set</a>
+		</td>
+	</tr>
+	</tbody>
 </table>
 
