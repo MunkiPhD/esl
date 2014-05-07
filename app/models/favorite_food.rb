@@ -15,7 +15,7 @@ class FavoriteFood < ActiveRecord::Base
 
   delegate :name, to: :food, prefix: true
 
-  scope :for_food, -> (food) { where("food_id = ?", food) } 
+  scope :for_food, -> (food) { where("favorite_foods.food_id = ?", food) } 
 
   validates :user, uniqueness: { scope: :food }
 end

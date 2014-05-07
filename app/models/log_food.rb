@@ -23,8 +23,8 @@ class LogFood < ActiveRecord::Base
 
   delegate :name, to: :food, prefix: true
 
-  scope :on_date, ->(date) { where("log_date = ?", date) }
-  scope :for_food, ->(food) { where("food_id = ?", food) }
+  scope :on_date, ->(date) { where("log_foods.log_date = ?", date) }
+  scope :for_food, ->(food) { where("log_foods.food_id = ?", food) }
 	scope :latest, -> { order(created_at: :desc) }
 
   def protein
