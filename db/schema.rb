@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140429004440) do
+ActiveRecord::Schema.define(version: 20140508193328) do
 
   create_table "circles", force: true do |t|
     t.string   "name",                       null: false
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 20140429004440) do
 
   create_table "log_foods", force: true do |t|
     t.decimal  "servings",   default: 1.0,          null: false
-    t.date     "log_date",   default: '2014-04-10', null: false
+    t.date     "log_date",   default: '2014-04-11', null: false
     t.integer  "food_id",                           null: false
     t.integer  "user_id",                           null: false
     t.datetime "created_at"
@@ -136,6 +136,15 @@ ActiveRecord::Schema.define(version: 20140429004440) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "units", force: true do |t|
+    t.integer "unit_type",        null: false
+    t.string  "unit_type_name",   null: false
+    t.integer "unit_system",      null: false
+    t.string  "unit_system_name", null: false
+    t.string  "unit_name",        null: false
+    t.string  "unit_abbr",        null: false
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
