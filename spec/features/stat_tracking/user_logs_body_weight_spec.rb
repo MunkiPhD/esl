@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Body weight stats' do
 	scenario 'User logs body weight entry' do
-		visit stats_body_weight_path
+		visit body_weights_path
 		expect(page).to have_content 'Body Weight'
 
 		within '#body_weight_entries' do
