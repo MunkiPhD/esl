@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508193328) do
+ActiveRecord::Schema.define(version: 20140509191446) do
+
+  create_table "body_weights", force: true do |t|
+    t.date     "log_date",                           default: '2014-05-09', null: false
+    t.decimal  "weight",     precision: 9, scale: 6,                        null: false
+    t.integer  "unit_id",                                                   null: false
+    t.integer  "user_id",                                                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "body_weights", ["user_id"], name: "index_body_weights_on_user_id", using: :btree
 
   create_table "circles", force: true do |t|
     t.string   "name",                       null: false

@@ -20,6 +20,6 @@ class Unit < ActiveRecord::Base
 	private
 
 	def before_save_callback
-		throw 'You cannot modify a unit entry'
+		#throw 'You cannot modify a unit entry'
 	end
 end

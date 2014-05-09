@@ -2,6 +2,7 @@ require 'spec_helper'
 
 feature 'Body weight stats' do
 	scenario 'User logs body weight entry' do
+		Timecop.freeze(Date.today) do
 		visit body_weights_path
 		expect(page).to have_content 'Body Weight'
 
@@ -17,7 +18,10 @@ feature 'Body weight stats' do
 
 		expect(page).to have_content "Body Weight entry logged!"
 		within '#body_weight_entries' do
+			date_str = 	format-date(Date.today)
 			expect(page).to have_content "200"
+			expect(page).to have_content date_str
+		end
 		end
 	end
 end

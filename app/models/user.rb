@@ -20,54 +20,55 @@
 #
 
 class User < ActiveRecord::Base
-  rolify
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+	rolify
+	# Include default devise modules. Others available are:
+	# :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+	devise :database_authenticatable, :registerable,
+		:recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessor :login
+	attr_accessor :login
 
 
-  has_many :exercises
-  has_many :workouts
-  has_many :circles
-  has_many :log_foods
-  has_many :favorite_foods
+	has_many :exercises
+	has_many :workouts
+	has_many :circles
+	has_many :log_foods
+	has_many :favorite_foods
 	has_many :workout_sets, through: :workouts
 	has_one :nutrition_goal
+	has_many :body_weights
 
-  validates :username, uniqueness: true,
-                      format: { with: /\A(?=.*[a-z])[a-z\_\d]+\Z/i, message: "Only alphanumeric letters and underscores allowed" }
-
-
-  # override the finder so that it searches by username OR email
-  def self.find_for_authentication(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).by_login(login).first
-    else
-      where(conditions).first
-    end
-  end
-
-  def to_param
-    username
-  end
-
-  def self.find(input)
-    input.to_i == 0 ? find_by_username(input) : super
-  end
+	validates :username, uniqueness: true,
+		format: { with: /\A(?=.*[a-z])[a-z\_\d]+\Z/i, message: "Only alphanumeric letters and underscores allowed" }
 
 
-  def favorite_food(food)
-    self.favorite_foods.for_food(food).first
-  end
+	# override the finder so that it searches by username OR email
+	def self.find_for_authentication(warden_conditions)
+		conditions = warden_conditions.dup
+		if login = conditions.delete(:login)
+			where(conditions).by_login(login).first
+		else
+			where(conditions).first
+		end
+	end
+
+	def to_param
+		username
+	end
+
+	def self.find(input)
+		input.to_i == 0 ? find_by_username(input) : super
+	end
 
 
-  private 
+	def favorite_food(food)
+		self.favorite_foods.for_food(food).first
+	end
 
-  def self.by_login(login_value)
-    where("lower(username) = :value OR lower(email) = :value", { value: login_value.downcase })
-  end
+
+	private 
+
+	def self.by_login(login_value)
+		where("lower(username) = :value OR lower(email) = :value", { value: login_value.downcase })
+	end
 end
