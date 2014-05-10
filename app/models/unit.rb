@@ -24,6 +24,15 @@ class Unit < ActiveRecord::Base
 
 		enum unit_system: { us_system: 0, metric_system: 1}
 
-		scope :for_system, -> (system) { where(unit_system: system) }
-		scope :for_unit, -> (unit_type) { where(unit_type: unit_type) }
+		def self.for_system(system_symbol)
+			system_int = Unit.unit_systems[system_symbol]
+			where(unit_system: system_int)
+		end
+
+
+		def self.for_unit_type(unit_type_sym)
+			unit_type_int = Unit.unit_types[unit_type_sym]
+			where(unit_type: unit_type_int)
+		end
+		
 end
