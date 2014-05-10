@@ -22,11 +22,9 @@ describe BodyWeight do
 		end
 	end
 
-	it 'on save, it sets the unit' do
-		instance  = user.body_weights.build(weight: 100)
-		puts "inside test, unit: #{instance.unit}"
+	it 'before validation, it sets the unit' do
+		instance  = BodyWeight.new(weight: 100, user: user)
 		expect(instance).to be_valid
-		instance.save
 		expect(instance.unit.unit_system_name).to eq "US"
 		expect(instance.unit.unit_type_name).to eq "weight"
 	end
