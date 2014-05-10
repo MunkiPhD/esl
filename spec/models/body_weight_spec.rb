@@ -18,15 +18,16 @@ describe BodyWeight do
 		end
 
 		it 'has a unit' do
-			expect(BodyWeight.new).to have(1).error_on(:unit)
+			expect(BodyWeight.new).to have(0).error_on(:unit)
 		end
 	end
 
 	it 'on save, it sets the unit' do
-		body_weight.save
-		instance  = user.body_weights.create(weight: 100)
-		unit = Unit.us_system.weight.first
-		expect(instance.unit.unit_system).to eq unit.unit_system
-		expect(instance.unit.unit_type).to eq unit.unit_type
+		instance  = user.body_weights.build(weight: 100)
+		puts "inside test, unit: #{instance.unit}"
+		expect(instance).to be_valid
+		instance.save
+		expect(instance.unit.unit_system_name).to eq "US"
+		expect(instance.unit.unit_type_name).to eq "weight"
 	end
 end

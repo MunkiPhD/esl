@@ -1,4 +1,11 @@
 class BodyWeight < ActiveRecord::Base
+	include HasMeasurement
+
+	def unit_measurement_type 
+	  	:weight  
+	end
+
+
 	belongs_to :user
 	belongs_to :unit
 

@@ -14,5 +14,9 @@ module HasUnit
 		enum unit_system: { us_system: 0, metric_system: 1}
 
 		scope :for_system, -> (system) { where(unit_system: system) }
+		scope :for_unit, -> (unit_type) { where(unit_type: unit_type) }
+	end
+
+	module ClassMethods
 	end
 end
