@@ -11,4 +11,10 @@ module SelectDateHelper
     select month, :from => "#{base_id}_2i"
     select day,   :from => "#{base_id}_3i"
   end
+
+  def select_log_date(date, id)
+	  select date.strftime('%-d'), from: "#{id}_3i"
+	  select date.strftime('%B'), from: "#{id}_2i"
+	  select date.strftime('%Y'), from: "#{id}_1i"
+  end
 end
