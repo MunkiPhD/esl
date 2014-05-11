@@ -7,6 +7,12 @@ feature 'User manages their body weight stats' do
 		login_user user
 	end
 
+	scenario 'can visit entries from link section' do
+		visit root_path
+		click_link 'body weight'
+		expect(page).to have_content 'Body Weight'
+	end
+
 	scenario 'logs an entry' do
 		date = Date.today
 		visit_and_log_entry(200, date)
