@@ -2,19 +2,9 @@
 <div id="body_weight_entries">
 		  <ul>
 		  <% @body_weights.each do |entry| %>
-					 <li><%= entry.weight %> : <%= format_date entry.log_date %></li>
+					 <li><%= entry.weight %> : <%= format_date entry.log_date %><%= link_to 'Edit', edit_body_weight_path(entry) %></li>
 		  <% end %>
 </ul>
 </div>
 
-
-<%= form_for @body_weight do |f| %>
-	<%= f.label :weight %>
-	<%= f.text_field :weight %>
-	<div class="field">
-		<%= f.label :log_date, "Log Date" %>
-		<%= f.date_select :log_date, order: [:day, :month, :year]  %>
-	</div>
-
-		  <%= f.submit 'Save' %>
-<% end %>
+<%= render 'form' %>

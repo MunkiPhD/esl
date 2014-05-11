@@ -18,6 +18,22 @@ class BodyWeightsController < ApplicationController
 		end
 	end
 
+	def edit
+		@body_weight = current_user.body_weights.find(params[:id])
+	end
+
+	def update
+		@body_weight = current_user.body_weights.find(params[:id])
+		respond_to do |format|
+			if @body_weight.update(body_weight_params)
+				flash[:success] = "Entry updated."
+				format.html { redirect_to body_weights_path }
+			else
+				format.html { render :edit }
+			end
+		end
+	end
+
 	private
 	def body_weight_params
 		params.require(:body_weight).permit(:weight, :log_date)

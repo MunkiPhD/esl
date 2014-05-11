@@ -1,0 +1,10 @@
+<%= form_for @body_weight do |f| %>
+	<%= f.label :weight %>
+	<%= f.text_field :weight %>
+	<div class="field">
+		<%= f.label :log_date, "Log Date" %>
+		<%= f.date_select :log_date, order: [:day, :month, :year]  %>
+	</div>
+
+		  <%= f.submit 'Save' %>
+<% end %>

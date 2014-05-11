@@ -49,6 +49,7 @@ RSpec.configure do |config|
   config.include(LoginMacros, :type => :feature)
   config.include(SelectDateHelper, :type => :feature)
   config.include(DateHelper, :type => :controller)
+  config.include(DateHelper, :type => :feature)
   config.include(LinkButtonClickHelper, :type => :feature)
 
   # paperclip shoulda matchers

@@ -17,6 +17,30 @@ feature 'User manages their body weight stats' do
 		visit_and_log_entry(100, date)
 	end
 
+	scenario 'edits an entry' do
+		Timecop.freeze(Date.today) do
+			visit_and_log_entry(200, Date.today)
+			within '#body_weight_entries' do
+				click_link 'Edit'
+			end
+			expect(page).to have_content "Editing body weight entry"
+
+			week_ago = 1.week.ago
+			within 'form.edit_body_weight' do
+				fill_in "Weight", with: 175
+				select_log_date(week_ago, 'body_weight_log_date')
+				click_button 'Save'
+			end
+
+			expect(page).to have_content "Entry updated"
+			within '#body_weight_entries' do
+				expect(page).to have_content '175'
+				expect(page).to have_content format_date(week_ago)
+				expect(page).to_not have_content '200'
+				expect(page).to_not have_content format_date(Date.today)
+			end
+		end
+	end
 
 	def visit_and_log_entry(weight, date)
 		Timecop.freeze(Date.today) do
