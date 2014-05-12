@@ -1,6 +1,6 @@
 class BodyWeightsController < ApplicationController
 	before_filter :authenticate_user!
-	before_filter :set_body_weight, only: [:edit, :update]
+	before_filter :set_body_weight, only: [:edit, :update, :destroy]
 
 	def index
 		@body_weight = BodyWeight.new(log_date: Date.today)
@@ -32,6 +32,18 @@ class BodyWeightsController < ApplicationController
 				format.html { redirect_to body_weights_path }
 			else
 				format.html { render :edit }
+			end
+		end
+	end
+
+
+	def destroy
+		respond_to do |format|
+			if @body_weight.destroy
+				flash[:success] = "Entry deleted"
+				format.html { redirect_to body_weights_path }
+			else
+				format.html { redirect_to body_weights_path, error: "An error occured while attempting to delete the entry." }
 			end
 		end
 	end

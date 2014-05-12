@@ -48,6 +48,19 @@ feature 'User manages their body weight stats' do
 		end
 	end
 
+	scenario 'deletes an entry' do
+		date = Date.today
+		visit_and_log_entry(200, date)
+		within '#body_weight_entries' do
+			click_button 'Delete'
+		end
+		within '#body_weight_entries' do
+			expect(page).to_not have_content format_date(date)
+			expect(page).to_not have_content '200'
+		end
+		expect(page).to have_content "Entry deleted"
+	end
+
 	def visit_and_log_entry(weight, date)
 		Timecop.freeze(Date.today) do
 			visit body_weights_path

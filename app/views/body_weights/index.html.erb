@@ -2,7 +2,7 @@
 <div id="body_weight_entries">
 		  <ul>
 		  <% @body_weights.each do |entry| %>
-					 <li><%= entry.weight %> : <%= format_date entry.log_date %><%= link_to 'Edit', edit_body_weight_path(entry) %></li>
+					 <li><%= entry.weight %> : <%= format_date entry.log_date %><%= link_to 'Edit', edit_body_weight_path(entry) %> | <%= link_to_destroy "Delete", body_weight_path(entry), method: :delete, data: { confirm: "Are you sure you want to delete this entry?" } %></li>
 		  <% end %>
 </ul>
 </div>
