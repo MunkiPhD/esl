@@ -1,10 +1,13 @@
-<%= form_for @body_weight do |f| %>
-	<%= f.label :weight %>
-	<%= f.text_field :weight, value: (number_with_precision(f.object.weight, precision: 2) || 0) %>
-	<div class="field">
-		<%= f.label :log_date, "Log Date" %>
-		<%= f.date_select :log_date, order: [:day, :month, :year]  %>
-	</div>
-
-		  <%= f.submit 'Save' %>
-<% end %>
+<div id="selected_date">
+	<%= form_for @body_weight, html: { class: "form-inline" } do |f| %>
+		<div class="form-group">
+			<%= f.label :weight %>
+			<%= f.text_field :weight, value: (number_with_precision(f.object.weight, precision: 2) || 0), class: "form-control" %>
+		</div>
+		<div class="form-group">
+			<%= f.label :log_date, "Log Date" %><br/>
+			<%= f.date_select :log_date, { order: [:day, :month, :year] }, class: "form-control" %>
+			<%= f.submit 'Save', class: "btn btn-primary" %>
+		</div>
+	<% end %>
+</div>

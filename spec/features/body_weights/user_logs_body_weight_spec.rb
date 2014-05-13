@@ -32,7 +32,7 @@ feature 'User manages their body weight stats' do
 			expect(page).to have_content "Editing body weight entry"
 
 			week_ago = 1.week.ago
-			within 'form.edit_body_weight' do
+			within 'form' do
 				fill_in "Weight", with: 175
 				select_log_date(week_ago, 'body_weight_log_date')
 				click_button 'Save'
@@ -80,6 +80,7 @@ feature 'User manages their body weight stats' do
 			within '#body_weight_entries' do
 				date_str = date.strftime('%d-%B-%Y')
 				expect(page).to have_content weight
+				expect(page).to have_content 'lbs'
 				expect(page).to have_content date_str
 			end
 		end

@@ -4,7 +4,7 @@ class BodyWeightsController < ApplicationController
 
 	def index
 		@body_weight = BodyWeight.new(log_date: Date.today)
-		@body_weights = current_user.body_weights
+		@body_weights = current_user.body_weights.includes(:unit)
 	end
 
 
@@ -13,7 +13,8 @@ class BodyWeightsController < ApplicationController
 
 		respond_to do |format|
 			if @body_weight.save
-				format.html { redirect_to body_weights_path, notice: "Body Weight entry logged!" }
+				flash[:success] = "Body Weight entry logged!"
+				format.html { redirect_to body_weights_path }
 			else
 				format.html { render :index }
 			end
