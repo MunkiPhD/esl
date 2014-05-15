@@ -5,9 +5,14 @@
 			<ul>
 				<% @body_weights.each do |entry| %>
 					<li><%= entry.weight %> <%= entry.unit.unit_abbr %>
-						<%= format_date entry.log_date %> | 
-						<%= link_to 'Edit', edit_body_weight_path(entry) %> | 
-						<%= link_to_destroy "Delete", body_weight_path(entry), class: "btn-xs", method: :delete, data: { confirm: "Are you sure you want to delete this entry?" } %></li>
+					<span class="entry-date">
+						<%= format_date entry.log_date %>
+		 			</span>
+						<span class="control-panel">
+								  <%= link_to_edit '', edit_body_weight_path(entry), class: "btn-xs", data: { action: "edit" } %>
+						<%= link_to_destroy '', body_weight_path(entry), class: "btn-xs", method: :delete, data: { action: "destroy", confirm: "Are you sure you want to delete this entry?" } %>
+			 </span>
+						</li>
 				<% end %>
 			</ul>
  		</div> <!-- end body weight entries -->

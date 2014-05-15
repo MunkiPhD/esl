@@ -26,7 +26,7 @@ module LinkHelper
   def link_to_edit(body, url, html_options = {})
     set_html_options(html_options, "btn btn-primary")
     link_to url, html_options do
-      content_tag(:span, nil, class: "glyphicon glyphicon-pencil icon-white") + " " + body
+      content_tag(:span, nil, class: "glyphicon glyphicon-pencil") + " " + body
     end
   end
 

@@ -27,7 +27,7 @@ feature 'User manages their body weight stats' do
 		Timecop.freeze(Date.today) do
 			visit_and_log_entry(200, Date.today)
 			within '#body_weight_entries' do
-				click_link 'Edit'
+				find('[data-action="edit"]').click
 			end
 			expect(page).to have_content "Editing body weight entry"
 
@@ -52,7 +52,7 @@ feature 'User manages their body weight stats' do
 		date = Date.today
 		visit_and_log_entry(200, date)
 		within '#body_weight_entries' do
-			click_button 'Delete'
+			find('[data-action="destroy"]').click
 		end
 		within '#body_weight_entries' do
 			expect(page).to_not have_content format_date(date)

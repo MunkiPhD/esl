@@ -1,0 +1,37 @@
+@import 'helpers/colors';
+
+#body_weight_weight {
+	width: 75px;
+	text-align: center;
+}
+
+#body_weight_entry {
+	max-width: 355px;
+  border:1px solid $border; 
+  padding:10px;
+
+  form {
+	margin: 0px;
+  }
+}
+
+#body_weight_entries {
+	ul {
+		list-style-type: none;
+		padding: 0px;
+		margin: 0px;
+
+		li {
+			margin: 5px 0px 5px 0px;
+			padding: 5px;
+			border-bottom: 1px dotted $border;
+		}
+		.entry-date {
+			color: #666;
+			margin-left:20px;
+		}
+		.control-panel {
+			margin-left:40px;
+		}
+	}
+}
