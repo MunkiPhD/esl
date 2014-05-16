@@ -11,7 +11,6 @@ describe LinkHelper do
       result = helper.link_to_add(text, item)
       expect(result).to include(text)
       expect(result).to include(item_path)
-      expect(result).to include("icon-plus icon-white")
       expect(result).to include("btn btn-success")
     end
 
@@ -28,7 +27,7 @@ describe LinkHelper do
       expect(result).to include(item_path) 
       expect(result).to include("type=\"submit\"") 
       expect(result).to include("btn btn-danger") 
-      expect(result).to include("icon-remove icon-white")
+      expect(result).to include("icon-remove")
     end
 
     it "does not conflict with other html options" do
@@ -50,7 +49,7 @@ describe LinkHelper do
       expect(result).to include(item_path) 
       expect(result).to include("href=") 
       expect(result).to include("btn btn-danger") 
-      expect(result).to include("icon-remove icon-white")
+      expect(result).to include("icon-remove")
     end
 
     it "does not conflict with other html options" do
@@ -71,7 +70,7 @@ describe LinkHelper do
       expect(result).to include(text)
       expect(result).to include(item_edit_path)
       expect(result).to include("btn btn-primary")
-      expect(result).to include("icon-pencil icon-white")
+      expect(result).to include("icon-pencil")
     end
 
     it "does not conflict with other html options" do
@@ -87,7 +86,7 @@ describe LinkHelper do
       expect(result).to include(text)
       expect(result).to include("type=\"submit\"")
       expect(result).to include("btn btn-primary")
-      expect(result).to include("icon-ok icon-white")
+      expect(result).to include("icon-ok")
       expect(result).to include("name=\"commit\"")
     end
 
