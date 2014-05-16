@@ -2,10 +2,7 @@ class NutritionController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @current_date = selected_date 
-    @logged_foods = current_user.log_foods.on_date(@current_date).latest
-	 @nutrition_goal = (current_user.nutrition_goal ||= NutritionGoal.where(user: current_user).first_or_create)
-	 @macro_totals = DailyNutritionTotals.sum_totals(@logged_foods)
+		@presenter = Nutrition::DashboardPresenter.new(current_user, selected_date)
   end
 
 
