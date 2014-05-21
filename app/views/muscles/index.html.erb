@@ -1,0 +1,4 @@
+<h1>Muscles</h1>
+<% @muscles.each do |muscle| %>
+	<%= link_to muscle.name, muscle_path(muscle) %>
+<% end %>

@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509191446) do
+ActiveRecord::Schema.define(version: 20140521222944) do
 
   create_table "body_weights", force: true do |t|
-    t.date     "log_date",                           default: '2014-05-09', null: false
+    t.date     "log_date",                           default: '2014-05-16', null: false
     t.decimal  "weight",     precision: 9, scale: 6,                        null: false
     t.integer  "unit_id",                                                   null: false
     t.integer  "user_id",                                                   null: false
@@ -41,7 +41,10 @@ ActiveRecord::Schema.define(version: 20140509191446) do
     t.integer  "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "muscle_id"
   end
+
+  add_index "exercises", ["muscle_id"], name: "index_exercises_on_muscle_id", using: :btree
 
   create_table "favorite_foods", force: true do |t|
     t.integer  "user_id",    null: false
@@ -120,9 +123,15 @@ ActiveRecord::Schema.define(version: 20140509191446) do
 
   create_table "log_foods", force: true do |t|
     t.decimal  "servings",   default: 1.0,          null: false
-    t.date     "log_date",   default: '2014-04-11', null: false
+    t.date     "log_date",   default: '2014-04-10', null: false
     t.integer  "food_id",                           null: false
     t.integer  "user_id",                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "muscles", force: true do |t|
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
