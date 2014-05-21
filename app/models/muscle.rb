@@ -1,3 +1,3 @@
 class Muscle < ActiveRecord::Base
-	validates :name, presence: true
+	validates :name, presence: true, null: false
 end
