@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+puts 'Starting to seed data!'
 
 Exercise.find_or_create_by(name: "Squat")
 Exercise.find_or_create_by(name: "Deadlift")
@@ -43,3 +44,11 @@ puts 'Adding Muscles...'
 end
 Muscle.find_or_create_by(name: "Lower Back")
 Muscle.find_or_create_by(name: "Middle Back")
+
+
+# exercise types
+puts 'Adding Exercise Types'
+%w(Cardio Plyometrics Powerlifting Strength Stretching Strongman).each do |exercise_type|
+	ExerciseType.find_or_create(name: exercise_type)
+end
+ExerciseType.find_or_create(name: 'Olympic Weightlifting')
