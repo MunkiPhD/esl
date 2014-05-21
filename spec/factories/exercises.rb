@@ -14,11 +14,9 @@
 FactoryGirl.define do
   factory :exercise do
     sequence(:name){ |n| "deadlift_#{n}" }
-    user
   end
 
   factory :squat, class: Exercise do
     name "squat"
-    user
   end
 end

@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+=begin
 feature "Exercises" do
   let(:user) { create(:user) }
   let(:workout) { create(:workout, user: user) }
@@ -30,7 +31,7 @@ feature "Exercises" do
   end
 
   scenario "can edit and update an exercise created by the user" do
-    exercise = create(:exercise, user: user)
+    exercise = create(:exercise)
     new_name = "#{exercise.name}2"
     visit exercises_path
     click_link exercise.name
@@ -54,7 +55,7 @@ feature "Exercises" do
   end
 
   scenario "can delete an exercise not tied to a workout" do
-    exercise = create(:exercise, user: user)
+    exercise = create(:exercise)
 
     expect {  
       visit exercises_path
@@ -66,7 +67,7 @@ feature "Exercises" do
   end
 
   scenario "cannot delete an exercise tied to a workout" do
-    exercise = create(:exercise, user: user)
+    exercise = create(:exercise)
     workout_set = create(:workout_set, exercise: exercise)
 
     expect {
@@ -91,3 +92,4 @@ feature "Exercises" do
     }.to_not change(Exercise, :count)
   end
 end
+=end

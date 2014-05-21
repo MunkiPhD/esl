@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe LinkHelper do
   let(:text) { "url text" }
-  let(:item) { create(:exercise) }
-  let(:item_path) { exercise_path(item) }
-  let(:item_edit_path) { edit_exercise_path(item) }
+  let(:item) { create(:workout) }
+  let(:item_path) { workout_path(item) }
+  let(:item_edit_path) { edit_workout_path(item) }
 
   describe "#link_to_add" do
     it "links to the specified url" do

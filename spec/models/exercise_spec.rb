@@ -15,14 +15,11 @@ describe Exercise do
 	describe 'validations' do
 		it "has a name" do
 			exercise = Exercise.new
-			user = User.new
-			exercise.user_id = user
 			expect(exercise).to_not be_valid
 		end
 
 		it "has a name at least three characters long" do
 			exercise = Exercise.new
-			exercise.user_id = 1
 			exercise.name = "123"
 			expect(exercise).to be_valid
 
@@ -31,7 +28,7 @@ describe Exercise do
 		end
 
 		it "has a name that is less than 45 characters long" do
-			exercise = Exercise.new(user_id:1)
+			exercise = Exercise.new
 			exercise.name = "1"*45
 			expect(exercise).to be_valid
 		end
@@ -50,7 +47,7 @@ describe Exercise do
 			exercise_two = create(:exercise, muscle: muscle)
 			exercise_excluded = create(:exercise, muscle: nil)
 
-			expect(Exercise.with_main_muscle(muscle)).to eq [exercise_one, exercise_two]
+			expect(Exercise.with_main_muscle(muscle)).to eq [exercise_two, exercise_one]
 		end
 	end
 end

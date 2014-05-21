@@ -5,11 +5,6 @@
 		<%= @exercise.name %>
 		</p>
 
-		<p>
-		Submitted by: <%= @exercise.user.username %>
-		</p>
-		<%= link_to_edit 'Edit', edit_exercise_path(@exercise) %> 
-		<%= link_to_destroy "Delete", @exercise, data: { confirm: "Are you sure?"}, method: "delete" %>
 	</div>
 	<div class="col-md-3">
 		<% if current_user %>
