@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521231344) do
+ActiveRecord::Schema.define(version: 20140521232704) do
 
   create_table "body_weights", force: true do |t|
     t.date     "log_date",                           default: '2014-05-16', null: false
@@ -35,6 +35,12 @@ ActiveRecord::Schema.define(version: 20140521231344) do
   end
 
   add_index "circles", ["user_id"], name: "index_circles_on_user_id", using: :btree
+
+  create_table "exercise_types", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "exercises", force: true do |t|
     t.string   "name",       null: false
