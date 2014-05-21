@@ -41,14 +41,6 @@ describe Exercise do
 			exercise2 = build(:exercise, name: "deadlift")
 			expect(exercise2).to have(1).errors_on(:name)
 		end
-
-		it "belongs to a user" do
-			expect(build(:exercise, user_id: nil)).to have(1).errors_on(:user_id)
-			expect(build(:exercise, user_id: 2)).to be_valid
-			user = create(:user)
-			exercise = user.exercises.build(name: "test")
-			expect(exercise).to be_valid
-		end
 	end
 
 	describe ".with_main_muscle" do

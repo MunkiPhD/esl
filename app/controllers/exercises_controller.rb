@@ -17,6 +17,7 @@ class ExercisesController < ApplicationController
 		end
   end
 
+=begin
   # GET /exercises/new
   def new
     @exercise = Exercise.new
@@ -78,7 +79,7 @@ class ExercisesController < ApplicationController
       end
     end
   end
-
+=end
   private
 
   # verify that the exercise can be deleted

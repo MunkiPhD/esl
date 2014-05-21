@@ -28,8 +28,6 @@ class User < ActiveRecord::Base
 
 	attr_accessor :login
 
-
-	has_many :exercises
 	has_many :workouts
 	has_many :circles
 	has_many :log_foods

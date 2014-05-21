@@ -12,7 +12,7 @@ Esl::Application.routes.draw do
 		end
 	end
 
-	resources :exercises
+	resources :exercises, only: [:index, :show]
 	resources :workouts
 	resources :body_weights, except: [:show]
 	resources :muscles, only: [:index, :show]

@@ -10,7 +10,6 @@
 #
 
 class Exercise < ActiveRecord::Base
-  belongs_to :user
 	belongs_to :muscle
   has_many :workout_exercises
   has_many :workout_sets, inverse_of: :exercise

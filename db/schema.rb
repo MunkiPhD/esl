@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521222944) do
+ActiveRecord::Schema.define(version: 20140521231344) do
 
   create_table "body_weights", force: true do |t|
     t.date     "log_date",                           default: '2014-05-16', null: false
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20140521222944) do
 
   create_table "exercises", force: true do |t|
     t.string   "name",       null: false
-    t.integer  "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "muscle_id"
