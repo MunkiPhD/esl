@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521232704) do
+ActiveRecord::Schema.define(version: 20140522114938) do
 
   create_table "body_weights", force: true do |t|
-    t.date     "log_date",                           default: '2014-05-16', null: false
+    t.date     "log_date",                           default: '2014-05-09', null: false
     t.decimal  "weight",     precision: 9, scale: 6,                        null: false
     t.integer  "unit_id",                                                   null: false
     t.integer  "user_id",                                                   null: false
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 20140521232704) do
 
   add_index "circles", ["user_id"], name: "index_circles_on_user_id", using: :btree
 
+  create_table "equipment", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "exercise_types", force: true do |t|
     t.string   "name",       null: false
     t.datetime "created_at"
@@ -50,6 +56,12 @@ ActiveRecord::Schema.define(version: 20140521232704) do
   end
 
   add_index "exercises", ["muscle_id"], name: "index_exercises_on_muscle_id", using: :btree
+
+  create_table "experience_levels", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "favorite_foods", force: true do |t|
     t.integer  "user_id",    null: false
@@ -126,11 +138,23 @@ ActiveRecord::Schema.define(version: 20140521232704) do
     t.datetime "food_image_updated_at"
   end
 
+  create_table "force_types", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "log_foods", force: true do |t|
     t.decimal  "servings",   default: 1.0,          null: false
-    t.date     "log_date",   default: '2014-04-10', null: false
+    t.date     "log_date",   default: '2014-04-11', null: false
     t.integer  "food_id",                           null: false
     t.integer  "user_id",                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mechanic_types", force: true do |t|
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
