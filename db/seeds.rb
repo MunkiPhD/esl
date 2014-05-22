@@ -1,15 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-puts 'Starting to seed data!'
+require 'open-uri'
 
+puts 'Starting to seed data!'
+=begin
 Exercise.find_or_create_by(name: "Squat")
 Exercise.find_or_create_by(name: "Deadlift")
 Exercise.find_or_create_by(name: "Bench Press")
+=end
 
 # delete all the units so we can seed them again
 puts 'Deleting all the units...'
@@ -48,7 +44,31 @@ Muscle.find_or_create_by(name: "Middle Back")
 
 # exercise types
 puts 'Adding Exercise Types'
-%w(Cardio Plyometrics Powerlifting Strength Stretching Strongman).each do |exercise_type|
-	ExerciseType.find_or_create(name: exercise_type)
+%w(Cardio Plyometrics Powerlifting Strength Stretching Strongman).each do |exercise|
+	ExerciseType.find_or_create_by(name: exercise)
 end
-ExerciseType.find_or_create(name: 'Olympic Weightlifting')
+ExerciseType.find_or_create_by(name: 'Olympic Weightlifting')
+
+
+def get_reference(klass, name)
+	klass.find_or_create_by(name: name)
+end
+
+
+# load the exercise data :: although this is inefficient with always hitting the db, it's only done once for a small dataset, so who cares
+puts "Loading Exercises"
+json_data = JSON.load(open('https://github.com/MunkiPhD/exercise_data/raw/master/exercise_data.json'))
+json_data.each do |item|
+	alternate_name = item["alternate_name"]
+	Exercise.find_or_create_by(name: item["name"])
+	equipment = get_reference(Equipment, item["equipment"])
+	force_type = get_reference(ForceType, item["force"])
+	mechanic_type = get_reference(MechanicType, item["mechanics"])
+	main_muscle = get_reference(Muscle, item["main_muscle"])
+	experience_level = get_reference(ExperienceLevel, item["level"])
+	exercise_type = get_reference(ExerciseType, item["type"])
+end
+
+Equipment.all.each do |equip|
+	puts "Equipment: #{equip.name}"
+end
