@@ -32,20 +32,24 @@ Unit.new(unit_type: 6, unit_type_name: "liquids", unit_system: 1, unit_system_na
 Unit.new(unit_type: 7, unit_type_name: "blood glucose", unit_system: 1, unit_system_name: "METRIC", unit_name: "millimoles per litre", unit_abbr: "mmol/l").save(validate: false)
 
 
+puts ""
 
 # create muscles
 puts 'Adding Muscles...'
 %w(Abdominals Abductors Adductors Biceps Calves Chest Forearms Glutes Hamstrings Lats Neck Quadriceps Shoulders Traps Triceps).each do |muscle|
 	Muscle.find_or_create_by(name: muscle)
+	print "."
 end
 Muscle.find_or_create_by(name: "Lower Back")
 Muscle.find_or_create_by(name: "Middle Back")
 
+puts ""
 
 # exercise types
 puts 'Adding Exercise Types'
 %w(Cardio Plyometrics Powerlifting Strength Stretching Strongman).each do |exercise|
 	ExerciseType.find_or_create_by(name: exercise)
+	print "."
 end
 ExerciseType.find_or_create_by(name: 'Olympic Weightlifting')
 
@@ -54,21 +58,26 @@ def get_reference(klass, name)
 	klass.find_or_create_by(name: name)
 end
 
+puts ""
 
 # load the exercise data :: although this is inefficient with always hitting the db, it's only done once for a small dataset, so who cares
 puts "Loading Exercises"
+Exercise.delete_all
 json_data = JSON.load(open('https://github.com/MunkiPhD/exercise_data/raw/master/exercise_data.json'))
 json_data.each do |item|
-	alternate_name = item["alternate_name"]
-	Exercise.find_or_create_by(name: item["name"])
-	equipment = get_reference(Equipment, item["equipment"])
-	force_type = get_reference(ForceType, item["force"])
-	mechanic_type = get_reference(MechanicType, item["mechanics"])
-	main_muscle = get_reference(Muscle, item["main_muscle"])
-	experience_level = get_reference(ExperienceLevel, item["level"])
-	exercise_type = get_reference(ExerciseType, item["type"])
+	Exercise.find_or_create_by(name: item["name"]) do |exercise|
+		exercise.alternate_name = item["alternate_name"]
+		exercise.equipment = get_reference(Equipment, item["equipment"])
+		exercise.force_type = get_reference(ForceType, item["force"])
+		exercise.mechanic_type = get_reference(MechanicType, item["mechanics"])
+		exercise.muscle = get_reference(Muscle, item["main_muscle"])
+		exercise.experience_level = get_reference(ExperienceLevel, item["level"])
+		exercise.exercise_type = get_reference(ExerciseType, item["type"])
+		exercise.instructions = item["directions"]
+	end
+	print "."
 end
 
-Equipment.all.each do |equip|
-	puts "Equipment: #{equip.name}"
-end
+puts ""
+
+puts "seeding complete"

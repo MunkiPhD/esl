@@ -1,5 +1,23 @@
 require 'spec_helper'
 
+feature "Exercises" do
+	let(:exercise) { create(:exercise, alternate_name: "something alternate") }
+
+	scenario "user visits page and sees info" do
+		visit exercise_path(exercise)
+		expect(page).to have_content exercise.name
+		expect(page).to have_content exercise.alternate_name
+		expect(page).to have_content exercise.exercise_type.name
+		expect(page).to have_content exercise.equipment.name
+		expect(page).to have_content exercise.experience_level.name
+		expect(page).to have_content exercise.force_type.name
+		expect(page).to have_content exercise.mechanic_type.name
+		expect(page).to have_content exercise.muscle.name
+		exercise.instructions.each do |instruction|
+			expect(page).to have_content instruction
+		end
+	end
+end
 =begin
 feature "Exercises" do
   let(:user) { create(:user) }

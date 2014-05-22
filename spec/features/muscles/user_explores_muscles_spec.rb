@@ -17,7 +17,7 @@ feature 'User navigates muscles' do
 		click_link 'Abdominals'
 
 		# a sample of exercises on the page
-		expect(page).to have_link '3/4 Sit-Up'
+		expect(page).to have_link 'Air Bike'
 		expect(page).to have_link 'Bent Press'
 	end
 end

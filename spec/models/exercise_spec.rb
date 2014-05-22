@@ -12,31 +12,53 @@
 require 'spec_helper'
 
 describe Exercise do
+	it 'has a valid factory' do
+		expect(build(:exercise)).to be_valid
+	end
+
 	describe 'validations' do
 		it "has a name" do
-			exercise = Exercise.new
-			expect(exercise).to_not be_valid
+			exercise = Exercise.new(name: '')
+			exercise.valid?
+			expect(exercise.errors[:name]).to include("can't be blank") #have(2).errors_on(:name)
 		end
 
-		it "has a name at least three characters long" do
-			exercise = Exercise.new
-			exercise.name = "123"
-			expect(exercise).to be_valid
-
-			exercise.name = "12"
-			expect(exercise).to_not be_valid
+		it "name is invalid if less than 3 characters" do
+			expect(Exercise.new(name: "12")).to have(1).errors_on(:name)
 		end
 
-		it "has a name that is less than 45 characters long" do
+		it "name is valid for 60 chars and less" do
 			exercise = Exercise.new
-			exercise.name = "1"*45
-			expect(exercise).to be_valid
+			exercise.name = "1"*61
+			expect(exercise).to have(1).error_on(:name)
 		end
 
 		it "has a unique name" do
 			exercise = create(:exercise, name: "deadlift")
 			exercise2 = build(:exercise, name: "deadlift")
 			expect(exercise2).to have(1).errors_on(:name)
+		end
+
+		context 'associations' do
+			it 'has an exercise type' do
+				expect(Exercise.new(exercise_type: nil)).to have(1).errors_on(:exercise_type)
+			end	
+
+			it 'has equipment' do
+				expect(Exercise.new(equipment: nil)).to have(1).errors_on(:equipment)
+			end
+
+			it 'has a mechanic type' do
+				expect(Exercise.new(mechanic_type: nil)).to have(1).errors_on(:mechanic_type)
+			end
+
+			it 'has a force type' do
+				expect(Exercise.new(force_type: nil)).to have(1).errors_on(:force_type)
+			end
+
+			it 'has a experience level' do
+				expect(Exercise.new(experience_level: nil)).to have(1).errors_on(:experience_level)
+			end
 		end
 	end
 

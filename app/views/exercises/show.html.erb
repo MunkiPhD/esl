@@ -5,6 +5,25 @@
 		<%= @exercise.name %>
 		</p>
 
+		<ul>
+			<% unless @exercise.alternate_name.blank? %>
+			<li>Also known as: <%= @exercise.alternate_name %></li>
+		<% end %>
+			<li>Type of Exercise: <%= @exercise.exercise_type.name %></li>
+			<li>Main Muscle: <%= @exercise.muscle.name %></li>
+			<li>Equipment: <%= @exercise.equipment.name %></li>
+			<li>Mechanic: <%= @exercise.mechanic_type.name %></li>
+			<li>Force: <%= @exercise.force_type.name %></li>
+			<li>Experience Level: <%= @exercise.experience_level.name %></li>
+		</ul>
+		<div id="instructions">
+			<ul>
+			<% @exercise.instructions.each do |instruction| %>
+				<li><%= instruction %></li>
+			<% end %>
+		</ul>
+		</div>
+
 	</div>
 	<div class="col-md-3">
 		<% if current_user %>

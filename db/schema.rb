@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522114938) do
+ActiveRecord::Schema.define(version: 20140522211314) do
 
   create_table "body_weights", force: true do |t|
-    t.date     "log_date",                           default: '2014-05-09', null: false
+    t.date     "log_date",                           default: '2014-05-22', null: false
     t.decimal  "weight",     precision: 9, scale: 6,                        null: false
     t.integer  "unit_id",                                                   null: false
     t.integer  "user_id",                                                   null: false
@@ -49,12 +49,24 @@ ActiveRecord::Schema.define(version: 20140522114938) do
   end
 
   create_table "exercises", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",                             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "muscle_id"
+    t.string   "alternate_name"
+    t.integer  "exercise_type_id",                 null: false
+    t.integer  "equipment_id",                     null: false
+    t.integer  "mechanic_type_id",                 null: false
+    t.integer  "force_type_id",                    null: false
+    t.integer  "experience_level_id",              null: false
+    t.text     "instructions",        default: ""
   end
 
+  add_index "exercises", ["equipment_id"], name: "index_exercises_on_equipment_id", using: :btree
+  add_index "exercises", ["exercise_type_id"], name: "index_exercises_on_exercise_type_id", using: :btree
+  add_index "exercises", ["experience_level_id"], name: "index_exercises_on_experience_level_id", using: :btree
+  add_index "exercises", ["force_type_id"], name: "index_exercises_on_force_type_id", using: :btree
+  add_index "exercises", ["mechanic_type_id"], name: "index_exercises_on_mechanic_type_id", using: :btree
   add_index "exercises", ["muscle_id"], name: "index_exercises_on_muscle_id", using: :btree
 
   create_table "experience_levels", force: true do |t|
@@ -146,7 +158,7 @@ ActiveRecord::Schema.define(version: 20140522114938) do
 
   create_table "log_foods", force: true do |t|
     t.decimal  "servings",   default: 1.0,          null: false
-    t.date     "log_date",   default: '2014-04-11', null: false
+    t.date     "log_date",   default: '2014-05-22', null: false
     t.integer  "food_id",                           null: false
     t.integer  "user_id",                           null: false
     t.datetime "created_at"

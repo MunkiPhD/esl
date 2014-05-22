@@ -55,7 +55,7 @@ describe ExercisesController do
 			it "assigns all exercises as @exercises" do
 				exercise = Exercise.create! valid_attributes
 				get :index, {}
-				assigns(:exercises).should eq([exercise])
+				assigns(:exercises).should include(exercise)
 			end
 		end
 
