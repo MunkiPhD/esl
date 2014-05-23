@@ -62,7 +62,21 @@ describe Exercise do
 		end
 	end
 
-	describe ".with_main_muscle" do
+	describe '#to_param' do
+		it 'returns a nice url' do
+			exercise = create(:exercise, name: "Barbell Squat with |/ something")
+			expect(exercise.to_param).to eq "#{exercise.id}-barbell-squat-with-something"
+		end
+	end
+
+	describe '.find_by_id' do
+		it 'returns the correct exercise' do
+			exercise = create(:exercise)
+			expect(Exercise.find(exercise.to_param)).to eq exercise
+		end
+	end
+
+	describe '.with_main_muscle' do
 		it 'scopes to exercises with the specified muscle as the main' do
 			muscle = create(:muscle)
 			exercise_one = create(:exercise, muscle: muscle)

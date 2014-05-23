@@ -71,6 +71,7 @@
 #
 
 class Food < ActiveRecord::Base
+	extend ActiveSupport::Concern
 	before_validation :sum_calories
 
 	has_many :log_foods
@@ -137,25 +138,6 @@ class Food < ActiveRecord::Base
 		:sugar_alcohols,
 		:chloride,
 		greater_than_or_equal_to: 0
-
-
-	#
-	# Used to override the default to_params so that it includes the name of the food
-	#
-	def to_param
-		[id, name.parameterize].join("-")
-	end
-
-
-	#
-	# Finds a Food based on the name (e.f. '112-fried-chicken-breast'
-	#   input: the string
-	#
-	# Ruby will take the string and turn it into a number. 
-	# Internally it will essentially just grab the first numbers and ignore the rest, so simply cast it as an integer
-	def self.find_by_param(input)
-		find(input.to_i)
-	end
 
 
 	#

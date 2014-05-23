@@ -10,6 +10,8 @@
 #
 
 class Exercise < ActiveRecord::Base
+	include NiceUrl
+
 	belongs_to :muscle
 	belongs_to :exercise_type
 	belongs_to :equipment
