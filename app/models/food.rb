@@ -71,7 +71,8 @@
 #
 
 class Food < ActiveRecord::Base
-	extend ActiveSupport::Concern
+	include NiceUrl
+
 	before_validation :sum_calories
 
 	has_many :log_foods

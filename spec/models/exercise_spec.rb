@@ -11,7 +11,12 @@
 
 require 'spec_helper'
 
+
 describe Exercise do
+	it_behaves_like 'nice urls' do
+		let(:model) { create(:exercise, name: "Barbell Squat with }][ something") }
+	end
+
 	it 'has a valid factory' do
 		expect(build(:exercise)).to be_valid
 	end

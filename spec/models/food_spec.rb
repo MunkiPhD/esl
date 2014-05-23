@@ -73,6 +73,10 @@
 require 'spec_helper'
 
 describe Food do
+	it_behaves_like 'nice urls' do
+		let(:model) { create(:food, name: "Chicken breast asdso } pudding") }
+	end
+
 	describe 'callbacks' do
 		describe 'before_validation' do
 			it 'calculates the correct number of calories based on macronutrients' do
@@ -141,17 +145,6 @@ describe Food do
     end
   end
 
-  it "the ID param is {id}-{name}" do
-    f = Food.create(name: "chicken breast")
-    expect(f).to be_valid
-    expect(f.to_param).to eq "#{f.id}-chicken-breast"
-  end
-
-  it '#find_by_param with the name' do
-    f = Food.create(name: "chicken")
-    found = Food.find_by_param(f.to_param)
-    expect(f).to eq found
-  end
 
   it 'image content type validation' do
 	food = create(:food)

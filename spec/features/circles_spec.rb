@@ -3,12 +3,6 @@ require 'spec_helper'
 feature "Circles" do
   let(:user) { create(:user) }
 
-  before :each do
-    create(:exercise, id: 1)
-    create(:exercise, id: 2)
-    create(:exercise, id: 3)
-  end
-
   scenario "are created by an authenticated user" do
     circle = build(:circle)
     login_user user

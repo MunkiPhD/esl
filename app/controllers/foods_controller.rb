@@ -46,7 +46,7 @@ class FoodsController < ApplicationController
   
   private
     def set_food
-      @food = Food.find_by_param(params[:id])
+      @food = Food.find(params[:id])
     end
 
     def food_params
