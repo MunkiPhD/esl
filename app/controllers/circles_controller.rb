@@ -12,8 +12,9 @@ class CirclesController < ApplicationController
   # GET /circles/1
   # GET /circles/1.json
   def show
-    @exercises = Exercise.where(id: [1,2,3])
-    @exercise = Exercise.find(params[:exercise_id] || 1)
+		# todo: This is totally hacky and needs to be fixed. Should allow the admin to select which exercises
+    @exercises = Exercise.where(name: ["Barbell Full Squat", "Barbell Deadlift", "Bench Press - Powerlifting"])
+    @exercise = Exercise.find(params[:exercise_id] || @exercises[0].id)
     @limit = 3
     @workouts = Leaderboard.max_weight_for_exercise_on_circle(@circle,@exercise, @limit)#.limit(@limit)
   end
