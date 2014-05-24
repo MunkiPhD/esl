@@ -33,4 +33,8 @@ class Exercise < ActiveRecord::Base
 	def self.with_main_muscle(muscle)
 		where(muscle: muscle)
 	end
+
+	%w(muscle exercise_type equipment mechanic_type force_type experience_level).each do |type|
+		delegate :name, to: :"#{type}", prefix: true
+	end
 end

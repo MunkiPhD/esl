@@ -67,19 +67,19 @@ describe Exercise do
 		end
 	end
 
-	describe '#to_param' do
-		it 'returns a nice url' do
-			exercise = create(:exercise, name: "Barbell Squat with |/ something")
-			expect(exercise.to_param).to eq "#{exercise.id}-barbell-squat-with-something"
+
+
+	describe 'delegates' do
+		let(:exercise) { create(:exercise) }
+		%w(muscle exercise_type equipment mechanic_type force_type experience_level).each do |type|
+			describe "##{type}_name" do
+				it "returns the #{type} name" do
+					expect(exercise.send("#{type}_name")).to eq exercise.send("#{type}").name
+				end
+			end
 		end
 	end
 
-	describe '.find_by_id' do
-		it 'returns the correct exercise' do
-			exercise = create(:exercise)
-			expect(Exercise.find(exercise.to_param)).to eq exercise
-		end
-	end
 
 	describe '.with_main_muscle' do
 		it 'scopes to exercises with the specified muscle as the main' do
