@@ -1,27 +1,26 @@
 <div class="row">
 	<div class="col-md-9">
-		<p>
-		<strong>Name:</strong>
+		<h1>
 		<%= @exercise.name %>
-		</p>
+		</h1>
 
-		<ul>
+		<ul id="exercise_details">
 			<% unless @exercise.alternate_name.blank? %>
-			<li>Also known as: <%= @exercise.alternate_name %></li>
+				<li><strong>Also known as:</strong> <%= @exercise.alternate_name %></li>
 		<% end %>
-			<li>Type of Exercise: <%= @exercise.exercise_type.name %></li>
-			<li>Main Muscle: <%= @exercise.muscle.name %></li>
-			<li>Equipment: <%= @exercise.equipment.name %></li>
-			<li>Mechanic: <%= @exercise.mechanic_type.name %></li>
-			<li>Force: <%= @exercise.force_type.name %></li>
-			<li>Experience Level: <%= @exercise.experience_level.name %></li>
+			<li><strong>Type of Exercise:</strong> <%= @exercise.exercise_type.name %></li>
+			<li><strong>Main Muscle:</strong> <%= link_to @exercise.muscle.name, @exercise.muscle %></li>
+			<li><strong>Equipment:</strong> <%= @exercise.equipment.name %></li>
+			<li><strong>Mechanic:</strong> <%= @exercise.mechanic_type.name %></li>
+			<li><strong>Force:</strong> <%= @exercise.force_type.name %></li>
+			<li><strong>Experience Level:</strong> <%= @exercise.experience_level.name %></li>
 		</ul>
 		<div id="instructions">
-			<ul>
+			<ol>
 			<% @exercise.instructions.each do |instruction| %>
 				<li><%= instruction %></li>
 			<% end %>
-		</ul>
+		</ol>
 		</div>
 
 	</div>
