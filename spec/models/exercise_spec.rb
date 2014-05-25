@@ -80,7 +80,15 @@ describe Exercise do
 		end
 	end
 
-
+	describe '.for_exercise_type' do
+		it 'scopes the exercises to the specified type' do
+			exercise_type = create(:exercise_type)
+			exercise_one = create(:exercise, exercise_type: exercise_type)
+			exercise_two = create(:exercise, exercise_type: create(:exercise_type))
+			expect(Exercise.for_exercise_type(exercise_type)).to eq [exercise_one]
+		end
+	end
+		
 	describe '.with_main_muscle' do
 		it 'scopes to exercises with the specified muscle as the main' do
 			muscle = create(:muscle)
