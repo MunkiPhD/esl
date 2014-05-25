@@ -3,12 +3,11 @@
 		<h1>
 		<%= @exercise.name %>
 		</h1>
-
 		<ul id="exercise_details">
 			<% unless @exercise.alternate_name.blank? %>
 				<li><strong>Also known as:</strong> <%= @exercise.alternate_name %></li>
 		<% end %>
-			<li><strong>Type of Exercise:</strong> <%= @exercise.exercise_type.name %></li>
+			<li><strong>Type of Exercise:</strong> <%= link_to @exercise.exercise_type_name, exercise_type_path(@exercise.exercise_type) %></li>
 			<li><strong>Main Muscle:</strong> <%= link_to @exercise.muscle.name, @exercise.muscle %></li>
 			<li><strong>Equipment:</strong> <%= @exercise.equipment.name %></li>
 			<li><strong>Mechanic:</strong> <%= @exercise.mechanic_type.name %></li>

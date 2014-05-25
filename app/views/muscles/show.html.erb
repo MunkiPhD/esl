@@ -1,4 +1,1 @@
-<h1><%= @muscle.name %></h1>
-<% @exercises.each do |exercise| %>
-	<%= link_to exercise.name, exercise %><br/>
-<% end %>
+<%= render 'exercise_references/listing', reference_type: @muscle, exercises: @exercises %>

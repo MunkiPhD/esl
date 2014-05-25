@@ -18,13 +18,6 @@ feature "Exercises" do
 		end
 	end
 
-	scenario 'clicking a muscle name on the exercise page shows exercises with that muscle' do
-		visit exercise_path(exercise)
-		click_link exercise.muscle.name
-
-		expect(page).to have_content exercise.muscle.name
-		expect(page).to have_link exercise.name
-	end
 end
 =begin
 feature "Exercises" do

@@ -12,6 +12,7 @@ Esl::Application.routes.draw do
 		end
 	end
 
+	resources :exercise_types, only: [:show], path: 'exercises/type/'
 	resources :exercises, only: [:index, :show]
 	resources :workouts
 	resources :body_weights, except: [:show]
