@@ -13,6 +13,8 @@ Esl::Application.routes.draw do
 	end
 
 	resources :exercise_types, only: [:show], path: 'exercises/type/'
+	resources :equipments, only: [:show], path: 'exercises/equipment/'
+
 	resources :exercises, only: [:index, :show]
 	resources :workouts
 	resources :body_weights, except: [:show]

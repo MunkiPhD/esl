@@ -13,6 +13,19 @@ feature 'can view the exercises by category' do
 		expect(page).to_not have_link exercise_two.name
 	end
 
+
+	scenario 'clicking on equipment for an exercise shows the exercises that use that equipment' do
+		equipment = create(:equipment, name: "my equipment")
+		exercise = create(:exercise, equipment: equipment)
+		exercise_two = create(:exercise)
+
+		visit exercise_path(exercise)
+		click_link exercise.equipment_name
+		expect(page).to have_content "Equipment: #{equipment.name}"
+		expect(page).to have_link exercise.name
+		expect(page).to_not have_link exercise_two.name
+	end
+
 	scenario 'clicking a muscle name on the exercise page shows exercises with that muscle' do
 		exercise = create(:exercise)
 		visit exercise_path(exercise)
