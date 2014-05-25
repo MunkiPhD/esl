@@ -88,6 +88,16 @@ describe Exercise do
 			expect(Exercise.for_exercise_type(exercise_type)).to eq [exercise_one]
 		end
 	end
+
+	describe '.for_equipment' do
+		it 'scopes the equipment to the specified type' do
+			equipment = create(:equipment)
+			exercise = create(:exercise, equipment: equipment)
+			exercise_excluded = create(:exercise)
+
+			expect(Exercise.for_equipment(equipment)).to eq [exercise]
+		end
+	end
 		
 	describe '.with_main_muscle' do
 		it 'scopes to exercises with the specified muscle as the main' do
