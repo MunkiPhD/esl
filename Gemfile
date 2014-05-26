@@ -43,6 +43,7 @@ end
 group :development, :test do
   gem "rspec-rails"
   gem 'timecop'
+  gem 'launchy'
 end
 
 group :test do
