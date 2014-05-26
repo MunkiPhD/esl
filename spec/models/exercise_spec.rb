@@ -114,7 +114,7 @@ describe Exercise do
 			exercise_two = create(:exercise, muscle: muscle)
 			exercise_excluded = create(:exercise, muscle: nil)
 
-			expect(Exercise.with_main_muscle(muscle)).to eq [exercise_two, exercise_one]
+			expect(Exercise.for_muscle(muscle)).to eq [exercise_two, exercise_one]
 		end
 	end
 end

@@ -2,13 +2,19 @@ module ExerciseFilters
 	extend ActiveSupport::Concern
 
 	included do
-		[:exercise_type, :equipment, :mechanic_type].each do |method|
-			define_singleton_method "for_#{method}" do |argument|
-				where("exercises.#{method}_id = ?", argument)
-			end
+		def self.for_exercise_type(exercise_type)
+			where(exercise_type: exercise_type)
 		end
 
-		def self.with_main_muscle(muscle)
+		def self.for_equipment(equipment)
+			where(equipment: equipment)
+		end
+
+		def self.for_mechanic_type(mechanic_type)
+			where(mechanic_type: mechanic_type)
+		end
+
+		def self.for_muscle(muscle)
 			where(muscle: muscle)
 		end
 	end

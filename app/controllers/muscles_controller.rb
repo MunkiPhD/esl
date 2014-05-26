@@ -5,6 +5,6 @@ class MusclesController < ApplicationController
 
 	def show
 		@muscle = Muscle.find(params[:id])
-		@exercises = Exercise.with_main_muscle(@muscle)
+		@exercises = Exercise.for_muscle(@muscle)
 	end
 end
