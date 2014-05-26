@@ -11,6 +11,7 @@
 
 class Exercise < ActiveRecord::Base
 	include NiceUrl
+	include ExerciseFilters
 
 	belongs_to :muscle
 	belongs_to :exercise_type
@@ -30,26 +31,7 @@ class Exercise < ActiveRecord::Base
 	validates :force_type, presence: true
 	validates :experience_level, presence: true
 
-	def self.with_main_muscle(muscle)
-		where(muscle: muscle)
-	end
-
-
-	def self.for_exercise_type(exercise_type)
-		where(exercise_type: exercise_type)
-	end
-
-
-	def self.for_equipment(equipment)
-		where(equipment: equipment)
-	end
-
-
-	def self.for_mechanic_type(mechanic_type)
-		where(mechanic_type: mechanic_type)
-	end
-
-	%w(muscle exercise_type equipment mechanic_type force_type experience_level).each do |type|
-		delegate :name, to: :"#{type}", prefix: true
+	[:muscle, :exercise_type, :equipment, :mechanic_type, :force_type, :experience_level].each do |type|
+		delegate :name, to: type, prefix: true
 	end
 end
