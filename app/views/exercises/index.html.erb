@@ -11,6 +11,12 @@
 		<%= check_box_tag 'exercise_types[]', type.id, was_checked(:exercise_types, type), id: "exercise_types_#{type.id}" %>
 		<%= label_tag "exercise_types[#{type.id}]", type.name %><br/>
 	<% end %>
+
+	<h3>Equipment</h3>
+	<% Equipment.all.each do |equipment| %>
+		<%= check_box_tag 'equipments[]', equipment.id, was_checked(:equipments, equipment), id: "equipments_#{equipment.id}" %>
+		<%= label_tag "equipments[#{equipment.id}]", equipment.name %><br/>
+	<% end %>
 	<%= submit_tag 'Filter' %>
 <% end %>
 

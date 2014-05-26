@@ -94,8 +94,16 @@ describe Exercise do
 			equipment = create(:equipment)
 			exercise = create(:exercise, equipment: equipment)
 			exercise_excluded = create(:exercise)
-
 			expect(Exercise.for_equipment(equipment)).to eq [exercise]
+		end
+	end
+
+	describe '.for_mechanic_type' do
+		it 'scopes the mechanic type to the specified mechanic' do
+			mechanic_type = create(:mechanic_type)
+			exercise = create(:exercise, mechanic_type: mechanic_type)
+			exercise_excluded = create(:exercise)
+			expect(Exercise.for_mechanic_type(mechanic_type)).to eq [exercise]
 		end
 	end
 		

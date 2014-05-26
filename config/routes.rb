@@ -14,6 +14,7 @@ Esl::Application.routes.draw do
 
 	resources :exercise_types, only: [:show], path: 'exercises/type/'
 	resources :equipments, only: [:show], path: 'exercises/equipment/'
+	resources :mechanic_types, only: [:show], path: 'exercises/mechanic_types/'
 	
 	get 'exercises/search', to: 'exercises#search'	
 	

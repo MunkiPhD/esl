@@ -1,5 +1,5 @@
 FactoryGirl.define do
 	factory :mechanic_type do
-		name "Compound"
+		sequence(:name) { |n| "mechanic_type_#{n}" }
 	end
 end
