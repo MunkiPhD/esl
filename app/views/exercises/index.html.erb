@@ -1,4 +1,18 @@
 <h1>Listing exercises</h1>
+<%= form_tag exercises_search_path, method: 'get' do %>
+	<h3>Muscles</h3>
+	<% Muscle.all.each do |muscle| %>
+		<%= check_box_tag 'muscles[]', muscle.id, was_checked(:muscles, muscle), id: "muscles_#{muscle.id}" %>
+		<%= label_tag "muscles[#{muscle.id}]", muscle.name %><br/>
+	<% end %>
+
+	<h3>Types</h3>
+	<% ExerciseType.all.each do |type| %>
+		<%= check_box_tag 'exercise_types[]', type.id, was_checked(:exercise_types, type), id: "exercise_types_#{type.id}" %>
+		<%= label_tag "exercise_types[#{type.id}]", type.name %><br/>
+	<% end %>
+	<%= submit_tag 'Filter' %>
+<% end %>
 
 <table class="table table-striped table-hover">
   <thead>

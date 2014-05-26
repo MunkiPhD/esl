@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-9">
 		<h1>
-		<%= @exercise.name %>
+			<%= @exercise.name %>
 		</h1>
 		<ul id="exercise_details">
 			<% unless @exercise.alternate_name.blank? %>
@@ -16,16 +16,16 @@
 		</ul>
 		<div id="instructions">
 			<ol>
-			<% @exercise.instructions.each do |instruction| %>
-				<li><%= instruction %></li>
+				<% @exercise.instructions.each do |instruction| %>
+					<li><%= instruction %></li>
 			<% end %>
-		</ol>
+			</ol>
 		</div>
 
 	</div>
 	<div class="col-md-3">
 		<% if current_user %>
 			<%= render 'one_rep_max', logged_orm_workout_set: @logged_orm_workout_set, calculated_orm: @calculated_orm %>
-		<% end %>
+	<% end %>
 	</div>
 </div>

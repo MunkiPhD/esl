@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :authenticate_user!, except: [:index, :show, :search]
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
 
   # GET /exercises
@@ -7,6 +7,14 @@ class ExercisesController < ApplicationController
   def index
     @exercises = Exercise.all
   end
+
+	def search
+		@exercises = ExerciseSearch.filter(params)
+
+		respond_to do |format|
+			format.html { render 'index' }
+		end
+	end
 
   # GET /exercises/1
   # GET /exercises/1.json
