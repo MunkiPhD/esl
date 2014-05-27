@@ -14,6 +14,19 @@ feature 'viewers can filter the exercise list by categories' do
 		expect(page).to_not have_link exercise_excluded.name
 	end
 
+	scenario 'can filter by force type' do
+		force_type = create(:force_type)
+		exercise = create(:exercise, force_type: force_type)
+		exercise_excluded = create(:exercise)
+
+		visit exercises_path
+		check(force_type.name)
+		click_button 'Filter'
+
+		expect(page).to have_link exercise.name
+		expect(page).to_not have_link exercise_excluded.name
+	end
+
 
 	scenario 'selects to view by muscle and exercise type' do
 		muscle = create(:muscle)
