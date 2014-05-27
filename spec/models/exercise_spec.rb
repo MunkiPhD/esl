@@ -107,7 +107,7 @@ describe Exercise do
 		end
 	end
 		
-	describe '.with_main_muscle' do
+	describe '.for_muscle' do
 		it 'scopes to exercises with the specified muscle as the main' do
 			muscle = create(:muscle)
 			exercise_one = create(:exercise, muscle: muscle)
