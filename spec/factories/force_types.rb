@@ -1,5 +1,5 @@
 FactoryGirl.define do
 	factory :force_type, class: ForceType do
-		name "Push"
+		sequence(:name) { |n| "force_type_#{n}" }
 	end
 end

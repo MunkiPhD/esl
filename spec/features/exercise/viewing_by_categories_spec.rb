@@ -49,4 +49,18 @@ feature 'can view the exercises by category' do
 		expect(page).to have_link exercise.name
 		expect(page).to_not have_link exercise_excluded.name
 	end
+
+
+	scenario 'clicking on a force type on the exercise page shows the exercises with the same force type' do
+		force_type = create(:force_type)
+		exercise = create(:exercise, force_type: force_type)
+		exercise_excluded = create(:exercise)
+
+		visit exercise_path(exercise)
+		click_link exercise.force_type_name
+
+		expect(page).to have_content "Force Type: #{force_type.name}"
+		expect(page).to have_link exercise.name
+		expect(page).to_not have_link exercise_excluded.name
+	end
 end

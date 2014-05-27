@@ -17,5 +17,9 @@ module ExerciseFilters
 		def self.for_muscle(muscle)
 			where(muscle: muscle)
 		end
+
+		def self.for_force_type(force_type)
+			where(force_type: force_type)
+		end
 	end
 end

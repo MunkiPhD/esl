@@ -117,4 +117,15 @@ describe Exercise do
 			expect(Exercise.for_muscle(muscle)).to eq [exercise_two, exercise_one]
 		end
 	end
+
+	describe '.for_force_type' do
+		it 'scopes the exercises with the specified force type' do
+			force_type = create(:force_type)
+			exercise_one = create(:exercise, force_type: force_type)
+			exercise_two = create(:exercise, force_type: force_type)
+			exercise_excluded = create(:exercise)
+
+			expect(Exercise.for_force_type(force_type)).to eq [exercise_two, exercise_one]
+		end
+	end
 end
