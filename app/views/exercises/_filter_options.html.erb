@@ -1,0 +1,11 @@
+<h3><%= klass.name.underscore.humanize.titleize.pluralize %></h3>
+<ul>
+	<% klass_name = klass.name.underscore.pluralize.downcase %>
+	<% klass.all.each do |instance| %>
+		<li>
+			<%= check_box_tag "#{klass_name}[]", instance.id, was_checked(klass_name, instance), id: "#{klass_name}_#{instance.id}" %>
+			<%= label_tag "#{klass_name}[#{instance.id}]", instance.name %><br/>
+		</li>
+	<% end %>
+</ul>
+

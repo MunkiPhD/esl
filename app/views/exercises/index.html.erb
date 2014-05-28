@@ -1,51 +1,35 @@
-<h1>Listing exercises</h1>
-<%= form_tag exercises_search_path, method: 'get' do %>
-	<h3>Muscles</h3>
-	<% Muscle.all.each do |muscle| %>
-		<%= check_box_tag 'muscles[]', muscle.id, was_checked(:muscles, muscle), id: "muscles_#{muscle.id}" %>
-		<%= label_tag "muscles[#{muscle.id}]", muscle.name %><br/>
+<h1>Exercises</h1>
+
+<div class="row">
+	<div class="col-md-4">
+		<%= form_tag exercises_search_path, method: 'get', id: "search_filter" do %>
+			<%= render 'filter_options', klass: Muscle %>
+			<%= render 'filter_options', klass: ExerciseType %>
+			<%= render 'filter_options', klass: Equipment %>
+			<%= render 'filter_options', klass: ForceType %>
+			<%= render 'filter_options', klass: ExperienceLevel %>
+  
+			<%= submit_tag 'Filter', class: "btn btn-primary btn-lg" %>
+		<% end %>
+	</div>
+	<div class="col-md-8">
+	<% unless @exercises.count == 0 %>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @exercises.each do |exercise| %>
+				<tr>
+					<td><%= link_to exercise.name, exercise %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% else %>
+		<h3>No exercises matched the specified criteria</h3>
 	<% end %>
-
-	<h3>Types</h3>
-	<% ExerciseType.all.each do |type| %>
-		<%= check_box_tag 'exercise_types[]', type.id, was_checked(:exercise_types, type), id: "exercise_types_#{type.id}" %>
-		<%= label_tag "exercise_types[#{type.id}]", type.name %><br/>
-	<% end %>
-
-	<h3>Equipment</h3>
-	<% Equipment.all.each do |equipment| %>
-		<%= check_box_tag 'equipments[]', equipment.id, was_checked(:equipments, equipment), id: "equipments_#{equipment.id}" %>
-		<%= label_tag "equipments[#{equipment.id}]", equipment.name %><br/>
-	<% end %>
-
-	<h3>Force Type</h3>
-	<% ForceType.all.each do |force| %>
-		<%= check_box_tag 'force_types[]', force.id, was_checked(:force_types, force), id: "force_types_#{force.id}" %>
-		<%= label_tag "force_types[#{force.id}]", force.name %><br/>
-	<% end %>
-
-
-	<h3>Experience Level</h3>
-	<% ExperienceLevel.all.each do |experience_level| %>
-		<%= check_box_tag 'experience_levels[]', experience_level.id, was_checked(:experience_levels, experience_level), id: "experience_levels_#{experience_level.id}" %>
-		<%= label_tag "experience_levels[#{experience_level.id}]", experience_level.name %><br/>
-	<% end %>
-
-	<%= submit_tag 'Filter' %>
-<% end %>
-
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Name</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @exercises.each do |exercise| %>
-    <tr>
-      <td><%= link_to exercise.name, exercise %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+	</div>
+</div>

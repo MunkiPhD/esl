@@ -24,3 +24,20 @@
 		margin:0px;
 	}
 }
+
+#search_filter {
+	ul {
+		margin:0px;
+		padding: 0px;
+
+		li {
+		border: 0px solid red;
+		display: inline-block;
+		width: 12em;
+		}
+	}
+	label {
+		font-weight: normal;
+		display: inline-block;
+	}
+}
