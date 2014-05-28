@@ -12,7 +12,7 @@
 			<li><strong>Equipment:</strong> <%= link_to @exercise.equipment_name, equipment_path(@exercise.equipment) %></li>
 			<li><strong>Mechanic:</strong> <%= link_to @exercise.mechanic_type_name, mechanic_type_path(@exercise.mechanic_type) %></li>
 			<li><strong>Force:</strong> <%= link_to @exercise.force_type_name, force_type_path(@exercise.force_type) %></li>
-			<li><strong>Experience Level:</strong> <%= @exercise.experience_level_name %></li>
+			<li><strong>Experience Level:</strong> <%= link_to @exercise.experience_level_name, experience_level_path(@exercise.experience_level) %></li>
 		</ul>
 		<div id="instructions">
 			<ol>

@@ -128,4 +128,15 @@ describe Exercise do
 			expect(Exercise.for_force_type(force_type)).to eq [exercise_two, exercise_one]
 		end
 	end
+
+	describe '.for_experience_level' do
+		it 'scopes the exercises with the specified experience level' do
+			experience_level = create(:experience_level)
+			exercise = create(:exercise, experience_level: experience_level)
+			exercise_two = create(:exercise, experience_level: experience_level)
+			exercise_excluded = create(:exercise)
+
+			expect(Exercise.for_experience_level(experience_level)).to eq [exercise_two, exercise]
+		end
+	end
 end

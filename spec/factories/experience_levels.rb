@@ -1,5 +1,5 @@
 FactoryGirl.define do
 	factory :experience_level do
-		name	"advanced"
+		sequence(:name) { |n| "experience_level_#{n}" }
 	end
 end

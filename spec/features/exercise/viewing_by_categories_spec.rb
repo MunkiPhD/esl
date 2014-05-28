@@ -63,4 +63,17 @@ feature 'can view the exercises by category' do
 		expect(page).to have_link exercise.name
 		expect(page).to_not have_link exercise_excluded.name
 	end
+
+	scenario 'clicking on the experience level shows the exercises with the same experience level' do
+		experience = create(:experience_level)
+		exercise = create(:exercise, experience_level: experience)
+		exercise_excluded = create(:exercise)
+
+		visit exercise_path(exercise)
+		click_link exercise.experience_level_name
+		
+		expect(page).to have_content "Experience Level: #{experience.name}"
+		expect(page).to have_link exercise.name
+		expect(page).to_not have_link exercise_excluded.name
+	end
 end

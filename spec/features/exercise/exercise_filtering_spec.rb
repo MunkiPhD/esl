@@ -27,6 +27,19 @@ feature 'viewers can filter the exercise list by categories' do
 		expect(page).to_not have_link exercise_excluded.name
 	end
 
+	scenario 'can filter by experience level' do
+		experience_level = create(:experience_level)
+		exercise = create(:exercise, experience_level: experience_level)
+		exercise_excluded = create(:exercise)
+
+		visit exercises_path
+		check(experience_level.name)
+		click_button 'Filter'
+
+		expect(page).to have_link exercise.name
+		expect(page).to_not have_link exercise_excluded.name
+	end
+
 
 	scenario 'selects to view by muscle and exercise type' do
 		muscle = create(:muscle)

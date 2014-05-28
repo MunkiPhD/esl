@@ -21,5 +21,9 @@ module ExerciseFilters
 		def self.for_force_type(force_type)
 			where(force_type: force_type)
 		end
+
+		def self.for_experience_level(experience_level)
+			where(experience_level: experience_level)
+		end
 	end
 end

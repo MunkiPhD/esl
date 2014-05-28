@@ -23,6 +23,14 @@
 		<%= check_box_tag 'force_types[]', force.id, was_checked(:force_types, force), id: "force_types_#{force.id}" %>
 		<%= label_tag "force_types[#{force.id}]", force.name %><br/>
 	<% end %>
+
+
+	<h3>Experience Level</h3>
+	<% ExperienceLevel.all.each do |experience_level| %>
+		<%= check_box_tag 'experience_levels[]', experience_level.id, was_checked(:experience_levels, experience_level), id: "experience_levels_#{experience_level.id}" %>
+		<%= label_tag "experience_levels[#{experience_level.id}]", experience_level.name %><br/>
+	<% end %>
+
 	<%= submit_tag 'Filter' %>
 <% end %>
 
