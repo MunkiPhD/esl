@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  servings   :decimal(, )      default(1.0), not null
-#  log_date   :date             default(Fri, 11 Apr 2014), not null
+#  log_date   :date             default(Thu, 22 May 2014), not null
 #  food_id    :integer          not null
 #  user_id    :integer          not null
 #  created_at :datetime

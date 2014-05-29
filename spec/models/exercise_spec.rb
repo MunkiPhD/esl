@@ -2,11 +2,18 @@
 #
 # Table name: exercises
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)      not null
-#  user_id    :integer          not null
-#  created_at :datetime
-#  updated_at :datetime
+#  id                  :integer          not null, primary key
+#  name                :string(255)      not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  muscle_id           :integer
+#  alternate_name      :string(255)
+#  exercise_type_id    :integer          not null
+#  equipment_id        :integer          not null
+#  mechanic_type_id    :integer          not null
+#  force_type_id       :integer          not null
+#  experience_level_id :integer          not null
+#  instructions        :text             default("")
 #
 
 require 'spec_helper'
