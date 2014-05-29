@@ -66,13 +66,13 @@ Exercise.delete_all
 json_data = JSON.load(open('https://github.com/MunkiPhD/exercise_data/raw/master/exercise_data.json'))
 json_data.each do |item|
 	Exercise.find_or_create_by(name: item["name"]) do |exercise|
-		exercise.alternate_name = item["alternate_name"]
-		exercise.equipment = get_reference(Equipment, item["equipment"])
-		exercise.force_type = get_reference(ForceType, item["force"])
-		exercise.mechanic_type = get_reference(MechanicType, item["mechanics"])
-		exercise.muscle = get_reference(Muscle, item["main_muscle"])
-		exercise.experience_level = get_reference(ExperienceLevel, item["level"])
-		exercise.exercise_type = get_reference(ExerciseType, item["type"])
+		exercise.alternate_name = item["also_known_as"]
+		exercise.equipment = get_reference(Equipment, item["equipment"] ||= "None")
+		exercise.force_type = get_reference(ForceType, item["force"] ||= "N/A")
+		exercise.mechanic_type = get_reference(MechanicType, item["mechanics_type"] ||= "N/A")
+		exercise.muscle = get_reference(Muscle, item["main_muscle_worked"] ||= "N/A")
+		exercise.experience_level = get_reference(ExperienceLevel, item["level"] ||= "Beginner")
+		exercise.exercise_type = get_reference(ExerciseType, item["type"] ||= "N/A")
 		exercise.instructions = item["directions"]
 	end
 	print "."
