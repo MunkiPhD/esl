@@ -14,6 +14,7 @@
 #  force_type_id       :integer          not null
 #  experience_level_id :integer          not null
 #  instructions        :text             default("")
+#  other_muscles       :string(255)
 #
 
 class Exercise < ActiveRecord::Base

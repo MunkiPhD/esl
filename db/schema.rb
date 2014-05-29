@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522211314) do
+ActiveRecord::Schema.define(version: 20140529190730) do
 
   create_table "body_weights", force: true do |t|
     t.date     "log_date",                           default: '2014-05-29', null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20140522211314) do
     t.integer  "force_type_id",                    null: false
     t.integer  "experience_level_id",              null: false
     t.text     "instructions",        default: ""
+    t.string   "other_muscles"
   end
 
   add_index "exercises", ["equipment_id"], name: "index_exercises_on_equipment_id", using: :btree

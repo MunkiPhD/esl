@@ -14,6 +14,7 @@
 #  force_type_id       :integer          not null
 #  experience_level_id :integer          not null
 #  instructions        :text             default("")
+#  other_muscles       :string(255)
 #
 
 require 'spec_helper'
@@ -49,6 +50,11 @@ describe Exercise do
 			exercise = create(:exercise, name: "deadlift")
 			exercise2 = build(:exercise, name: "deadlift")
 			expect(exercise2).to have(1).errors_on(:name)
+		end
+
+		it 'other muscles can be blank' do
+			exercise = build(:exercise, other_muscles: "")
+			expect(exercise).to have(0).errors_on(:other_muscles)
 		end
 
 		context 'associations' do

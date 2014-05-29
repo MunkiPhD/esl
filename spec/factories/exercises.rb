@@ -14,6 +14,7 @@
 #  force_type_id       :integer          not null
 #  experience_level_id :integer          not null
 #  instructions        :text             default("")
+#  other_muscles       :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -27,6 +28,7 @@ FactoryGirl.define do
 		force_type
 		mechanic_type
 		muscle
+		other_muscles "Quads, Lats, Biceps"
 		instructions ['pick up weight', 'drop weight', 'get big']
   end
 
@@ -39,6 +41,7 @@ FactoryGirl.define do
 		force_type
 		mechanic_type
 		muscle
+		other_muscles "Glutes, Quads"
 		instructions ['pick up weight', 'drop weight', 'get big', 'profit']
   end
 end

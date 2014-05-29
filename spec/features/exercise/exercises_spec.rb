@@ -7,12 +7,13 @@ feature "Exercises" do
 		visit exercise_path(exercise)
 		expect(page).to have_content exercise.name
 		expect(page).to have_content exercise.alternate_name
-		expect(page).to have_content exercise.exercise_type_name
-		expect(page).to have_content exercise.equipment_name
-		expect(page).to have_content exercise.experience_level_name
-		expect(page).to have_content exercise.force_type_name
-		expect(page).to have_content exercise.mechanic_type_name
+		expect(page).to have_link exercise.exercise_type_name
+		expect(page).to have_link exercise.equipment_name
+		expect(page).to have_link exercise.experience_level_name
+		expect(page).to have_link exercise.force_type_name
+		expect(page).to have_link exercise.mechanic_type_name
 		expect(page).to have_link exercise.muscle_name
+		expect(page).to have_content exercise.other_muscles
 		exercise.instructions.each do |instruction|
 			expect(page).to have_content instruction
 		end

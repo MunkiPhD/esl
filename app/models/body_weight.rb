@@ -3,7 +3,7 @@
 # Table name: body_weights
 #
 #  id         :integer          not null, primary key
-#  log_date   :date             default(Thu, 22 May 2014), not null
+#  log_date   :date             default(Thu, 29 May 2014), not null
 #  weight     :decimal(9, 6)    not null
 #  unit_id    :integer          not null
 #  user_id    :integer          not null

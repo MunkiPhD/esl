@@ -67,6 +67,7 @@ json_data = JSON.load(open('https://github.com/MunkiPhD/exercise_data/raw/master
 json_data.each do |item|
 	Exercise.find_or_create_by(name: item["name"]) do |exercise|
 		exercise.alternate_name = item["also_known_as"]
+		exercise.other_muscles = item["other_muscles"]
 		exercise.equipment = get_reference(Equipment, item["equipment"] ||= "None")
 		exercise.force_type = get_reference(ForceType, item["force"] ||= "N/A")
 		exercise.mechanic_type = get_reference(MechanicType, item["mechanics_type"] ||= "N/A")
