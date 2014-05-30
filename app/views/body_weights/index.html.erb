@@ -1,6 +1,11 @@
 <h1>Body Weight</h1>
 <div class="row">
 	<div class="col-md-8">
+		<% if @body_weights.count == 0 %>
+			<div class="alert alert-info">
+				<p><strong>You aren't made of air.</strong> Yet, you haven't logged any body weight entries yet.</p>
+			</div>
+		<% end %>
 		<div id="body_weight_entries">
 			<ul>
 				<% @body_weights.each do |entry| %>

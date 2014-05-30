@@ -7,6 +7,11 @@ feature 'User manages their body weight stats' do
 		login_user user
 	end
 
+	scenario 'user sees a message stating that they have no body weight entries if there are none logged' do
+		visit body_weights_path
+		expect(page).to have_content "You aren't made of air. Yet, you haven't logged any body weight entries yet."
+	end
+
 	scenario 'can visit entries from link section' do
 		visit root_path
 		click_link 'body weight'
