@@ -7,6 +7,11 @@ feature "User manages favorite foods" do
     login_user user
   end
 
+	scenario 'user sees message if no foods marked as favorite' do
+		visit favorite_foods_path
+		expect(page).to have_content "You currently have no favorite foods!"
+	end
+
   scenario "Can add a food to favorites from a food items page" do
     food = create(:food)
 
