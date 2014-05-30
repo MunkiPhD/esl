@@ -5,7 +5,7 @@
 	<br/>
  <% end %>
  <div id="food_search_results" class="center-block">
-	 <%= "Search for '#{@search_phrase}' found #{pluralize(@results.length, "result")}." %>
+	 <%= "Search for '#{@search_phrase}' found #{pluralize(@results.length, "result")}." if !@search_phrase.blank? %>
 <% @results.each do |food| %>
 	<div class="food-item">
 	<div class="food-item-info">
