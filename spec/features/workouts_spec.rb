@@ -10,6 +10,11 @@ feature "Workouts" do
     expect(page).to have_content user.username
   end
 
+	scenario 'user sees message stating that no workouts have been logged if there are none' do
+		visit workouts_path
+		expect(page).to have_content "You haven't logged any workouts yet!"
+	end
+
   scenario "user can add a workout" do
     exercise = create(:exercise) 
     visit workouts_path
