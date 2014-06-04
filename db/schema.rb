@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529190730) do
+ActiveRecord::Schema.define(version: 20140603235915) do
 
   create_table "body_weights", force: true do |t|
     t.date     "log_date",                           default: '2014-05-29', null: false
@@ -207,6 +207,15 @@ ActiveRecord::Schema.define(version: 20140529190730) do
     t.string  "unit_name",        null: false
     t.string  "unit_abbr",        null: false
   end
+
+  create_table "user_preferences", force: true do |t|
+    t.integer  "user_id",                       null: false
+    t.integer  "default_system_id", default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_preferences", ["user_id"], name: "index_user_preferences_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

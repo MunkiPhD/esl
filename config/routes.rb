@@ -12,6 +12,8 @@ Esl::Application.routes.draw do
 		end
 	end
 
+	resource :user_preferences, only: [:show, :edit, :update]
+
 	resources :exercise_types, only: [:show], path: 'exercises/type/'
 	resources :equipments, only: [:show], path: 'exercises/equipment/'
 	resources :mechanic_types, only: [:show], path: 'exercises/mechanic_type/'

@@ -1,0 +1,5 @@
+<h1>User Preferences</h1>
+
+Default Weight Unit: <%= "#{@preferences.weight_unit.unit_name.humanize} (#{@preferences.weight_unit.unit_abbr})" %>
+
+<%= link_to_edit "Edit Preferences", edit_user_preferences_path %>

@@ -29,10 +29,13 @@ class Unit < ActiveRecord::Base
 			where(unit_system: system_int)
 		end
 
+		def self.for_unit_system(system_int)
+			where(unit_system: system_int)
+		end
+
 
 		def self.for_unit_type(unit_type_sym)
 			unit_type_int = Unit.unit_types[unit_type_sym]
 			where(unit_type: unit_type_int)
 		end
-		
 end

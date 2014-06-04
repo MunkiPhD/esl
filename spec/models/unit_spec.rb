@@ -42,6 +42,13 @@ describe Unit do
 		end
 	end
 
+	describe '.for_unit_system' do
+		it 'returns us system for 0' do
+			unit = Unit.for_unit_system(0).first
+			expect(unit.unit_system_name).to eq 'US'
+		end
+	end
+
 	describe '.for_system' do
 		it 'gets US system measurement' do
 			unit = Unit.for_system(:us_system).first
