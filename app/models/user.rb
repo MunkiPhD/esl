@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
 	has_many :favorite_foods
 	has_many :workout_sets, through: :workouts
 	has_one :nutrition_goal
+	has_one :user_preferences, inverse_of: :user
 	has_many :body_weights
 
 	validates :username, uniqueness: true,
