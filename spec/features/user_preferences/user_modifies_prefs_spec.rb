@@ -7,6 +7,13 @@ feature 'User modifies their preferences' do
 		login_user user
 	end
 
+	scenario 'user clicks on their user name and navigates to the preferences page' do
+		visit root_path
+		click_link user.username
+
+		expect(page).to have_content 'User Preferences'
+	end
+
 	scenario 'can change their default unit system' do
 		visit user_preferences_path
 
