@@ -1,4 +1,5 @@
-<%= form_for @preferences, url: user_preferences_path do |f| %>
-
-
+<%= form_for :user_preferences, url: user_preferences_path, method: "put" do |f| %>
+	<%= label_tag :default_system_id, "Default Unit System" %>
+	<%= select_tag :default_system_id, options_for_select([['US System', 0], ['Metric System', 1]], @preferences.default_system_id) %>
+	<%= submit_tag "Save", class: 'btn btn-success' %>
 <% end %>
