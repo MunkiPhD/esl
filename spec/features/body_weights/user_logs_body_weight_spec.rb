@@ -28,6 +28,15 @@ feature 'User manages their body weight stats' do
 		visit_and_log_entry(100, date)
 	end
 
+	scenario 'weight is logged with the users default unit' do
+		user_prefs = UserPreferences.new(default_system_id: 1)
+		user.user_preferences = user_prefs
+		user.save
+		user.reload
+		visit_and_log_entry(100, Date.today)
+		expect(page).to have_content "100.0 kgs"	
+	end
+
 	scenario 'edits an entry' do
 		Timecop.freeze(Date.today) do
 			visit_and_log_entry(200, Date.today)
@@ -85,7 +94,6 @@ feature 'User manages their body weight stats' do
 			within '#body_weight_entries' do
 				date_str = date.strftime('%d-%B-%Y')
 				expect(page).to have_content weight
-				expect(page).to have_content 'lbs'
 				expect(page).to have_content date_str
 			end
 		end

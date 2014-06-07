@@ -43,6 +43,7 @@ describe User do
 		end
 	end
 
+
 	describe '.workout_sets' do
 		it 'responds to workout_sets' do
 			expect(user).to respond_to :workout_sets
@@ -59,6 +60,18 @@ describe User do
 		it 'gets the correct nutriton goal' do
 			nutrition_goal = create(:nutrition_goal, user: user)
 			expect(user.nutrition_goal).to eq nutrition_goal	
+		end
+	end
+
+	describe '.preferences' do
+		it 'gets the correct preferences for the user' do
+			preferences = create(:user_preferences, user: user)
+			expect(user.preferences).to eq preferences
+		end
+
+		it 'creates preferences if non exist' do
+			user = create(:user, user_preferences: nil)
+			expect(user.preferences).to_not be_nil
 		end
 	end
 

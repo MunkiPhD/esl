@@ -10,6 +10,7 @@ class BodyWeightsController < ApplicationController
 
 	def create
 		@body_weight = current_user.body_weights.build(body_weight_params)
+		@body_weight.unit = current_user.preferences.weight_unit
 
 		respond_to do |format|
 			if @body_weight.save

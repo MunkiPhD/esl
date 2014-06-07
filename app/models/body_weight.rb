@@ -15,7 +15,7 @@ class BodyWeight < ActiveRecord::Base
 	include HasMeasurement
 
 	def unit_measurement_type 
-	  	:weight  
+		:weight  
 	end
 
 

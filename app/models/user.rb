@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
 	has_one :user_preferences, inverse_of: :user
 	has_many :body_weights
 
+	accepts_nested_attributes_for :user_preferences
+
 	validates :username, uniqueness: true,
 		format: { with: /\A(?=.*[a-z])[a-z\_\d]+\Z/i, message: "Only alphanumeric letters and underscores allowed" }
 
@@ -64,6 +66,10 @@ class User < ActiveRecord::Base
 		self.favorite_foods.for_food(food).first
 	end
 
+
+	def preferences
+		UserPreferences.find_or_create_by(user: self)
+	end
 
 	private 
 
