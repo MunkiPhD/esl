@@ -41,4 +41,10 @@ describe BodyWeight do
 		expect(instance.unit.unit_system_name).to eq "US"
 		expect(instance.unit.unit_type_name).to eq "weight"
 	end
+
+	describe '.unit_abbr' do
+		it 'is the abbreviation for the unit of the entry' do
+			expect(body_weight.unit_abbr).to eq body_weight.unit.unit_abbr
+		end
+	end
 end

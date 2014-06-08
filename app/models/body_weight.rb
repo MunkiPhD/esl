@@ -25,4 +25,6 @@ class BodyWeight < ActiveRecord::Base
 	validates :weight, presence: true, numericality: {	only_integer: false,	greater_than: 0, less_than: 900 }
 	validates :user, presence: true
 	validates :unit, presence: true
+
+	delegate :unit_abbr, to: :unit, prefix: false
 end

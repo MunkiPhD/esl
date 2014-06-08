@@ -1,8 +1,8 @@
 <div id="body_weight_entry">
 	<%= form_for @body_weight, html: { class: "form-inline" } do |f| %>
 		<div class="form-group">
-				  <%= f.label :weight %><br/>
-			<%= f.text_field :weight, value: (number_with_precision(f.object.weight, precision: 2) || 0), class: "form-control" %>
+			<%= f.label :weight %><br/>
+			<%= f.text_field :weight, value: (number_with_precision(f.object.weight, precision: 2) || 0), class: "form-control" %>&nbsp;<strong><%= current_user.preferences.weight_unit.unit_abbr %></strong>
 		</div>
 		<br/>
 		<div class="form-group" style="margin-top: 10px;">

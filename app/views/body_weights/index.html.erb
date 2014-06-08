@@ -9,7 +9,7 @@
 		<div id="body_weight_entries">
 			<ul>
 				<% @body_weights.each do |entry| %>
-					<li><%= entry.weight %> <%= entry.unit.unit_abbr %>
+					<li><%= entry.weight %> <%= entry.unit_abbr %>
 					<span class="entry-date">
 						<%= format_date entry.log_date %>
 		 			</span>
