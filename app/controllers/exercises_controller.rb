@@ -5,11 +5,11 @@ class ExercisesController < ApplicationController
   # GET /exercises
   # GET /exercises.json
   def index
-    @exercises = Exercise.all
+    @exercises = Exercise.paginate(page: params[:page])
   end
 
 	def search
-		@exercises = ExerciseSearch.filter(params)
+		@exercises = ExerciseSearch.filter(params).paginate(page: params[:page])
 
 		respond_to do |format|
 			format.html { render 'index' }
@@ -103,6 +103,7 @@ class ExercisesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def exercise_params
+		params.permit(:page)
     params.require(:exercise).permit(:name)
   end
 end

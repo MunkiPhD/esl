@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WorkoutsController do
+describe WorkoutsController, type: :controller do
   before :each do
     @user = create(:user)
     @workout = create(:workout, user_id: @user.id)

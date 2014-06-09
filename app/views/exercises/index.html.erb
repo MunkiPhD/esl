@@ -14,6 +14,7 @@
 	</div>
 	<div class="col-md-8">
 	<% unless @exercises.count == 0 %>
+		<%= will_paginate @exercises %>
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
@@ -28,6 +29,7 @@
 				<% end %>
 			</tbody>
 		</table>
+		<%= will_paginate @exercises %>
 	<% else %>
 		<h3>No exercises matched the specified criteria</h3>
 	<% end %>

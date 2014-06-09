@@ -21,6 +21,7 @@ class Exercise < ActiveRecord::Base
 	include NiceUrl
 	include ExerciseFilters
 
+
 	belongs_to :muscle
 	belongs_to :exercise_type
 	belongs_to :equipment

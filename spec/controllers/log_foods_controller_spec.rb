@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LogFoodsController do
+describe LogFoodsController, type: :controller do
   let(:user) { create(:user) }
   let(:logged_food){ create(:log_food, user: user) }
 
@@ -11,14 +11,14 @@ describe LogFoodsController do
   describe "GET 'index'" do
     it "returns http success" do
       get 'index', { food_id: logged_food.food } #path
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
   describe "GET 'show'" do
     it "returns http success" do
       get :show, { id: logged_food }
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -26,7 +26,7 @@ describe LogFoodsController do
   describe "GET 'edit'" do
     it "returns http success" do
       get :edit, { id: logged_food }
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -39,7 +39,7 @@ describe LogFoodsController do
       food_entry = create(:log_food, user: user, log_date: date_str, servings: 2, food: food)
       get 'daily_totals', date: date_str, format: "json"
 
-      response.should be_success
+      expect(response).to be_success
 
       json = response.body
       parsed_response = JSON.parse(json) if json && json.length >= 2
@@ -58,7 +58,6 @@ describe LogFoodsController do
 			food = create(:food)
 			log_food = build(:log_food, user: user, food: food)
 			post :create, { :format => 'json', :log_food => log_food.attributes, :food_id => food.id }
-			puts response.body
 			parsed_json = JSON.parse(response.body)
 			expect(response.status).to eq 201
 			expect(parsed_json["food_name"]).to eq food.name
@@ -68,7 +67,6 @@ describe LogFoodsController do
 		it 'returns errors if missing attributes' do
 			food = create(:food)
 			post :create, { :format => 'json', :log_food => { trash: "test"}, :food_id => food.id}
-			puts response.body
 			expect(response.status).to eq 422
 		end
 	end
