@@ -42,9 +42,10 @@ group :development do
 end
 
 group :development, :test do
-  gem "rspec-rails"
   gem 'timecop'
   gem 'launchy'
+  gem 'rspec', '~>2.99.0.beta1'
+  gem "rspec-rails"
 end
 
 group :test do
@@ -54,6 +55,7 @@ group :test do
   gem "fuubar"
   gem 'rspec-expectations'
   gem 'rspec-mocks'
+  gem 'rspec-collection_matchers'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CirclesController do
+describe CirclesController, type: :controller do
   let(:user) { create(:user) }
   let(:circle) { create(:circle, user: user) }
 

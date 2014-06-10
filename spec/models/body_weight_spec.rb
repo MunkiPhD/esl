@@ -14,6 +14,8 @@
 require 'spec_helper'
 
 describe BodyWeight do
+	include Capybara::DSL
+
 	let(:user) { create(:user) }
 	let(:body_weight) { build(:body_weight, user: user) }
 

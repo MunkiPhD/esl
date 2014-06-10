@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FoodsController do
+describe FoodsController, type: :controller do
   let(:bread) { create(:bread) }
   before(:each) do
     @user = FactoryGirl.create(:user)

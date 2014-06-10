@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe NutritionController do
+describe NutritionController, type: :controller do
   describe "GET 'index'" do
     it "returns http success" do
       sign_in create(:user)

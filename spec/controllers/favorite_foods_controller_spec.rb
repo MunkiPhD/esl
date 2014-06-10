@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FavoriteFoodsController do
+describe FavoriteFoodsController, type: :controller do
   context 'guest' do
     it 'is redirected to login page' do
       get 'index'

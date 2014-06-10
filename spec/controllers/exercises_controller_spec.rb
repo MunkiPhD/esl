@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExercisesController do
+describe ExercisesController, type: :controller do
 	context 'un-authenticated user' do
 		describe "GET show" do
 			it 'renders the show template' do
@@ -49,14 +49,6 @@ describe ExercisesController do
 
 		before(:each) do
 			sign_in user
-		end
-
-		describe "GET index" do
-			it "assigns all exercises as @exercises" do
-				exercise = Exercise.create! valid_attributes
-				get :index, {}
-				assigns(:exercises).should include(exercise)
-			end
 		end
 
 		describe "GET show" do
