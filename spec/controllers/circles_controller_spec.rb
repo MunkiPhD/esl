@@ -16,14 +16,14 @@ describe CirclesController, type: :controller do
       end
 
       describe "JSON" do
-        pending
+        skip
       end
     end
 
 
     describe "GET show" do
       it "is valid response" do
-        pending "This test fails as it issues a redirect. Can't figure out what is wrong. Hand tested and it works as intended. Will have to investigate further"
+        skip "This test fails as it issues a redirect. Can't figure out what is wrong. Hand tested and it works as intended. Will have to investigate further"
         some_circle = Circle.find(circle)
         get :show, { :id => some_circle.to_param }
 
@@ -41,7 +41,7 @@ describe CirclesController, type: :controller do
       end
 
       describe "JSON" do
-        pending
+        skip
       end
     end
 
@@ -79,7 +79,7 @@ describe CirclesController, type: :controller do
         end
 
         describe "JSON" do
-          pending
+          skip
         end
       end
 
@@ -99,7 +99,7 @@ describe CirclesController, type: :controller do
         end
 
         describe "JSON" do
-          pending
+          skip
         end
       end
     end
@@ -126,7 +126,7 @@ describe CirclesController, type: :controller do
         end
 
         describe "JSON" do
-          pending
+          skip
         end
       end
 
@@ -146,7 +146,7 @@ describe CirclesController, type: :controller do
         end
 
         describe "JSON" do
-          pending
+          skip
         end
       end
     end
@@ -168,7 +168,7 @@ describe CirclesController, type: :controller do
       end
 
       describe "JSON" do
-        pending
+        skip
       end
     end
   end

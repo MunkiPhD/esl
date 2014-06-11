@@ -32,22 +32,22 @@ describe CircleMembersController, type: :controller do
 
 
     describe 'POST :join' do
-      pending
+      skip
     end
 
 
     describe 'POST :leave' do
-      pending
+      skip
     end
 
 
     describe 'GET :pending' do
-      pending
+      skip
     end
 
 
     describe 'POST :approve' do
-      pending
+      skip
     end
 
   end # end authenticated users

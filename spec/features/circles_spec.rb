@@ -53,7 +53,7 @@ feature "Circles" do
   end
 
   scenario "can be deleted by an admin if there are no other members" do
-    pending
+    skip
   end
 
   scenario "if a circle has no users, the first user to join automatically becomes the admin" do
