@@ -11,7 +11,7 @@
 #  unit_abbr        :string(255)      not null
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Unit do
 	it 'cannot be validated' do

@@ -11,7 +11,7 @@
 #  updated_at :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe BodyWeight do
 	include Capybara::DSL
@@ -24,16 +24,22 @@ describe BodyWeight do
 	end
 
 	describe 'validations' do
-		it 'has a weight greater than 0' do
-			expect(BodyWeight.new).to have(2).errors_on(:weight)
+		let(:entry) { BodyWeight.new }
+
+		before(:each) do
+			entry.valid?
+		end
+
+		it 'is a number and is not null' do
+			expect(entry.errors[:weight]).to include("is not a number", "can't be blank")
 		end
 
 		it 'has a user' do
-			expect(BodyWeight.new).to have(1).error_on(:user)
+			expect(entry.errors[:user]).to include("can't be blank")
 		end
 
 		it 'has a unit' do
-			expect(BodyWeight.new).to have(0).error_on(:unit)
+			expect(entry.errors[:unit]).to eq []
 		end
 	end
 

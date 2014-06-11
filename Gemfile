@@ -43,18 +43,18 @@ end
 
 group :development, :test do
   gem 'timecop'
-  gem 'launchy'
-  gem 'rspec', '~>2.99.0.beta1'
-  gem "rspec-rails"
+  #gem 'launchy'
+  gem 'rspec', '~> 3.0.0'
+  gem "rspec-rails", '~> 3.0.0'
 end
 
 group :test do
   gem "factory_girl_rails"
   #gem "capybara", "~> 2.2.0"
   gem 'capybara', git: 'https://github.com/jnicklas/capybara.git'
-  gem "fuubar"
-  gem 'rspec-expectations'
-  gem 'rspec-mocks'
+  #gem "fuubar"
+  #gem 'rspec-expectations'
+  #gem 'rspec-mocks'
   gem 'rspec-collection_matchers'
 end
 # To use ActiveModel has_secure_password
@@ -67,5 +67,5 @@ end
 # gem 'capistrano', group: :development
 
 # To use debugger
-gem 'debugger'
+#gem 'debugger'
 

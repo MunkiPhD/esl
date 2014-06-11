@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Can view the one rep max for an individual exercise' do
 	NO_1RM_MESSAGE = "No Data"

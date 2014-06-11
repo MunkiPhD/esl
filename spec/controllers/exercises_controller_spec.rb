@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ExercisesController, type: :controller do
 	context 'un-authenticated user' do

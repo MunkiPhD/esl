@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe FoodsController, type: :controller do
   let(:bread) { create(:bread) }

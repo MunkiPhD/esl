@@ -19,7 +19,7 @@
 #  username               :string(255)      default(""), not null
 #
 
-require 'spec_helper'
+require 'rails_helper'
 require 'cancan/matchers'
 
 describe User do

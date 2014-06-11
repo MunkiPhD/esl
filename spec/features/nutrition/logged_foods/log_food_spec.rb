@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature "User food item logging" do
 	let(:food) { create(:bread) }

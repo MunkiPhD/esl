@@ -14,7 +14,7 @@
 #  workout_id          :integer          not null
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe WorkoutSet do
   it 'returns exercise name' do

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Visitor' do
 	scenario 'attempts to edit nutrition goal' do

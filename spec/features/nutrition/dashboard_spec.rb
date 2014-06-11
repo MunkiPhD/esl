@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature "user visits the dashboard" do
   context 'valid user' do

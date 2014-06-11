@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe FoodLinkHelper do
 	describe '.link_to_log_food' do

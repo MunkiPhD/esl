@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature "Visitor interacts with food" do
   let(:bread) { create(:bread) }

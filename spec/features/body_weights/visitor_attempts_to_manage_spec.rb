@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Visitor manages body weight' do
 	scenario 'attempts to visit page but is redirected' do

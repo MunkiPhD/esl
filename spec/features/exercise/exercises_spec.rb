@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature "Exercises" do
 	let(:exercise) { create(:exercise, alternate_name: "something alternate") }

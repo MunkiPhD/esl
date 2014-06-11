@@ -7,7 +7,7 @@
 #  exercise_id :integer          not null
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe WorkoutExercise do
   context "validations" do

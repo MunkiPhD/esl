@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'User navigates muscles' do
 	scenario 'visits the muscle page and sees the list of muscles' do

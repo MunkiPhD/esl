@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe FavoriteFoodsController, type: :controller do
   context 'guest' do

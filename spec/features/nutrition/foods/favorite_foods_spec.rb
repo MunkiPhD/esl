@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature "User manages favorite foods" do
   let(:user) { create(:user) }

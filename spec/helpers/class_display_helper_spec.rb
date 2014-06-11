@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ClassDisplayHelper do
 	describe '.display_class_name' do

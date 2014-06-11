@@ -8,7 +8,7 @@
 #  updated_at :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe ExerciseType do
 	describe 'validations' do

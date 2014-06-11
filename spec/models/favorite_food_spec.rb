@@ -9,7 +9,7 @@
 #  updated_at :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe FavoriteFood do
   describe '#food_name' do

@@ -70,7 +70,7 @@
 #  food_image_updated_at   :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Food do
 	it_behaves_like 'nice urls' do

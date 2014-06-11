@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature "Person searching for food" do
   scenario "searches for a food item" do

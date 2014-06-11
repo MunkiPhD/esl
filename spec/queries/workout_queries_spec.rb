@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe WorkoutQueries do
 	describe '.max_weight_for_exercise_and_user' do

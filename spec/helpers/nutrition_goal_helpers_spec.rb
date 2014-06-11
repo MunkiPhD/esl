@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 describe NutritionGoalHelper do
 	describe '#protein_in_grams_to_percentage' do
 		it 'calculates correct percentage' do

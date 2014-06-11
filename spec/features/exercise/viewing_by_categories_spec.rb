@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'can view the exercises by category' do
 	scenario 'clicking an exercise type on an exercise shows the exercises with that specified type' do

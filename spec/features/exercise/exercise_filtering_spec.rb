@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'viewers can filter the exercise list by categories' do
 	scenario 'can filter by equipment type' do
