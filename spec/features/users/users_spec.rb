@@ -84,5 +84,5 @@ feature "Users" do
 		expect(page).to have_content 'login'
 	end
 
-  pending "can change their email and password"
+  skip "can change their email and password"
 end

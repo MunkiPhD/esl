@@ -348,7 +348,7 @@ describe Circle do
         end
 
         context "is not allowed to" do
-          pending "admin should be able to do everything"
+          skip "admin should be able to do everything"
         end
       end
 
