@@ -16,9 +16,10 @@ describe Equipment do
 			let(:model) { create(:equipment) }	
 		end
 
-		it 'must have a non-blank name' do
-			expect(Equipment.new(name: '')).to have(1).errors_on(:name)
-			expect(Equipment.new(name: nil)).to have(1).errors_on(:name)
+		it 'cannot have a blank name' do
+			equipment = Equipment.new(name: nil)
+			equipment.valid?
+			expect(equipment.errors[:name]).to include("can't be blank")
 		end
 	end
 end

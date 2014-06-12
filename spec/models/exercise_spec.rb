@@ -37,19 +37,22 @@ describe Exercise do
 		end
 
 		it "name is invalid if less than 3 characters" do
-			expect(Exercise.new(name: "12")).to have(1).errors_on(:name)
+			exercise = Exercise.new(name: "12")
+			exercise.valid?
+			expect(exercise.errors[:name]).to include("is too short (minimum is 3 characters")
 		end
 
 		it "name is valid for 60 chars and less" do
-			exercise = Exercise.new
-			exercise.name = "1"*61
-			expect(exercise).to have(1).error_on(:name)
+			exercise = Exercise.new(name: "1"*61)
+			exercise.valid?
+			expect(exercise.errors[:name]).to include('is too long (maximum is 60 characters)')
 		end
 
 		it "has a unique name" do
 			exercise = create(:exercise, name: "deadlift")
 			exercise2 = build(:exercise, name: "deadlift")
-			expect(exercise2).to have(1).errors_on(:name)
+			exercise2.valid?
+			expect(exercise2.errors[:name]).to include('has already been taken')
 		end
 
 		it 'other muscles can be blank' do
