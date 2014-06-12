@@ -20,7 +20,7 @@ class Circle < ActiveRecord::Base
 
   validates :name, presence: true, 
                    uniqueness: true, 
-                   length: { minimum: 3, maximum: 50 }
+                   length: { minimum: 3, maximum: 120 }
   validates :motto, length: { maximum: 50 }
   validates :user, presence: true
   validates :is_public, inclusion: { in: [true, false] }

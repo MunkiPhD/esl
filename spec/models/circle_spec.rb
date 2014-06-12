@@ -23,43 +23,56 @@ describe Circle do
   it "has a unique name" do
     create(:circle, name: "group1")
     circle = build(:circle, name: "group1")
-    expect(circle).to have(1).errors_on(:name)
+		circle.valid?
+    expect(circle.errors[:name]).to include("has already been taken")
   end
+
+	it 'has a name that is not null' do
+		circle = Circle.new(name: nil)
+		circle.valid?
+		expect(circle.errors[:name]).to include("can't be blank")
+	end
+
+	it 'has a name at least 3 characters long' do
+		circle = Circle.new(name: "22")
+		circle.valid?
+		expect(circle.errors[:name]).to include("is too short (minimum is 3 characters)")
+	end
 
   it "has a name at least 3 charcters long" do
-    circle = Circle.new(name: nil)
-    expect(circle).to have(2).errors_on(:name)
-    
-    circle = Circle.new(name: "22")
-    expect(circle).to have(1).errors_on(:name)
-
     circle = Circle.new(name: "222")
-    expect(circle).to have(0).errors_on(:name)
+		circle.valid?
+    expect(circle.errors[:name]).to eq []
   end
 
-  it "has a name shorter than 120 characters long" do
+  it 'has a name shorter than 120 characters long' do
     circle = Circle.new(name: "a" * 121)
-    expect(circle).to have(1).errors_on(:name)
+		circle.valid?
+    expect(circle.errors[:name]).to include("is too long (maximum is 120 characters)")
   end
 
-  it "has a description that can be empty" do
+  it 'can have an empty description' do
     circle = Circle.new(description: "")
-    expect(circle).to have(0).errors_on(:description)
+		circle.valid?
+    expect(circle.errors[:description]).to eq []
   end
 
-  it "must be created by a user" do
+  it "has a user" do
     circle = Circle.new(user: nil)
-    expect(circle).to have(1).errors_on(:user)
+		circle.valid?
+    expect(circle.errors[:user]).to include("can't be blank")
   end
 
   it "has a motto shorter than 50 characters" do
     circle = Circle.new(motto: "a" * 51)
-    expect(circle).to have(1).errors_on(:user)
+		circle.valid?
+    expect(circle.errors[:motto]).to include("is too long (maximum is 50 characters)")
   end
 
   it "not public is set to false if unchecked" do
     circle = Circle.new(is_public: false)
-    expect(circle).to have(0).errors_on(:is_public)
+		circle.valid?
+    expect(circle.errors[:is_public]).to eq []
     expect(circle.is_public).to eq false
   end
 
