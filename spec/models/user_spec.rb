@@ -84,49 +84,54 @@ describe User do
 					user2.save
 				}.to change(User, :count).by(0)
 
-				expect(user2).to have(1).errors_on(:username)
+				expect(user2.errors[:username]).to include "has already been taken"
 			end
 
 
 			it "has no spaces" do
 				user = build(:user, username: "steve martin")
-				expect(user).to have(1).errors_on(:username)
+				user.valid?
+				expect(user.errors[:username]).to include 'Only alphanumeric letters and underscores allowed'
 			end
 
-			it "can only be alphanumeric" do
+			it "cannot be non-alphanumeric" do
 				user = build(:user, username: "steve!martin")
-				expect(user).to have(1).errors_on(:username)
-
-				user.username = "stevemartin2"
-				expect(user).to have(0).errors_on(:username)
+				user.valid?
+				expect(user.errors[:username]).to include 'Only alphanumeric letters and underscores allowed'
 			end
 
 			it "allows _ character" do
 				user = build(:user, username: "steve_martin")
-				expect(user).to have(0).errors_on(:username)
+				user.valid?
+				expect(user.errors[:username]).to eq []
 			end
 
 			it "does not allow - character" do
 				user = build(:user, username: "steve-martin")
-				expect(user).to have(1).errors_on(:username)
+				user.valid?
+				expect(user.errors[:username]).to include 'Only alphanumeric letters and underscores allowed'
 			end
 
 			it 'does not allow just numbers' do
 				user = build(:user, username: "12346")
-				expect(user).to have(1).errors_on(:username)
+				user.valid?
+				expect(user.errors[:username]).to include 'Only alphanumeric letters and underscores allowed'
 			end
 
 			it 'has at least one letter' do
 				user = build(:user, username: "a12346")
-				expect(user).to have(0).errors_on(:username)
+				user.valid?
+				expect(user.errors[:username]).to eq []
 			end
 
 			it 'does not have to start with a letter' do
 				user = build(:user, username: "1stevemartin")
-				expect(user).to have(0).errors_on(:username)
+				user.valid?
+				expect(user.errors[:username]).to eq []
 
 				user.username = "_stevemartin"
-				expect(user).to have(0).errors_on(:username)
+				user.valid?
+				expect(user.errors[:username]).to eq []
 			end
 		end
 	end
