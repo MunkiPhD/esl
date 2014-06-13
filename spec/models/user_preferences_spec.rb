@@ -7,18 +7,33 @@ describe UserPreferences do
 
 	it 'has a default system id that is either 0 or 1' do
 		#this test might seem odd, but we only have two systems: US and Metric. Chances of another is zero. No need to make it dynamic
-		expect(UserPreferences.new(default_system_id: -1)).to have(1).errors_on(:default_system_id)
-		expect(UserPreferences.new(default_system_id: 0)).to have(0).errors_on(:default_system_id)
-		expect(UserPreferences.new(default_system_id: 1)).to have(0).errors_on(:default_system_id)
-		expect(UserPreferences.new(default_system_id: 2)).to have(1).errors_on(:default_system_id)
+		user_pref = UserPreferences.new(default_system_id: -1)
+		user_pref.valid?		
+		expect(user_pref.errors[:default_system_id]).to include 'must be greater than or equal to 0'
+		
+		user_pref.default_system_id = 0
+		user_pref.valid?
+		expect(user_pref.errors[:default_system_id]).to eq []
+
+		user_pref.default_system_id = 1
+		user_pref.valid?		
+		expect(user_pref.errors[:default_system_id]).to eq []
+
+		user_pref.default_system_id = 2
+		user_pref.valid?		
+		expect(user_pref.errors[:default_system_id]).to include 'must be less than or equal to 1'
 	end
 
 	it 'cannot have a null default_system_id' do
-		expect(UserPreferences.new(default_system_id: nil)).to have(2).errors_on(:default_system_id)
+		user_pref = UserPreferences.new(default_system_id: nil)
+		user_pref.valid?
+		expect(user_pref.errors[:default_system_id]).to include "can't be blank"
 	end
 
 	it 'cannot have a null user' do
-		expect(UserPreferences.new(user: nil)).to have(1).errors_on(:user)
+		user_pref = UserPreferences.new(user: nil)
+		user_pref.valid?
+		expect(user_pref.errors[:user]).to include "can't be blank"
 	end
 
 	describe '#weight_unit' do

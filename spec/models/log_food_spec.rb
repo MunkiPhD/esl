@@ -100,49 +100,58 @@ describe LogFood do
 
     it 'has a user' do
       logged = LogFood.new(user: user)
-      expect(logged).to have(0).errors_on(:user)
+			logged.valid?
+			expect(logged.errors[:user]).to eq []
     end
 
     it 'has a food' do
       logged = LogFood.new(food: create(:bread))
-      expect(logged).to have(0).errors_on(:food)
+			logged.valid?
+			expect(logged.errors[:food]).to eq []
     end
 
     it 'has a date' do
       logged = LogFood.new
-      expect(logged).to have(0).errors_on(:log_date)
+			logged.valid?
+			expect(logged.errors[:log_date]).to eq []
     end
 
     it "must have a number greater than 0" do
       logged = LogFood.new(servings: 1.24)
-      expect(logged).to have(0).errors_on(:servings)
+			logged.valid?
+			expect(logged.errors[:servings]).to eq []
     end
   end
 
   context "invalid" do
     it 'has a user' do
       logged = LogFood.new
-      expect(logged).to have(1).errors_on(:user)
+			logged.valid?
+			expect(logged.errors[:user]).to include "can't be blank"
     end
 
     it 'has a food' do
       logged = LogFood.new
-      expect(logged).to have(1).errors_on(:food)
+			logged.valid?
+			expect(logged.errors[:food]).to include "can't be blank"
     end
 
     it 'has a date' do
       logged = LogFood.new(log_date: "")
-      expect(logged).to have(1).errors_on(:log_date)
+			logged.valid?
+			expect(logged.errors[:log_date]).to include "can't be blank"
     end
 
     it "must have a number greater than 0" do
       logged = LogFood.new(servings: 0)
-      expect(logged).to have(1).errors_on(:servings)
+			logged.valid?
+			expect(logged.errors[:servings]).to include 'must be greater than 0'
     end
 
     it 'has servings less than 1000' do
       logged = LogFood.new(servings: 1001)
-      expect(logged).to have(1).errors_on(:servings)
+			logged.valid?
+			expect(logged.errors[:servings]).to include 'must be less than or equal to 1000'
     end
   end
 end

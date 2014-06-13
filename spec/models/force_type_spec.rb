@@ -12,9 +12,10 @@ require 'rails_helper'
 
 describe ForceType do
 	describe 'validations' do
-		it 'must have a non-blank name' do
-			expect(ForceType.new(name: '')).to have(1).errors_on(:name)
-			expect(ForceType.new(name: nil)).to have(1).errors_on(:name)
+		it 'cannot have a blank name' do
+			force_type = ForceType.new(name: nil)
+			force_type.valid?
+			expect(force_type.errors[:name]).to include "can't be blank"
 		end
 	end
 

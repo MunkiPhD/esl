@@ -11,14 +11,15 @@
 require 'rails_helper'
 
 describe MechanicType do
-	describe 'validations' do
-		it 'must have a non-blank name' do
-			expect(MechanicType.new(name: '')).to have(1).errors_on(:name)
-			expect(MechanicType.new(name: nil)).to have(1).errors_on(:name)
-		end
-	end
-
 	it_behaves_like 'nice urls' do
 		let(:model) { create(:mechanic_type) }
+	end
+
+	describe 'validations' do
+		it 'must have a non-blank name' do
+			mechanic_type = MechanicType.new(name: '')
+			mechanic_type.valid?
+			expect(mechanic_type.errors[:name]).to include "can't be blank"
+		end
 	end
 end
