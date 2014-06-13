@@ -13,8 +13,9 @@ require 'rails_helper'
 describe ExerciseType do
 	describe 'validations' do
 		it 'must have a non-blank name' do
-			expect(ExerciseType.new(name: '')).to have(1).errors_on(:name)
-			expect(ExerciseType.new(name: nil)).to have(1).errors_on(:name)
+			exercise_type = ExerciseType.new(name: '')
+			exercise_type.valid?
+			expect(exercise_type.errors[:name]).to include "can't be blank"
 		end
 	end
 

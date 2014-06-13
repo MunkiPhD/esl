@@ -90,30 +90,34 @@ describe Food do
 	end
 
   describe "validations" do
-    it "has a name" do
-      f = Food.new(name: nil)
-      expect(f).to have(3).errors_on(:name)
+		it 'cannot have a blank name' do
+			food = Food.new(name: nil)
+			food.valid?
+			expect(food.errors[:name]).to include "can't be blank"
+		end
+
+		it 'name cannot be less than two characters' do
+			food = Food.new(name: "a")
+			food.valid?
+			expect(food.errors[:name]).to include "is too short (minimum is 2 characters)"
+		end
+
+    it "name can be two characters" do
+			food = Food.new(name: "AB")
+			food.valid?
+      expect(food.errors[:name]).to eq []
     end
 
-    it "has a name with at least two characters" do
-      f = Food.new(name: "A")
-      expect(f).to have(1).errors_on(:name)
+		it 'cannot have a name larger than 150 characters' do
+			food = Food.new(name: ("a"*151))
+			food.valid?
+			expect(food.errors[:name]).to include "is too long (maximum is 150 characters)"
+		end
 
-      f.name = "AB"
-      expect(f).to have(0).errors_on(:name)
-    end
-
-    it "has a name less than 150 characters" do
-      f = Food.new(name: ("A"*151))
-      expect(f).to have(1).errors_on(:name)
-
-      f.name = ("A" * 150)
-      expect(f).to have(0).errors_on(:name)
-    end
-
-    it "has a serving size that is not empty" do
-      f = Food.new(serving_size: "")
-      expect(f).to have(2).errors_on(:serving_size)
+    it "serving size cant be blank" do
+      food = Food.new(serving_size: "")
+			food.valid?
+      expect(food.errors[:serving_size]).to include "can't be blank"
     end
 
     it "default serving size is '1 serving'" do
@@ -122,52 +126,9 @@ describe Food do
     end
 
     it "has a serving size less than 75 characters" do
-      f = Food.new(serving_size: ("A" * 75))
-      expect(f).to have(0).errors_on(:serving_size)
-
-      f.serving_size = ("A" * 76)
-      expect(f).to have(1).errors_on(:serving_size)
-    end
-
-    it "calories are >= 0" do
-      f = Food.new(calories: -1)
-      expect(f).to have(0).errors_on(:calories)
-    end
-
-    it "calories from fat are >= 0" do
-      f = Food.new(calories_from_fat: -1)
-      expect(f).to have(0).errors_on(:calories_from_fat)
-    end
-
-    it "total_fat are >= 0" do
-      f = Food.new(total_fat: -1)
-      expect(f).to have(1).errors_on(:total_fat)
-    end
-  end
-
-
-  it 'image content type validation' do
-	food = create(:food)
-	food.should validate_attachment_content_type(:food_image)
-		.allowing('image/png', 'image/jpg', 'image/jpeg')
-		.rejecting('text/plain', 'text/xml')
-  end
-
-  it 'has an attached image file' do
-	  create(:food).should have_attached_file(:food_image)
-  end
-
-  # it seems like the validate attachment size isnt working correctly in the test
-  #it 'has a size less than 2 MBs' do
-  #		food = build(:food, food_image: File.new("#{Rails.root}/spec/fixtures/ron.jpg"))
-  #		food.should validate_attachment_size(:food_image).in(0..2.megabytes)
-  #  end
-
-  describe "methods" do
-	  it "#search_for returns items with similar names" do
-		  food = create(:bread)
-		  list = Food.search_for(food.name)
-		  expect(list).to eq [food] 
+      food = Food.new(serving_size: ("A" * 76))
+			food.valid?
+      expect(food.errors[:serving_size]).to include "is too long (maximum is 75 characters)"
 	  end
 
 	  it "#search_for will also return results that aren't in correct case" do
