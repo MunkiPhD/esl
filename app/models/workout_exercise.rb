@@ -18,6 +18,8 @@ class WorkoutExercise < ActiveRecord::Base
 
   accepts_nested_attributes_for :workout_sets, allow_destroy: true, reject_if: :reject_workout_sets
 
+	delegate :name, to: :exercise, prefix: true
+
   private
   def reject_workout_sets(attributes)
     attributes['rep_count'].blank? || attributes['weight'].blank?

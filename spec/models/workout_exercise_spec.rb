@@ -41,4 +41,11 @@ describe WorkoutExercise do
 			}.to change(WorkoutExercise, :count).by(0)
 		end
 	end
+
+	describe '#exercise_name' do
+		it 'returns the name of the exercise' do
+			workout_exercise = create(:workout_exercise)
+			expect(workout_exercise.exercise_name).to eq workout_exercise.exercise.name
+		end
+	end
 end
