@@ -17,10 +17,10 @@
 require 'rails_helper'
 
 describe WorkoutSet do
-  it 'returns exercise name' do
-    workout_set = build(:workout_set)
-    expect(workout_set.exercise_name).to eq workout_set.exercise.name
-  end
+	it 'returns exercise name' do
+		workout_set = build(:workout_set)
+		expect(workout_set.exercise_name).to eq workout_set.exercise.name
+	end
 
 	describe "#for_exercise" do
 		it 'retrieves workout sets for the specified exercise' do
@@ -40,71 +40,93 @@ describe WorkoutSet do
 		end
 	end
 
-  describe "validations" do
+	describe "validations" do
 
-    context "with valid data" do
-      it "are valid for factory" do
-        expect(build(:workout_set)).to be_valid
-      end
+		context "with valid data" do
+			it "are valid for factory" do
+				expect(build(:workout_set)).to be_valid
+			end
 
-      it "is valid with a workout exercise" do
-        expect(WorkoutSet.new(workout_exercise_id: 1)).to have(0).errors_on(:workout_exercise_id)
-      end
+			it "is valid with a workout exercise" do
+				workout_set = WorkoutSet.new(workout_exercise_id: 1)
+				workout_set.valid?
+				expect(workout_set.errors[:workout_exercise_id]).to eq []
+			end
 
-      it "set number is greater than or equal to 1" do
-        expect(WorkoutSet.new(set_number: 1)).to have(0).errors_on(:set_number)
-      end
+			it "set number is greater than or equal to 1" do
+				workout_set = WorkoutSet.new(set_number: 1)
+				workout_set.valid?
+				expect(workout_set.errors[:set_number]).to eq []
+			end
 
-      it "rep number must be greater than or equal to 0" do
-        expect(WorkoutSet.new(rep_count: 0)).to have(0).errors_on(:rep_count)
-      end
+			it "rep number must be greater than or equal to 0" do
+				workout_set = WorkoutSet.new(rep_count: 0)
+				workout_set.valid?
+				expect(workout_set.errors[:rep_count]).to eq []
+			end
 
-      it "notes can be empty" do
-        expect(WorkoutSet.new(notes:nil)).to have(0).errors_on(:notes)
-      end
+			it "notes can be empty" do
+				workout_set = WorkoutSet.new(notes:nil)
+				workout_set.valid?
+				expect(workout_set.errors[:notes]).to eq []
+			end
 
-      it "notes must be less than 250 characters" do
-        expect(WorkoutSet.new(notes: "a"*250)).to have(0).errors_on(:notes)
-      end
-    end
+			it "notes must be less than 250 characters" do
+				workout_set = WorkoutSet.new(notes: "a"*250)
+				workout_set.valid?
+				expect(workout_set.errors[:notes]).to eq []
+			end
+		end
 
-    context "is invalid if" do
-      it "without a workout exercise when saving" do
-        expect {
-          build(:workout_set, workout_exercise_id: nil).save
-        }.to change(WorkoutSet, :count).by(0)
-        #expect(WorkoutSet.new(workout_exercise_id: nil).save).to have(1).errors_on(:workout_exercise_id)
-      end
+		context "is invalid if" do
+			it "without a workout exercise when saving" do
+				expect {
+					build(:workout_set, workout_exercise_id: nil).save
+				}.to change(WorkoutSet, :count).by(0)
+			end
 
 
-      it "set number is null" do
-        expect(WorkoutSet.new(set_number: nil)).to have(2).errors_on(:set_number)
-      end
+			it "set number is null" do
+				workout_set = WorkoutSet.new(set_number: nil)
+				workout_set.valid?
+				expect(workout_set.errors[:set_number]).to include "can't be blank"
+			end
 
-      it "rep number is null" do
-        expect(WorkoutSet.new(rep_count: nil)).to have(2).errors_on(:rep_count)
-      end
+			it "rep number is null" do
+				workout_set = WorkoutSet.new(rep_count: nil)
+				workout_set.valid?
+				expect(workout_set.errors[:rep_count]).to include "can't be blank"
+			end
 
-      it "set number is zero" do
-        expect(WorkoutSet.new(set_number: 0)).to have(1).errors_on(:set_number)
-      end
+			it "set number is zero" do
+				workout_set = WorkoutSet.new(set_number: 0)
+				workout_set.valid?
+				expect(workout_set.errors[:set_number]).to include "must be greater than or equal to 1"
+			end
 
-      it "rep number is less than zero" do
-        expect(WorkoutSet.new(rep_count:-1)).to have(1).errors_on(:rep_count)
-      end
+			it "rep number is less than zero" do
+				workout_set = WorkoutSet.new(rep_count:-1)
+				workout_set.valid?
+				expect(workout_set.errors[:rep_count]).to include "must be greater than or equal to 0"
+			end
 
-      it "notes is longer than 250 chars" do
-        expect(WorkoutSet.new(notes: "1" * 251)).to have(1).errors_on(:notes)
-      end
+			it "notes is longer than 250 chars" do
+				workout_set = WorkoutSet.new(notes: "1" * 251)
+				workout_set.valid?
+				expect(workout_set.errors[:notes]).to include "is too long (maximum is 250 characters)"
+			end
 
-      it "only accepts whole numbers for sets" do
-        expect(WorkoutSet.new(set_number: 1.1)).to have(1).errors_on(:set_number)
-      end
+			it "only accepts whole numbers for sets" do
+				workout_set = WorkoutSet.new(set_number: 1.1)
+				workout_set.valid?
+				expect(workout_set.errors[:set_number]).to include "must be an integer"
+			end
 
-      it "only accepts whole numbers for rep_count" do
-        expect(WorkoutSet.new(rep_count: 1.1)).to have(1).errors_on(:rep_count)
-      end
-
-    end
-  end
+			it "only accepts whole numbers for rep_count" do
+				workout_set = WorkoutSet.new(rep_count: 1.1)
+				workout_set.valid?
+				expect(workout_set.errors[:rep_count]).to include "must be an integer"
+			end
+		end
+	end
 end
