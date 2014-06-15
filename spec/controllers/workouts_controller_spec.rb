@@ -174,12 +174,12 @@ describe WorkoutsController, type: :controller do
 
 		describe "DELETE #destroy" do
 			it "deletes the workout from the database" do
+				workout = create(:workout, user_id: user.id)
 				expect {
-					workout = create(:workout, user_id: user.id)
-					puts "Workout ID: #{workout.id}"
-					delete :destroy, id: workout
+					delete :destroy, { "id" => "#{workout.id}", "username" => "#{user.username}" }
 				}.to change(Workout, :count).by(-1)
 			end
+
 			it "redirects to the workout index" do
 				delete :destroy, id: workout
 				expect(response).to redirect_to workouts_path

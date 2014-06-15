@@ -39,7 +39,7 @@ describe Exercise do
 		it "name is invalid if less than 3 characters" do
 			exercise = Exercise.new(name: "12")
 			exercise.valid?
-			expect(exercise.errors[:name]).to include("is too short (minimum is 3 characters")
+			expect(exercise.errors[:name]).to include("is too short (minimum is 3 characters)")
 		end
 
 		it "name is valid for 60 chars and less" do
@@ -57,28 +57,39 @@ describe Exercise do
 
 		it 'other muscles can be blank' do
 			exercise = build(:exercise, other_muscles: "")
-			expect(exercise).to have(0).errors_on(:other_muscles)
+			exercise.valid?
+			expect(exercise.errors[:other_muscles]).to eq []
 		end
 
 		context 'associations' do
 			it 'has an exercise type' do
-				expect(Exercise.new(exercise_type: nil)).to have(1).errors_on(:exercise_type)
+				exercise = Exercise.new(exercise_type: nil)
+				exercise.valid?
+				expect(exercise.errors[:exercise_type]).to include "can't be blank"
 			end	
 
 			it 'has equipment' do
-				expect(Exercise.new(equipment: nil)).to have(1).errors_on(:equipment)
+				exercise = Exercise.new(equipment: nil)
+				exercise.valid?
+				expect(exercise.errors[:equipment]).to include "can't be blank"
 			end
 
 			it 'has a mechanic type' do
-				expect(Exercise.new(mechanic_type: nil)).to have(1).errors_on(:mechanic_type)
+				exercise = Exercise.new(mechanic_type: nil)
+				exercise.valid?
+				expect(exercise.errors[:mechanic_type]).to include "can't be blank"
 			end
 
 			it 'has a force type' do
-				expect(Exercise.new(force_type: nil)).to have(1).errors_on(:force_type)
+				exercise = Exercise.new(force_type: nil)
+				exercise.valid?
+				expect(exercise.errors[:force_type]).to include "can't be blank"
 			end
 
 			it 'has a experience level' do
-				expect(Exercise.new(experience_level: nil)).to have(1).errors_on(:experience_level)
+				exercise = Exercise.new(experience_level: nil)
+				exercise.valid?
+				expect(exercise.errors[:experience_level]).to include "can't be blank"
 			end
 		end
 	end
@@ -122,7 +133,7 @@ describe Exercise do
 			expect(Exercise.for_mechanic_type(mechanic_type)).to eq [exercise]
 		end
 	end
-		
+
 	describe '.for_muscle' do
 		it 'scopes to exercises with the specified muscle as the main' do
 			muscle = create(:muscle)
