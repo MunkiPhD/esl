@@ -19,7 +19,7 @@
 	</thead>
 	<tbody>
 	<%= f.fields_for :workout_sets, include_id: false do |set| %>
-		<%= render "workout_sets_fields", f: set  %>
+		<%= render "workouts/workout_sets_fields", f: set  %>
 <% end %>
 	<tr class="prev-placeholder">
 		<td colspan="4">
