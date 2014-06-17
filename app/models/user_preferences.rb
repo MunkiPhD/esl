@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: user_preferences
+#
+#  id                :integer          not null, primary key
+#  user_id           :integer          not null
+#  default_system_id :integer          default(0), not null
+#  created_at        :datetime
+#  updated_at        :datetime
+#
+
 class UserPreferences < ActiveRecord::Base
 	belongs_to :user
 

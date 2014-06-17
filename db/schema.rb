@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603235915) do
+ActiveRecord::Schema.define(version: 20140616223802) do
 
   create_table "body_weights", force: true do |t|
     t.date     "log_date",                           default: '2014-05-29', null: false
@@ -266,6 +266,16 @@ ActiveRecord::Schema.define(version: 20140603235915) do
 
   add_index "workout_sets", ["exercise_id"], name: "index_workout_sets_on_exercise_id", using: :btree
   add_index "workout_sets", ["workout_id"], name: "index_workout_sets_on_workout_id", using: :btree
+
+  create_table "workout_templates", force: true do |t|
+    t.string   "title",                   null: false
+    t.text     "notes",      default: "", null: false
+    t.integer  "user_id",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "workout_templates", ["user_id"], name: "index_workout_templates_on_user_id", using: :btree
 
   create_table "workouts", force: true do |t|
     t.string   "title",                       null: false
