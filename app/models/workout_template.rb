@@ -1,6 +1,16 @@
-class WorkoutTemplate < ActiveRecord::Base
-	before_save :set_name
+# == Schema Information
+#
+# Table name: workout_templates
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)      not null
+#  notes      :text             default(""), not null
+#  user_id    :integer          not null
+#  created_at :datetime
+#  updated_at :datetime
+#
 
+class WorkoutTemplate < ActiveRecord::Base
 	belongs_to :user
 
 	validates :user_id, presence: true	
@@ -9,9 +19,10 @@ class WorkoutTemplate < ActiveRecord::Base
 		where(user: user)
 	end
 
+	def self.with_title(title)
+		where(title: title)
+	end
+
 	private
 
-	def set_name
-		WorkoutTemplate.where("workout_template.user_id = ?", user_id)
-	end
 end

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: workout_templates
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)      not null
+#  notes      :text             default(""), not null
+#  user_id    :integer          not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'rails_helper'
 
 describe WorkoutTemplate do
@@ -56,6 +68,19 @@ describe WorkoutTemplate do
 			workout_templ2 = create(:workout_template, user: user)
 
 			expect(WorkoutTemplate.for_user(user)).to eq [workout_templ2, workout_templ1]
+		end
+	end
+
+	describe '#with_title' do
+		it 'returns workout template with specified title' do
+			workout_templ = create(:workout_template)
+			expect(WorkoutTemplate.with_title(workout_templ.title)).to eq [workout_templ]
+		end
+
+		it 'returns all templates with the same title' do
+			workout_templ = create(:workout_template)
+			workout_templ2 = create(:workout_template, title: workout_templ.title)
+			expect(WorkoutTemplate.with_title(workout_templ.title)).to eq [workout_templ, workout_templ2]
 		end
 	end
 
