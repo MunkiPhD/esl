@@ -12,7 +12,7 @@ describe WorkoutTemplate do
 			it 'cant be blank' do
 				workout_templ = WorkoutTemplate.new(title: nil)
 				workout_templ.valid?
-				expect(workout_temp.errors[:title]).to include "can't be blank"
+				expect(workout_templ.errors[:title]).to include "can't be blank"
 			end
 
 			it 'is not unique between users' do
@@ -47,6 +47,15 @@ describe WorkoutTemplate do
 				workout_templ.valid?
 				expect(workout_templ.errors[:notes]).to eq []
 			end
+		end
+	end
+
+	describe '#for_user' do
+		it 'returns workout templates that belong to specified user' do
+			workout_templ1 = create(:workout_template, user: user)
+			workout_templ2 = create(:workout_template, user: user)
+
+			expect(WorkoutTemplate.for_user(user)).to eq [workout_templ2, workout_templ1]
 		end
 	end
 
