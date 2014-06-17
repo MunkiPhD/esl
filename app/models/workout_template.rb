@@ -11,6 +11,8 @@
 #
 
 class WorkoutTemplate < ActiveRecord::Base
+	before_save :set_name
+
 	belongs_to :user
 
 	validates :user_id, presence: true	
@@ -25,4 +27,10 @@ class WorkoutTemplate < ActiveRecord::Base
 
 	private
 
+	def set_name
+		template_count = WorkoutTemplate.for_user(self.user).with_title(self.title).count
+		if template_count > 0
+			self.title += " (#{template_count + 1})"
+		end
+	end
 end
