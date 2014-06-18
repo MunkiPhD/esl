@@ -26,6 +26,14 @@ class WorkoutTemplate < ActiveRecord::Base
 		where(title: title)
 	end
 
+	def self.from_workout(workout)
+		template = WorkoutTemplate.new
+		template.title = workout.title
+		template.user = workout.user
+		template.notes = workout.notes
+		template
+	end
+
 	private
 
 	def set_name
