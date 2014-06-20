@@ -34,7 +34,19 @@ class WorkoutSetTemplate < ActiveRecord::Base
 		numericality: { greater_than_or_equal_to: 0, only_integer: true }
 	validates :percent_of_one_rep_max, numericality: { greater_than: 0, only_integer: true }, if: :is_based_on_orm?
 
+
 	delegate :name, to: :exercise, prefix: true
+
+
+	def self.from_workout_set(workout_set)
+		templ = WorkoutSetTemplate.new
+		templ.set_number = workout_set.set_number
+		templ.rep_count = workout_set.rep_count
+		templ.weight = workout_set.weight
+		templ.notes = workout_set.notes
+		templ.exercise = workout_set.exercise
+		templ
+	end
 
 	private
 	def is_based_on_orm?

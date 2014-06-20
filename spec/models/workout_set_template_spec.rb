@@ -22,6 +22,18 @@ RSpec.describe WorkoutSetTemplate, :type => :model do
 		expect(workout_set.exercise_name).to eq workout_set.exercise.name
 	end
 
+	describe '.from_workout_set' do
+		it 'creates a workout set template based on a workout set' do
+			workout_set = create(:workout_set)
+			workout_set_template = WorkoutSetTemplate.from_workout_set(workout_set)
+			expect(workout_set_template.set_number).to eq workout_set.set_number
+			expect(workout_set_template.rep_count).to eq workout_set.rep_count
+			expect(workout_set_template.weight).to eq workout_set.weight
+			expect(workout_set_template.notes).to eq workout_set.notes
+			expect(workout_set_template.exercise_id).to eq workout_set.exercise_id
+		end
+	end
+
 	describe "#for_exercise" do
 		it 'retrieves workout sets for the specified exercise' do
 			exercise = create(:exercise)
