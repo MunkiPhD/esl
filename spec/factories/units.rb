@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: units
+#
+#  id               :integer          not null, primary key
+#  unit_type        :integer          not null
+#  unit_type_name   :string(255)      not null
+#  unit_system      :integer          not null
+#  unit_system_name :string(255)      not null
+#  unit_name        :string(255)      not null
+#  unit_abbr        :string(255)      not null
+#
+
 FactoryGirl.define do
 	factory :unit do
 		unit_system			0

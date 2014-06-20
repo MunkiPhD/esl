@@ -29,7 +29,9 @@ class Exercise < ActiveRecord::Base
 	belongs_to :force_type
 	belongs_to :experience_level
 	has_many :workout_exercises
+	has_many :workout_exercise_templates
 	has_many :workout_sets, inverse_of: :exercise
+	has_many :workout_set_templates, inverse_of: :exercise
 
 	serialize :instructions, Array
 

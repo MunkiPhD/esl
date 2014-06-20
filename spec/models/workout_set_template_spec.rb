@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: workout_set_templates
+#
+#  id                           :integer          not null, primary key
+#  set_number                   :integer          not null
+#  rep_count                    :integer          not null
+#  weight                       :integer          not null
+#  notes                        :string(255)      default(""), not null
+#  is_percent_of_one_rep_max    :boolean          default(FALSE), not null
+#  percent_of_one_rep_max       :integer          default(0), not null
+#  workout_exercise_template_id :integer          not null
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#
+
 require 'rails_helper'
 
 RSpec.describe WorkoutSetTemplate, :type => :model do
@@ -25,6 +41,24 @@ RSpec.describe WorkoutSetTemplate, :type => :model do
 	end
 
 	describe "validations" do
+		describe 'is_percent_one_rep_max' do
+			it 'defaults with percentage of one rep max to be false' do
+				workout_set_templ = WorkoutSetTemplate.new
+				expect(workout_set_templ.is_percent_of_one_rep_max).to eq false
+			end
+
+			it 'has a percent greater than zero if based off of one rep max' do
+				workout_set_templ = WorkoutSetTemplate.new(is_percent_of_one_rep_max: true, percent_of_one_rep_max: 10)
+				workout_set_templ.valid?
+				expect(workout_set_templ.errors[:percent_of_one_rep_max]).to eq []
+			end
+
+			it 'is invalid if based off of percent and the percent is less than or equal to zero' do
+				workout_set_templ = WorkoutSetTemplate.new(is_percent_of_one_rep_max: true, percent_of_one_rep_max: 0)
+				workout_set_templ.valid?
+				expect(workout_set_templ.errors[:percent_of_one_rep_max]).to include "must be greater than 0"
+			end
+		end
 
 		context "with valid data" do
 			it "has a valid factory" do
@@ -32,7 +66,7 @@ RSpec.describe WorkoutSetTemplate, :type => :model do
 			end
 
 			it "is valid with a workout exercise" do
-				workout_set = WorkoutSetTemplate.new(workout_exercise_id: 1)
+				workout_set = WorkoutSetTemplate.new(workout_exercise_template_id: 1)
 				workout_set.valid?
 				expect(workout_set.errors[:workout_exercise_tempalte_id]).to eq []
 			end
@@ -60,25 +94,12 @@ RSpec.describe WorkoutSetTemplate, :type => :model do
 				workout_set.valid?
 				expect(workout_set.errors[:notes]).to eq []
 			end
-
-			it 'defaults with percentage of one rep max to be false' do
-				workout_set_templ = WorkoutSetTemplate.new
-				expect(workout_set_templ.is_percent_of_one_rep_max).to eq false
-			end
-
-			it 'percent of one rep max must be greater than zero' do
-				fail
-			end
-
-			it 'percent of one rep max is valid only if is_percent_of_one_rep_max is true' do
-				fail
-			end
 		end
 
 		context "is invalid if" do
 			it "without a workout exercise when saving" do
 				expect {
-					build(:workout_set_template, workout_exercise_id: nil).save
+					build(:workout_set_template, workout_exercise_template_id: nil).save
 				}.to change(WorkoutSetTemplate, :count).by(0)
 			end
 

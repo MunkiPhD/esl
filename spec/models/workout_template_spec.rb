@@ -103,8 +103,8 @@ describe WorkoutTemplate do
 			expect(workout_templ.title).to eq workout.title
 			expect(workout_templ.notes).to eq workout.notes
 
-			for i in 0..workout_templ.workout_sets.size
-				templ = workout_templ.workout_sets[i]
+			for i in 0..workout_templ.workout_set_templates.size
+				templ = workout_templ.workout_set_templates[i]
 				orig = workout.workout_sets[i]
 				expect(templ.set_number).to eq orig.set_number
 				expect(templ.rep_count).to eq orig.rep_count

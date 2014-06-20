@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618232808) do
+ActiveRecord::Schema.define(version: 20140620023910) do
 
   create_table "body_weights", force: true do |t|
     t.date     "log_date",                           default: '2014-05-29', null: false
@@ -259,6 +259,20 @@ ActiveRecord::Schema.define(version: 20140618232808) do
 
   add_index "workout_exercises", ["exercise_id"], name: "index_workout_exercises_on_exercise_id", using: :btree
   add_index "workout_exercises", ["workout_id"], name: "index_workout_exercises_on_workout_id", using: :btree
+
+  create_table "workout_set_templates", force: true do |t|
+    t.integer  "set_number",                                   null: false
+    t.integer  "rep_count",                                    null: false
+    t.integer  "weight",                                       null: false
+    t.string   "notes",                        default: "",    null: false
+    t.boolean  "is_percent_of_one_rep_max",    default: false, null: false
+    t.integer  "percent_of_one_rep_max",       default: 0,     null: false
+    t.integer  "workout_exercise_template_id",                 null: false
+    t.integer  "workout_template_id",                          null: false
+    t.integer  "exercise_id",                                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "workout_sets", force: true do |t|
     t.integer  "set_number",                       null: false
