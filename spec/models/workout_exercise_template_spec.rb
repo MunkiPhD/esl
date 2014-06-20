@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: workout_exercise_templates
+#
+#  id                  :integer          not null, primary key
+#  workout_template_id :integer          not null
+#  exercise_id         :integer          not null
+#
+
 require 'rails_helper'
 
 RSpec.describe WorkoutExerciseTemplate, :type => :model do
