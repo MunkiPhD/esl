@@ -33,6 +33,9 @@ class WorkoutTemplate < ActiveRecord::Base
 		template.title = workout.title
 		template.user = workout.user
 		template.notes = workout.notes
+		workout.workout_exercises.each do |we|
+			template.workout_exercise_templates << WorkoutExerciseTemplate.from_workout_exercise(we)
+		end
 		template
 	end
 

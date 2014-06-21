@@ -103,13 +103,12 @@ describe WorkoutTemplate do
 			expect(workout_templ.title).to eq workout.title
 			expect(workout_templ.notes).to eq workout.notes
 
-			for i in 0..workout_templ.workout_set_templates.size
-				templ = workout_templ.workout_set_templates[i]
-				orig = workout.workout_sets[i]
-				expect(templ.set_number).to eq orig.set_number
-				expect(templ.rep_count).to eq orig.rep_count
-				expect(templ.weight).to eq orig.weight
-				expect(templ.exercise_id).to eq orig.exercise_id
+			workout_templ.workout_exercise_templates.each_with_index do |element, index|
+				#templ = workout_templ.workout_set_templates[i]
+				orig = workout.workout_sets[index]
+
+				expect(element.workout_set_templates.size).to eq orig.workout_sets.size
+				expect(element.exercise).to eq orig.exercise
 			end
 		end
 	end	

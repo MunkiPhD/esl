@@ -15,4 +15,13 @@ class WorkoutExerciseTemplate < ActiveRecord::Base
 
 	validates :workout_template, presence: true
 	validates :exercise, presence: true
+
+	def self.from_workout_exercise(workout_exercise)
+		templ = WorkoutExerciseTemplate.new
+		templ.exercise = workout_exercise.exercise
+		workout_exercise.workout_sets.each do |ws|
+			templ.workout_set_templates << WorkoutSetTemplate.from_workout_set(ws)
+		end
+		templ
+	end
 end

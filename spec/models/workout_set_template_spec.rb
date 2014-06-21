@@ -30,7 +30,7 @@ RSpec.describe WorkoutSetTemplate, :type => :model do
 			expect(workout_set_template.rep_count).to eq workout_set.rep_count
 			expect(workout_set_template.weight).to eq workout_set.weight
 			expect(workout_set_template.notes).to eq workout_set.notes
-			expect(workout_set_template.exercise_id).to eq workout_set.exercise_id
+			expect(workout_set_template.exercise).to eq workout_set.exercise
 		end
 	end
 
