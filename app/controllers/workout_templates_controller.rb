@@ -1,6 +1,10 @@
 class WorkoutTemplatesController < ApplicationController
 	before_action :set_workout, only: [:new]	
 
+	def index
+		@workout_templates = current_user.workout_templates
+	end
+
 	def new
 		@exercises = Exercise.all
 	end
