@@ -1,0 +1,133 @@
+<%= form_for(@workout_template) do |f| %>
+  <% if @workout.errors.any? %>
+  <div id="error_explanation">
+  <h2><%= pluralize(@workout_template.errors.count, "error") %> prohibited this workout from being saved:</h2>
+
+  <ul>
+    <% @workout_template.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+  <% end %>
+
+<div class="workout-general-info">
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, { placeholder: "Workout Title", class: "input-xlarge" } %>
+  </div>
+  <div class="field">
+			 <%= f.label :date_performed %><br/>
+	 <%= f.date_select :date_performed, { order: [:day, :month, :year] } %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, { placeholder: "Notes" } %>
+  </div>
+</div>
+
+<div id="workout_exercises_container">
+  <%= f.fields_for :workout_exercise_templates, include_id: false do |builder| %>
+    <%= render "workout_templates/workout_exercise_templates_fields", f: builder, exercises: @exercises %>
+  <% end %>
+</div>
+
+  <div class="prev-placeholder">
+	  <a href="#" id="btn_add_workout_exercise" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Performed Exercise</a>
+    <br/>
+  </div>
+<div class="workout-actions">
+	<%= button_tag class: "btn btn-primary btn-large", type: 'submit' do %>
+		<span class="glyphicon glyphicon-check icon-white"></span> Save Workout
+	<% end %>
+</div>
+
+<% end %>
+
+
+
+	<script type="x-templ-mustache" id="template_workout_exercise">
+<table class="workouts_workout_exercise fields table" data-index="{{ workout_exercise_index }}" style="display: none;">
+  <thead>
+	 <tr>
+		<th colspan="4">
+		  <h4>
+			  <select 
+				id="workout_workout_exercises_attributes_{{ workout_exercise_index }}_exercise_id" 
+				name="workout[workout_exercises_attributes][{{ workout_exercise_index }}][exercise_id]"
+				class="exercise-select"></select>
+
+			<input 
+			id="workout_workout_exercises_attributes_{{ workout_exercise_index }}__destroy" 
+			name="workout[workout_exercises_attributes][{{ workout_exercise_index }}][_destroy]" 
+			type="hidden" value="false"><a class="btn btn-danger remove-workout-exercise" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+		  </h4>
+		</th>
+	 </tr>
+	 <tr>
+		<th>Set</th>
+		<th>Reps</th>
+		<th>Weight</th>
+		<th>Remove</th>
+	 </tr>
+  </thead>
+  <tbody>
+		  <tr class="prev-placeholder">
+		<td colspan="4">
+		  <br/><a href="#" class="btn-add-set btn btn-success">Add a set</a>
+	 </td>
+	 </tr>
+  </tbody>
+</table>
+	</script>
+
+
+
+
+
+	<script type="x-templ-mustache" id="template_workout_set">
+<tr class="workout-set">
+  <td>
+	  <span class="set-number">{{ set_number }}</span>
+	 <input class="set-field"
+	 id="workout_workout_exercises_attributes_{{ workout_exercise_index }}_workout_sets_attributes_{{ workout_set_id }}_set_number" 
+	 name="workout[workout_exercises_attributes][{{ workout_exercise_index }}][workout_sets_attributes][{{ workout_set_id }}][set_number]" 
+	 type="hidden" value="{{ set_number }}">
+
+	 <input 
+	 id="workout_workout_exercises_attributes_{{ workout_exercise_index }}_workout_sets_attributes_{{ workout_set_id }}_exercise_id" 
+	 name="workout[workout_exercises_attributes][{{ workout_exercise_index }}][workout_sets_attributes][{{ workout_set_id }}][exercise_id]" 
+	 type="hidden">
+
+	 <input 
+	 id="workout_workout_exercises_attributes_{{ workout_exercise_index }}_workout_sets_attributes_{{ workout_set_id }}_workout_id" 
+	 name="workout[workout_exercises_attributes][{{ workout_exercise_index }}][workout_sets_attributes][{{ workout_set_id }}][workout_id]" 
+	 type="hidden">
+ </td>
+
+  <td>  
+	  <input 
+	  class="input-small input-reps form-control" 
+	  id="workout_workout_exercises_attributes_{{ workout_exercise_index }}_workout_sets_attributes_{{ workout_set_id }}_rep_count" 
+	  name="workout[workout_exercises_attributes][{{ workout_exercise_index }}][workout_sets_attributes][{{ workout_set_id }}][rep_count]" 
+	  placeholder="reps" 
+	  type="text">
+  </td>
+
+  <td>
+	  <input 
+	  class="input-small input-weight form-control" 
+	  id="workout_workout_exercises_attributes_{{ workout_exercise_index }}_workout_sets_attributes_{{ workout_set_id }}_weight" 
+	  name="workout[workout_exercises_attributes][{{ workout_exercise_index }}][workout_sets_attributes][{{ workout_set_id }}][weight]" 
+	  placeholder="weight" type="text">
+  </td>
+
+  <td>
+	  <input 
+	  id="workout_workout_exercises_attributes_{{ workout_exercise_index }}_workout_sets_attributes_{{ workout_set_id }}__destroy" 
+	  name="workout[workout_exercises_attributes][{{ workout_exercise_index }}][workout_sets_attributes][{{ workout_set_id }}][_destroy]" 
+	  type="hidden" value="false">
+		  <a href="#" class="btn btn-danger btn-sm btn-remove-set"><span class="glyphicon glyphicon-remove"></span></a>
+  </td>
+</tr>
+	</script>
