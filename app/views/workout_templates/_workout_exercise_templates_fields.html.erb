@@ -1,3 +1,5 @@
+<h1>workout exercise </h1>
+<%= debug f.object %>
 <table class="workouts_workout_exercise fields table" data-index="<%= f.index %>">
 	<thead>
 		<tr>
@@ -18,8 +20,8 @@
 		</tr>
 	</thead>
 	<tbody>
-	<%= f.fields_for :workout_sets, include_id: false do |set| %>
-		<%= render "workouts/workout_sets_fields", f: set  %>
+	<%= f.fields_for :workout_set_templates, include_id: false do |set| %>
+		<%#= render "workout_templates/workout_set_templates_fields", f: set  %>
 <% end %>
 	<tr class="prev-placeholder">
 		<td colspan="4">

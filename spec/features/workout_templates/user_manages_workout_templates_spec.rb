@@ -12,4 +12,5 @@ feature 'User can manage workout templates' do
 		visit workout_templates_path
 		expect(page).to have_content template.title
 	end
+	
 end

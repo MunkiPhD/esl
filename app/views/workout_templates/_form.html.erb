@@ -1,7 +1,14 @@
+<% @workout_template.workout_exercise_templates.each do |wet| %>
+		  <%= wet.exercise.name %>
+	<% wet.workout_set_templates.each do |wst| %>
+		<%= debug wst %>
+	<% end %>
+	<br/>
+<% end %>
 <%= form_for(@workout_template) do |f| %>
-  <% if @workout.errors.any? %>
+  <% if @workout_template.errors.any? %>
   <div id="error_explanation">
-  <h2><%= pluralize(@workout_template.errors.count, "error") %> prohibited this workout from being saved:</h2>
+  <h2><%= pluralize(@workout_template.errors.count, "error") %> prohibited this workout tempalte from being saved:</h2>
 
   <ul>
     <% @workout_template.errors.full_messages.each do |msg| %>
@@ -15,10 +22,6 @@
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title, { placeholder: "Workout Title", class: "input-xlarge" } %>
-  </div>
-  <div class="field">
-			 <%= f.label :date_performed %><br/>
-	 <%= f.date_select :date_performed, { order: [:day, :month, :year] } %>
   </div>
   <div class="field">
     <%= f.label :notes %>

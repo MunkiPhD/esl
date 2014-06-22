@@ -48,6 +48,7 @@ class WorkoutTemplatesController < ApplicationController
 	end
 
 	def set_workout
-		@workout = Workout.find(params[:id])
+		workout = Workout.find(params[:id])
+		@workout_template = WorkoutTemplate.from_workout(workout)
 	end
 end

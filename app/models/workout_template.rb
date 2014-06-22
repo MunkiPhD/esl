@@ -14,8 +14,8 @@ class WorkoutTemplate < ActiveRecord::Base
 	before_save :set_name
 
 	belongs_to :user
-  has_many :workout_exercise_templates, :dependent => :destroy, inverse_of: :workout_template
-  has_many :workout_set_templates, :dependent => :destroy, inverse_of: :workout_template
+	has_many :workout_exercise_templates, :dependent => :destroy, inverse_of: :workout_template
+	has_many :workout_set_templates, :dependent => :destroy, inverse_of: :workout_template
 
 	validates :user, presence: true	
 	validates :title, presence: true	
