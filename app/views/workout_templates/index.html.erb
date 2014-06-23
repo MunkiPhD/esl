@@ -1,6 +1,6 @@
 <h1>Workout Templates</h1>
 <ul>
 <% @workout_templates.each do |template| %>
-		  <li><%= template.title %></li>
+		  <li><%= link_to template.title, template %></li>
 <% end %>
 </ul>

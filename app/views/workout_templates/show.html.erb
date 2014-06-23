@@ -1,0 +1,44 @@
+<div class="workout-general-info">
+  <h2><%= @workout_template.title %></h2>
+<% unless @workout_template.notes.blank? %>
+<div>
+  Notes: <%= @workout_template.notes %>
+</div>
+<% end %>
+<div>
+  by: <%= @workout_template.user.username %>
+</div>
+</div>
+
+
+<div id="workout_exercises_container" class="container-fluid">
+<% @workout_template.workout_exercise_templates.each do |workout_exercise| %>
+		  <div class="workout-exercise-container" id="<%= dom_id(workout_exercise) %>" data-exercise-name="<%= workout_exercise.exercise.name %>">
+					 <div class="row">
+								<div class="col-md-4">
+		  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th colspan="2"><h3><%= link_to workout_exercise.exercise.name, workout_exercise.exercise %></h3></th>
+    </tr>
+	 <tr>
+				<th>Set</th>
+				<th>Weight x Reps</th>
+	 </tr>
+  </thead>
+  <tbody>
+    <% workout_exercise.workout_set_templates.each do |workout_set| %>
+      <tr>
+        <td><%= workout_set.set_number %></td>
+        <td><%= workout_set.weight %>x<%= workout_set.rep_count %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="col-md-8" id="<%= dom_id(workout_exercise) %>_graph">
+</div>
+</div>
+</div>
+<% end %>
+</div>

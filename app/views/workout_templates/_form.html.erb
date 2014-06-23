@@ -1,10 +1,3 @@
-<% @workout_template.workout_exercise_templates.each do |wet| %>
-		  <%= wet.exercise.name %>
-	<% wet.workout_set_templates.each do |wst| %>
-		<%= debug wst %>
-	<% end %>
-	<br/>
-<% end %>
 <%= form_for(@workout_template) do |f| %>
   <% if @workout_template.errors.any? %>
   <div id="error_explanation">

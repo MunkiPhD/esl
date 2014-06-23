@@ -8,7 +8,7 @@ feature 'User creates a single workout template' do
 	end
 
 	scenario 'by copying an existing workout' do
-		workout = create(:workout, user: user)
+		workout = create(:workout_with_exercises, user: user)
 		visit workout_path(workout)
 
 		click_link "Create Template"
@@ -19,7 +19,7 @@ feature 'User creates a single workout template' do
 			expect(page).to have_content workout_exercise.exercise_name
 		end
 
-		fill_in "workout_title", with: "some workout template"
+		fill_in "workout_template_title", with: "some workout template"
 
 		click_button "Save Workout"
 
