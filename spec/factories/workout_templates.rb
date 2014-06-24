@@ -15,11 +15,8 @@ FactoryGirl.define do
 		sequence(:title)	{ |n| "test_#{n}" }
 		notes							"some random notes!"
 		user
-
-		factory :workout_template_with_exercises do
-			after(:create) do |workout_template, evaluator|
-				create_list(:workout_exercise_template_with_sets, 2, workout_template: workout_template)
-			end
+		after(:build) do |workout_template|
+			build_list(:workout_exercise_template, 1, workout_template: workout_template)
 		end
 	end
 end

@@ -16,8 +16,18 @@ describe WorkoutTemplate do
 	let(:user) { create(:user) }
 
 	describe 'validations' do
-		it 'has a valid factory' do
-			expect(create(:workout_template)).to be_valid
+		describe 'factory' do
+			it 'has a valid factory' do
+				expect(create(:workout_template)).to be_valid
+			end
+
+			it 'has correct nested items' do
+				template = build(:workout_template)
+				expect(template.workout_exercise_templates.length).to eq 2
+				template.workout_exercise_templates.each do |wet|
+					expect(wet.workout_set_templates.length).to eq 2
+				end
+			end
 		end
 
 		describe 'title' do

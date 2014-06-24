@@ -20,8 +20,8 @@ FactoryGirl.define do
 		rep_count 1
 		weight 300
 		notes ""
-		workout_exercise_template
-		workout_template
+		#workout_exercise_template
+		#workout_template
 		exercise
 		is_percent_of_one_rep_max		false
 		percent_of_one_rep_max			0
@@ -32,8 +32,8 @@ FactoryGirl.define do
 		rep_count 1
 		weight 300
 		notes ""
-		workout_exercise_template
-		workout_template
+		#workout_exercise_template
+		#workout_template
 		exercise
 
 		is_percent_of_one_rep_max	true
