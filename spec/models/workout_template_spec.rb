@@ -22,7 +22,7 @@ describe WorkoutTemplate do
 			end
 
 			it 'has correct nested items' do
-				template = build(:workout_template)
+				template = build(:workout_template_with_exercises)
 				expect(template.workout_exercise_templates.length).to eq 2
 				template.workout_exercise_templates.each do |wet|
 					expect(wet.workout_set_templates.length).to eq 2
@@ -56,11 +56,11 @@ describe WorkoutTemplate do
 		end
 
 		describe 'user' do
-		it 'cannot be blank' do
-			workout_templ = WorkoutTemplate.new(user: nil)
-			workout_templ.valid?
-			expect(workout_templ.errors[:user]).to include "can't be blank"
-		end
+			it 'cannot be blank' do
+				workout_templ = WorkoutTemplate.new(user: nil)
+				workout_templ.valid?
+				expect(workout_templ.errors[:user]).to include "can't be blank"
+			end
 		end
 
 		describe 'notes' do

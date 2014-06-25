@@ -7,11 +7,9 @@ class WorkoutTemplatesController < ApplicationController
 	end
 
 	def show
-
 	end
 
 	def new
-		puts "----------- inside new ------------------"
 		@exercises = Exercise.all
 		if @workout_template.nil?
 			@workout_template = WorkoutTemplate.new
@@ -21,21 +19,11 @@ class WorkoutTemplatesController < ApplicationController
 	def create
 		workout_template = current_user.workout_templates.build(workout_template_params)
 
-		puts "------ is it valid?: #{workout_template.valid?}"
-		if !workout_template.valid?
-			workout_template.errors.full_messages.each do |msg|
-				puts msg
-			end
-		end
-
-		puts "---------- end messages ----------- "
-
 		respond_to do |format|
 			if workout_template.save
 				flash[:success] = 'Workout template created.'
 				format.html { redirect_to workout_templates_path }
 			else
-				puts "--------- it didnt save ---------"
 				format.html { render action: 'new' }	
 			end
 		end
@@ -71,10 +59,7 @@ class WorkoutTemplatesController < ApplicationController
 	end
 
 	def set_template_from_workout
-		puts "------------------ inside set_template-from_workout -----------------"
-		puts "params: #{params}"
 		workout = Workout.find(params[:id])
 		@workout_template = WorkoutTemplate.from_workout(workout)
-		puts "got to here..."
 	end
 end

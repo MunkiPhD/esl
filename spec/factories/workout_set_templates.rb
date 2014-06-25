@@ -15,7 +15,19 @@
 #
 
 FactoryGirl.define do
-	factory :workout_set_template do
+	factory :workout_set_template, class: WorkoutSetTemplate do
+		set_number 1
+		rep_count 1
+		weight 300
+		notes ""
+		workout_exercise_template
+		workout_template
+		exercise
+		is_percent_of_one_rep_max		false
+		percent_of_one_rep_max			0
+	end
+
+	factory :workout_set_template_for_build, class: WorkoutSetTemplate do
 		set_number 1
 		rep_count 1
 		weight 300

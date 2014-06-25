@@ -25,12 +25,10 @@ describe LogFood do
   describe ".on_date" do
     it 'returns the logged foods on specified date' do
 			Timecop.freeze(Date.today - 1) do
-				puts Date.today
 				yesterday = create(:log_food, log_date: Date.today, user: user)
 				expect(user.log_foods.on_date(Date.today)).to eq [yesterday]
 			end
 			Timecop.freeze(Date.today) do
-				puts Date.today
 				today = create(:log_food, log_date: Date.today, user: user)
 				expect(user.log_foods.on_date(Date.today)).to eq [today]
 			end

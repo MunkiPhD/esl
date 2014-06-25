@@ -100,7 +100,6 @@ describe ExercisesController, type: :controller do
 					expect {
 						post :create, { format: 'json', exercise: exercise.attributes }
 						parsed_json = JSON.parse(response.body)
-						puts parsed_json
 						expect(response.status).to eq 422
 						expect(parsed_json["name"]).to eq ["can't be blank", "is too short (minimum is 3 characters)"]
 
