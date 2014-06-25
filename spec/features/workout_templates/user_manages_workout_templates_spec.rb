@@ -33,4 +33,16 @@ feature 'User can manage workout templates' do
 		end
 	end
 	
+	scenario 'can create a new workout template' do
+		visit workout_templates_path
+		click_link "New Template"
+
+		template = build(:workout_template)
+		fill_in "workout_template_title", with: template.title
+		
+		fail 'need to actually select the workout entry data'
+
+		click_link "Save Template"
+		expect(page).to have_content template.title
+	end
 end
