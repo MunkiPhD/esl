@@ -1,9 +1,16 @@
+<div class="pull-right">
+		  <%= link_to "My Templates >>", workout_templates_path, class: "btn btn-primary" %>
+</div>
 <h1><%= workout_index_title @user %></h1>
+
 <% if @workouts.count == 0 %>
 	<div class="alert alert-info">
 		<p><strong>Best get to liftin'!</strong> You haven't logged any workouts yet!</p>
 	</div>
 <% end %>
+
+<br/>
+
 <div id="workouts">
 		  <table class="table table-striped">
   <% @workouts.each do |workout| %>

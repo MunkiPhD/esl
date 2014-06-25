@@ -6,6 +6,7 @@ describe LinkHelper do
   let(:item_path) { workout_path(item) }
   let(:item_edit_path) { edit_workout_path(item) }
 
+
   describe "#link_to_add" do
     it "links to the specified url" do
       result = helper.link_to_add(text, item)

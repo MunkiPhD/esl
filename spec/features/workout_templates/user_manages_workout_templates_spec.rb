@@ -7,6 +7,13 @@ feature 'User can manage workout templates' do
 		login_user user
 	end
 
+	scenario 'goes to workout templates page from the workouts page' do
+		visit workouts_path
+		click_link "My Templates"
+
+		expect(page).to have_content "Workout Templates"
+	end
+
 	scenario 'can view a list of all their templates' do
 		template = create(:workout_template, user: user)
 		visit workout_templates_path
