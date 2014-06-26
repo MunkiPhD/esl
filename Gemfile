@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.2.rc1'
+gem 'rails', '4.1.2'
 
 #gem 'sqlite3'
 
@@ -10,6 +10,7 @@ gem 'rails', '4.1.2.rc1'
 group :assets do
   gem 'sass-rails', '>= 3.2' #,   '~> 4.0.0.beta1'
   gem 'bootstrap-sass', '~> 3.1.1'
+  gem 'sprockets', '2.11.0'
   gem 'coffee-rails' #, '~> 4.0.0.beta1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -43,8 +44,7 @@ end
 
 group :development, :test do
   gem 'timecop'
-  :w
-gem 'launchy'
+  gem 'launchy'
   gem 'rspec', '~> 3.0.0'
   gem "rspec-rails", '~> 3.0.0'
 end
