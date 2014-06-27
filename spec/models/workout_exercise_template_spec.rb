@@ -22,7 +22,7 @@ RSpec.describe WorkoutExerciseTemplate, :type => :model do
 		end
 
 		it "has an exercise" do
-			workout_exercise = WorkoutExerciseTemplate.new(exercise_id: 1)
+			workout_exercise = WorkoutExerciseTemplate.new(exercise: create(:exercise))
 			workout_exercise.valid?
 			expect(workout_exercise.errors[:exercise]).to eq []
 		end

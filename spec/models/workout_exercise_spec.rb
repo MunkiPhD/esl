@@ -22,7 +22,7 @@ describe WorkoutExercise do
 		end
 
 		it "has an exercise" do
-			workout_exercise = WorkoutExercise.new(exercise_id: 1)
+			workout_exercise = WorkoutExercise.new(exercise: create(:exercise))
 			workout_exercise.valid?
 			expect(workout_exercise.errors[:exercise]).to eq []
 		end
