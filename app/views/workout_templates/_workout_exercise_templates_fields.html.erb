@@ -1,7 +1,7 @@
 <table class="workouts_workout_exercise fields table" data-index="<%= f.index %>">
 	<thead>
 		<tr>
-			<th colspan="4">
+			<th colspan="6">
 				<%= f.hidden_field :id %>
 				<h4>
 					<%= f.collection_select(:exercise_id, exercises, :id, :name, {}, { class: 'exercise-select' }) %>
@@ -14,6 +14,8 @@
 			<th>Set</th>
 			<th>Reps</th>
 			<th>Weight</th>
+			<th>Is ORM</th>
+			<th>% ORM</th>
 			<th>Remove</th>
 		</tr>
 	</thead>
@@ -22,7 +24,7 @@
 		<%= render "workout_templates/workout_set_templates_fields", f: set  %>
 <% end %>
 	<tr class="prev-placeholder">
-		<td colspan="4">
+		<td colspan="6">
 			<a href="#" class="btn-add-set btn btn-success">Add a set</a>
 		</td>
 	</tr>

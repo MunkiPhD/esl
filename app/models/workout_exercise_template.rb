@@ -31,6 +31,6 @@ class WorkoutExerciseTemplate < ActiveRecord::Base
 
 	private
 	def reject_workout_sets(attributes)
-		attributes['rep_count'].blank? || attributes['weight'].blank?
+		attributes['rep_count'].blank? || (attributes['weight'].blank? && attributes['percent_of_one_rep_max'].blank? && (attributes['is_percent_of_one_rep_max'] == false))
 	end
 end

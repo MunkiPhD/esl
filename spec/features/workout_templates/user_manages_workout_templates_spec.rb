@@ -34,13 +34,29 @@ feature 'User can manage workout templates' do
 	end
 	
 	scenario 'can create a new workout template' do
+		exercise = create(:exercise) 
 		visit workout_templates_path
 		click_link "New Template"
 
 		template = build(:workout_template)
 		fill_in "workout_template_title", with: template.title
 		
-		fail 'need to actually select the workout entry data'
+    last_nested_exercise = all(".workouts_workout_exercise").last
+
+    within(last_nested_exercise) do
+      select exercise.name, from: 'workout_workout_exercise_templates_attributes_0_exercise_id'
+      fill_in "workout_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_rep_count", with: "2"
+      fill_in "workout_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_weight", with: "225"
+			check	"is_percent_of_one_rep_max"
+			fill_in
+    end
+
+    expect {
+      click_button "Save Workout"
+    }.to change(Workout, :count).by(1)
+
+    expect(page).to have_content "back exercise" # redirects to the index
+    expect(page).to have_content("logout")
 
 		click_link "Save Template"
 		expect(page).to have_content template.title

@@ -70,6 +70,13 @@ RSpec.describe WorkoutSetTemplate, :type => :model do
 				workout_set_templ.valid?
 				expect(workout_set_templ.errors[:percent_of_one_rep_max]).to include "must be greater than 0"
 			end
+
+			it 'is valid if no weight is specified, but it has percent of ORM' do
+				workout_set_templ = WorkoutSetTemplate.new(is_percent_of_one_rep_max: true, percent_of_one_rep_max: 90, weight: nil)
+				workout_set_templ.valid?
+				expect(workout_set_templ.errors[:weight]).to eq []
+				expect(workout_set_templ.errors[:percent_of_one_rep_max]).to eq []
+			end
 		end
 
 		context "with valid data" do
