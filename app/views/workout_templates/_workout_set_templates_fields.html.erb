@@ -13,8 +13,7 @@
     <%= f.text_field :weight, placeholder: "weight", class: "input-small input-weight form-control" %>
  </td>
  <td>
- <%= check_box_tag :is_percent_of_one_rep_max, class: "form-control" %>
- <%= label_tag :is_percent_of_one_rep_max, "Percentage of One Rep Max?" %>
+ <%= f.check_box :is_percent_of_one_rep_max, class: "form-control" %><%= f.label :is_percent_of_one_rep_max, "Percentage of ORM?" %>
  </td>
   <td>
 	  <%= f.number_field :percent_of_one_rep_max, class: "input-small input-percent-orm form-control" %>
