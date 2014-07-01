@@ -33,6 +33,9 @@ class WorkoutSetTemplate < ActiveRecord::Base
 	validates :rep_count, presence: true, 
 		numericality: { greater_than_or_equal_to: 0, only_integer: true }
 	validates :percent_of_one_rep_max, numericality: { greater_than: 0, only_integer: true }, if: :is_based_on_orm?
+	validates :weight,
+		numericality: { greater_than_or_equal_to: 0, only_integer: true }, if: :is_not_based_on_orm?
+																					
 
 
 	delegate :name, to: :exercise, prefix: true
@@ -51,5 +54,9 @@ class WorkoutSetTemplate < ActiveRecord::Base
 	private
 	def is_based_on_orm?
 		is_percent_of_one_rep_max
+	end
+
+	def is_not_based_on_orm?
+		!is_based_on_orm?
 	end
 end

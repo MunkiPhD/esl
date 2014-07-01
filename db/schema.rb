@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620023910) do
+ActiveRecord::Schema.define(version: 20140701195651) do
 
   create_table "body_weights", force: true do |t|
     t.date     "log_date",                           default: '2014-05-29', null: false
@@ -263,7 +263,7 @@ ActiveRecord::Schema.define(version: 20140620023910) do
   create_table "workout_set_templates", force: true do |t|
     t.integer  "set_number",                                   null: false
     t.integer  "rep_count",                                    null: false
-    t.integer  "weight",                                       null: false
+    t.integer  "weight"
     t.string   "notes",                        default: "",    null: false
     t.boolean  "is_percent_of_one_rep_max",    default: false, null: false
     t.integer  "percent_of_one_rep_max",       default: 0,     null: false

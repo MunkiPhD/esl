@@ -116,6 +116,12 @@ RSpec.describe WorkoutSetTemplate, :type => :model do
 		end
 
 		context "is invalid if" do
+			it 'has a null weight and is not based on percent of ORM' do
+				template = WorkoutSetTemplate.new(weight: nil, is_percent_of_one_rep_max: false)
+				template.valid?
+				expect(template.errors[:weight]).to include ('is not a number')
+			end
+
 			it "without a workout exercise when saving" do
 				expect {
 					build(:workout_set_template, workout_exercise_template_id: nil).save
