@@ -14,13 +14,14 @@ class WorkoutTemplatesController < ApplicationController
 	end
 
 	def create
-		workout_template = current_user.workout_templates.build(workout_template_params)
+		@workout_template = current_user.workout_templates.build(workout_template_params)
 
 		respond_to do |format|
-			if workout_template.save
+			if @workout_template.save
 				flash[:success] = 'Workout template created.'
 				format.html { redirect_to workout_templates_path }
 			else
+				@exercises = Exercise.all
 				format.html { render action: 'new' }	
 			end
 		end
