@@ -1,3 +1,7 @@
+<div class="pull-right">
+	<%= link_to_edit "Edit Template", edit_workout_template_path(@workout_template) %>
+</div>
+
 <div class="workout-general-info">
   <h2><%= @workout_template.title %></h2>
 <% unless @workout_template.notes.blank? %>

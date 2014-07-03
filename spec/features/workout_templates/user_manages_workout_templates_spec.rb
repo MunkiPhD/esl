@@ -46,15 +46,34 @@ feature 'User can manage workout templates' do
     within(last_nested_exercise) do
       select exercise.name, from: 'workout_template_workout_exercise_templates_attributes_0_exercise_id'
       fill_in "workout_template_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_rep_count", with: "2"
-      fill_in "workout_template_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_weight", with: "225"
+      #fill_in "workout_template_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_weight", with: "225"
 			check	"workout_template_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_is_percent_of_one_rep_max"
 			fill_in "workout_template_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_percent_of_one_rep_max", with: "85"
     end
 
     expect {
-      click_button "Save Workout"
+      click_button "Save Workout Template"
     }.to change(WorkoutTemplate, :count).by(1)
 
+		expect(page).to have_content "Workout template created."
     expect(page).to have_link template.title
+	end
+
+	scenario 'can edit a template' do
+		workout_template = create(:workout_template_with_exercises, user: user)
+		visit workout_templates_path
+		
+		click_link workout_template.title
+		click_link "Edit Template"
+
+		fill_in "Title", with: "Updated Title"
+		fill_in "workout_template_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_weight", with: "333"
+		uncheck	"workout_template_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_is_percent_of_one_rep_max"
+		#fill_in "workout_template_workout_exercise_templates_attributes_0_workout_set_templates_attributes_0_percent_of_one_rep_max", with: "85"
+
+		click_button "Save Workout Template"
+
+		expect(page).to have_content "Updated Title"
+		expect(page).to have_content "333"
 	end
 end
