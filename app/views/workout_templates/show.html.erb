@@ -23,15 +23,21 @@
     </tr>
 	 <tr>
 				<th>Set</th>
-				<th>Weight x Reps</th>
+				<th>Reps</th>
+				<th>Weight</th>
 	 </tr>
   </thead>
   <tbody>
     <% workout_exercise.workout_set_templates.each do |workout_set| %>
       <tr>
-        <td><%= workout_set.set_number %></td>
-        <td><%= workout_set.weight %>x<%= workout_set.rep_count %></td>
-        <td><%= workout_set.is_percent_of_one_rep_max %> <%= workout_set.percent_of_one_rep_max %></td>
+			<td><%= workout_set.set_number %></td>
+			<td><%= workout_set.rep_count %></td>
+		  <td><% if workout_set.is_percent_of_one_rep_max %>
+				  <%= workout_set.percent_of_one_rep_max %>% of ORM
+				<% else %>
+					<%= workout_set.weight %> lbs
+				<% end %>
+			</td>
       </tr>
     <% end %>
     </tbody>
