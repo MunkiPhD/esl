@@ -1,4 +1,5 @@
 class WorkoutTemplatesController < ApplicationController
+	before_filter :authenticate_user!, except: [:show]
 	before_action :set_template_from_workout, only: [:new]	
 	before_action :set_template, only: [:show, :edit, :update, :destroy]
 
