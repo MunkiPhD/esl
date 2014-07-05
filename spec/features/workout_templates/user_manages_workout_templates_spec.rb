@@ -76,4 +76,16 @@ feature 'User can manage workout templates' do
 		expect(page).to have_content "Updated Title"
 		expect(page).to have_content "333"
 	end
+
+	scenario 'can delete a template' do
+		workout_template = create(:workout_template_with_exercises, user: user)
+		visit workout_template_path(workout_template)
+
+		expect {
+			click_button "Delete Template"
+		}.to change(WorkoutTemplate, :count).by(-1)
+
+		expect(page).to have_content "Template was deleted."
+		expect(page).to_not have_link workout_template.title
+	end
 end

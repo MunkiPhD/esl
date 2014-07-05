@@ -19,7 +19,7 @@ Esl::Application.routes.draw do
 	resources :mechanic_types, only: [:show], path: 'exercises/mechanic_type/'
 	resources :force_types, only: [:show], path: 'exercises/force_type/'
 	resources :experience_levels, only: [:show], path: 'exercises/experience_level/'
-	resources :workout_templates, only: [:index, :new, :create, :edit, :update, :show], path: 'workouts/templates/'
+	resources :workout_templates, path: 'workouts/templates/'
 	
 	get 'exercises/search', to: 'exercises#search'	
 	

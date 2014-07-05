@@ -1,6 +1,6 @@
 class WorkoutTemplatesController < ApplicationController
 	before_action :set_template_from_workout, only: [:new]	
-	before_action :set_template, only: [:show, :edit, :update]
+	before_action :set_template, only: [:show, :edit, :update, :destroy]
 
 	def index
 		@workout_templates = current_user.workout_templates
@@ -43,6 +43,22 @@ class WorkoutTemplatesController < ApplicationController
 				@exercises = Exercise.all
 				format.html { render action: 'edit' }
 			end
+		end
+	end
+
+	def destroy
+		respond_to do |format|
+			if @workout_template.user != current_user
+				flash[:error] = "You cannot delete a template that does not belong to you"
+				format.html { redirect_to workout_templates_path }
+			end
+
+		if @workout_template.destroy
+			flash[:success] = "Template was deleted."
+			format.html { redirect_to workout_templates_path }
+		else
+			format.html { redirect_to @workout_template }
+		end
 		end
 	end
 
