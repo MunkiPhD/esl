@@ -122,6 +122,12 @@ RSpec.describe WorkoutSetTemplate, :type => :model do
 				expect(template.errors[:weight]).to include ('is not a number')
 			end
 
+			it 'is based off percent of ORM and the percent is less than or equal to zero' do
+				workout_set = WorkoutSetTemplate.new(weight: nil, is_percent_of_one_rep_max: true, percent_of_one_rep_max: 0)
+				expect(workout_set.valid?).to eq false
+			end
+
+
 			it "without a workout exercise when saving" do
 				expect {
 					build(:workout_set_template, workout_exercise_template_id: nil).save

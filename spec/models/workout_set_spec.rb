@@ -75,24 +75,9 @@ describe WorkoutSet do
 				workout_set.valid?
 				expect(workout_set.errors[:notes]).to eq []
 			end
-
-			it 'is based on percent of one rep max and has a null weight' do
-				workout_set = WorkoutSetTemplate.new(weight: nil, is_percent_of_one_rep_max: true, percent_of_one_rep_max: 85)
-				expect(workout_set.valid?).to eq true
-			end
 		end
 
 		context "is invalid if" do
-			it 'has a null weight and is not based on percent' do
-				workout_set = WorkoutSetTemplate.new(weight: nil, is_percent_of_one_rep_max: false, percent_of_one_rep_max: 0)
-				expect(workout_set.valid?).to eq false
-			end
-
-			it 'is based off percent of ORM and the percent is less than or equal to zero' do
-				workout_set = WorkoutSetTemplate.new(weight: nil, is_percent_of_one_rep_max: true, percent_of_one_rep_max: 0)
-				expect(workout_set.valid?).to eq false
-			end
-
 			it "without a workout exercise when saving" do
 				expect {
 					build(:workout_set, workout_exercise_id: nil).save
