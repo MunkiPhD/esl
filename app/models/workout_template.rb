@@ -12,7 +12,7 @@
 
 class WorkoutTemplate < ActiveRecord::Base
 	before_validation :prepare_workout_for_validation
-	before_save :set_name
+	#before_save :set_name
 
 	belongs_to :user
 	has_many :workout_exercise_templates, :dependent => :destroy, inverse_of: :workout_template

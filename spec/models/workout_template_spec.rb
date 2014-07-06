@@ -47,12 +47,14 @@ describe WorkoutTemplate do
 				expect(workout_templ2.errors[:title]).to eq []
 			end
 
+=begin
 			it 'adds a number to the end if a user has another template with the same name' do
 				workout_templ = create(:workout_template, user: user, title: "test")
 				workout_templ2 = create(:workout_template, user: user, title: "test")
 				workout_templ2.reload
 				expect(workout_templ2.title).to eq "test (2)"
 			end
+=end
 		end
 
 		describe 'user' do
