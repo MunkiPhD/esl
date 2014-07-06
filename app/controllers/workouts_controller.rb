@@ -17,9 +17,14 @@ class WorkoutsController < ApplicationController
 	def new
 		@new_exercise = Exercise.new
 		@exercises = Exercise.all
-		@workout = Workout.new
-		1.times { @workout.workout_exercises.build }
-		1.times { @workout.workout_exercises[0].workout_sets.build }
+		if params[:id].blank?
+			@workout = Workout.new
+			1.times { @workout.workout_exercises.build }
+			1.times { @workout.workout_exercises[0].workout_sets.build }
+		else
+			template = WorkoutTemplate.find(params[:id])
+			@workout = Workout.from_template(template)
+		end
 	end
 
 	def create

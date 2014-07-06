@@ -1,8 +1,8 @@
 <% if current_user == @workout.user %>
 <div class="workout-actions right">
 		  <%= link_to_edit "Edit", edit_user_workout_path(@workout.user.username, @workout) %>  
+		  <%= link_to_add "Create Template", new_workout_template_path(id: @workout) %>
 		  <%= link_to_destroy "Delete Workout", delete_user_workout_path(id: @workout, username: @workout.user.username), method: :delete, data: { confirm: 'Are you sure?' }%>
-		  <%= link_to "Create Template", new_workout_template_path(id: @workout) %>
 </div>
 <% end %>
 

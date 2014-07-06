@@ -32,8 +32,15 @@ class Workout < ActiveRecord::Base
 	scope :for_user, -> (user) { where("workouts.user_id = ?", user) }
 
 
-  def self.max_weight(exercise)
 
+	def self.from_template(workout_template)
+		workout = Workout.new(title: workout_template.title)
+
+		return workout
+	end
+
+
+  def self.max_weight(exercise)
     selected_fields = <<-SELECT
       workouts.id AS workout_id, 
       workout_sets.weight,

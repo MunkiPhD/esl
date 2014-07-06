@@ -114,6 +114,14 @@ describe Workout do
 	end
 
 	describe 'methods' do
+		describe '#from_template' do
+			it 'creates a workout from the template with same title' do
+				template = create(:workout_template_with_exercises)
+				workout = Workout.from_template(template)
+				expect(workout.title).to eq template.title
+			end
+		end
+
 		describe '#max_weight' do
 			it "fetches an empty array for no exercise of type" do
 				circle = create(:circle, user: user)
