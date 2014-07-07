@@ -120,6 +120,18 @@ describe Workout do
 				workout = Workout.from_template(template)
 				expect(workout.title).to eq template.title
 			end
+
+			it 'creates a workout with the same workout exercises' do
+				template = create(:workout_template_with_exercises)
+				workout = Workout.from_template(template)
+
+				expect(workout.workout_exercises.count).to eq template.workout_exercise_templates.size
+				expect(workout.workout_exercises.count).to be > 0
+
+				workout.workout_exercises.each_with_index do |element, index|
+					expect(element.exercise_name).to eq template.workout_exercise_templates[index].exercise_name
+				end
+			end
 		end
 
 		describe '#max_weight' do

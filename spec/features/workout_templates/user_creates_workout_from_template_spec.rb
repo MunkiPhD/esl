@@ -21,7 +21,14 @@ feature 'User logs a workout from a template' do
 	end
 
 	scenario 'the build workout has the same exercises and sets as the template' do
-		fail
+		template = create(:workout_template_with_exercises, user: user)
+		visit workout_template_path(template)
+
+		click_link 'Log Workout'
+
+		template.workout_exercise_templates.each do |we|
+			expect(page).to have_content we.exercise_name
+		end
 	end
 
 	scenario 'if a template has a one rep max exercise set, it gets the ORM for that exercise (for the user) and sets it as the weight for that set' do

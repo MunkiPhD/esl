@@ -34,9 +34,21 @@ class Workout < ActiveRecord::Base
 
 
 	def self.from_template(workout_template)
-		workout = Workout.new(title: workout_template.title)
+		@workout = Workout.new #(title: workout_template.title)
+			1.times { @workout.workout_exercises.build }
+			1.times { @workout.workout_exercises[0].workout_sets.build }
+=begin	
+		workout_template.workout_exercise_templates.each do |workout_exercise_template|
+			puts "Adding exercise #{workout_exercise_template.exercise_name}"
+			puts "WE: #{workout_exercise_template.inspect}"
+			puts "Attribs: #{workout_exercise_template.attributes}"
+			puts "Workout e count: #{workout.workout_exercises.count}"
+			
+			workout.workout_exercises.build
+		end
+=end
 
-		return workout
+		return @workout
 	end
 
 
