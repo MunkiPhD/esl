@@ -122,14 +122,28 @@ describe Workout do
 			end
 
 			it 'creates a workout with the same workout exercises' do
-				template = create(:workout_template_with_exercises)
+				template = create(:workout_template_with_exercises, user: user)
 				workout = Workout.from_template(template)
-
-				expect(workout.workout_exercises.count).to eq template.workout_exercise_templates.size
-				expect(workout.workout_exercises.count).to be > 0
 
 				workout.workout_exercises.each_with_index do |element, index|
 					expect(element.exercise_name).to eq template.workout_exercise_templates[index].exercise_name
+				end
+			end
+
+			it 'creates a workout with the same sets' do
+				template = create(:workout_template_with_exercises, user: user)
+				workout = Workout.from_template(template)
+				
+				workout.workout_exercises.each_with_index do |workout_exercise, index|
+					template_exercise = template.workout_exercise_templates[index]
+
+					workout_exercise.workout_sets.each_with_index do |workout_set, index2|
+						template_set = template_exercise.workout_set_templates[index2]
+
+						expect(workout_set.set_number).to eq template_set.set_number
+						expect(workout_set.rep_count).to eq template_set.rep_count
+						expect(workout_set.exercise).to eq template_set.exercise
+					end
 				end
 			end
 		end
