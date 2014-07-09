@@ -28,7 +28,10 @@ describe WorkoutSet do
 		end
 
 		it 'sets the weight as zero for an ORM set where a user has not logged said exercise' do
-			fail
+			template = WorkoutSetTemplate.new(is_percent_of_one_rep_max: true, percent_of_one_rep_max: 85)
+			workout_set = WorkoutSet.from_template(template)
+
+			expect(workout_set.weight).to eq 0
 		end
 
 		it 'copies the template' do

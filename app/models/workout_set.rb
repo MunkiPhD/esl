@@ -40,8 +40,18 @@ class WorkoutSet < ActiveRecord::Base
 	  workout_set = WorkoutSet.new
 	  workout_set.set_number = workout_set_template.set_number
 	  workout_set.rep_count = workout_set_template.rep_count
-	  workout_set.weight = workout_set_template.weight
+	  workout_set.weight = get_correct_weight(workout_set_template)
 	  workout_set.exercise = workout_set_template.exercise
 	  workout_set
+  end
+
+  private
+
+  def self.get_correct_weight(workout_set_template)
+	  if workout_set_template.is_percent_of_one_rep_max
+			0
+	  else
+		  workout_set_template.weight
+	  end
   end
 end
