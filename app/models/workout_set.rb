@@ -34,4 +34,14 @@ class WorkoutSet < ActiveRecord::Base
                         numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
   delegate :name, to: :exercise, prefix: true
+
+
+  def self.from_template(workout_set_template)
+	  workout_set = WorkoutSet.new
+	  workout_set.set_number = workout_set_template.set_number
+	  workout_set.rep_count = workout_set_template.rep_count
+	  workout_set.weight = workout_set_template.weight
+	  workout_set.exercise = workout_set_template.exercise
+	  workout_set
+  end
 end

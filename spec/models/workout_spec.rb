@@ -130,6 +130,7 @@ describe Workout do
 				end
 			end
 
+
 			it 'creates a workout with the same sets' do
 				template = create(:workout_template_with_exercises, user: user)
 				workout = Workout.from_template(template)
