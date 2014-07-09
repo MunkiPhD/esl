@@ -37,22 +37,17 @@ class Workout < ActiveRecord::Base
 		workout = Workout.new(title: workout_template.title)
 
 		workout_template.workout_exercise_templates.each do |workout_exercise_template|
-			puts "Adding exercise #{workout_exercise_template.exercise_name}"
-			puts "WE: #{workout_exercise_template.inspect}"
-			puts "Attribs: #{workout_exercise_template.attributes}"
-			puts "Workout e count: #{workout.workout_exercises.count}"
+			we = WorkoutExercise.new(exercise: workout_exercise_template.exercise)
 
-			 we = WorkoutExercise.new(exercise: workout_exercise_template.exercise)
-
-			 workout_exercise_template.workout_set_templates.each do |set_template|
-				 set = WorkoutSet.new(set_number: set_template.set_number, rep_count: set_template.rep_count, exercise: set_template.exercise)
-				 if set_template.is_percent_of_one_rep_max
-					 set.weight = 999
-				 else
+			workout_exercise_template.workout_set_templates.each do |set_template|
+				set = WorkoutSet.new(set_number: set_template.set_number, rep_count: set_template.rep_count, exercise: set_template.exercise)
+				if set_template.is_percent_of_one_rep_max
+					set.weight = 999
+				else
 					set.weight = set_template.weight
-				 end
-				 we.workout_sets << set
-			 end
+				end
+				we.workout_sets << set
+			end
 
 			workout.workout_exercises << we
 		end
@@ -61,48 +56,48 @@ class Workout < ActiveRecord::Base
 	end
 
 
-  def self.max_weight(exercise)
-    selected_fields = <<-SELECT
-      workouts.id AS workout_id, 
-      workout_sets.weight,
-      workout_sets.id AS workout_set_id,
-      workout_exercises.exercise_id AS exercise_id,
-      ROW_NUMBER() OVER (
-        PARTITION BY workouts.user_id 
-        ORDER BY workout_sets.weight DESC, workouts.id DESC) as rowNum
-    SELECT
+	def self.max_weight(exercise)
+		selected_fields = <<-SELECT
+		workouts.id AS workout_id, 
+		workout_sets.weight,
+		workout_sets.id AS workout_set_id,
+		workout_exercises.exercise_id AS exercise_id,
+		ROW_NUMBER() OVER (
+		  PARTITION BY workouts.user_id 
+		  ORDER BY workout_sets.weight DESC, workouts.id DESC) as rowNum
+		SELECT
 
-    subquery = Workout.joins(workout_exercises: :workout_sets).select(selected_fields).for_exercise(exercise).to_sql
-    Workout.select("workouts.*, t.*, COUNT(id)").from(Arel.sql("workouts, (#{subquery}) as t"))
-    .where("t.rowNum = 1 AND workouts.id = t.workout_id")
-    .order("t.weight DESC")
+		subquery = Workout.joins(workout_exercises: :workout_sets).select(selected_fields).for_exercise(exercise).to_sql
+		Workout.select("workouts.*, t.*, COUNT(id)").from(Arel.sql("workouts, (#{subquery}) as t"))
+		.where("t.rowNum = 1 AND workouts.id = t.workout_id")
+		.order("t.weight DESC")
 =begin
-    # Workout.joins(:workout_sets).for_exercise(exercise).order("workout_sets.weight DESC")
-    #WorkoutSet.where("exercise_id = ?", exercise.id).order("workout_sets.weight DESC").workout
-    joins(:workout_sets).for_exercise(exercise).order("workout_sets.weight DESC")
+	 # Workout.joins(:workout_sets).for_exercise(exercise).order("workout_sets.weight DESC")
+	 #WorkoutSet.where("exercise_id = ?", exercise.id).order("workout_sets.weight DESC").workout
+	 joins(:workout_sets).for_exercise(exercise).order("workout_sets.weight DESC")
 =end
 
-  end
+	end
 
 
-  def self.for_exercise(exercise)
-    where("workout_sets.exercise_id = ?", exercise.id)
-  end
+	def self.for_exercise(exercise)
+		where("workout_sets.exercise_id = ?", exercise.id)
+	end
 
-  private
+	private
 
 
-  # makes sure that the correct IDs are set for all the workout sets
-  def prepare_workout_for_validation
-    begin
-      workout_exercises.each do |workout_exercise|
-        workout_exercise.workout_sets.each do |workout_set|
-          workout_set.workout = self
-          workout_set.exercise = workout_exercise.exercise
-        end
-      end
-    rescue => e
-      logger.info "!----- error occured while massaging the workout #{e}"
-    end
-  end
+	# makes sure that the correct IDs are set for all the workout sets
+	def prepare_workout_for_validation
+		begin
+			workout_exercises.each do |workout_exercise|
+				workout_exercise.workout_sets.each do |workout_set|
+					workout_set.workout = self
+					workout_set.exercise = workout_exercise.exercise
+				end
+			end
+		rescue => e
+			logger.info "!----- error occured while massaging the workout #{e}"
+		end
+	end
 end

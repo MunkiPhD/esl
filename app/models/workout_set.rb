@@ -36,22 +36,32 @@ class WorkoutSet < ActiveRecord::Base
   delegate :name, to: :exercise, prefix: true
 
 
-  def self.from_template(workout_set_template)
+  def self.from_template(workout_set_template, user)
 	  workout_set = WorkoutSet.new
 	  workout_set.set_number = workout_set_template.set_number
 	  workout_set.rep_count = workout_set_template.rep_count
-	  workout_set.weight = get_correct_weight(workout_set_template)
+	  workout_set.weight = get_weight_for_template(workout_set_template, user)
 	  workout_set.exercise = workout_set_template.exercise
 	  workout_set
   end
 
   private
 
-  def self.get_correct_weight(workout_set_template)
+  def self.get_weight_for_template(workout_set_template, user)
 	  if workout_set_template.is_percent_of_one_rep_max
-			0
+		  weight = get_logged_orm_weight_for_user(workout_set_template.exercise, user)
+		  (weight * (workout_set_template.percent_of_one_rep_max.to_f / 100))
 	  else
 		  workout_set_template.weight
+	  end
+  end
+
+  def self.get_logged_orm_weight_for_user(exercise, user)
+	  result = WorkoutQueries.max_weight_for_exercise_and_user(exercise, user).first	
+	  if result.nil? 
+		  0
+	  else
+		  result.weight
 	  end
   end
 end
