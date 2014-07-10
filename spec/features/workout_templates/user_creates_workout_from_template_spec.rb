@@ -56,6 +56,20 @@ feature 'User logs a workout from a template' do
 	end
 
 	scenario 'if a set has an ORM, but the user has not logged that exercise, it sets the weight as zero and displays a mesasge that no ORM was available' do
-		fail
+		workout_template = create(:workout_template, user: user)
+		exercise = create(:exercise)
+		workout_exercise_template = create(:workout_exercise_template, workout_template: workout_template, exercise: exercise)
+		workout_set_template = create(:workout_set_template, exercise: exercise, workout_exercise_template: workout_exercise_template, workout_template: workout_template, is_percent_of_one_rep_max: true, percent_of_one_rep_max: 60)
+
+		visit workout_template_path(workout_template)
+		expect(page).to have_content exercise.name
+
+		click_link 'Log Workout'
+
+		last_nested_exercise = all(".workouts_workout_exercise").last
+
+		within(last_nested_exercise) do
+			expect(find("#workout_workout_exercises_attributes_0_workout_sets_attributes_0_weight").value).to eq "0.0"
+		end
 	end
 end
