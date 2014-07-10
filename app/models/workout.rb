@@ -33,24 +33,14 @@ class Workout < ActiveRecord::Base
 
 
 
-	def self.from_template(workout_template)
+	def self.from_template(workout_template, user)
 		workout = Workout.new(title: workout_template.title)
 
 		workout_template.workout_exercise_templates.each do |workout_exercise_template|
-			puts "Adding exercise #{workout_exercise_template.exercise_name}"
-			puts "WE: #{workout_exercise_template.inspect}"
-			puts "Attribs: #{workout_exercise_template.attributes}"
-			puts "Workout e count: #{workout.workout_exercises.count}"
-
 			 we = WorkoutExercise.new(exercise: workout_exercise_template.exercise)
 
 			 workout_exercise_template.workout_set_templates.each do |set_template|
-				 set = WorkoutSet.new(set_number: set_template.set_number, rep_count: set_template.rep_count, exercise: set_template.exercise)
-				 if set_template.is_percent_of_one_rep_max
-					 set.weight = 999
-				 else
-					set.weight = set_template.weight
-				 end
+				 set = WorkoutSet.from_template(set_template, user)
 				 we.workout_sets << set
 			 end
 

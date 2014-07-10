@@ -23,7 +23,7 @@ class WorkoutsController < ApplicationController
 			1.times { @workout.workout_exercises[0].workout_sets.build }
 		else
 			template = WorkoutTemplate.find(params[:id])
-			@workout = Workout.from_template(template)
+			@workout = Workout.from_template(template, current_user)
 		end
 	end
 
