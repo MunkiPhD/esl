@@ -117,13 +117,13 @@ describe Workout do
 		describe '#from_template' do
 			it 'creates a workout from the template with same title' do
 				template = create(:workout_template_with_exercises)
-				workout = Workout.from_template(template)
+				workout = Workout.from_template(template, user)
 				expect(workout.title).to eq template.title
 			end
 
 			it 'creates a workout with the same workout exercises' do
 				template = create(:workout_template_with_exercises, user: user)
-				workout = Workout.from_template(template)
+				workout = Workout.from_template(template, user)
 
 				workout.workout_exercises.each_with_index do |element, index|
 					expect(element.exercise_name).to eq template.workout_exercise_templates[index].exercise_name
@@ -133,7 +133,7 @@ describe Workout do
 
 			it 'creates a workout with the same sets' do
 				template = create(:workout_template_with_exercises, user: user)
-				workout = Workout.from_template(template)
+				workout = Workout.from_template(template, user)
 				
 				workout.workout_exercises.each_with_index do |workout_exercise, index|
 					template_exercise = template.workout_exercise_templates[index]

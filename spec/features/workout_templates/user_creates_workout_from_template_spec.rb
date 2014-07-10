@@ -39,6 +39,9 @@ feature 'User logs a workout from a template' do
 		workout_set_template = create(:workout_set_template, exercise: exercise, workout_exercise_template: workout_exercise_template, workout_template: workout_template, is_percent_of_one_rep_max: true, percent_of_one_rep_max: orm_percent)
 
 
+		workout = create(:workout, user: user)
+		workout_set = create(:workout_set, exercise: exercise, workout: workout)
+
 		visit workout_template_path(workout_template)
 		expect(page).to have_content exercise.name
 
@@ -47,8 +50,8 @@ feature 'User logs a workout from a template' do
 		last_nested_exercise = all(".workouts_workout_exercise").last
 
 		within(last_nested_exercise) do
-			expected_weight = (orm_percent.to_f / 100).to_f * workout_set_template.weight.to_f
-			expect(find("#workout_workout_exercises_attributes_0_workout_sets_attributes_0_weight").value).to eq expected_weight
+			expected_weight = (orm_percent.to_f / 100).to_f * workout_set.weight.to_f
+			expect(find("#workout_workout_exercises_attributes_0_workout_sets_attributes_0_weight").value).to eq expected_weight.to_s
 		end
 	end
 
