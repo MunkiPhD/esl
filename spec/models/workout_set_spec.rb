@@ -22,6 +22,36 @@ describe WorkoutSet do
 		expect(workout_set.exercise_name).to eq workout_set.exercise.name
 	end
 
+	describe '#from_template' do
+		it 'correctly creates a workout set based on ORM if the user has logged said exercise' do
+			user = create(:user)
+			workout = create(:workout, user: user)
+			exercise = create(:exercise)
+			max_workout_set = create(:workout_set, exercise: exercise, weight: 100, workout: workout)
+			template = create(:workout_set_template, exercise: exercise, is_percent_of_one_rep_max: true, percent_of_one_rep_max: 50)
+
+			workout_set = WorkoutSet.from_template(template, user)
+			expect(workout_set.weight).to eq 50
+		end
+
+		it 'sets the weight as zero for an ORM set where a user has not logged said exercise' do
+			template = WorkoutSetTemplate.new(is_percent_of_one_rep_max: true, percent_of_one_rep_max: 85)
+			workout_set = WorkoutSet.from_template(template, create(:user))
+
+			expect(workout_set.weight).to eq 0
+		end
+
+		it 'copies the template' do
+			template = create(:workout_set_template)
+			workout_set = WorkoutSet.from_template(template, create(:user))
+
+			expect(workout_set.set_number).to eq template.set_number
+			expect(workout_set.rep_count).to eq template.rep_count
+			expect(workout_set.weight).to eq template.weight
+			expect(workout_set.exercise).to eq template.exercise
+		end
+	end
+
 	describe "#for_exercise" do
 		it 'retrieves workout sets for the specified exercise' do
 			exercise = create(:exercise)
