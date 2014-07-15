@@ -27,6 +27,7 @@ Esl::Application.routes.draw do
 	resources :workouts
 	resources :body_weights, except: [:show]
 	resources :muscles, only: [:index, :show]
+	resources :body_measurements, only: [:index, :new]
 
 	#devise_for :users
 	devise_for :users, :controllers => {:registrations => "users/registrations", :passwords => "users/passwords", :sessions => "users/sessions"}

@@ -9,7 +9,7 @@ feature 'user manages their body measurements' do
 
 	scenario 'can log a single body measurement' do
 		visit root_path
-		click_link "Body Measurements"
+		click_link "measurements"
 
 		click_link "Record Measurements"
 
@@ -26,8 +26,15 @@ feature 'user manages their body measurements' do
 		visit body_measurements_path
 		click_link 'Record Measurements'
 
-		fill_in 'Thighs', with: '47'
-		fill_in 'Neck', with: '17'
+		fill_in 'Bicep', with: '2'
+		fill_in 'Calf', with: '3'
+		fill_in 'Chest', with: '4'
+		fill_in 'Fat', with: '5'
+		fill_in 'Forearm', with: '6'
+		fill_in 'Hip', with: '7'
+		fill_in 'Neck', with: '8'
+		fill_in 'Thigh', with: '9'
+		fill_in 'Waist', with: '10'
 
 		click_button 'Save Measurements'
 
