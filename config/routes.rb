@@ -14,19 +14,21 @@ Esl::Application.routes.draw do
 
 	resource :user_preferences, only: [:show, :edit, :update]
 
+	# these are basically referential routes
 	resources :exercise_types, only: [:show], path: 'exercises/type/'
 	resources :equipments, only: [:show], path: 'exercises/equipment/'
 	resources :mechanic_types, only: [:show], path: 'exercises/mechanic_type/'
 	resources :force_types, only: [:show], path: 'exercises/force_type/'
 	resources :experience_levels, only: [:show], path: 'exercises/experience_level/'
+	resources :muscles, only: [:index, :show]
+	resources :exercises, only: [:index, :show]
+
 	resources :workout_templates, path: 'workouts/templates/'
 	
 	get 'exercises/search', to: 'exercises#search'	
 	
-	resources :exercises, only: [:index, :show]
 	resources :workouts
 	resources :body_weights, except: [:show]
-	resources :muscles, only: [:index, :show]
 	resources :body_measurements, only: [:index, :new]
 
 	#devise_for :users
