@@ -29,7 +29,6 @@ feature 'user manages their body measurements' do
 		fill_in 'Bicep', with: '2'
 		fill_in 'Calf', with: '3'
 		fill_in 'Chest', with: '4'
-		fill_in 'Fat', with: '5'
 		fill_in 'Forearm', with: '6'
 		fill_in 'Hip', with: '7'
 		fill_in 'Neck', with: '8'
