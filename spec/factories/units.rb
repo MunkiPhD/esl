@@ -20,4 +20,13 @@ FactoryGirl.define do
 		unit_name			"pounds"
 		unit_abbr			"lbs"
 	end
+
+	factory :unit_measurements, class: Unit do
+		unit_system			0
+		unit_system_name	"US"
+		unit_type			5
+		unit_type_name		"measurement"		
+		unit_name			"inches"
+		unit_abbr			"in"
+	end
 end

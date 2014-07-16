@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
 	has_one :nutrition_goal
 	has_one :user_preferences, inverse_of: :user
 	has_many :body_weights
+	has_many :body_measurements
 
 	accepts_nested_attributes_for :user_preferences
 

@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701195651) do
+ActiveRecord::Schema.define(version: 20140716153203) do
+
+  create_table "body_measurements", force: true do |t|
+    t.date     "log_date",                           default: '2014-07-16', null: false
+    t.decimal  "bicep",      precision: 5, scale: 2
+    t.decimal  "calf",       precision: 5, scale: 2
+    t.decimal  "chest",      precision: 5, scale: 2
+    t.decimal  "forearm",    precision: 5, scale: 2
+    t.decimal  "hips",       precision: 5, scale: 2
+    t.decimal  "neck",       precision: 5, scale: 2
+    t.decimal  "thigh",      precision: 5, scale: 2
+    t.decimal  "waist",      precision: 5, scale: 2
+    t.integer  "unit_id",                            default: 0,            null: false
+    t.integer  "user_id",                                                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "body_measurements", ["user_id"], name: "index_body_measurements_on_user_id", using: :btree
 
   create_table "body_weights", force: true do |t|
     t.date     "log_date",                           default: '2014-05-29', null: false
