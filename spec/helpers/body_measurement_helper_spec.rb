@@ -5,7 +5,7 @@ describe BodyMeasurementHelper do
 		it "shows 'not measured' if entry is blank" do
 			body_measurement = BodyMeasurement.new(chest: nil)
 			result = helper.measurement_display(body_measurement, :chest)
-			expect(result).to eq "Chest: not measured"
+			expect(result).to eq "Chest: <span class='not-measured'>not measured</span>"
 		end
 
 		it 'shows the value of the entry with the correct unit' do
