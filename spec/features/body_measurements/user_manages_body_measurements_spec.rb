@@ -17,8 +17,8 @@ feature 'user manages their body measurements' do
 
 		click_button "Save Measurements"
 		expect(page).to have_content "Body measurements saved."
-		expect(page).to have_content "Chest: 53 in." 
-		expect(page).to have_content "Arms: not measured"
+		expect(page).to have_content "Chest: 53.0 in" 
+		expect(page).to have_content "Bicep: not measured"
 	end
 
 
