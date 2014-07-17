@@ -8,7 +8,7 @@ class BodyMeasurementsController < ApplicationController
 	end
 
 	def new
-		@body_measurement = BodyMeasurement.new
+		@body_measurement = current_user.body_measurements.build
 	end
 
 	def create

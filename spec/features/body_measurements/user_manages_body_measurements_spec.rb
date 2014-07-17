@@ -30,15 +30,21 @@ feature 'user manages their body measurements' do
 		fill_in 'Calf', with: '3'
 		fill_in 'Chest', with: '4'
 		fill_in 'Forearm', with: '6'
-		fill_in 'Hip', with: '7'
-		fill_in 'Neck', with: '8'
+		fill_in 'Hips', with: '7'
+		fill_in 'Neck', with: '8.1'
 		fill_in 'Thigh', with: '9'
 		fill_in 'Waist', with: '10'
 
 		click_button 'Save Measurements'
 
-		expect(page).to have_content 'Thighs: 47 in.'
-		expect(page).to have_content 'Neck: 17 in.'
+		expect(page).to have_content 'Bicep: 2.0 in'
+		expect(page).to have_content 'Calf: 3.0 in'
+		expect(page).to have_content 'Chest: 4.0 in'
+		expect(page).to have_content 'Forearm: 6.0 in'
+		expect(page).to have_content 'Hips: 7.0 in'
+		expect(page).to have_content 'Neck: 8.1 in'
+		expect(page).to have_content 'Thigh: 9.0 in'
+		expect(page).to have_content 'Waist: 10.0 in'
 	end
 
 

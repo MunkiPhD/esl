@@ -1,5 +1,6 @@
 class BodyMeasurement < ActiveRecord::Base
 	include HasMeasurement
+	after_initialize :set_unit
 
 	def unit_measurement_type 
 		:measurements  
@@ -23,4 +24,14 @@ class BodyMeasurement < ActiveRecord::Base
 	validates :waist, numericality: { only_integer: false, greater_than: 0, less_than: 100, allow_nil: true } 
 
 	delegate :unit_abbr, to: :unit, prefix: false
+
+	private
+
+	def set_unit
+		unless self.user.nil?
+			self.unit = Unit.for_unit_system(self.user.preferences.default_system_id).for_unit_type(self.unit_measurement_type).first
+		else
+			self.unit = Unit.for_system(:us_system).for_unit_type(self.unit_measurement_type).first
+		end
+	end
 end

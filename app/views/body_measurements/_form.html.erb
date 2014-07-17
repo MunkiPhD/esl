@@ -1,4 +1,4 @@
-<%= form_for(@body_measurement) do |f| %>
+<%= form_for(@body_measurement, html: { class: "form-horizontal" }) do |f| %>
 	<% if @body_measurement.errors.any? %>
 		<div id="error_explanation">
 		<h2><%= pluralize(@body_measurement.errors.count, "error") %> prohibited these measurements from being saved:</h2>
@@ -11,15 +11,28 @@
 		</div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :log_date %>
-	 <%= f.date_select :log_date, { order: [:day, :month, :year] } %>
+  <div class="form-group">
+    <%= f.label :log_date, class: "col-sm-2 control-label" %>
+			 <div class="col-sm-2">
+	 <%= f.date_select :log_date, { order: [:day, :month, :year] }, class: "form-control" %>
+	 </div>
   </div>
 
-	<div class="field">
-		<%= f.label :chest %>
-		<%= f.text_field :chest, class: "input" %>
-	</div>
+	<% %w(bicep calf chest forearm hips neck thigh waist).each do |attr_symbol| %>
+		<div class="form-group">
+			<%= f.label attr_symbol, class: "col-sm-2 control-label" %>
+			<div class="col-sm-1">
+					  <%= f.text_field attr_symbol, class: "form-control input-small" %>
+			</div>
+			<div class="col-sm-1">
+			<p><%= @body_measurement.unit_abbr %></p>
+			</div>
+  		</div>
+	<% end %>
 
-	<%= f.submit "Save Measurements" %>
+	<div class="col-sm-offset-2 col-sm-10">
+		<%= button_tag class: "btn btn-primary btn-large", type: 'submit' do %>
+			<span class="glyphicon glyphicon-check icon-white"></span> Save Measurements
+		<% end %>
+	</div>
 <% end %>
