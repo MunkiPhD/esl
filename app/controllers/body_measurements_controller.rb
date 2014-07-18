@@ -1,7 +1,8 @@
 class BodyMeasurementsController < ApplicationController
-	before_filter :set_body_measurement, only: [:show]
+	before_filter :set_body_measurement, only: [:show, :edit, :update]
 
 	def index
+		@body_measurements = current_user.body_measurements.select(:log_date, :id, :user_id)
 	end
 
 	def show
@@ -20,6 +21,20 @@ class BodyMeasurementsController < ApplicationController
 				format.html { redirect_to @body_measurement }
 			else
 				format.html { render :new }
+			end
+		end
+	end
+
+	def edit
+	end
+
+	def update
+		respond_to do |format|
+			if @body_measurement.update(body_measurement_params)
+				flash[:success] = "Body measurements entry was updated."
+				format.html { redirect_to @body_measurement }
+			else
+				format.html { render :edit }
 			end
 		end
 	end

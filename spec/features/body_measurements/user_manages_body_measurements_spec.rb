@@ -47,23 +47,27 @@ feature 'user manages their body measurements' do
 		expect(page).to have_content 'Waist: 10.0 in'
 	end
 
+	scenario 'can view all logged entries from the index page' do
+		bm = create(:body_measurement, user: user)
+		visit body_measurements_path
+		expect(page).to have_link format_date(bm.log_date)
+	end
 
 	scenario 'can edit existing measurement data' do
-		body_measurement = create(:body_measurement, user: user)
+		body_measurement = create(:body_measurement, chest: 52, user: user)
 		visit body_measurement_path(body_measurement)
 
-		expected_str = "Chest: #{body_measurement.chest} in."
+		expected_str = "Chest: #{body_measurement.chest} in"
 		expect(page).to have_content expected_str
 
 		click_link "Edit"
 
-		new_measurement = "#{body_measurement.chest + 1}.0"
-		fill_in "Chest", with: new_measurement
+		fill_in "Chest", with: "53"
 
 		click_button "Save Measurements"
 
-		expect(page).to have_content  "Body measurements were updated."
-		expect(page).to have_content ("Chest: " + new_measurement + " in.")
+		expect(page).to have_content  "Body measurements entry was updated."
+		expect(page).to have_content ("Chest: 53.0 in")
 	end
 
 

@@ -29,7 +29,7 @@ Esl::Application.routes.draw do
 	
 	resources :workouts
 	resources :body_weights, except: [:show]
-	resources :body_measurements, only: [:index, :show, :new, :create]
+	resources :body_measurements, only: [:index, :show, :new, :create, :edit, :update]
 
 	#devise_for :users
 	devise_for :users, :controllers => {:registrations => "users/registrations", :passwords => "users/passwords", :sessions => "users/sessions"}
