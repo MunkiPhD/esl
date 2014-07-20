@@ -1,4 +1,5 @@
 class BodyMeasurementsController < ApplicationController
+	before_filter :authenticate_user!
 	before_filter :set_body_measurement, only: [:show, :edit, :update, :destroy]
 
 	def index
