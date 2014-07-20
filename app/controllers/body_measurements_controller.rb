@@ -1,5 +1,5 @@
 class BodyMeasurementsController < ApplicationController
-	before_filter :set_body_measurement, only: [:show, :edit, :update]
+	before_filter :set_body_measurement, only: [:show, :edit, :update, :destroy]
 
 	def index
 		@body_measurements = current_user.body_measurements.select(:log_date, :id, :user_id)
@@ -35,6 +35,18 @@ class BodyMeasurementsController < ApplicationController
 				format.html { redirect_to @body_measurement }
 			else
 				format.html { render :edit }
+			end
+		end
+	end
+
+	def destroy
+		respond_to do |format|
+			if @body_measurement.destroy
+				flash[:success] = "Body measurement entry was deleted."
+				format.html { redirect_to body_measurements_path }
+			else
+				flash[:error] = "Failed to delete the body measurement entry"
+				format.html { redirect_to @body_measurement }
 			end
 		end
 	end

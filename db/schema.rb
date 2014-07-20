@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20140716153203) do
 
   create_table "body_measurements", force: true do |t|
-    t.date     "log_date",                           default: '2014-07-16', null: false
+    t.date     "log_date",                           default: '2014-07-19', null: false
     t.decimal  "bicep",      precision: 5, scale: 2
     t.decimal  "calf",       precision: 5, scale: 2
     t.decimal  "chest",      precision: 5, scale: 2

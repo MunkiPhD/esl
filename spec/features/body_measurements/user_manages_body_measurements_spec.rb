@@ -77,9 +77,9 @@ feature 'user manages their body measurements' do
 
 		expect {
 			click_button "Delete"
-		}.to change(BodyMeasurements, :count).by(-1)
+		}.to change(BodyMeasurement, :count).by(-1)
 
-		expect(page).to have_content "Body measurements entry was deleted."
+		expect(page).to have_content "Body measurement entry was deleted."
 	end
 
 
