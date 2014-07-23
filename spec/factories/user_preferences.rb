@@ -14,4 +14,9 @@ FactoryGirl.define do
 		user
 		default_system_id		0
 	end
+
+	factory :user_preferences_metric, class: UserPreferences do
+		user
+		default_system_id		1
+	end
 end

@@ -93,6 +93,12 @@ feature 'user manages their body measurements' do
 
 
 	scenario 'the unit for the measurement is the same as the user preferences' do
-		fail		
+		preferences = create(:user_preferences_metric, user: user)
+
+		visit new_body_measurements_path
+
+		expect(page).to have_content "Logging Body Measurements"
+		expect(page).to have_content "cm"
+		expect(page).to_not have_content "in"
 	end
 end
