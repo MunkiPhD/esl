@@ -5,11 +5,13 @@
 #  id                           :integer          not null, primary key
 #  set_number                   :integer          not null
 #  rep_count                    :integer          not null
-#  weight                       :integer          not null
+#  weight                       :integer
 #  notes                        :string(255)      default(""), not null
 #  is_percent_of_one_rep_max    :boolean          default(FALSE), not null
 #  percent_of_one_rep_max       :integer          default(0), not null
 #  workout_exercise_template_id :integer          not null
+#  workout_template_id          :integer          not null
+#  exercise_id                  :integer          not null
 #  created_at                   :datetime
 #  updated_at                   :datetime
 #

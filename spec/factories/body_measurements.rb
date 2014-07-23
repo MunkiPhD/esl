@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: body_measurements
+#
+#  id         :integer          not null, primary key
+#  log_date   :date             default(Wed, 16 Jul 2014), not null
+#  bicep      :decimal(5, 2)
+#  calf       :decimal(5, 2)
+#  chest      :decimal(5, 2)
+#  forearm    :decimal(5, 2)
+#  hips       :decimal(5, 2)
+#  neck       :decimal(5, 2)
+#  thigh      :decimal(5, 2)
+#  waist      :decimal(5, 2)
+#  unit_id    :integer          default(0), not null
+#  user_id    :integer          not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 FactoryGirl.define do
 	factory :body_measurement do
 		user
