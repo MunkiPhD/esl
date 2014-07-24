@@ -17,6 +17,8 @@
 	 <%= f.date_select :log_date, { order: [:day, :month, :year] }, class: "form-control" %>
 	 </div>
   </div>
+  <%= f.object.unit.inspect %>
+	<%= f.select :unit, options_for_select([['US System', 0], ['Metric System', 1]], f.object.unit.unit_system), class: "form-control" %>
 
 	<% %w(bicep calf chest forearm hips neck thigh waist).each do |attr_symbol| %>
 		<div class="form-group">

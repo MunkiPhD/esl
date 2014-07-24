@@ -94,9 +94,24 @@ feature 'user manages their body measurements' do
 
 	scenario 'the unit for the measurement is the same as the user preferences when logging an entry' do
 		preferences = create(:user_preferences_metric, user: user)
-
 		visit new_body_measurement_path
+		saves_metric_measurements
+	end
 
+	scenario 'if the user changes their preferences for unit, the entries under a previous unit do not change' do
+		preferences = create(:user_preferences_metric, user: user)
+		visit new_body_measurement_path
+		saves_metric_measurements
+		preferences.default_system_id = 0
+		preferences.save
+
+		visit body_measurement_path(BodyMeasurement.last)
+
+		expect(page).to have_content 'Thigh: 9.0 cm'
+		expect(page).to have_content 'Waist: 10.0 cm'
+	end
+
+	def saves_metric_measurements
 		expect(page).to have_content "Logging Body Measurements"
 		all(".measurement-unit").each do |entry|
 			expect(entry).to have_content "cm"	
