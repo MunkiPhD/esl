@@ -3,7 +3,7 @@ class BodyMeasurementsController < ApplicationController
 	before_filter :set_body_measurement, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@body_measurements = current_user.body_measurements.select(:log_date, :id, :user_id)
+		@body_measurements = current_user.body_measurements.select(:log_date, :id, :user_id, :unit_id)
 	end
 
 	def show

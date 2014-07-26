@@ -49,7 +49,9 @@ class BodyMeasurement < ActiveRecord::Base
 
 	def set_unit
 		unless self.user.nil?
-			self.unit = Unit.for_unit_system(self.user.preferences.default_system_id).for_unit_type(self.unit_measurement_type).first
+			if self.unit.nil?
+				self.unit = Unit.for_unit_system(self.user.preferences.default_system_id).for_unit_type(self.unit_measurement_type).first
+			end
 		else
 			self.unit = Unit.for_system(:us_system).for_unit_type(self.unit_measurement_type).first
 		end
