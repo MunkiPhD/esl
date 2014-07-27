@@ -10,7 +10,7 @@ class BodyMeasurementsController < ApplicationController
 	end
 
 	def new
-		@body_measurement = current_user.body_measurements.build
+		@body_measurement = current_user.body_measurements.build(log_date: Date.today)
 	end
 
 	def create
