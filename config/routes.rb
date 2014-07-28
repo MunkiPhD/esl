@@ -13,6 +13,7 @@ Esl::Application.routes.draw do
 	end
 
 	resource :user_preferences, only: [:show, :edit, :update]
+	get 'exercises/search', to: 'exercises#search'	
 
 	# these are basically referential routes
 	resources :exercise_types, only: [:show], path: 'exercises/type/'
@@ -25,7 +26,6 @@ Esl::Application.routes.draw do
 
 	resources :workout_templates, path: 'workouts/templates/'
 	
-	get 'exercises/search', to: 'exercises#search'	
 	
 	resources :workouts
 	resources :body_weights, except: [:show]
