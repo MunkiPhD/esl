@@ -76,6 +76,18 @@ RSpec.describe BodyMeasurement, :type => :model do
 		end
 	end
 
+	describe '.latest' do
+		it 'returns the entries with the latest first by log date' do
+			Timecop.freeze(Date.today) do
+			user = create(:user)
+			measurement_latest = create(:body_measurement, log_date: Date.today, user: user)
+			measurement_earliest = create(:body_measurement, log_date: 3.days.ago, user: user)
+
+			expect(BodyMeasurement.latest).to eq [measurement_latest, measurement_earliest]
+			end
+		end
+	end
+
 	describe '#unit_abbr' do
 		it 'returns the unit abbreviation for the unit' do
 			bm = build(:body_measurement)

@@ -45,6 +45,8 @@ class BodyMeasurement < ActiveRecord::Base
 
 	delegate :unit_abbr, to: :unit, prefix: false
 
+	scope :latest, -> { order(log_date: :desc) }
+
 	private
 
 	def set_unit
