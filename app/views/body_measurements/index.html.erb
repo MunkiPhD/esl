@@ -1,5 +1,11 @@
 <%= link_to_add "Record Measurements", new_body_measurement_path %>
-<br/>
-<% @body_measurements.each do |bm| %>
-	<%= link_to format_date(bm.log_date), body_measurement_path(bm) %><br/>
-<% end %>
+<div class="row">
+	<div class="col-md-8">
+		<% @body_measurements.each do |bm| %>
+				<%= link_to format_date(bm.log_date), body_measurement_path(bm) %><br/>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<%= render 'form' %>
+	</div>
+</div>

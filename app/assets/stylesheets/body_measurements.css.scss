@@ -1,6 +1,24 @@
 @import 'helpers/colors';
 
+#body_measurement_form_container { 
+	width: 360px; 
+	padding: 10px;
+	padding-bottom: 38px;
+	border: 1px solid $grey;
+}
+
 .not-measured {
   color: $dark-grey;
   font-style: italic;
+}
+#body_measurement_log_date_3i {
+  width: 65px;
+}
+
+#body_measurement_log_date_2i {
+  width: 115px;
+}
+
+#body_measurement_log_date_1i {
+  width: 80px;
 }

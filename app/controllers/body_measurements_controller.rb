@@ -3,6 +3,7 @@ class BodyMeasurementsController < ApplicationController
 	before_filter :set_body_measurement, only: [:show, :edit, :update, :destroy]
 
 	def index
+		@body_measurement = current_user.body_measurements.build(log_date: Date.today)
 		@body_measurements = current_user.body_measurements.select(:log_date, :id, :user_id, :unit_id)
 	end
 

@@ -1,3 +1,4 @@
+<div id="body_measurement_form_container">
 <%= form_for(@body_measurement, html: { class: "form-horizontal" }) do |f| %>
 	<% if @body_measurement.errors.any? %>
 		<div id="error_explanation">
@@ -12,17 +13,17 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :log_date, class: "col-sm-2 control-label" %>
-			 <div class="col-sm-2">
-	 <%= f.date_select :log_date, { order: [:day, :month, :year] }, class: "form-control" %>
-	 </div>
+			 <%= f.label :log_date, class: "col-sm-2 control-label" %>
+			 <div class="col-sm-10">
+						<%= f.date_select :log_date, { order: [:day, :month, :year] }, class: "form-control col-sm-10" %>
+			 </div>
   </div>
 	<%= f.hidden_field :unit %>
 
 	<% %w(bicep calf chest forearm hips neck thigh waist).each do |attr_symbol| %>
 		<div class="form-group">
 			<%= f.label attr_symbol, class: "col-sm-2 control-label" %>
-			<div class="col-sm-1">
+			<div class="col-sm-3">
 					  <%= f.text_field attr_symbol, class: "form-control input-small" %>
 			</div>
 			<div class="col-sm-1">
@@ -37,3 +38,4 @@
 		<% end %>
 	</div>
 <% end %>
+	</div>
