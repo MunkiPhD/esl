@@ -4,7 +4,7 @@ class BodyMeasurementsController < ApplicationController
 
 	def index
 		@body_measurement = current_user.body_measurements.build(log_date: Date.today)
-		@body_measurements = current_user.body_measurements.select(:log_date, :id, :user_id, :unit_id)
+		@body_measurements = current_user.body_measurements.latest.select(:log_date, :id, :user_id, :unit_id)
 	end
 
 	def show
