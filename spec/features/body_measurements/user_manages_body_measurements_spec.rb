@@ -9,7 +9,7 @@ feature 'user manages their body measurements' do
 
 	scenario 'can log a single body measurement' do
 		visit root_path
-		click_link "measurements"
+		click_link "measure"
 
 		click_link "Record Measurements"
 
@@ -87,7 +87,9 @@ feature 'user manages their body measurements' do
 		visit body_measurements_path
 		Timecop.freeze(Date.today) do
 			click_link "Record Measurements"
-			expect(find("#log_date").value).to eq "#{format_date(Date.today)}"
+			expect(find("#body_measurement_log_date_3i").value).to eq "#{Date.today.strftime('%d')}"
+			expect(find("#body_measurement_log_date_2i").value).to eq "#{Date.today.strftime('%B')}"
+			expect(find("#body_measurement_log_date_1i").value).to eq "#{Date.today.strftime('%Y')}"
 		end
 	end
 
