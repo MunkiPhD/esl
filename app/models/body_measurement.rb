@@ -47,6 +47,8 @@ class BodyMeasurement < ActiveRecord::Base
 
 	scope :latest, -> { order(log_date: :desc) }
 
+	self.per_page = 3
+
 	private
 
 	def set_unit

@@ -4,7 +4,8 @@ class BodyMeasurementsController < ApplicationController
 
 	def index
 		@body_measurement = current_user.body_measurements.build(log_date: Date.today)
-		@body_measurements = current_user.body_measurements.latest.select(:log_date, :id, :user_id, :unit_id)
+		# will_paginate doesn't like it when you use selects. This can obviously be optimized, but we will leave it as is for now
+		@body_measurements = current_user.body_measurements.latest.paginate(page: params[:page], per_page: 15) #.select(:log_date, :id, :user_id, :unit_id)
 	end
 
 	def show
@@ -60,6 +61,7 @@ class BodyMeasurementsController < ApplicationController
 	end
 
 	def body_measurement_params
+		params.permit(:page)
 		params.require(:body_measurement).permit(:log_date,
 																:bicep,
 																:calf, 

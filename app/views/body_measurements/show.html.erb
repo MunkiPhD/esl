@@ -1,6 +1,6 @@
 <div class="control-panel pull-right">
 <%= link_to_edit "Edit", edit_body_measurement_path(@body_measurement) %>
-<%= link_to_destroy "Delete", body_measurement_path, method: :delete, data: { confirm: 'Are you sure?' }%>
+<%= link_to_destroy "Delete", body_measurement_path(@body_measurement), method: :delete %>
 </div>
 <h2>Body Measurements for <%= format_date @body_measurement.log_date %></h2>
 <%= measurement_display(@body_measurement, :bicep) %><br/>
