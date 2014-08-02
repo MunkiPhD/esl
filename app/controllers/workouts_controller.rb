@@ -8,7 +8,7 @@ class WorkoutsController < ApplicationController
 	def index
 		params[:username] ||= current_user.username
 		@user = User.find_by_username(params[:username])
-		@workouts = @user.workouts.date_desc
+		@workouts = @user.workouts.date_desc.paginate(page: params[:page], per_page: 20)
 	end
 
 	def show
@@ -92,6 +92,7 @@ class WorkoutsController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def workout_params
+		params.permit(:page)
 		params.require(:workout).permit(:name, :title, :date_performed, :notes, 
 												  workout_exercises_attributes: [ 
 													  :workout_id, 
