@@ -87,7 +87,7 @@ feature 'user manages their body measurements' do
 		visit body_measurements_path
 		Timecop.freeze(Date.today) do
 			click_link "Record Measurements"
-			expect(find("#body_measurement_log_date_3i").value).to eq "#{Date.today.strftime('%d')}"
+			expect(find("#body_measurement_log_date_3i").value).to eq "#{Date.today.strftime('%-d')}"
 			expect(find("#body_measurement_log_date_2i").value).to eq "#{Date.today.strftime('%B')}"
 			expect(find("#body_measurement_log_date_1i").value).to eq "#{Date.today.strftime('%Y')}"
 		end
