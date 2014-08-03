@@ -20,6 +20,8 @@
 	<div class="food-item-image"><%= image_tag food.food_image.url(:thumb) %></div>
 </div>
 <% end %>
+<%= @results.count %> results found.
+<%= will_paginate @results %>
 </div>
 
 <br/>

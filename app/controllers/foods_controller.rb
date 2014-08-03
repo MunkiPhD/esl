@@ -4,7 +4,7 @@ class FoodsController < ApplicationController
 
   def search
     @search_phrase = params[:search] ||= nil
-    @results = Food.search_for(@search_phrase)
+    @results = Food.search_for(@search_phrase).paginate(page: params[:page], per_page: 25)
   end
 
   def show
@@ -50,6 +50,7 @@ class FoodsController < ApplicationController
     end
 
     def food_params
+		params.permit(:page)
       #params.require(:food).permit()
       # this needs to be based off of the list of whitelisted attributes (which is a lot...)
       # but for now, we're just going to return the params list
