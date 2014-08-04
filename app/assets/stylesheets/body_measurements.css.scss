@@ -22,3 +22,24 @@
 #body_measurement_log_date_1i {
   width: 80px;
 }
+
+#body_measurement_entries {
+	ul {
+		list-style-type: none;
+		padding: 0px;
+		margin: 0px;
+
+		li {
+			margin: 5px 0px 5px 0px;
+			padding: 5px;
+			border-bottom: 1px dotted $border;
+		}
+		.entry-date {
+			color: #666;
+			margin-left:20px;
+		}
+		.control-panel {
+			margin-left:40px;
+		}
+	}
+}
