@@ -2,9 +2,19 @@
 
 .food_label {
   width: 500px;
-  float: right;
   margin: 10px;
   clear: none;
+  border: 1px solid #666;
+  padding: 10px;
+   input[type='text'] {
+		border: 1px solid #666;
+		margin:2px;
+		padding: 4px;
+	}
+
+	.left_indent {
+		padding-left: 35px;
+	}
 }
 #add_food_to_favorites_form {
 	display: inline-block;
