@@ -27,7 +27,7 @@ a {
 
 #masthead {
   margin:0px auto;
-  background-color: $color-two;
+  background-color: #222;
 }
 
 #header-logo {
@@ -86,16 +86,25 @@ a {
   }
 }
 
+#main-nav-wrapper {
+	background-color: #333;
+	padding: 0px;
+	margin: 0px;
+}
 #main-nav {
+  margin:0px auto;
+  width:1280px;
   /*border-right:1px solid lighten($color-three, 30%);*/
-	padding: 10px 3px 3px 3px;
+	padding: 10px 3px 5px 3px;
   > ul {
     list-style: none;
     padding:0px;
     margin:0px;
  
     > li {
-      padding: 2px;
+      padding: 2px 15px 2px 2px;
+		  list-style-type: none;
+		  display: inline;
     }
   }
 
@@ -107,7 +116,7 @@ a {
     -webkit-transition-timing-function: ease-out;
 
     &:hover {
-      color: $secondary; //lighten($grey, 40%);
+      color: lighten($grey, 10%);
       -webkit-transition-property:color;
       -webkit-transition-duration:0.1s;
       -webkit-transition-timing-function: linear, ease-out;
@@ -118,7 +127,7 @@ a {
 
 #main-info {
   margin:0 auto;
-  border-bottom: 1px dotted lighten($color-two, 9%);
+  border-bottom: 1px dotted lighten($color-two, 11%);
 }
 
 #user-login {

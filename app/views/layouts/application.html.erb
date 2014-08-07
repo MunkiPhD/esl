@@ -17,12 +17,12 @@
     <%= render "layouts/user_login" %>
   </div>
 </div>
+<div id="main-nav-wrapper">
+		  <%= render "layouts/navigation" %>	
+</div>
 <div id="main-content-container" class="container-fluid clearfix center-block">
 	<div class="row">
-		<div class="col-md-1">
-				  <%= render "layouts/navigation" %>	
-		</div>
-		<div class="col-md-11" id="main-content" class="clearfix">
+		<div class="col-md-12" id="main-content" class="clearfix">
 				<%= render "layouts/flash_messages" %>
 				<%= yield %>
 	 	</div>
