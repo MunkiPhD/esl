@@ -55,4 +55,15 @@ describe BodyWeight do
 			expect(body_weight.unit_abbr).to eq body_weight.unit.unit_abbr
 		end
 	end
+
+	describe '#latest' do
+		it 'returns the body weights latest first' do
+			Timecop.freeze(Date.today) do
+				bw1 = create(:body_weight, user: user, log_date: Date.today)
+				bw2 = create(:body_weight, user: user, log_date: Date.yesterday)
+
+				expect(user.body_weights.latest).to eq [bw1, bw2]
+			end
+		end
+	end
 end

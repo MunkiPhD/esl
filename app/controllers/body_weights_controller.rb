@@ -4,7 +4,7 @@ class BodyWeightsController < ApplicationController
 
 	def index
 		@body_weight = BodyWeight.new(log_date: Date.today)
-		@body_weights = current_user.body_weights.includes(:unit)
+		@body_weights = current_user.body_weights.latest.includes(:unit)
 	end
 
 

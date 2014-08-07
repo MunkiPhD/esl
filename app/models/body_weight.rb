@@ -27,4 +27,6 @@ class BodyWeight < ActiveRecord::Base
 	validates :unit, presence: true
 
 	delegate :unit_abbr, to: :unit, prefix: false
+
+	scope :latest, -> { order('body_weights.log_date DESC') }
 end
