@@ -76,6 +76,39 @@ describe User do
 	end
 
 	context 'validations' do
+		describe 'birth_date' do
+			it 'can be null' do
+				user = User.new(birth_date: nil)
+				user.valid?
+				expect(user.errors[:birth_date]).to eq []
+			end
+
+			it 'has a birth date that is at at least in the past' do
+				Timecop.freeze(Date.today) do
+					user = User.new(birth_date: Date.today + 1)
+					user.valid?
+					expect(user.errors[:birth_date]).to include "must be less than today"
+				end
+			end
+		end
+
+		describe 'gender' do
+			it 'can be null' do
+				user = User.new(gender: nil)
+				user.valid?
+				expect(user.errors[:gender]).to eq []
+			end
+		end
+
+		describe 'height' do
+			it 'can be null' do
+				user = User.new(height: nil)
+				user.valid?
+				expect(user.errors[:height]).to eq []
+			end
+		end
+
+
 		describe 'username' do
 			it "is unique" do
 				user = create(:user, username: "steve")
