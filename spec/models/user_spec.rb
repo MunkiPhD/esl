@@ -75,6 +75,23 @@ describe User do
 		end
 	end
 
+	describe 'gender' do
+		it 'defaults to "unknown"' do
+			user = User.new
+			expect(user.gender).to eq "unknown"
+		end
+
+		it 'can be "male"' do
+			user = User.new(gender: 1)
+			expect(user.gender).to eq "male"
+		end
+
+		it 'can be "female"' do
+			user = User.new(gender: 2)
+			expect(user.gender).to eq "female"
+		end
+	end
+
 	context 'validations' do
 		describe 'birth_date' do
 			it 'can be null' do
@@ -93,8 +110,26 @@ describe User do
 		end
 
 		describe 'gender' do
-			it 'can be null' do
+			it 'cannot be null' do
 				user = User.new(gender: nil)
+				user.valid?
+				expect(user.errors[:gender]).to include "cannot be null"
+			end
+
+			it 'defaults to "unknown"' do
+				user = User.new
+				expect(user.gender).to eq "unknown"
+			end
+
+			it 'can be male' do
+				user = User.new(gender: 1)
+				user.valid?
+				expect(user.errors[:gender]).to eq []
+			end
+
+
+			it 'can be female' do
+				user = User.new(gender: 2)
 				user.valid?
 				expect(user.errors[:gender]).to eq []
 			end
@@ -105,6 +140,18 @@ describe User do
 				user = User.new(height: nil)
 				user.valid?
 				expect(user.errors[:height]).to eq []
+			end
+
+			it 'is greater than or equal to 54' do
+				user = User.new(height: 54)
+				user.valid?
+				expect(user.errors[:height]).to include "must be greater than or equal to 54"
+			end
+
+			it 'is less than or equal to 251' do
+				user = User.new(height: 252)
+				user.valid?
+				expect(user.errors[:height]).to include "must be less than or equal to 251"
 			end
 		end
 
