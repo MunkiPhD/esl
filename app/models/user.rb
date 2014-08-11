@@ -17,6 +17,9 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  username               :string(255)      default(""), not null
+#  height                 :decimal(4, 2)
+#  gender                 :integer          default(0), not null
+#  birth_date             :datetime
 #
 
 class User < ActiveRecord::Base
@@ -27,6 +30,8 @@ class User < ActiveRecord::Base
 		:recoverable, :rememberable, :trackable, :validatable
 
 	attr_accessor :login
+
+	enum gender: { unknown: 0, male: 1, female: 2 }
 
 	has_many :workouts
 	has_many :workout_templates
@@ -43,6 +48,10 @@ class User < ActiveRecord::Base
 
 	validates :username, uniqueness: true,
 		format: { with: /\A(?=.*[a-z])[a-z\_\d]+\Z/i, message: "Only alphanumeric letters and underscores allowed" }
+
+	validate :birth_date_must_be_in_the_past
+	validates :gender, presence: true
+	validates :height, numericality: { greater_than_or_equal_to: 54, less_than_or_equal_to: 251, only_integer: false }, if: "height.present?"
 
 
 	# override the finder so that it searches by username OR email
@@ -77,5 +86,11 @@ class User < ActiveRecord::Base
 
 	def self.by_login(login_value)
 		where("lower(username) = :value OR lower(email) = :value", { value: login_value.downcase })
+	end
+
+	def birth_date_must_be_in_the_past
+		if birth_date.present? && birth_date > Date.today
+			errors.add(:birth_date, "must be in the past!")
+		end
 	end
 end

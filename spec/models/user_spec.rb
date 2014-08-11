@@ -17,6 +17,9 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  username               :string(255)      default(""), not null
+#  height                 :decimal(4, 2)
+#  gender                 :integer          default(0), not null
+#  birth_date             :datetime
 #
 
 require 'rails_helper'
@@ -104,7 +107,7 @@ describe User do
 				Timecop.freeze(Date.today) do
 					user = User.new(birth_date: Date.today + 1)
 					user.valid?
-					expect(user.errors[:birth_date]).to include "must be less than today"
+					expect(user.errors[:birth_date]).to include "must be in the past!"
 				end
 			end
 		end
@@ -113,7 +116,7 @@ describe User do
 			it 'cannot be null' do
 				user = User.new(gender: nil)
 				user.valid?
-				expect(user.errors[:gender]).to include "cannot be null"
+				expect(user.errors[:gender]).to include "can't be blank"
 			end
 
 			it 'defaults to "unknown"' do
@@ -143,7 +146,7 @@ describe User do
 			end
 
 			it 'is greater than or equal to 54' do
-				user = User.new(height: 54)
+				user = User.new(height: 52)
 				user.valid?
 				expect(user.errors[:height]).to include "must be greater than or equal to 54"
 			end

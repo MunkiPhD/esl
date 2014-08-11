@@ -17,6 +17,9 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  username               :string(255)      default(""), not null
+#  height                 :decimal(4, 2)
+#  gender                 :integer          default(0), not null
+#  birth_date             :datetime
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
