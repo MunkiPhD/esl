@@ -1,4 +1,8 @@
-<h1>User Preferences</h1>
+<h1>My Info</h1>
+Gender: <%= current_user.gender %><br/>
+Height: <%= height(current_user.height) %><br/>
+Age: <%= age(current_user.birth_date) %> 
+<h1>Preferences</h1>
 <div>
 	<strong>Default Unit System:</strong> <%= "#{@preferences.unit_system}" %>
 </div>
