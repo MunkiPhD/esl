@@ -1,0 +1,18 @@
+<%= form_for current_user, url: athlete_path(current_user) do |f| %>
+		  <%= f.label :birth_date %>
+		  <%= f.date_select :birth_date, order: [:day, :month, :year], end_year: Time.now.year - 90, start_year: Time.now.year - 10 %>
+
+		  <br/>
+
+	 <%= f.label :height %>
+	 <%= f.text_field :height %>
+
+	 <br/>
+
+	 <%= f.label :gender %>
+	 <%= f.select :gender, options_for_select([["Unknown","unknown"], ["Male", "male"], ["Female","female"]], current_user.gender) %>
+
+	 <br/>
+
+	 <%= submit_tag "Save" %>
+<% end %>

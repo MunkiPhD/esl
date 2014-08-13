@@ -13,6 +13,9 @@ Esl::Application.routes.draw do
 	end
 
 	resource :user_preferences, only: [:show, :edit, :update]
+	
+	resources :athletes, only: [:show, :edit, :update]
+
 	get 'exercises/search', to: 'exercises#search'	
 
 	# these are basically referential routes
@@ -33,6 +36,7 @@ Esl::Application.routes.draw do
 
 	#devise_for :users
 	devise_for :users, :controllers => {:registrations => "users/registrations", :passwords => "users/passwords", :sessions => "users/sessions"}
+	
 
 	get ':username/workout/:id', to: 'workouts#show', as: :user_workout
 	get ':username/workouts', to: 'workouts#index', as: :user_workouts
@@ -55,6 +59,7 @@ Esl::Application.routes.draw do
 	scope '/api' do
 		get 'nutrition/log/daily_totals', to: 'log_foods#daily_totals', as: 'log_food_daily_totals'
 	end
+
 
 	root to: "home#index"
 end
