@@ -4,7 +4,7 @@ module ProfileHelper
 		feet = inches / 12
 		inch = inches % 12
 		meters = inches * 0.0254
-		"#{feet.floor}' #{inch}\" (#{number_with_precision(meters, precision: 2)} m)"
+		"#{feet.floor}' #{"%g" % inch}\" (#{number_with_precision(meters, precision: 2)} m)"
 	end
 
 	def age(dob)

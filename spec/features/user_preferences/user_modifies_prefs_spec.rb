@@ -11,7 +11,7 @@ feature 'User modifies their preferences' do
 		visit root_path
 		click_link user.username
 
-		expect(page).to have_content 'User Preferences'
+		expect(page).to have_content 'Preferences'
 	end
 
 	scenario 'can change their default unit system' do

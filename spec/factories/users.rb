@@ -30,6 +30,9 @@ FactoryGirl.define do
     password_confirmation     "password"
     sequence(:email){ |n|     "user#{n}@email.com" }
     sequence(:username){ |n|  "username#{n}" }
+	 height							70
+	 gender							"male"
+	 birth_date						Date.today.year - 20
   end
 
   factory :user_circle_member do
