@@ -11,7 +11,41 @@ feature 'User manages their profile info' do
 		visit root_path
 		click_link user.username
 
-		expect(page).to have_content "My Info"
+		within("#athlete_name") do
+			expect(page).to have_content user.username
+		end
+	end
+
+
+	scenario 'user visits another users page, only sees their username' do
+		user2 = create(:user)
+		visit athlete_path(user2)
+
+		within("#athlete_name") do
+			expect(page).to have_content user2.username
+			expect(page).to_not have_content user.username
+		end
+	end
+
+	scenario 'can see the ability to edit their information' do
+		visit athlete_path(user)
+
+		expect(page).to have_link "Edit Preferences"
+		expect(page).to have_link "Edit"
+	end
+
+	scenario 'current user does not see the ability to edit their preferences and info if on another athletes page' do
+		user2 = create(:user)
+		visit athlete_path(user2)
+
+		expect(page).to_not have_link "Edit Preferences"
+		expect(page).to_not have_link "Edit"
+	end
+
+	scenario 'if they attempt to look at a user that does not exist, they are redirected to their profile' do
+		visit athlete_path("some_random_guy_that_doesnt_exist")
+
+		expect(page).to have_content "That athlete does not exist!"
 	end
 
 

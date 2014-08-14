@@ -1,10 +1,13 @@
-<h1>My Info</h1>
-Gender: <%= current_user.gender.humanize %><br/>
-Height: <%= height(current_user.height) %><br/>
-Age: <%= age(current_user.birth_date) %> 
-<br/><br/>
-<%= link_to_edit "Edit", edit_athlete_path(current_user) %>
+<h1 id="athlete_name"><%= @user.username %></h1>
+Gender: <%= @user.gender.humanize %><br/>
+Height: <%= height(@user.height) %><br/>
+Age: <%= age(@user.birth_date) %> 
 
-<hr/>
-<%= render 'user_preferences/display_prefs', preferences: current_user.preferences %>
-<%= link_to_edit "Edit Preferences", edit_user_preferences_path %>
+<% if @user == current_user %>
+	<br/><br/>
+	<%= link_to_edit "Edit", edit_athlete_path(@user) %>
+
+	<hr/>
+	<%= render 'user_preferences/display_prefs', preferences: current_user.preferences %>
+	<%= link_to_edit "Edit Preferences", edit_user_preferences_path %>
+<% end %>

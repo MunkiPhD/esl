@@ -1,5 +1,13 @@
 class AthletesController < ApplicationController
+	before_filter :authenticate_user!
+
 	def show
+		@user = User.find(params[:id])
+
+		if @user.nil?
+			flash[:error] = "That athlete does not exist!"
+			@user = current_user
+		end
 	end
 
 	def edit
