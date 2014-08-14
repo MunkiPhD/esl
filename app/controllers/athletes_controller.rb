@@ -5,8 +5,8 @@ class AthletesController < ApplicationController
 		@user = User.find(params[:id])
 
 		if @user.nil?
-			flash[:error] = "That athlete does not exist!"
-			@user = current_user
+			flash[:error] = "Athlete #{CGI.escape_html(params[:id])} does not exist!"
+			redirect_to athlete_path(current_user)
 		end
 	end
 

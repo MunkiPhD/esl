@@ -45,7 +45,7 @@ feature 'User manages their profile info' do
 	scenario 'if they attempt to look at a user that does not exist, they are redirected to their profile' do
 		visit athlete_path("some_random_guy_that_doesnt_exist")
 
-		expect(page).to have_content "That athlete does not exist!"
+		expect(page).to have_content "Athlete some_random_guy_that_doesnt_exist does not exist!"
 	end
 
 
