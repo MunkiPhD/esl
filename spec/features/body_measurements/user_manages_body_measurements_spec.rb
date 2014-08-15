@@ -18,7 +18,7 @@ feature 'user manages their body measurements' do
 		click_button "Save Measurements"
 		expect(page).to have_content "Body measurements saved."
 		expect(page).to have_content "Chest: 53.0 in" 
-		expect(page).to have_content "Bicep: not measured"
+		expect(page).to have_content "Waist: not measured"
 	end
 
 
@@ -26,24 +26,32 @@ feature 'user manages their body measurements' do
 		visit body_measurements_path
 		click_link 'Record Measurements'
 
-		fill_in 'Bicep', with: '2'
-		fill_in 'Calf', with: '3'
+		fill_in 'Bicep left', with: '2'
+		fill_in 'Bicep right', with: '2.1'
+		fill_in 'Calf left', with: '3'
+		fill_in 'Calf right', with: '3.1'
 		fill_in 'Chest', with: '4'
-		fill_in 'Forearm', with: '6'
+		fill_in 'Forearm left', with: '6'
+		fill_in 'Forearm right', with: '6.1'
 		fill_in 'Hips', with: '7'
 		fill_in 'Neck', with: '8.1'
-		fill_in 'Thigh', with: '9'
+		fill_in 'Thigh left', with: '9'
+		fill_in 'Thigh right', with: '9.1'
 		fill_in 'Waist', with: '10'
 
 		click_button 'Save Measurements'
 
-		expect(page).to have_content 'Bicep: 2.0 in'
-		expect(page).to have_content 'Calf: 3.0 in'
+		expect(page).to have_content 'Bicep left: 2.0 in'
+		expect(page).to have_content 'Bicep right: 2.1 in'
+		expect(page).to have_content 'Calf left: 3.0 in'
+		expect(page).to have_content 'Calf right: 3.1 in'
 		expect(page).to have_content 'Chest: 4.0 in'
-		expect(page).to have_content 'Forearm: 6.0 in'
+		expect(page).to have_content 'Forearm left: 6.0 in'
+		expect(page).to have_content 'Forearm right: 6.1 in'
 		expect(page).to have_content 'Hips: 7.0 in'
 		expect(page).to have_content 'Neck: 8.1 in'
-		expect(page).to have_content 'Thigh: 9.0 in'
+		expect(page).to have_content 'Thigh left: 9.0 in'
+		expect(page).to have_content 'Thigh right: 9.1 in'
 		expect(page).to have_content 'Waist: 10.0 in'
 	end
 
@@ -109,7 +117,7 @@ feature 'user manages their body measurements' do
 
 		visit body_measurement_path(BodyMeasurement.last)
 
-		expect(page).to have_content 'Thigh: 9.0 cm'
+		expect(page).to have_content 'Chest: 52.0 cm'
 		expect(page).to have_content 'Waist: 10.0 cm'
 	end
 
@@ -120,12 +128,12 @@ feature 'user manages their body measurements' do
 			expect(entry).to_not have_content "in"	
 		end
 
-		fill_in 'Thigh', with: '9'
+		fill_in 'Chest', with: '52'
 		fill_in 'Waist', with: '10'
 
 		click_button 'Save Measurements'
 
-		expect(page).to have_content 'Thigh: 9.0 cm'
+		expect(page).to have_content 'Chest: 52.0 cm'
 		expect(page).to have_content 'Waist: 10.0 cm'
 	end
 end

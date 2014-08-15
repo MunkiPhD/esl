@@ -63,13 +63,17 @@ class BodyMeasurementsController < ApplicationController
 	def body_measurement_params
 		params.permit(:page)
 		params.require(:body_measurement).permit(:log_date,
-																:bicep,
-																:calf, 
+																:bicep_left,
+																:bicep_right,
+																:calf_left, 
+																:calf_right, 
 																:chest,
-																:forearm,
+																:forearm_left,
+																:forearm_right,
 																:hips,
 																:neck,
-																:thigh,
+																:thigh_left,
+																:thigh_right,
 																:waist)
 	end
 end

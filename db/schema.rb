@@ -11,22 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811213508) do
+ActiveRecord::Schema.define(version: 20140815122140) do
 
   create_table "body_measurements", force: true do |t|
-    t.date     "log_date",                           default: '2014-07-16', null: false
-    t.decimal  "bicep",      precision: 5, scale: 2
-    t.decimal  "calf",       precision: 5, scale: 2
-    t.decimal  "chest",      precision: 5, scale: 2
-    t.decimal  "forearm",    precision: 5, scale: 2
-    t.decimal  "hips",       precision: 5, scale: 2
-    t.decimal  "neck",       precision: 5, scale: 2
-    t.decimal  "thigh",      precision: 5, scale: 2
-    t.decimal  "waist",      precision: 5, scale: 2
-    t.integer  "unit_id",                            default: 0,            null: false
-    t.integer  "user_id",                                                   null: false
+    t.date     "log_date",                              default: '2014-07-16', null: false
+    t.decimal  "bicep_right",   precision: 5, scale: 2
+    t.decimal  "calf_right",    precision: 5, scale: 2
+    t.decimal  "chest",         precision: 5, scale: 2
+    t.decimal  "forearm_right", precision: 5, scale: 2
+    t.decimal  "hips",          precision: 5, scale: 2
+    t.decimal  "neck",          precision: 5, scale: 2
+    t.decimal  "thigh_right",   precision: 5, scale: 2
+    t.decimal  "waist",         precision: 5, scale: 2
+    t.integer  "unit_id",                               default: 0,            null: false
+    t.integer  "user_id",                                                      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "bicep_left",    precision: 5, scale: 2
+    t.decimal  "calf_left",     precision: 5, scale: 2
+    t.decimal  "forearm_left",  precision: 5, scale: 2
+    t.decimal  "thigh_left",    precision: 5, scale: 2
   end
 
   add_index "body_measurements", ["user_id"], name: "index_body_measurements_on_user_id", using: :btree

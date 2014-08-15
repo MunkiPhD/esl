@@ -3,11 +3,15 @@
 <%= link_to_destroy "Delete", body_measurement_path(@body_measurement), method: :delete %>
 </div>
 <h2>Body Measurements for <%= format_date @body_measurement.log_date %></h2>
-<%= measurement_display(@body_measurement, :bicep) %><br/>
-<%= measurement_display(@body_measurement, :calf) %><br/>
+<%= measurement_display(@body_measurement, :bicep_left) %><br/>
+<%= measurement_display(@body_measurement, :bicep_right) %><br/>
+<%= measurement_display(@body_measurement, :calf_left) %><br/>
+<%= measurement_display(@body_measurement, :calf_right) %><br/>
 <%= measurement_display(@body_measurement, :chest) %><br/>
-<%= measurement_display(@body_measurement, :forearm) %><br/>
+<%= measurement_display(@body_measurement, :forearm_left) %><br/>
+<%= measurement_display(@body_measurement, :forearm_right) %><br/>
 <%= measurement_display(@body_measurement, :hips) %><br/>
 <%= measurement_display(@body_measurement, :neck) %><br/>
-<%= measurement_display(@body_measurement, :thigh) %><br/>
+<%= measurement_display(@body_measurement, :thigh_left) %><br/>
+<%= measurement_display(@body_measurement, :thigh_right) %><br/>
 <%= measurement_display(@body_measurement, :waist) %><br/>

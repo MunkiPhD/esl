@@ -20,9 +20,9 @@
   </div>
 	<%= f.hidden_field :unit %>
 
-	<% %w(bicep calf chest forearm hips neck thigh waist).each do |attr_symbol| %>
+	<% %w(bicep_left bicep_right calf_left calf_right chest forearm_left forearm_right hips neck thigh_left thigh_right waist).each do |attr_symbol| %>
 		<div class="form-group">
-			<%= f.label attr_symbol, class: "col-sm-2 control-label" %>
+			<%= f.label attr_symbol, class: "col-sm-5 control-label" %>
 			<div class="col-sm-3">
 					  <%= f.text_field attr_symbol, class: "form-control input-small" %>
 			</div>

@@ -81,7 +81,6 @@ class LogFoodsController < ApplicationController
     @totals = DailyNutritionTotals.new(current_user).on_date(date)
 
     respond_to do |format|
-      puts "Format type: #{format}"
       format.html { redirect_to nutrition_path, notice: "This call is meant for API calls only!" }
       format.json { render 'daily_totals' }
     end

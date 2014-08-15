@@ -2,20 +2,24 @@
 #
 # Table name: body_measurements
 #
-#  id         :integer          not null, primary key
-#  log_date   :date             default(Wed, 16 Jul 2014), not null
-#  bicep      :decimal(5, 2)
-#  calf       :decimal(5, 2)
-#  chest      :decimal(5, 2)
-#  forearm    :decimal(5, 2)
-#  hips       :decimal(5, 2)
-#  neck       :decimal(5, 2)
-#  thigh      :decimal(5, 2)
-#  waist      :decimal(5, 2)
-#  unit_id    :integer          default(0), not null
-#  user_id    :integer          not null
-#  created_at :datetime
-#  updated_at :datetime
+#  id            :integer          not null, primary key
+#  log_date      :date             default(Wed, 16 Jul 2014), not null
+#  bicep_right   :decimal(5, 2)
+#  calf_right    :decimal(5, 2)
+#  chest         :decimal(5, 2)
+#  forearm_right :decimal(5, 2)
+#  hips          :decimal(5, 2)
+#  neck          :decimal(5, 2)
+#  thigh_right   :decimal(5, 2)
+#  waist         :decimal(5, 2)
+#  unit_id       :integer          default(0), not null
+#  user_id       :integer          not null
+#  created_at    :datetime
+#  updated_at    :datetime
+#  bicep_left    :decimal(5, 2)
+#  calf_left     :decimal(5, 2)
+#  forearm_left  :decimal(5, 2)
+#  thigh_left    :decimal(5, 2)
 #
 
 require 'rails_helper'
@@ -35,6 +39,7 @@ RSpec.describe BodyMeasurement, :type => :model do
 		end
 
 		it 'has a unit by default' do
+			create(:unit_measurements)
 			bm = BodyMeasurement.new
 			bm.valid?
 			expect(bm.errors[:unit]).to eq []
@@ -45,7 +50,6 @@ RSpec.describe BodyMeasurement, :type => :model do
 				bm1 = create(:body_measurement, user: user, log_date: Date.today)
 				bm2 = build(:body_measurement, user: user, log_date: Date.today)
 				bm2.valid?
-				puts bm2.errors
 				expect(bm2.errors[:log_date]).to include "an entry for this date already exists"
 			end
 		end
@@ -58,7 +62,7 @@ RSpec.describe BodyMeasurement, :type => :model do
 			end
 		end
 
-		%w(bicep calf chest forearm hips neck thigh waist).each do |attr|
+		%w(bicep_right bicep_left calf_right calf_left chest forearm_right forearm_left hips neck thigh_right thigh_left waist).each do |attr|
 			describe "#{attr}" do
 				it 'can be null' do
 					is_null(attr)

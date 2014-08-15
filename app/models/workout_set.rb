@@ -50,7 +50,6 @@ class WorkoutSet < ActiveRecord::Base
   def self.get_weight_for_template(workout_set_template, user)
 	  if workout_set_template.is_percent_of_one_rep_max
 		  weight = get_logged_orm_weight_for_user(workout_set_template.exercise, user)
-			puts "returned weight: #{weight}"
 		  (weight * (workout_set_template.percent_of_one_rep_max.to_f / 100))
 	  else
 		  workout_set_template.weight
@@ -60,7 +59,6 @@ class WorkoutSet < ActiveRecord::Base
   def self.get_logged_orm_weight_for_user(exercise, user)
 	  result = WorkoutQueries.max_weight_for_exercise_and_user(exercise, user).first	
 	  if result.nil? 
-			puts "result was nil!"
 		  0
 	  else
 		  result.weight
