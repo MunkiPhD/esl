@@ -50,39 +50,43 @@ feature 'User manages their profile info' do
 
 
 	scenario 'edits their profile information for to a male' do
-		visit root_path
-		click_link user.username
-		
-		click_link "Edit"
-		date = 20.years.ago
-		select_log_date(date, "user_birth_date")
-		fill_in "Height", with: "70"
+		Timecop.freeze(Date.today) do
+			visit root_path
+			click_link user.username
 
-		select "Male", from: "Gender"
+			click_link "Edit"
+			date = Date.new(Time.now.year - 20, Date.today.month, Date.today.day - 1)
+			select_log_date(date, "user_birth_date")
+			fill_in "Height", with: "70"
 
-		click_button "Save"
+			select "Male", from: "Gender"
 
-		expect(page).to have_content "5' 10\""
-		expect(page).to have_content "Male"
-		expect(page).to have_content "Age: 20"
+			click_button "Save"
+
+			expect(page).to have_content "5' 10\""
+			expect(page).to have_content "Male"
+			expect(page).to have_content "Age: 20"
+		end
 	end
 
 	scenario 'edits their profile information for to a female' do
-		visit root_path
-		click_link user.username
-		
-		click_link "Edit"
-		date = 22.years.ago
-		select_log_date(date, "user_birth_date")
-		fill_in "Height", with: "56"
+		Timecop.freeze(Date.today) do
+			visit root_path
+			click_link user.username
 
-		select "Female", from: "Gender"
+			click_link "Edit"
+			date = Date.new(Time.now.year - 22, Date.today.month, Date.today.day - 1)
+			select_log_date(date, "user_birth_date")
+			fill_in "Height", with: "56"
 
-		click_button "Save"
+			select "Female", from: "Gender"
 
-		expect(page).to have_content "4' 8\""
-		expect(page).to have_content "Female"
-		expect(page).to have_content "Age: 22"
+			click_button "Save"
+
+			expect(page).to have_content "4' 8\""
+			expect(page).to have_content "Female"
+			expect(page).to have_content "Age: 22"
+		end
 	end
 
 	scenario 'has appropriate units based on preferences' do
