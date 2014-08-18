@@ -11,6 +11,9 @@
 <% if user_signed_in? %>
   <h1>Dashboard</h1>
   <hr />
+  <div id="bmi">
+		<%= @current_user.bmi.present? ? @current_user.bmi : "no age present" %>
+  </div>
   <h2>My Circles</h2>
 <%= "Not a member of any circles!" if @memberships.empty? %>
 <% @memberships.each do |circle| %>
