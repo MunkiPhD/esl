@@ -91,6 +91,14 @@ class User < ActiveRecord::Base
 	end
 
 	def bmi
+		return nil if height.nil?
+
+		weight_entry = body_weights.latest.first
+		
+		return nil if weight_entry.nil?
+		
+		bmi = (weight_entry.weight / (height ** 2)) * 703
+		return bmi.round(2)
 	end
 
 	private 
