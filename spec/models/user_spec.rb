@@ -33,6 +33,35 @@ describe User do
 		expect(user).to be_valid
 	end
 
+	describe '#age' do
+		it 'returns the users age if a birth_date is present' do
+			pending
+		end
+
+		it 'returns null if no birth_date is present' do
+			pending
+		end
+	end
+
+
+	describe '#bmi' do
+		it 'returns bmi if there is age, height, and a weight entry' do
+			pending
+		end
+
+		it 'returns null if no body weight' do
+			pending
+		end
+
+		it 'returns null if no age' do
+			pending
+		end
+
+		it 'returns null if no height' do
+			pending
+		end
+	end
+
 	describe "#favorite_food" do
 		it 'returns the favorite food for the specified item' do
 			food = create(:food)
