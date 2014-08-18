@@ -1,7 +1,7 @@
 <h1 id="athlete_name"><%= @user.username %></h1>
 Gender: <%= @user.gender.humanize %><br/>
 Height: <%= height(@user.height) %><br/>
-Age: <%= age(@user.birth_date) %> 
+Age: <%= @user.age.nil? ? "unknown" : @user.age %> 
 
 <% if @user == current_user %>
 	<br/><br/>

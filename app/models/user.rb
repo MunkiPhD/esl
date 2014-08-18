@@ -82,6 +82,17 @@ class User < ActiveRecord::Base
 		UserPreferences.find_or_create_by(user: self)
 	end
 
+	def age
+		return nil unless birth_date.present?
+		today = Date.today
+		age = today.year - birth_date.year
+		age -= 1 if birth_date.strftime("%m%d").to_i > today.strftime("%m%d").to_i
+		age
+	end
+
+	def bmi
+	end
+
 	private 
 
 	def self.by_login(login_value)

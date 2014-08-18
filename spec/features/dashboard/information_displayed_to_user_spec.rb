@@ -18,7 +18,7 @@ feature 'Information displayed on the dashboard' do
 	end
 
 	scenario 'where the user has age, height, and weight it shows the BMI' do
-		user.age = 20
+		user.birth_date = 20.years.ago + 1
 		user.height = 70
 		user.save
 

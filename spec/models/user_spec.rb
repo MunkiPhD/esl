@@ -35,27 +35,44 @@ describe User do
 
 	describe '#age' do
 		it 'returns the users age if a birth_date is present' do
-			pending
+			Timecop.freeze(Date.today) do
+				user = create(:user, birth_date: 20.years.ago)
+				expect(user.age).to eq 19
+			end
 		end
 
 		it 'returns null if no birth_date is present' do
-			pending
+			user = create(:user, birth_date: nil)
+			expect(user.age).to eq nil
+		end	
+	
+		it 'has correct age based on a date' do
+			Timecop.freeze(Date.new(2010, 4, 4)) do
+				user = create(:user, birth_date: Date.new(1976, 4, 10))
+				expect(user.age).to eq 33
+			end
+		end
+
+		it 'has correct age on a date 2' do 
+			Timecop.freeze(Date.new(2010, 4, 14)) do
+				user = create(:user, birth_date: Date.new(1976, 4, 10))
+				expect(user.age).to eq 34
+			end
 		end
 	end
 
 
 	describe '#bmi' do
-		it 'returns bmi if there is age, height, and a weight entry' do
-			pending
+		it 'returns bmi if there is height and a weight entry for US system' do
+			user = create(:user, height: 70, birth_date: 20.years.ago)
+			weight = create(:body_weight, user: user, weight: 200)
+			expect(user.bmi).to eq 28.69
 		end
 
 		it 'returns null if no body weight' do
 			pending
 		end
 
-		it 'returns null if no age' do
-			pending
-		end
 
 		it 'returns null if no height' do
 			pending
