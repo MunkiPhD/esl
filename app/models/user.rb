@@ -92,16 +92,22 @@ class User < ActiveRecord::Base
 
 	def bmi
 		return nil if height.nil?
-
 		weight_entry = body_weights.latest.first
-		
 		return nil if weight_entry.nil?
-		
-		bmi = (weight_entry.weight / (height ** 2)) * 703
-		return bmi.round(2)
+		return calculate_bmi(weight_entry.weight)	
 	end
 
 	private 
+
+	def calculate_bmi(weight)
+		bmi = 0
+		if preferences.default_system_id ==  MeasurementSystem::US_SYSTEM	
+			bmi = (weight / (height ** 2)) * 703
+		else
+			bmi = weight / ( (height / 100) ** 2)
+		end
+		return bmi.round(2)
+	end
 
 	def self.by_login(login_value)
 		where("lower(username) = :value OR lower(email) = :value", { value: login_value.downcase })

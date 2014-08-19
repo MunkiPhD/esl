@@ -63,10 +63,17 @@ describe User do
 
 
 	describe '#bmi' do
-		it 'returns bmi if there is height and a weight entry for US system' do
+		it 'returns bmi if there is height and a weight entry, in US system' do
 			user = create(:user, height: 70)
 			weight = create(:body_weight, user: user, weight: 200)
 			expect(user.bmi).to eq 28.69
+		end
+
+		it 'returns bmi if there is height and a weight entry, in metric' do
+			user = create(:user, height: 160)
+			prefs = create(:user_preferences, default_system_id: 1, user: user)
+			weight = create(:body_weight, user: user, weight: 120)
+			expect(user.bmi).to eq 46.88
 		end
 
 		it 'returns null if no body weight' do
