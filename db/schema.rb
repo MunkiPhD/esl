@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815122140) do
+ActiveRecord::Schema.define(version: 20140819132225) do
 
   create_table "body_measurements", force: true do |t|
     t.date     "log_date",                              default: '2014-07-16', null: false
@@ -254,7 +254,7 @@ ActiveRecord::Schema.define(version: 20140815122140) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username",                                       default: "", null: false
-    t.decimal  "height",                 precision: 4, scale: 2
+    t.decimal  "height",                 precision: 5, scale: 2
     t.integer  "gender",                                         default: 0,  null: false
     t.datetime "birth_date"
   end
