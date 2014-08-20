@@ -12,6 +12,6 @@
  *= require vendor/normalize.min 
  *= require_self
  *= require app_wide
- *= require jquery.ui.dialog
+ *= require jquery-ui/dialog
  *= require_tree .
  */
