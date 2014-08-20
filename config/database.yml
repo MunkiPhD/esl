@@ -20,7 +20,7 @@ development:
   database: esl_development
   pool: 5
   username: esl
-  password:
+  password: esl123
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -49,7 +49,8 @@ test:
   database: esl_test
   pool: 5
   username: esl
-  password:
+  password: esl123
+  #host: localhost
 
 #production:
 #  adapter: postgresql

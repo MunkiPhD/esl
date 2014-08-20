@@ -13,8 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20140819132225) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "body_measurements", force: true do |t|
-    t.date     "log_date",                              default: '2014-07-16', null: false
+    t.date     "log_date",                              default: '2014-08-20', null: false
     t.decimal  "bicep_right",   precision: 5, scale: 2
     t.decimal  "calf_right",    precision: 5, scale: 2
     t.decimal  "chest",         precision: 5, scale: 2
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 20140819132225) do
   add_index "body_measurements", ["user_id"], name: "index_body_measurements_on_user_id", using: :btree
 
   create_table "body_weights", force: true do |t|
-    t.date     "log_date",                           default: '2014-05-29', null: false
+    t.date     "log_date",                           default: '2014-08-20', null: false
     t.decimal  "weight",     precision: 9, scale: 6,                        null: false
     t.integer  "unit_id",                                                   null: false
     t.integer  "user_id",                                                   null: false
@@ -181,7 +184,7 @@ ActiveRecord::Schema.define(version: 20140819132225) do
 
   create_table "log_foods", force: true do |t|
     t.decimal  "servings",   default: 1.0,          null: false
-    t.date     "log_date",   default: '2014-05-29', null: false
+    t.date     "log_date",   default: '2014-08-20', null: false
     t.integer  "food_id",                           null: false
     t.integer  "user_id",                           null: false
     t.datetime "created_at"
@@ -232,7 +235,7 @@ ActiveRecord::Schema.define(version: 20140819132225) do
 
   create_table "user_preferences", force: true do |t|
     t.integer  "user_id",                       null: false
-    t.integer  "default_system_id", default: 0, null: false
+    t.integer  "default_system_id", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
