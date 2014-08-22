@@ -1,9 +1,8 @@
 <% unless user_signed_in? %>
   <div class="hero-unit">
-  <h1>Well, hello there!</h1>
+  <h1>Serious Logging.</h1>
   <p>
-  <%= link_to 'Login', new_user_session_path, class: "btn btn-primary" %> or try it out by 
-  <%= link_to "Signing up", new_user_registration_path, class: "btn btn-success" %><br />
+  <%= link_to 'Login', new_user_session_path, class: "btn btn-primary" %> <%= link_to "Try it out", new_user_registration_path, class: "btn btn-success" %><br />
   </p>
 </div>
   <% end %>
