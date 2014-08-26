@@ -108,10 +108,10 @@ describe Food do
       expect(food.errors[:name]).to eq []
     end
 
-		it 'cannot have a name larger than 150 characters' do
-			food = Food.new(name: ("a"*151))
+		it 'cannot have a name larger than 220 characters' do
+			food = Food.new(name: ("a"*221))
 			food.valid?
-			expect(food.errors[:name]).to include "is too long (maximum is 150 characters)"
+			expect(food.errors[:name]).to include "is too long (maximum is 220 characters)"
 		end
 
     it "serving size cant be blank" do
@@ -125,10 +125,10 @@ describe Food do
       expect(f.serving_size).to eq "1 serving"
     end
 
-    it "has a serving size less than 80 characters" do
-      food = Food.new(serving_size: ("A" * 81))
+    it "has a serving size less than 90 characters" do
+      food = Food.new(serving_size: ("A" * 91))
 			food.valid?
-      expect(food.errors[:serving_size]).to include "is too long (maximum is 80 characters)"
+      expect(food.errors[:serving_size]).to include "is too long (maximum is 90 characters)"
 	  end
 
 	  it "#search_for will also return results that aren't in correct case" do
