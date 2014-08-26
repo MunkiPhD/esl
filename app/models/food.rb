@@ -84,8 +84,8 @@ class Food < ActiveRecord::Base
 	validates_attachment_size :food_image, less_than_or_equal_to: 2.megabytes, if: Proc.new { |import| !import.food_image.file? }
 
 
-	validates :name, presence: true, length: { minimum: 2, maximum: 150 }, allow_blank: false
-	validates :serving_size, presence: true, length: { minimum: 1, maximum: 80 }
+	validates :name, presence: true, length: { minimum: 2, maximum: 220 }, allow_blank: false
+	validates :serving_size, presence: true, length: { minimum: 1, maximum: 90 }
 	validates_numericality_of :calories, 
 		:calories_from_fat,
 		:total_fat,
