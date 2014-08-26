@@ -125,10 +125,10 @@ describe Food do
       expect(f.serving_size).to eq "1 serving"
     end
 
-    it "has a serving size less than 75 characters" do
-      food = Food.new(serving_size: ("A" * 76))
+    it "has a serving size less than 80 characters" do
+      food = Food.new(serving_size: ("A" * 81))
 			food.valid?
-      expect(food.errors[:serving_size]).to include "is too long (maximum is 75 characters)"
+      expect(food.errors[:serving_size]).to include "is too long (maximum is 80 characters)"
 	  end
 
 	  it "#search_for will also return results that aren't in correct case" do
