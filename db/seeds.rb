@@ -133,17 +133,17 @@ end
 #
 # ---------------------------------------
 def mold_food(food, values, ndb_no, gram_weight, additional_nutrients)
-	food.total_fat = denormalize gram_weight, values[5]
-	food.calories_from_fat = (denormalize gram_weight, values[5]) * 9
+	food.total_fat = denormalize(gram_weight, values[5]).to_i
+	food.calories_from_fat = (denormalize(gram_weight, values[5]).to_i) * 9
 	food.saturated_fat = denormalize gram_weight, values[44]
 	food.polyunsaturated_fat = denormalize gram_weight, values[46]
 	food.monounsaturated_fat = denormalize gram_weight, values[45]
 	food.cholesterol = denormalize gram_weight, values[47]
 	food.sodium = denormalize gram_weight, values[15]
-	food.carbs = denormalize gram_weight, values[7]
+	food.carbs = denormalize(gram_weight, values[7]).to_i
 	food.dietary_fiber = denormalize gram_weight, values[8]
 	food.sugars = denormalize gram_weight, values[9]
-	food.protein = denormalize gram_weight, values[4]
+	food.protein = denormalize(gram_weight, values[4]).to_i
 	food.vitamin_a = denormalize gram_weight, values[32]
 	food.vitamin_c = denormalize gram_weight, values[20]
 	food.calcium = denormalize gram_weight, values[10]

@@ -34,27 +34,29 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'paperclip', '~> 4.1'
 gem 'aws-sdk', '~> 1.5.7'
 
+gem 'activerecord-import', ">= 0.4.0", require: false
+
 group :development do
-gem "annotate"
-gem 'spring'
-gem 'spring-commands-rspec'
+	gem "annotate"
+	gem 'spring'
+	gem 'spring-commands-rspec'
 end
 
 group :development, :test do
-gem 'timecop'
-gem 'launchy'
-gem 'rspec', '~> 3.0.0'
-gem "rspec-rails", '~> 3.0.0'
+	gem 'timecop'
+	gem 'launchy'
+	gem 'rspec', '~> 3.0.0'
+	gem "rspec-rails", '~> 3.0.0'
 end
 
 group :test do
-gem "factory_girl_rails"
-#gem "capybara", "~> 2.2.0"
-gem 'capybara', git: 'https://github.com/jnicklas/capybara.git'
-#gem "fuubar"
-#gem 'rspec-expectations'
-#gem 'rspec-mocks'
-gem 'rspec-collection_matchers'
+	gem "factory_girl_rails"
+	#gem "capybara", "~> 2.2.0"
+	gem 'capybara', git: 'https://github.com/jnicklas/capybara.git'
+	#gem "fuubar"
+	#gem 'rspec-expectations'
+	#gem 'rspec-mocks'
+	gem 'rspec-collection_matchers'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
