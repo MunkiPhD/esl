@@ -10,14 +10,5 @@
 <% end %>
 
 <% if user_signed_in? %>
-  <h1>Dashboard</h1>
-  <hr />
-  <div id="bmi">
-		BMI: <%= @current_user.bmi.present? ? @current_user.bmi : "not enough information" %>
-  </div>
-  <h2>My Circles</h2>
-<%= "Not a member of any circles!" if @memberships.empty? %>
-<% @memberships.each do |circle| %>
-  <%= link_to circle.name, circle %><br>
-  <% end %>
+		  <%= render 'user_dashboard' %>
 <% end %>

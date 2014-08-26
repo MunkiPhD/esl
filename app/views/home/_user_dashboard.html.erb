@@ -1,0 +1,8 @@
+<h1>Dashboard</h1>
+<hr />
+<%= render 'user_bmi' %>
+<h2>My Circles</h2>
+<%= "Not a member of any circles!" if @memberships.empty? %>
+<% @memberships.each do |circle| %>
+		  <%= link_to circle.name, circle %><br>
+  <% end %>
