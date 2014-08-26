@@ -85,7 +85,7 @@ class Food < ActiveRecord::Base
 
 
 	validates :name, presence: true, length: { minimum: 2, maximum: 150 }, allow_blank: false
-	validates :serving_size, presence: true, length: { minimum: 1, maximum: 75 }
+	validates :serving_size, presence: true, length: { minimum: 1, maximum: 80 }
 	validates_numericality_of :calories, 
 		:calories_from_fat,
 		:total_fat,

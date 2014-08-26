@@ -11,7 +11,7 @@
 								</div>
 					 </div>
 					 <div class="col-md-3">
-								<span class="value-recorded"><%= "#{presenter.macro_totals.send(presenter.field).to_i}" %></span><span class="value-recorded-measurement"><%= "#{presenter.display_unit_value}" %></span><span class="nutrition-goal-value"> / <%= "#{presenter.nutrition_goal.send(presenter.field)}#{presenter.display_unit_measurement}" %></span>
+								<span class="value-recorded"><%= "#{number_with_precision(presenter.macro_totals.send(presenter.field), :precision => 0, :significant => false, :strip_insignificant_zeroes => true)}" %></span><span class="value-recorded-measurement"><%= "#{presenter.display_unit_value}" %></span><span class="nutrition-goal-value"> / <%= "#{presenter.nutrition_goal.send(presenter.field)}#{presenter.display_unit_measurement}" %></span>
 					 </div>
 		  </div>
 </div>
