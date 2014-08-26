@@ -3,9 +3,19 @@
 	<% if @current_user.bmi.present? %>
 		<%= @current_user.bmi %>
 	<% else %>
-			  <span class="hint-text">not enough information</span><br/>
-			  <%= link_to "Set your age", edit_athlete_path(@current_user) unless @current_user.birth_date.present? %><br/>
-			  <%= link_to "Set your height", edit_athlete_path(@current_user) unless @current_user.height.present? %><br/>
-			  <%= link_to "Record your weight", body_weights_path if @weight_entry_count == 0 %>
+		<span class="hint-text">not enough information</span><br/>
+		<% unless @current_user.birth_date.present? %>
+			<%= link_to "Set your age", edit_athlete_path(@current_user) %>
+			<br/>  
+ 		<% end %>
+
+		<% unless @current_user.height.present? %>
+			<%= link_to "Set your height", edit_athlete_path(@current_user) %>
+			<br/>
+		<% end %>
+
+		<% if @weight_entry_count == 0 %>
+			<%= link_to "Record your weight", body_weights_path %>
+ 		<% end %>
 	<% end %>
 </div>
