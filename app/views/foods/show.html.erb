@@ -42,41 +42,41 @@
 								<td style="border-top:4px #000 solid"><span class="right bold">% Daily Value*</span></td>
 					 </tr>
 					 <tr>
-								<td style="border-top:2px #000 solid"><b>Total Fat</b> <%= @food.total_fat %>g</td>
+								<td style="border-top:2px #000 solid"><b>Total Fat</b> <%= number_with_precision(@food.total_fat, :precision => 1, :significant => false, :strip_insignificant_zeroes => true) %>g</td>
 					 </tr>
 					 <tr>
-								<td class="left_indent">Saturated Fat <%= @food.saturated_fat %>g</td>
+								<td class="left_indent">Saturated Fat <%= number_with_precision(@food.saturated_fat, :precision => 0, :significant => false, :strip_insignificant_zeroes => true) %>g</td>
 					 </tr>
 					 <tr>
-								<td class="left_indent">Polyunsaturated Fat <%= @food.polyunsaturated_fat %>g</td>
+								<td class="left_indent">Polyunsaturated Fat <%= number_with_precision(@food.polyunsaturated_fat, :precision => 0, :significant => false, :strip_insignificant_zeroes => true) %>g</td>
 					 </tr>
 					 <tr>
-								<td class="left_indent">Monounsaturated Fat <%= @food.monounsaturated_fat %>g</td>
+								<td class="left_indent">Monounsaturated Fat <%= number_with_precision(@food.monounsaturated_fat, :precision => 0, :significant => false, :strip_insignificant_zeroes => true) %>g</td>
 					 </tr>
 					 <tr>
-								<td><b>Cholesterol</b> <%= @food.cholesterol %>mg</td>
+								<td><b>Cholesterol</b> <%= number_with_precision(@food.cholesterol, :precision => 0, :significant => false, :strip_insignificant_zeroes => true) %>mg</td>
 					 </tr>
 					 <tr>
-								<td><b>Sodium</b> <%= @food.sodium %>mg</td>
+								<td><b>Sodium</b> <%= number_with_precision(@food.sodium, :precision => 0, :significant => false, :strip_insignificant_zeroes => true) %>mg</td>
 					 </tr>
 					 <tr>
-								<td><b>Potassium</b> <%= @food.potassium %>mg</td>
+								<td><b>Potassium</b> <%= number_with_precision(@food.potassium, :precision => 0, :significant => false, :strip_insignificant_zeroes => true) %>mg</td>
 					 </tr>
 					 <tr>
 								<tr>
-										  <td><b>Total Carbohydrates</b> <%= @food.carbs %>g</td>
+										  <td><b>Total Carbohydrates</b> <%= number_with_precision(@food.carbs, :precision => 1, :significant => false, :strip_insignificant_zeroes => true) %>g</td>
 								</tr>
 								<tr>
-										  <td class="left_indent">Dietary Fiber <%= @food.dietary_fiber %></td>
+										  <td class="left_indent">Dietary Fiber <%= number_with_precision(@food.dietary_fiber, :precision => 0, :significant => false, :strip_insignificant_zeroes => true) %>g</td>
 								</tr>
 								<tr>
-										  <td class="left_indent">Sugars <%= @food.sugars %>g</td>
+										  <td class="left_indent">Sugars <%= number_with_precision(@food.sugars, :precision => 0, :significant => false, :strip_insignificant_zeroes => true) %>g</td>
 								</tr>
 								<tr>
-										  <td class="left_indent">Sugar Alcohols <%= @food.sugar_alcohols %>g</td>
+										  <td class="left_indent">Sugar Alcohols <%= number_with_precision(@food.sugar_alcohols, :precision => 0, :significant => false, :strip_insignificant_zeroes => true) %>g</td>
 								</tr>
 								<tr>
-										  <td><b>Protein</b> <%= @food.protein %>g</td>
+										  <td><b>Protein</b> <%= number_with_precision(@food.protein, :precision => 1, :significant => false, :strip_insignificant_zeroes => true) %>g</td>
 								</tr>
 								<tr>
 										  <td style="border:none">
