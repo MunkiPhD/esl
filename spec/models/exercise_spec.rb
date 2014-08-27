@@ -151,7 +151,7 @@ describe Exercise do
 			exercise_two = create(:exercise, muscle: muscle)
 			exercise_excluded = create(:exercise, muscle: nil)
 
-			expect(Exercise.for_muscle(muscle)).to eq [exercise_two, exercise_one]
+			expect(Exercise.for_muscle(muscle)).to eq [exercise_one, exercise_two]
 		end
 	end
 
@@ -162,7 +162,7 @@ describe Exercise do
 			exercise_two = create(:exercise, force_type: force_type)
 			exercise_excluded = create(:exercise)
 
-			expect(Exercise.for_force_type(force_type)).to eq [exercise_two, exercise_one]
+			expect(Exercise.for_force_type(force_type)).to eq [exercise_one, exercise_two]
 		end
 	end
 
@@ -173,7 +173,7 @@ describe Exercise do
 			exercise_two = create(:exercise, experience_level: experience_level)
 			exercise_excluded = create(:exercise)
 
-			expect(Exercise.for_experience_level(experience_level)).to eq [exercise_two, exercise]
+			expect(Exercise.for_experience_level(experience_level)).to eq [exercise, exercise_two]
 		end
 	end
 end
