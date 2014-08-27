@@ -35,6 +35,8 @@ class Exercise < ActiveRecord::Base
 
 	serialize :instructions, Array
 
+	default_scope  { order(name: :asc) }
+
 	validates :name, presence: true, uniqueness: true, length: {minimum: 3, maximum:60}
 	validates :exercise_type, presence: true
 	validates :equipment, presence: true

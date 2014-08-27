@@ -29,6 +29,16 @@ describe Exercise do
 		expect(build(:exercise)).to be_valid
 	end
 
+	it 'is ordered alphabetically by default' do
+		# delta = create(:exercise, name: "delta")
+		# alpha = create(:exercise, name: "alpha")
+		# zeta = create(:exercise, name: "zeta")
+		# expect(Exercise.all).to eq [alpha, delta, zeta]
+		# this is assuming we have the test data in the database, need to change this
+		exercises = Exercise.order(name: :asc).take(50)
+		expect(Exercise.take(50)).to eq exercises
+	end
+
 	describe 'validations' do
 		it "has a name" do
 			exercise = Exercise.new(name: '')
