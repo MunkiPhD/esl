@@ -90,6 +90,20 @@ feature 'User manages their profile info' do
 	end
 
 	scenario 'has appropriate units based on preferences' do
-		pending
+		logout_user
+		prefs = create(:user_preferences_metric)
+
+		metric_user = prefs.user
+		login_user metric_user
+
+		visit root_path
+		click_link metric_user.username
+
+		click_link "Edit"
+
+		within(".edit_user") do
+			expect(page).to have_content "cm"
+			expect(page).to_not have_content "inches"
+		end
 	end
 end
