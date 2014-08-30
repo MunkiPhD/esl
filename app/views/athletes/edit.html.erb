@@ -1,18 +1,25 @@
-<%= form_for current_user, url: athlete_path(current_user) do |f| %>
+<%= form_for current_user, url: athlete_path(current_user), html: { class: "form-inline edit_user" } do |f| %>
+	<div class="form-group">
 		  <%= f.label :birth_date %>
-		  <%= f.date_select :birth_date, order: [:day, :month, :year], end_year: Time.now.year - 90, start_year: Time.now.year - 10 %>
-
+		  <%= f.date_select :birth_date, { order: [:day, :month, :year], end_year: Time.now.year - 90, start_year: Time.now.year - 10 }, { class: "form-control" } %>
+	</div>
 		  <br/>
 
+	<div class="form-group" style="margin-top: 10px;">
 	 <%= f.label :height %>
-	 <%= f.text_field :height %> <%= Unit.for_unit_system(current_user.preferences.default_system_id).for_unit_type(:height).first.unit_abbr %>
-
+	 <%= f.text_field :height, class: "form-control" %> <%= Unit.for_unit_system(current_user.preferences.default_system_id).for_unit_type(:height).first.unit_abbr %>
+	</div>
 	 <br/>
 
+	 <div class="form-group" style="margin-top: 10px;">
 	 <%= f.label :gender %>
-	 <%= f.select :gender, options_for_select([["Unknown","unknown"], ["Male", "male"], ["Female","female"]], current_user.gender) %>
+	 <%= f.select  :gender, options_for_select([["Unknown","unknown"], ["Male", "male"], ["Female","female"]], current_user.gender), {}, { class: "form-control" } %>
+	 </div>
 
 	 <br/>
 
-	 <%= submit_tag "Save" %>
+ 	 <%= button_tag class: "btn btn-primary btn-large", style: "margin-top: 10px", type: 'submit' do %>
+		<span class="glyphicon glyphicon-check icon-white"></span> Save Info
+	<% end %>
+
 <% end %>
