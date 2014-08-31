@@ -104,6 +104,11 @@ feature 'User manages their profile info' do
 		within(".edit_user") do
 			expect(page).to have_content "cm"
 			expect(page).to_not have_content "inches"
+			fill_in 'Height', with: "178"
 		end
+
+		click_button "Save Info"
+
+		expect(page).to have_content "1.78 m (5' 10\")"
 	end
 end
