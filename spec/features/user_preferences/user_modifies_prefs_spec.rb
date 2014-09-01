@@ -15,7 +15,7 @@ feature 'User modifies their preferences' do
 	end
 
 	scenario 'can change their default unit system' do
-		visit user_preferences_path
+		visit athlete_path(user)
 
 		expect(page).to have_content 'Default Unit System: US'
 		expect(page).to have_content 'Weight: Pounds (lbs)'

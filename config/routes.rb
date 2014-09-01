@@ -12,7 +12,7 @@ Esl::Application.routes.draw do
 		end
 	end
 
-	resource :user_preferences, only: [:show, :edit, :update]
+	resource :user_preferences, only: [:edit, :update]
 	
 	resources :athletes, only: [:show, :edit, :update]
 

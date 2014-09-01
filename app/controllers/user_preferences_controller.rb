@@ -13,7 +13,7 @@ class UserPreferencesController < ApplicationController
 			@preferences.default_system_id = params[:default_unit_system]
 			if @preferences.update(user_preferences_params)
 				flash[:success] = "Unit system updated"
-				format.html { redirect_to user_preferences_path }
+				format.html { redirect_to athlete_path(current_user) }
 			end
 		end
 	end
