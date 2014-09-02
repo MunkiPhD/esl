@@ -8,7 +8,7 @@
 		<div class="form-group" style="margin-top: 10px;">
 			<%= f.label :log_date, "Log Date" %><br/>
 			<%= f.date_select :log_date, { order: [:day, :month, :year] }, class: "form-control" %>
-			<%= f.submit 'Save', class: "btn btn-primary" %>
+		  <%= submit_button "Save" %>
 		</div>
 	<% end %>
 </div>
