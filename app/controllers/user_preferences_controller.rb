@@ -1,9 +1,6 @@
 class UserPreferencesController < ApplicationController
 	before_filter :authenticate_user!
-	before_filter :set_preferences, only: [:show, :edit, :update]
-
-	def show
-	end
+	before_filter :set_preferences, only: [:edit, :update]
 
 	def edit
 	end
