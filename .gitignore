@@ -15,6 +15,5 @@ rerun.txt
 pickle-email-*.html
 *.swp
 *.swo
-public/images/*
 config/secrets.yml
 config/aws.yml
