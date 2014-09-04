@@ -1,4 +1,8 @@
 Esl::Application.routes.draw do
+	namespace :api, defaults: { format: :json } do
+		resources :body_weights, except: [:show]
+	end
+
 	resources :circles do
 		resources :members, controller: 'circle_members', only: [:index] do
 			collection do
