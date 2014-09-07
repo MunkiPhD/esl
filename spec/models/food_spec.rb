@@ -125,8 +125,8 @@ describe Food do
       expect(f.serving_size).to eq "1 serving"
     end
 
-    it "has a serving size less than 90 characters" do
-      food = Food.new(serving_size: ("A" * 91))
+    it "has a serving size less than 150 characters" do
+      food = Food.new(serving_size: ("A" * 151))
 			food.valid?
       expect(food.errors[:serving_size]).to include "is too long (maximum is 90 characters)"
 	  end

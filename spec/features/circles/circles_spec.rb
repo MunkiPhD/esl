@@ -9,7 +9,7 @@ feature "Circles" do
 
     visit circles_path
 
-    click_link "Create a Circle"
+    click_link "Save"
     fill_in "Name", with: circle.name
     fill_in "Motto", with: circle.motto
     fill_in "Description", with: circle.description
@@ -37,7 +37,7 @@ feature "Circles" do
 
     name = "#{circle.name} edited"
     fill_in "Name", with: name
-    click_button "Update Circle"
+    click_button "Save"
 
     visit circle_path(circle)
     expect(page).to have_content name
