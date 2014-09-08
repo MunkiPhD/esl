@@ -128,7 +128,7 @@ describe Food do
     it "has a serving size less than 150 characters" do
       food = Food.new(serving_size: ("A" * 151))
 			food.valid?
-      expect(food.errors[:serving_size]).to include "is too long (maximum is 90 characters)"
+      expect(food.errors[:serving_size]).to include "is too long (maximum is 150 characters)"
 	  end
 
 	  it "#search_for will also return results that aren't in correct case" do

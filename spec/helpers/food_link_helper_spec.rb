@@ -7,7 +7,7 @@ describe FoodLinkHelper do
 			result = helper.link_to_log_food(food)
 
 			data_attr_id = "data-id=\"#{food.id}\""
-			data_attr_url = "data-url=\"#{food_log_foods_path(food)}\""
+			data_attr_url = "data-url=\"#{api_log_foods_path(food)}\""
 
 			expect(result).to include(data_attr_id)
 			expect(result).to include(data_attr_url)

@@ -1,6 +1,5 @@
 class LogFoodsController < ApplicationController
 	before_filter :authenticate_user!
-	respond_to :html, :json
 
 	def index
 		@food = Food.find(params[:food_id])
@@ -23,13 +22,10 @@ class LogFoodsController < ApplicationController
 		respond_to do |format|
 			if @logged_food.save
 				format.html { redirect_to nutrition_path, notice: "Logged #{@logged_food.servings} servings of #{@logged_food.food_name}" }
-				format.json { render status: :created }
 			else
 				format.html { render action: 'new' }
-				format.json { render json: @logged_food.errors, status: :unprocessable_entity }
 			end
 		end
-
 	end
 
 	def edit
