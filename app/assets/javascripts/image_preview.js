@@ -1,9 +1,9 @@
-function readURL(input) {
+function readURL(input, previewElementId) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#food_image_upload_preview').attr('src', e.target.result);
+            $(previewElementId).attr('src', e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -12,6 +12,6 @@ function readURL(input) {
 
 $(document).ready(function(e){
 	$("#food_food_image").change(function(){
-		readURL(this);
+		readURL(this, "#food_image_upload_preview");
 	});
 });
