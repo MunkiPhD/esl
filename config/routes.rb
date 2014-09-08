@@ -1,6 +1,7 @@
 Esl::Application.routes.draw do
 	namespace :api, defaults: { format: :json } do
 		resources :body_weights, except: [:show]
+		resources :log_foods, only: [:create]
 	end
 
 	resources :circles do
