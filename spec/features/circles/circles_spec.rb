@@ -9,13 +9,13 @@ feature "Circles" do
 
     visit circles_path
 
-    click_link "Save"
+    click_link "Create a Circle"
     fill_in "Name", with: circle.name
     fill_in "Motto", with: circle.motto
     fill_in "Description", with: circle.description
 
     expect {
-    click_button "Create Circle"
+    click_button "Save"
     }.to change(Circle, :count).by(1)
 
     expect(page).to have_content circle.name
