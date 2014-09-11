@@ -47,8 +47,11 @@ end
 group :development, :test do
 	gem 'timecop'
 	gem 'launchy'
-	gem 'rspec', '~> 3.0.0'
-	gem "rspec-rails", '~> 3.0.0'
+	gem 'rspec', '~> 3.1.0'
+	gem 'rspec-core', '~> 3.1.0'
+	gem 'rspec-expectations', '~> 3.1.0'
+	gem 'rspec-support', '~> 3.1.0'
+	gem "rspec-rails", '~> 3.1.0'
 end
 
 group :test do
