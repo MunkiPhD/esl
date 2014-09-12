@@ -2,6 +2,7 @@ Esl::Application.routes.draw do
 	namespace :api, defaults: { format: :json } do
 		resources :body_weights, except: [:show]
 		resources :log_foods, only: [:create]
+		get 'nutrition/log/daily_totals', to: 'log_foods#daily_totals', as: 'log_food_daily_totals'
 	end
 
 	resources :circles do
@@ -60,11 +61,6 @@ Esl::Application.routes.draw do
 		get 'foods', to: 'foods#search', as: :search_food
 		get '/', to: 'nutrition#index', as: :nutrition
 	end
-
-	scope '/api' do
-		get 'nutrition/log/daily_totals', to: 'log_foods#daily_totals', as: 'log_food_daily_totals'
-	end
-
 
 	root to: "home#index"
 end
