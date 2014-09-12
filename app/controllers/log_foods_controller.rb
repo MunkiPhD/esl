@@ -19,12 +19,10 @@ class LogFoodsController < ApplicationController
 	def create
 		@logged_food = current_user.log_foods.build(logged_food_params)
 
-		respond_to do |format|
-			if @logged_food.save
-				format.html { redirect_to nutrition_path, notice: "Logged #{@logged_food.servings} servings of #{@logged_food.food_name}" }
-			else
-				format.html { render action: 'new' }
-			end
+		if @logged_food.save
+			redirect_to nutrition_path, notice: "Logged #{@logged_food.servings} servings of #{@logged_food.food_name}" 
+		else
+			render action: 'new' 
 		end
 	end
 
