@@ -37,6 +37,7 @@ gem 'aws-sdk', '~> 1.5.7'
 gem 'activerecord-import', ">= 0.4.0", require: false
 
 gem 'rails_12factor', group: :production
+gem 'pg_search'
 
 group :development do
 	gem "annotate"

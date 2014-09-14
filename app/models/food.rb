@@ -72,6 +72,7 @@
 
 class Food < ActiveRecord::Base
 	include NiceUrl
+	include PgSearch
 
 	before_validation :sum_calories
 
@@ -140,17 +141,10 @@ class Food < ActiveRecord::Base
 		:chloride,
 		greater_than_or_equal_to: 0
 
-
-	#
-	# Searches for food items with the name or brand like the passed query. Very crude SQL implementation using LIKE
-	#
-	def self.search_for(query_string)
-		if query_string
-			where('lower(name) ILIKE ? OR lower(brand) ILIKE ?', "%#{query_string.downcase}%", "%#{query_string.downcase}%")
-		else
-			Food.none
-		end
-	end
+	pg_search_scope :search_for, against: [ [:name, "A"], [:brand, "B"] ], 
+		using: {
+			tsearch: { prefix: true }
+		}
 
 	private
 
