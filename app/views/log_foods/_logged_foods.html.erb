@@ -6,7 +6,7 @@
 	<div class="food-item-info">
 		<div class="control-panel">
 			<%= link_to_edit "", edit_log_food_path(logged), name: "Edit", class: "btn-xs" %>
-			<%= link_to_ajax_destroy "", logged, name: "Delete", class: "btn-xs", data: { confirm: "Are you sure you want to delete #{logged.servings} servings of #{logged.food_name}?" }%>
+			<%= link_to_ajax_destroy "", logged, name: "Delete", class: "btn-xs", data: { confirm: "Are you sure you want to delete #{logged.servings} servings of #{logged.food_name}?" }, remote: true %>
 		</div>
 		<h4><%= link_to logged.food_name, logged.food %></h4>
 		<h3></h3>

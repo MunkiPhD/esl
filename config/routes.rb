@@ -2,6 +2,7 @@ Esl::Application.routes.draw do
 	namespace :api, defaults: { format: :json } do
 		resources :body_weights, except: [:show]
 		resources :log_foods, only: [:create]
+		resources :nutrition_goals, only: [:index]
 		get 'nutrition/log/daily_totals', to: 'log_foods#daily_totals', as: 'log_food_daily_totals'
 	end
 
