@@ -30,7 +30,8 @@ $(document).on('click', 'a.btn-remove-exercise', function(){
 function AddWorkoutSetToContainer(containerId) {
 	var $container = $(containerId);
 
-	var set_number = 1;
+	var current_sets_count = $container.closest('.workouts_workout_exercise').find(".set-number").length;
+	var set_number = current_sets_count + 1;
 	var workout_exercise_index = $container.parents("table").data('index');
 	var workout_set_id = GenerateUniqueId();
 
