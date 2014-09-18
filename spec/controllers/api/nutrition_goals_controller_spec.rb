@@ -9,6 +9,10 @@ describe API::NutritionGoalsController, type: :controller do
 		sign_in user
 	end
 
+	after :each do
+		LogFood.delete_all
+	end
+
 	describe 'GET index' do
 		it 'returns http success' do
 			get :index, format: "json"
@@ -31,15 +35,23 @@ describe API::NutritionGoalsController, type: :controller do
 
 		it 'returns the daily totals for the specified date' do
 			Timecop.freeze(Date.today) do
-				log_food = create(:log_food, user: user, servings: 2, log_date: 2.days.ago)
-				p log_food.log_date
-				get :index, { format: "json", selected_date: { year: 2.days.ago.year, month: 2.days.ago.month, day: 2.days.ago.day }}
+				food = create(:food, protein: 10, total_fat: 20, carbs: 30)
+				log_food = create(:log_food, user: user, servings: 2, log_date: 3.days.ago, food: food)
+				p "Log Food: Calories: #{log_food.calories}   Protein: #{log_food.protein} ======== C:#{food.calories} P:#{food.protein}"
+				get :index, { format: "json", log_date: { year: 3.days.ago.year, month: 3.days.ago.month, day: 3.days.ago.day }}
 
 				parsed_json = JSON.parse(response.body)
-				expect(parsed_json["daily_totals"]["calories"]).to eq log_food.calories * 2
-				expect(parsed_json["daily_totals"]["protein"]).to eq log_food.protein * 2
-				expect(parsed_json["daily_totals"]["total_fat"]).to eq log_food.total_fat * 2
-				expect(parsed_json["daily_totals"]["carbs"]).to eq log_food.carbs * 2
+				expect(parsed_json["daily_totals"]["calories"].to_i).to eq log_food.calories
+				expect(parsed_json["daily_totals"]["protein"].to_i).to eq log_food.protein
+				expect(parsed_json["daily_totals"]["total_fat"].to_i).to eq log_food.total_fat
+				expect(parsed_json["daily_totals"]["carbs"].to_i).to eq log_food.carbs
+
+				get :index, { format: "json", log_date: { year: Date.today.year, month: Date.today.month, day: Date.today.day }}
+				parsed_json = JSON.parse(response.body)
+				expect(parsed_json["daily_totals"]["calories"]).to eq 0
+				expect(parsed_json["daily_totals"]["protein"]).to eq 0
+				expect(parsed_json["daily_totals"]["total_fat"]).to eq 0
+				expect(parsed_json["daily_totals"]["carbs"]).to eq 0
 			end
 		end
 
