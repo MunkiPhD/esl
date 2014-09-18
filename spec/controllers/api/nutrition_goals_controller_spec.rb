@@ -36,22 +36,26 @@ describe API::NutritionGoalsController, type: :controller do
 		it 'returns the daily totals for the specified date' do
 			Timecop.freeze(Date.today) do
 				food = create(:food, protein: 10, total_fat: 20, carbs: 30)
-				log_food = create(:log_food, user: user, servings: 2, log_date: 3.days.ago, food: food)
-				p "Log Food: Calories: #{log_food.calories}   Protein: #{log_food.protein} ======== C:#{food.calories} P:#{food.protein}"
-				get :index, { format: "json", log_date: { year: 3.days.ago.year, month: 3.days.ago.month, day: 3.days.ago.day }}
+				log_date = 3.days.ago
+				log_food = create(:log_food, user: user, servings: 2, log_date: log_date, food: food)
+				get :index, { format: "json", log_date: { year: log_date.year, month: log_date.month, day: log_date.day }}
 
 				parsed_json = JSON.parse(response.body)
 				expect(parsed_json["daily_totals"]["calories"].to_i).to eq log_food.calories
 				expect(parsed_json["daily_totals"]["protein"].to_i).to eq log_food.protein
 				expect(parsed_json["daily_totals"]["total_fat"].to_i).to eq log_food.total_fat
 				expect(parsed_json["daily_totals"]["carbs"].to_i).to eq log_food.carbs
+				expect(parsed_json["log_date"]).to eq format_date(log_date)
 
-				get :index, { format: "json", log_date: { year: Date.today.year, month: Date.today.month, day: Date.today.day }}
+				# just to make sure it isnt getting todays stuff
+				today = Date.today
+				get :index, { format: "json", log_date: { year: today.year, month: today.month, day: today.day }}
 				parsed_json = JSON.parse(response.body)
 				expect(parsed_json["daily_totals"]["calories"]).to eq 0
 				expect(parsed_json["daily_totals"]["protein"]).to eq 0
 				expect(parsed_json["daily_totals"]["total_fat"]).to eq 0
 				expect(parsed_json["daily_totals"]["carbs"]).to eq 0
+				expect(parsed_json["log_date"]).to eq format_date(today)
 			end
 		end
 
