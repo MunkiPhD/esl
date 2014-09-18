@@ -38,6 +38,7 @@ describe API::NutritionGoalsController, type: :controller do
 				food = create(:food, protein: 10, total_fat: 20, carbs: 30)
 				log_date = 3.days.ago
 				log_food = create(:log_food, user: user, servings: 2, log_date: log_date, food: food)
+
 				get :index, { format: "json", log_date: { year: log_date.year, month: log_date.month, day: log_date.day }}
 
 				parsed_json = JSON.parse(response.body)
@@ -47,9 +48,12 @@ describe API::NutritionGoalsController, type: :controller do
 				expect(parsed_json["daily_totals"]["carbs"].to_i).to eq log_food.carbs
 				expect(parsed_json["log_date"]).to eq format_date(log_date)
 
-				# just to make sure it isnt getting todays stuff
+
+				# issue a request to todays totals to make sure the previous test didnt get some other dates data
 				today = Date.today
+
 				get :index, { format: "json", log_date: { year: today.year, month: today.month, day: today.day }}
+
 				parsed_json = JSON.parse(response.body)
 				expect(parsed_json["daily_totals"]["calories"]).to eq 0
 				expect(parsed_json["daily_totals"]["protein"]).to eq 0
