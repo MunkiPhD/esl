@@ -20,6 +20,7 @@ $(document).ready(function(){
 			$theEntry.parents(".logged-food-entry").fadeOut('slow', function(){
 				//* animation complete*/
 				RefreshDailyTotalsPieChart() // refresh the daily totals
+				RefreshDailyTotals();
 			});
 		});
 
@@ -28,7 +29,31 @@ $(document).ready(function(){
 
 });
 
+function RefreshDailyTotals(){
+	/* get the json data from the api call */
+	try {
+		var currentDate = $("#selected_date_value").val(); 
+		console.log("date: " + currentDate);
 
+		$.ajax({
+			type: "GET",
+			data: { log_date: currentDate },
+			dataType: "json",
+			url: 'api/nutrition_goals/'
+		}).done(function(data, status, xhr){
+			console.log("nutrition goals data:");
+			console.log(data);
+
+		}).fail(function(xhr, status, error){
+			Security.HandleStatusCode(xhr, status, error);
+
+		}).always(function(){
+			// do nothing
+		});
+	}catch(e){
+		console.log(e);
+	}
+}
 //
 // Refreshes the pie chart that displays the daily totals of macronutrient intake
 //
