@@ -1,21 +1,18 @@
 class API::NutritionGoalsController < ApplicationController
 	before_filter :authenticate_user!
+	before_filter :set_goal
 
 	def index
-		@presenter = Nutrition::DashboardPresenter.new(current_user, selected_date)
+		@nutrition_goals = current_user.nutrition_goal
+		p @nutrition_goals
 	end
 
 	private
-	def selected_date
-		d = Date.new(date_params[:year].to_i, date_params[:month].to_i, date_params[:day].to_i) rescue nil
-		if d
-			return d
-		else
-			return Date.today
+	def set_goal
+		@nutrition_goal = current_user.nutrition_goal
+		if @nutrition_goal.blank?
+			NutritionGoal.new(user: current_user).save
 		end
-	end
-
-	def date_params
-		params.require(:log_date)
+		@nutrition_goal = current_user.nutrition_goal
 	end
 end
