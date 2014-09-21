@@ -81,7 +81,6 @@ function LogFoodItemHandler(link) {
 
 
 function LogFood($container){
-	console.log("inside LogFood()");
 	var $parent = $container.find("form.food-item-log-new");
 	var serializedData = $parent.serialize(); // This gets all the data from the form
 	var actionUrl = $parent.attr("action");
@@ -112,9 +111,9 @@ function LogFood($container){
 
 window.FoodLog.CreateDataForPieChart = function(json){
 	// parse the numbers to get them into numerical format //
-	var protein = parseFloat(json.protein);
-	var carbs = parseFloat(json.carbs);
-	var fat = parseFloat(json.fat);
+	var protein = parseFloat(json["daily_totals"].protein);
+	var carbs = parseFloat(json["daily_totals"].carbs);
+	var fat = parseFloat(json["daily_totals"].total_fat);
 	var total = protein + carbs + fat;
 
 	if(total == 0){

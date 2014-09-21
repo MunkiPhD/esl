@@ -12,13 +12,6 @@ class API::LogFoodsController < ApplicationController
 		end
 	end
 
-	def daily_totals
-		date = Date.parse(params[:date])
-		@totals = DailyNutritionTotals.new(current_user).on_date(date)
-
-		render 'daily_totals'
-	end
-
 	private
 	def logged_food_params
 		params.require(:log_food).permit(:servings, :log_date, :food_id)

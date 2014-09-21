@@ -4,7 +4,6 @@ class API::NutritionGoalsController < ApplicationController
 
 	def index
 		@nutrition_goals = current_user.nutrition_goal
-		p @nutrition_goals
 	end
 
 	private

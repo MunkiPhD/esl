@@ -3,7 +3,6 @@ Esl::Application.routes.draw do
 		resources :body_weights, except: [:show]
 		resources :log_foods, only: [:create]
 		resources :nutrition_goals, only: [:index]
-		get 'nutrition/log/daily_totals', to: 'log_foods#daily_totals', as: 'log_food_daily_totals'
 		get 'nutrition/daily_nutrition_stats', to: 'day_nutrition_stats#index', as: 'day_nutrition_stats'
 	end
 
