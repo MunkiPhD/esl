@@ -1,32 +1,36 @@
 require 'rails_helper'
 
 feature "Person searching for food" do
-  scenario "searches for a food item" do
-    bread = create(:bread)
+	before :each do 
+		Food.delete_all
+	end
 
-    perform_search("bread")
+	scenario "searches for a food item" do
+		bread = create(:bread)
 
-    expect(page).to have_link bread.name
-    expect(page).to have_content "Search for 'bread' found 1 result."
-  end
+		perform_search("bread")
 
-  scenario "recieves more than one result" do
-    bread = create(:bread)
-    bread2 = create(:bread, name: "Sourdough Bread")
+		expect(page).to have_link bread.name
+		expect(page).to have_content "Search for 'bread' found 1 result."
+	end
 
-    perform_search("bread")
-		
+	scenario "recieves more than one result" do
+		bread = create(:bread)
+		bread2 = create(:bread, name: "Sourdough Bread")
 
-    expect(page).to have_link bread.name
-    expect(page).to have_link bread2.name
-    expect(page).to have_content "Search for 'bread' found 2 results."
-  end
+		perform_search("bread")
 
-  def perform_search(terms)
-    visit search_food_path
-    expect(page).to have_text "Search for a food!"
 
-    fill_in "search", with: terms
-    click_button "Search"
-  end
+		expect(page).to have_link bread.name
+		expect(page).to have_link bread2.name
+		expect(page).to have_content "Search for 'bread' found 2 results."
+	end
+
+	def perform_search(terms)
+		visit search_food_path
+		expect(page).to have_text "Search for a food!"
+
+		fill_in "search", with: terms
+		click_button "Search"
+	end
 end
