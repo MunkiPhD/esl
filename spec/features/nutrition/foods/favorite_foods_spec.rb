@@ -7,6 +7,12 @@ feature "User manages favorite foods" do
     login_user user
   end
 
+  scenario 'by accessing it from the favorite foods link on the main page' do
+		visit root_path
+		click_link "favorite foods"
+		expect(page).to have_content "Favorite Foods"
+  end
+
 	scenario 'user sees message if no foods marked as favorite' do
 		visit favorite_foods_path
 		expect(page).to have_content "You currently have no favorite foods!"
