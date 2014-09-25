@@ -1,9 +1,17 @@
 <h2>Change your password</h2>
 
 <%= form_for(@user, :url => password_path(@user), :html => { :method => :put }) do |f| %>
-  <%= f.hidden_field :reset_password_token %>
+  <% if @user.errors.any? %>  
+  <div id="errorExplanation">  
+  <h2><%= pluralize(@user.errors.count, "error") %>  prohibited your password from being changed:</h2>  
+  <ul>  
+    <% @user.errors.full_messages.each do |msg| %>  
+      <li><%= msg %></li>  
+  <% end %>  
+  </ul>  
+</div>  
 
-  <div><%= f.label :current_password %>
+  <% end %> <div><%= f.label :current_password %>
   <%= f.password_field :current_password %>
 <i>(current password is needed to confirm changes)</i><br/>
 </div>
