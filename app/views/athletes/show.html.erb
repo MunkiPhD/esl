@@ -10,4 +10,7 @@ Age: <%= @user.age.nil? ? "unknown" : @user.age %>
 	<hr/>
 	<%= render 'user_preferences/display_prefs', preferences: current_user.preferences %>
 	<%= link_to_edit "Edit Preferences", edit_user_preferences_path %>
+
+	<hr/>
+	<%= link_to "Change Password", edit_user_password_path %>
 <% end %>
