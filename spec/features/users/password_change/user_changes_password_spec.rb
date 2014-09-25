@@ -21,6 +21,31 @@ feature 'User changes their password' do
 		expect(page).to have_content "Current password is invalid"
 	end
 
+	scenario 'displays errors if current password is blank' do
+		change_user_password("", "newpassword", "newpassword")
+		expect(page).to have_content "Current password can't be blank"
+	end
+
+	scenario 'displays errors if new password does not match confirmation' do
+		change_user_password(user.password, "newpassword", "newpassworddifferent")
+		expect(page).to have_content "Password confirmation doesn't match Password"
+	end
+
+	scenario 'provides current password, but leaves everything else blank, does not change password' do
+		change_user_password(user.password, "", "")
+		expect(page).to have_content "Password Updated Successfully"
+		logout_user
+
+		visit root_path
+
+		click_link "login"
+		fill_in "Login", with: user.email
+		fill_in "Password", with: user.password
+
+		click_button "Sign in"
+		expect(page).to have_link user.username
+		expect(page).to have_link "logout"
+	end
 
 	scenario 'changes their password and is redirected to the account page' do
 		change_user_password(user.password, "newpassword", "newpassword")
