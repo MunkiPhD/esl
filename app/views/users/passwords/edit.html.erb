@@ -1,26 +1,34 @@
 <h2>Change your password</h2>
+<div class="row">
+		  <div class="col-md-6 col-md-offset-3">
 
 <%= form_for(@user, :url => password_path(@user), :html => { :method => :put }) do |f| %>
-  <% if @user.errors.any? %>  
-  <div id="errorExplanation">  
-  <h2><%= pluralize(@user.errors.count, "error") %>  prohibited your password from being changed:</h2>  
-  <ul>  
-    <% @user.errors.full_messages.each do |msg| %>  
-      <li><%= msg %></li>  
-  <% end %>  
-  </ul>  
+		  <% if @user.errors.any? %>  
+		  <div id="errorExplanation">  
+		  <h2><%= pluralize(@user.errors.count, "error") %>  prohibited your password from being changed:</h2>  
+		  <ul>  
+					 <% @user.errors.full_messages.each do |msg| %>  
+								<li><%= msg %></li>  
+		  <% end %>  
+		  </ul>  
 </div>  
+  <% end %> 
 
-  <% end %> <div><%= f.label :current_password %>
-  <%= f.password_field :current_password %>
-<i>(current password is needed to confirm changes)</i><br/>
+<div class="form-group" style="margin-top: 10px;">
+		  <%= f.label :current_password %>
+		  <%= f.password_field :current_password, class: "form-control" %>
+		  <i>(current password is needed to confirm changes)</i><br/>
 </div>
 
-  <div><%= f.label :password, "New password" %>
-  <%= f.password_field :password %></div>
+<div class="form-group" style="margin-top: 10px;">
+<%= f.label :password, "New password" %>
+		  <%= f.password_field :password, class: "form-control" %></div>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %>
-  <%= f.password_field :password_confirmation %></div>
+<div class="form-group" style="margin-top: 10px;">
+<%= f.label :password_confirmation, "Confirm new password" %>
+		  <%= f.password_field :password_confirmation, class: "form-control" %></div>
 
-  <div><%= f.submit "Change my password", class: "btn btn-primary" %></div>
+<div><%= f.submit "Change my password", class: "btn btn-primary" %></div>
 <% end %>
+</div>
+</div>
