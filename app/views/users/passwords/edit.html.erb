@@ -16,17 +16,17 @@
 
 <div class="form-group" style="margin-top: 10px;">
 		  <%= f.label :current_password %>
-		  <%= f.password_field :current_password, class: "form-control" %>
+		  <%= f.password_field :current_password, class: "esl-form-control" %>
 		  <i>(current password is needed to confirm changes)</i><br/>
 </div>
 
 <div class="form-group" style="margin-top: 10px;">
 <%= f.label :password, "New password" %>
-		  <%= f.password_field :password, class: "form-control" %></div>
+		  <%= f.password_field :password, class: "esl-form-control" %></div>
 
 <div class="form-group" style="margin-top: 10px;">
 <%= f.label :password_confirmation, "Confirm new password" %>
-		  <%= f.password_field :password_confirmation, class: "form-control" %></div>
+		  <%= f.password_field :password_confirmation, class: "esl-form-control" %></div>
 
 <div><%= f.submit "Change my password", class: "btn btn-primary" %></div>
 <% end %>

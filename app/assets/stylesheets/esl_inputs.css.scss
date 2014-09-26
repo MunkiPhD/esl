@@ -1,0 +1,23 @@
+.esl-form-control {
+		  -webkit-box-shadow: rgba(0, 0, 0, 0.0742188) 0px 1px 1px inset;
+		  background-color: white;
+		  background-image: none;
+		  border: 1px solid #CCC;
+		  border-bottom-left-radius: 4px 4px;
+		  border-bottom-right-radius: 4px 4px;
+		  border-top-left-radius: 4px 4px;
+		  border-top-right-radius: 4px 4px;
+		  color: #555; //red
+		  display: block;
+		  font-size: 14px;
+		  height: 34px;
+		  line-height: 1.42857;
+		  padding: 6px 12px;
+		  width: 100%;
+}
+
+.esl-form-control:focus {
+		  -webkit-box-shadow: rgba(0, 0, 0, 0.0742188) 0px 1px 1px inset, rgba(102, 175, 233, 0.597656) 0px 0px 8px;
+		  border-color: #66AFE9;
+		  outline: 0px;
+}
