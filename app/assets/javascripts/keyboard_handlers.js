@@ -9,22 +9,3 @@ function SubmitOnEnter(event){
 	// Submit the form.
 	$(event.target).closest('form').submit();	
 }
-
-
-$(document).ready(function(){
-	$('#search').keypress(function(e){
-		SubmitOnEnter(e);
-	});
-
-	$('#body_weight_weight').keypress(function(e){
-		SubmitOnEnter(e);
-	});
-
-	$('#user_password').keypress(function(e){
-		SubmitOnEnter(e);
-	});
-
-	$('#user_password_confirmation').keypress(function(e){
-		SubmitOnEnter(e);
-	});
-});
