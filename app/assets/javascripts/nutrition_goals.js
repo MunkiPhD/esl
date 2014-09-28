@@ -1,15 +1,5 @@
 var NutritionGoals = window.NutritionGoals || {};
 
-$(document).keypress(function(e) {
-	if(e.which == 13) {
-		EnterKeyPressedHandler();
-		return false;
-	}
-	return true;
-});
-
-
-
 $(document).ready(function(){
 	$("#desired_calories").change(function(){
 		DesiredCaloriesChangedHandler();
@@ -32,6 +22,14 @@ $(document).ready(function(){
 
 	$("#nutrition_goal_calories, #nutrition_goal_protein, #nutrition_goal_carbs, #nutrition_goal_total_fat").change(function () {
 		UpdateTotalsByMacroNutrients();
+	});
+
+	$("#nutrition_goal_calories, #nutrition_goal_protein, #nutrition_goal_carbs, #nutrition_goal_total_fat").keypress(function (e) {
+		if(e.which == 13) {
+			EnterKeyPressedHandler();
+			return false;
+		}
+		return true;
 	});
 
 
