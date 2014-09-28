@@ -10,7 +10,9 @@
 		  <% if @favorite_food.blank? %>
 					 <%= form_tag(favorite_foods_path, method: "POST", id: "add_food_to_favorites_form") do %>
 						<%= hidden_field_tag "id", @food.id %>
-						<%= submit_tag "Add to Favorites", class: "btn btn-success" %>
+						<%= button_tag(type: "submit", class: "btn btn-warning") do %>
+							<i class="glyphicon glyphicon-star"></i>Add to Favorites
+						<% end %>
 					<% end %>
 			<% else %>
 					 <%= link_to_destroy "Remove from Favorites", @favorite_food, method: "delete" %>
