@@ -15,9 +15,12 @@ $(document).on('click', "a.btn-add-set", function (e) {
 
 $(document).on('click', 'a.btn-remove-set', function(){
 	$(this).prev("input[name*='_destroy']").val(true);
-	$(this).parents('tr.workout-set').fadeOut('slow');
+	$(this).parents('tr.workout-set').fadeOut('slow', function(){
+		RecalculateSetNumbers($(this).parents(".workouts_workout_exercise")[0]);
+	});
 	return false;
 });
+
 
 
 $(document).on('click', 'a.btn-remove-exercise', function(){
@@ -25,6 +28,17 @@ $(document).on('click', 'a.btn-remove-exercise', function(){
 	$(this).parents('table').fadeOut('slow');
 	return false;
 });
+
+
+function RecalculateSetNumbers(exerciseContainer){
+	//set the displayed and actual rep number
+	var counter = 1;
+	$(exerciseContainer).find(".set-number").filter(":visible").each(function(index){
+		$(this).next(".set-field").val(counter);
+		$(this).html(counter);
+		counter += 1;
+	});
+}
 
 
 function AddWorkoutSetToContainer(containerId) {
