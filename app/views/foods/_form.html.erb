@@ -139,5 +139,10 @@ $(document).ready(function(){
 	$("#calories_popover_btn").on('click', function(){
 		$(this).popover('show');
 	});
+
+	$("#food_food_image").change(function(){
+		console.log("image preview initialized");
+		readURL(this, "#food_image_upload_preview");
+	});
 });
 </script>

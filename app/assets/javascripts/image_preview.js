@@ -10,8 +10,11 @@ function readURL(input, previewElementId) {
     }
 }
 
+/*
 $(document).ready(function(e){
 	$("#food_food_image").change(function(){
+		console.log("image preview initialized");
 		readURL(this, "#food_image_upload_preview");
 	});
 });
+*/
