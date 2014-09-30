@@ -53,7 +53,7 @@ function LogFoodItemHandler(link) {
 
 		$foodDialogDiv.dialog({
 			resizable: false,
-			width: 550,
+			width: 675,
 			modal: true,
 			buttons: [
 				{
