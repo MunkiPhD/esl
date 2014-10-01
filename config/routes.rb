@@ -4,6 +4,11 @@ Esl::Application.routes.draw do
 		resources :log_foods, only: [:create]
 		resources :nutrition_goals, only: [:index]
 		get 'nutrition/daily_nutrition_stats', to: 'day_nutrition_stats#index', as: 'day_nutrition_stats'
+
+		scope '/nutrition' do
+			resources :foods, except: [:index]
+			get 'foods', to: 'foods#search', as: :search_food
+		end
 	end
 
 	resources :circles do
