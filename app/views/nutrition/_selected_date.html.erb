@@ -9,7 +9,7 @@
   <% end %>
   <% if selected_date != Date.today %>
     <div class="go-back-to-today">
-      <%= link_to "Go back to today", nutrition_path%>
+				<%= link_to "Go back to today", nutrition_path(log_date: { day: Date.today.day, month: Date.today.month, year: Date.today.year})%>
     </div>
   <% end %>
 </div>

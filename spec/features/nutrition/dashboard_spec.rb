@@ -59,5 +59,23 @@ feature "user visits the dashboard" do
       click_button 'Search'
       expect(page).to have_link food.name
     end
+
+	 scenario "selecting a different date will maintain that date as the day to view, even if changed" do
+		Timecop.freeze(Date.today) do
+			visit nutrition_path
+			expect(page).to have_content format_date(Date.today)
+
+			date = 4.days.ago
+			select date.day.to_s, from: 'log_date_day'
+			select date.strftime("%B"), from: 'log_date_month'
+			select date.year.to_s, from: 'log_date_year'
+			click_button 'Go'
+
+			expect(page).to have_content format_date(date)
+			visit root_path
+			visit nutrition_path
+			expect(page).to have_content format_date(date)
+		end
+	 end
   end
 end
