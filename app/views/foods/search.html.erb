@@ -12,7 +12,9 @@
 		<div class="control-panel">
 			<%= link_to_log_food food %>
 		</div>
-		<h4><%= link_to food.name, food_path(food) %></h4>
+		<div class="food-name-l">
+			<h4><%= link_to food.name, food_path(food) %></h4>
+		</div>
 		<h3></h3>
 		<%= macronutrient_summary_display(food) %>
 		<div class="serving-size"><%= food.serving_size %></div>

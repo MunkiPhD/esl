@@ -40,10 +40,23 @@
 				}
 		 }
 
-	 	h4 {
+	 	.food-name {
 				font-size: 20px;
 				padding: 0px;
 				margin: 0px 0px 0px 0px;
+				position: absolute;
+				top:0;
+				left: 0;
+				max-width:360px;
+		}
+	 	.food-name-l {
+				font-size: 20px;
+				padding: 0px;
+				margin: 0px 0px 20px 0px;
+				position: absolute;
+				top:0;
+				left: 0;
+				max-width:430px;
 		}
 		h5 {
 				font-size: 15px;
@@ -62,6 +75,10 @@
 				right: 10px;
 				bottom: -5px;
 				position: absolute;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;			
+				max-width: 140px;
 	 }
 	 .control-panel {
 				position: absolute;
