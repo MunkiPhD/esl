@@ -20,7 +20,9 @@ describe API::FoodsController, type: :controller do
 
 			get :search, { format: "json", search: "est" }
 			parsed_json = JSON.parse(response.body)
-			expect(response.status).to eq 201
+
+			p response.body
+			p "---------------------"
 
 			json_food = parsed_json[0]
 			expect(json_food["name"]).to eq food_one.name
