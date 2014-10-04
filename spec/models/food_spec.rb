@@ -86,6 +86,12 @@ describe Food do
 					expect(food.calories).to eq total_calories
 					expect(food.calories_from_fat).to eq (food.total_fat * 9)
 			end
+
+			it 'returns 0 for a value if it was null' do
+				food = build(:food, protein: nil, total_fat: nil, carbs: nil)
+				food.valid?
+				expect(food.calories).to eq 0
+			end
 		end
 	end
 

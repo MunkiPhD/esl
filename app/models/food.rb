@@ -149,7 +149,7 @@ class Food < ActiveRecord::Base
 	private
 
 	def sum_calories
-		self.calories_from_fat = (9 * self.total_fat)
-		self.calories = (4 * self.protein) + (4 * self.carbs) + self.calories_from_fat
+		self.calories_from_fat = (9 * self.total_fat ||= 0)
+		self.calories = (4 * self.protein ||= 0) + (4 * self.carbs ||= 0) + self.calories_from_fat ||= 0
 	end
 end
