@@ -7,6 +7,7 @@ describe API::FoodsController, type: :controller do
 
 	before :each do
 		sign_in user
+		Food.delete_all
 	end
 
 	describe "GET 'search'" do
@@ -35,17 +36,39 @@ describe API::FoodsController, type: :controller do
 			expect(json_food["id"]).to eq food_one.id
 		end
 
-		it 'returns correct paged results' do
-			Food.delete_all
 
-			for i in 1..28
+		it 'returns correct paged results' do
+			parsed_json = create_and_issue_request(3)
+			expect(parsed_json["foods"].size).to eq 3
+		end
+
+
+		it 'has the correct meta data on the result count' do
+			parsed_json = create_and_issue_request
+			expect(parsed_json["results"]["count"]).to eq 28
+		end
+
+
+		it 'has the current page number' do
+			parsed_json = create_and_issue_request
+			expect(parsed_json["results"]["page"]).to eq 1
+		end
+
+
+		it 'has the total number of pages' do
+			parsed_json = create_and_issue_request(35)
+			expect(parsed_json["results"]["page_count"]).to eq 2
+		end
+
+
+		def create_and_issue_request(size = 28)
+			for i in 1..size
 				create(:food, name: "food#{i}")
 			end
 
-			get :search, { format: "json", search: "food", page: 2 }
+			get :search, { format: "json", search: "food" }
 			parsed_json = JSON.parse(response.body)
-			
-			expect(parsed_json["foods"].size).to eq 3
+			return parsed_json
 		end
 	end
 end

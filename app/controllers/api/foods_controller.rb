@@ -3,6 +3,7 @@ class API::FoodsController < ApplicationController
 
 	def search
 		@search_phrase = params[:search] ||= nil
-		@results = Food.search_for(@search_phrase).paginate(page: params[:page], per_page: 25)
+		@page = params[:page] ||= 1
+		@results = Food.search_for(@search_phrase).paginate(page: @page, per_page: 25)
 	end
 end
