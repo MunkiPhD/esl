@@ -6,4 +6,8 @@ class API::FoodsController < ApplicationController
 		@page = params[:page] ||= 1
 		@results = Food.search_for(@search_phrase).paginate(page: @page, per_page: 25)
 	end
+
+	def show
+      @food = Food.find(params[:id])
+	end
 end

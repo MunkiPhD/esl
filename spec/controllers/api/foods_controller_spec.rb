@@ -10,6 +10,23 @@ describe API::FoodsController, type: :controller do
 		Food.delete_all
 	end
 
+	describe "GET 'show'" do
+		let(:food) { create(:food) }
+
+		it 'returns http success' do
+			get :show, { format: "json", id: food }
+			expect(response).to have_http_status(:success)
+		end
+
+		it 'has the correct info for the requested food item' do
+			get :show, { format: "json", id: food }
+			parsed_json = JSON.parse(response.body)["food"]
+			expect(parsed_json["name"]).to eq food.name	
+			expect(parsed_json["brand"]).to eq food.brand
+			expect(parsed_json["total_calories"]).to eq food.calories
+		end
+	end
+
 	describe "GET 'search'" do
 		it 'returns http success' do
 			get :search, { format: "json", search: "some string" }

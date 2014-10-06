@@ -26,32 +26,27 @@ feature "User food item logging" do
 		end
 
 		scenario "edits a logged food item" do
-			logged_food = create(:log_food, user: user, log_date: Date.parse("12-April-2014"), servings: 1)
-			visit nutrition_path
-			select '12', from: 'log_date_day'
-			select 'April', from: 'log_date_month'
-			select '2014', from: 'log_date_year'
-			click_button 'Go'
-			within first('.food-item') do
-				click_edit_link
+			Timecop.freeze(Date.parse("12-April-2014")) do
+				logged_food = create(:log_food, user: user, log_date: Date.parse("12-April-2014"), servings: 1)
+				visit nutrition_path
+				select '12', from: 'log_date_day'
+				select 'April', from: 'log_date_month'
+				select '2014', from: 'log_date_year'
+				click_button 'Go'
+				within first('.food-item') do
+					click_edit_link
+				end
+
+				#click_link "Edit"
+				fill_in 'Servings', with: "2.25"
+				select_date '2013,January,2', from: 'Log Date'
+				click_button 'Update'
+
+				expect(page).to have_content "Successfully updated food log entry!"
+				visit log_food_path(logged_food)
+				expect(find_by_id("servings")).to have_content "2.25"
+				expect(find_by_id("log_date")).to have_content "over 1 year ago"
 			end
-			#first('.food-item').click_link("Edit")
-
-			#Possible changes in the future where you go view the actual entry
-			#visit log_food_path(logged_food)
-			#expect(find_by_id("servings")).to have_content "1.0"
-			#expect(page).to have_link "Edit"
-			#expect(page).to have_content "Today"
-
-			#click_link "Edit"
-			fill_in 'Servings', with: "2.25"
-			select_date '2013,January,2', from: 'Log Date'
-			click_button 'Update'
-
-			expect(page).to have_content "Successfully updated food log entry!"
-			visit log_food_path(logged_food)
-			expect(find_by_id("servings")).to have_content "2.25"
-			expect(find_by_id("log_date")).to have_content "over 1 year ago"
 		end
 
 		scenario "deletes a log entry from the nutrition dashboard" do
