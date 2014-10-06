@@ -2,7 +2,7 @@ class FavoriteFoodsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @favorite_foods = current_user.favorite_foods.includes(:food)
+    @favorite_foods = current_user.favorite_foods.includes(:food).order("foods.name ASC")
   end
 
   def create

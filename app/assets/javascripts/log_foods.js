@@ -2,6 +2,7 @@ window.FoodLog = {};
 
 $(document).ready(function(){
 	$("a.link-to-log-food").click(function(e){
+		console.log("a.link-to-log-food handler initiated");
 		e.preventDefault();
 		LogFoodItemHandler(this);
 	})
