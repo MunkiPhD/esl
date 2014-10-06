@@ -34,5 +34,18 @@ describe API::FoodsController, type: :controller do
 			expect(json_food["name"]).to eq food_one.name
 			expect(json_food["id"]).to eq food_one.id
 		end
+
+		it 'returns correct paged results' do
+			Food.delete_all
+
+			for i in 1..28
+				create(:food, name: "food#{i}")
+			end
+
+			get :search, { format: "json", search: "food", page: 2 }
+			parsed_json = JSON.parse(response.body)
+			
+			expect(parsed_json["foods"].size).to eq 3
+		end
 	end
 end
