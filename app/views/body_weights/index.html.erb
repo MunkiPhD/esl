@@ -1,28 +1,65 @@
 <h1>Body Weight</h1>
+<script>
+$(document).ready(function(){
+		  $.ajax({
+					 type: "GET",
+					 dataType: "json",
+					 url: 'api/body_weights'
+		  }).done(function(data, status, xhr){
+					 jsonData = data;
+					 console.log(jsonData);
+					 var chart = c3.generate({
+								bindto: "#chart",
+								data: { 
+										  json: jsonData,
+										  keys: {
+													 x: 'log_date',
+													 value: ["weight"]
+										  }
+								},
+								axis: {
+										  x: {
+													 type: 'timeseries',
+													 tick: {
+																format: '%m-%d-%Y'
+													 }
+										  }
+								}
+					 });
+
+		  }).fail(function(xhr, status, error){
+					 Security.HandleStatusCode(xhr, status, error);
+		  }).always(function(){
+					 // do nothing
+		  });
+
+});
+</script>
 <div class="row">
-	<div class="col-md-8">
-		<% if @body_weights.count == 0 %>
-			<div class="alert alert-info">
-				<p><strong>You aren't made of air.</strong> Yet, you haven't logged any body weight entries yet.</p>
-			</div>
-		<% end %>
-		<div id="body_weight_entries">
-			<ul>
-				<% @body_weights.each do |entry| %>
-					<li><%= entry.weight %> <%= entry.unit_abbr %>
-					<span class="entry-date">
-						<%= format_date entry.log_date %>
-		 			</span>
-						<span class="control-panel">
-								  <%= link_to_edit '', edit_body_weight_path(entry), class: "btn-xs", data: { action: "edit" } %>
-						<%= link_to_destroy '', body_weight_path(entry), class: "btn-xs", method: :delete, data: { action: "destroy", confirm: "Are you sure you want to delete this entry?" } %>
-			 </span>
-						</li>
-				<% end %>
-			</ul>
- 		</div> <!-- end body weight entries -->
-	</div> <!-- end col-md-8 -->
-	<div class="col-md-4">
-		<%= render 'form' %>
-	</div>
+		  <div class="col-md-8">
+					 <% if @body_weights.count == 0 %>
+								<div class="alert alert-info">
+								<p><strong>You aren't made of air.</strong> Yet, you haven't logged any body weight entries yet.</p>
+					 </div>
+		  <% end %>
+					 <div id="chart"></div>
+					 <div id="body_weight_entries">
+								<ul>
+										  <% @body_weights.each do |entry| %>
+													 <li><%= entry.weight %> <%= entry.unit_abbr %>
+										  <span class="entry-date">
+													 <%= format_date entry.log_date %>
+										  </span>
+										  <span class="control-panel">
+													 <%= link_to_edit '', edit_body_weight_path(entry), class: "btn-xs", data: { action: "edit" } %>
+													 <%= link_to_destroy '', body_weight_path(entry), class: "btn-xs", method: :delete, data: { action: "destroy", confirm: "Are you sure you want to delete this entry?" } %>
+										  </span>
+										  </li>
+								<% end %>
+								</ul>
+					 </div> <!-- end body weight entries -->
+		  </div> <!-- end col-md-8 -->
+		  <div class="col-md-4">
+					 <%= render 'form' %>
+		  </div>
 </div><!-- end row -->

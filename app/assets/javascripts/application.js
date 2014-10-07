@@ -17,4 +17,5 @@
 //= require bootstrap
 //= require turbolinks
 //= require frameworks/mustache.js
+//= require frameworks/c3.min.js
 //= require_tree .
