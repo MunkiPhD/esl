@@ -38,10 +38,22 @@ feature 'dasboard' do
 		template = create(:workout_template, user: user)
 		visit root_path
 		within("#workouts") do
-			expect(page).to have_link "Template Workout"
-			click_link "Template Workout"
+			expect(page).to have_link "Workout from Template"
+			click_link "Workout from Template"
 		end
 		expect(page).to have_content "Workout Templates"
 		expect(page).to have_link template.title
+	end
+
+	scenario 'if a user has NO workout templates, it displays a link to create workout template' do
+		expect(user.workout_templates.count).to eq 0
+
+		visit root_path
+		within("#workouts") do
+			expect(page).to have_link "Create Workout Template"
+			click_link "Create Workout Template"
+		end
+
+		expect(page).to have_content "Creating a Workout Template"
 	end
 end

@@ -11,5 +11,9 @@
 
 <div id="workouts">
 		  <%= link_to_add "Workout", new_workout_path %>
-		  <%= link_to_add "Template Workout", workout_templates_path %>
+		  <% if current_user.workout_templates.count > 0 %>
+					 <%= link_to_add "Workout from Template", workout_templates_path %>
+		  <% else %>
+					 <%= link_to_add "Create Workout Template", new_workout_template_path %>
+		  <% end %>
 </div>

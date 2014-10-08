@@ -13,7 +13,7 @@ feature 'User creates a single workout template' do
 
 		click_link "Create Template"
 
-		expect(page).to have_content "Creating a template from: #{workout.title}"
+		expect(page).to have_content "Creating a Workout Template from: #{workout.title}"
 
 		workout.workout_exercises.each do |workout_exercise|
 			expect(page).to have_content workout_exercise.exercise_name

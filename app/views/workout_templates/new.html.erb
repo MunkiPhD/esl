@@ -1,2 +1,6 @@
-<h2>Creating a template from: <%= @workout_template.title %></h2>
+<% if @workout_template.title.blank? %>
+		  <h2>Creating a Workout Template</h2>
+<% else %>
+		  <h2>Creating a Workout Template from: <%= @workout_template.title %></h2>
+<% end %>
 <%= render 'form' %>
