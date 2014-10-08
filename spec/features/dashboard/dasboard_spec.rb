@@ -25,6 +25,23 @@ feature 'dasboard' do
 	end
 
 	scenario 'displays the link to log a workout' do
-		fail	
+		visit root_path
+		within("#workouts") do
+			expect(page).to have_link "Workout"
+			click_link "Workout"
+		end
+
+		expect(page).to have_content "Logging a new Workout"
+	end
+
+	scenario 'if a user has workout templates, it displays the link to view workout templates' do
+		template = create(:workout_template, user: user)
+		visit root_path
+		within("#workouts") do
+			expect(page).to have_link "Template Workout"
+			click_link "Template Workout"
+		end
+		expect(page).to have_content "Workout Templates"
+		expect(page).to have_link template.title
 	end
 end
