@@ -1,19 +1,32 @@
-<h1>Dashboard</h1>
-<hr />
-<%= render 'user_bmi' %>
-<h2>My Circles</h2>
-<%= "Not a member of any circles!" if @memberships.empty? %>
-<% @memberships.each do |circle| %>
-	<%= link_to circle.name, circle %><br>
-<% end %>
+<div id="dashboard">
+	<%= render 'user_bmi' %>
 
-<%= render 'foods/search' %>
+	<div id="nutrition">
+		<h2>Nutrition</h2>
+		<div style="width: 500px">
+			<%= render 'foods/search' %>
+		</div>
+	</div>
+	
+	<hr/>
 
-<div id="workouts">
-		  <%= link_to_add "Workout", new_workout_path %>
-		  <% if current_user.workout_templates.count > 0 %>
-					 <%= link_to_add "Workout from Template", workout_templates_path %>
-		  <% else %>
-					 <%= link_to_add "Create Workout Template", new_workout_template_path %>
-		  <% end %>
+	<div id="workouts">
+		<h2>Workouts</h2>
+		<%= link_to_add "Workout", new_workout_path %>
+		<% if current_user.workout_templates.count > 0 %>
+			<%= link_to_add "Workout from Template", workout_templates_path %>
+		<% else %>
+			<%= link_to_add "Create Workout Template", new_workout_template_path %>
+		<% end %>
+	</div>
+
+	<hr/>
+
+	<div id="circles">
+		<h2>My Circles</h2>
+		<%= "Not a member of any circles!" if @memberships.empty? %>
+		<% @memberships.each do |circle| %>
+			<%= link_to circle.name, circle %><br>
+		<% end %>
+	</div>
 </div>
