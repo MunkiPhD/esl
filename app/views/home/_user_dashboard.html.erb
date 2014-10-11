@@ -3,6 +3,9 @@
 
 	<div id="nutrition">
 		<h2>Nutrition</h2>
+		<% if @presenter.logged_foods.count > 0 %>
+			<%= render 'nutrition_goals/nutrition_goals', macro_totals: @presenter.macro_totals, nutrition_goal: @presenter.nutrition_goal %>
+		<% end %>
 		<div style="width: 500px">
 			<%= render 'foods/search' %>
 		</div>
