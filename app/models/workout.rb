@@ -32,6 +32,8 @@ class Workout < ActiveRecord::Base
 	scope :for_user, -> (user) { where("workouts.user_id = ?", user) }
 
 
+	scope :on_date, -> (date) { where("workouts.date_performed = ?", date) }
+
 
 	def self.from_template(workout_template, user)
 		workout = Workout.new(title: workout_template.title)

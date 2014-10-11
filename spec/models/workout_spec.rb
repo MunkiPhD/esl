@@ -114,6 +114,16 @@ describe Workout do
 	end
 
 	describe 'methods' do
+		describe '.on_date' do
+			it 'returns the workouts on specified date' do
+				Timecop.freeze(Date.today) do
+					workout_one = create(:workout, date_performed: Date.today, user: user)
+					workout_two = create(:workout, date_performed: 1.week.ago, user: user)
+					expect(user.workouts.on_date(Date.today)).to eq [workout_one]
+				end
+			end
+		end
+
 		describe '#from_template' do
 			it 'creates a workout from the template with same title' do
 				template = create(:workout_template_with_exercises)
