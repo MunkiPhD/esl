@@ -6,10 +6,19 @@ feature 'dasboard' do
 		login_user user
 	end
 
+	scenario 'it displays the current date being looked at' do
+		Timecop.freeze(Date.today) do
+			visit root_path
+			expect(page).to have_content format_date(Date.today)
+		end
+	end
+
 	scenario 'is accessible by clicking dashboard on the naviation' do
 		visit nutrition_path
 		click_link "dashboard"
-		expect(page).to have_content "Dashboard"
+		expect(page).to have_content "Nutrition"
+		expect(page).to have_content "Workouts"
+		expect(page).to have_content "My Circles"
 	end
 
 	scenario 'has the ability to search for food items' do
@@ -55,5 +64,16 @@ feature 'dasboard' do
 		end
 
 		expect(page).to have_content "Creating a Workout Template"
+	end
+
+	scenario 'it displays links to workouts that have been logged for todays date' do
+		Timecop.freeze(Date.today) do
+			expect(user.workouts.on_date(Date.today).count).to eq 0
+			workout = create(:workout, date_performed: Date.today, user: user)
+			visit root_path
+			within("#workouts") do
+				expect(page).to have_link workout.title
+			end
+		end
 	end
 end
