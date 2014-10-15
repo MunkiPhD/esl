@@ -26,7 +26,7 @@ describe API::BodyWeightsController, type: :controller do
 			post :create, { format: "json", body_weight: body_weight.attributes }
 			parsed_json = JSON.parse(response.body)
 			 
-			expect(parsed_json["weight"]).to eq body_weight.weight	
+			expect(parsed_json["body_weight"]["weight"]).to eq "#{body_weight.weight}"
 		end
 	end
 end
