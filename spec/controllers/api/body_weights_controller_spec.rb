@@ -29,4 +29,15 @@ describe API::BodyWeightsController, type: :controller do
 			expect(parsed_json["body_weight"]["weight"]).to eq "#{body_weight.weight}"
 		end
 	end
+
+	describe 'PUT :update' do
+		it 'edits an existing entry' do
+			body_weight = create(:body_weight, user: user, weight: 123)
+			body_weight.weight = 321
+			put :update, { format: "json", body_weight: body_weight.attributes }
+			parsed_json = JSON.parse(response.body)
+
+			expect(parsed_json["body_weight"]["weight"]).to eq "321"
+		end
+	end
 end
