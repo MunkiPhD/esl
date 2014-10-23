@@ -5,15 +5,33 @@ feature "Analysis" do
 		fail
 	end
 
-	scenario 'allows the user to compare calories and workouts on daily basis over time' do
+	scenario 'allows the user to compare calories and workouts on daily basis' do
 		fail
 	end
 
-	scenario 'can be done over periods of time' do
-		fail
+	describe 'user can select periods of time and the graph updates' do
+		scenario '2 weeks by default' do
+			fail
+		end
+
+		scenario '1 month' do
+			fail
+		end
+
+		scenario '2 months' do
+			fail
+		end
+
+		scenario '6 months' do
+			fail
+		end
+
+		scenario 'all' do
+			fail
+		end
 	end
 
-	scenario 'has average line for each line' do
+	scenario 'has moving average line' do
 		fail
 	end
 end
