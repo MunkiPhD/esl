@@ -1,6 +1,6 @@
 class API::BodyWeightsController < ApplicationController
 	before_filter :authenticate_user!
-	before_filter :set_body_weight, only: [:show]
+	before_filter :set_body_weight, only: [:show, :update]
 
 	def index
 		@body_weight = BodyWeight.new(log_date: Date.today)
@@ -22,12 +22,21 @@ class API::BodyWeightsController < ApplicationController
 		end
 	end
 
+	def update
+		if @body_weight.update(body_weight_params)
+			render :show
+		else
+			# error handling
+		end
+	end
+
 	private
 	def set_body_weight
 		@body_weight = current_user.body_weights.find(params[:id])
 	end
 
 	def body_weight_params
-		params.require(:body_weight).permit(:weight, :log_date)
+		params.require(:body_weight).permit(:weight, :log_date, :id)
 	end
 end
+
