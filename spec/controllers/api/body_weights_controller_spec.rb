@@ -35,10 +35,11 @@ describe API::BodyWeightsController, type: :controller do
 		it 'updates an existing entry' do
 			body_weight = create(:body_weight, user: user, weight: 123)
 			body_weight.weight = 321
-			put :update, { format: "json", body_weight: body_weight.attributes }
+			put :update, { id: body_weight.id, format: "json", body_weight: body_weight.attributes }
 			parsed_json = JSON.parse(response.body)
 
-			expect(parsed_json["body_weight"]["weight"]).to eq "321"
+			expect(parsed_json["body_weight"]["weight"]).to eq "321.0"
 		end
 	end
 end
+
